@@ -8,4 +8,4 @@ Please follow below steps to configure
 2)Clone the project from this repo : APP6441Risk to local folder
 3)Open Eclipse
 4)Import as "Existing project" into workspace
-5)Run project from CheckGitRun.java file
+5)Run project from CheckGitRun.java file.
