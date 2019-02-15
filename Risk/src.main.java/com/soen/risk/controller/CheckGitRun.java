@@ -8,7 +8,7 @@ package com.soen.risk.controller;
  * This class is to test the working of cloned project from repository
  * 
  * @author Yogesh Nimbhorkar
- *
+ *Class to be removed later
  */
 public class CheckGitRun {
 

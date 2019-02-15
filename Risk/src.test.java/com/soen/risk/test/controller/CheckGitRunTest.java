@@ -18,6 +18,7 @@ public class CheckGitRunTest {
 	
 	/**
 	 * Test method for {@link com.soen.risk.controller.CheckGitRun#CheckJunit(java.lang.String)}.
+	 * Class to be removed later
 	 */
 	@Test
 	public void testCheckJunit() {
