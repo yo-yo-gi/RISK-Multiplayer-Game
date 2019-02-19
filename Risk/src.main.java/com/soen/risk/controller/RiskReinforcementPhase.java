@@ -84,7 +84,16 @@ public class RiskReinforcementPhase
 	    	   System.out.println("The No Of Armies for Player "+noOfArmiesForPlayer);
 	    	   System.out.println("Enter the number of Armies for Country "+currentPlayerTerritories.get(i)+" From "+noOfArmiesForPlayer);
 	    	   int armyCal = sc.nextInt();
-	    	   
+	    	   if(armyCal == 0)
+	    	   {
+		    	   do 
+	 	    	   {
+	 	    		   
+	 	    		   System.out.println("No armies assigned cannot be zero, please add armies to the country"+currentPlayerTerritories.get(i));
+	 	    		   armyCal = sc.nextInt();
+	 	    		   
+	 	    	   }while(armyCal == 0);
+	    	   }
 	    	   if(armyCal > noOfArmiesForPlayer)
     		   {
     			   do
