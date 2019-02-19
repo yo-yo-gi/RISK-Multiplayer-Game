@@ -9,3 +9,6 @@ Please follow below steps to configure
 3)Open Eclipse -> File.
 4)Import as "Existing project" into workspace
 5)Run project from CheckGitRun.java file.
+
+Task to do 
+Check if random assignment don't assign whole continent to player
