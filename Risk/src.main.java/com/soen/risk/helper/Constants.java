@@ -8,5 +8,8 @@ package com.soen.risk.helper;
  * @author Chirag
  */
 public class Constants {
+	private Constants(){
+		//Empty constructor
+	}
 //Write all the constants as private 
 }
