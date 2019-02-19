@@ -5,6 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * <h2>Map Creation by user</h2>
+ * <ul>
+ * <li>User Creation of map
+ *
+ * </ul>
+ *
+ * @author Shashank Rao
+ * @version 1.0.0
+ * @since 2019-02-18
+ */
+
 public class RiskMapCreatorUser {
 	
 public static void main(String[] args) {
