@@ -11,5 +11,5 @@ public class Constants {
 	private Constants(){
 		//Empty constructor
 	}
-//Write all the constants as private 
+	//Write all the constants as private 
 }
