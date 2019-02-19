@@ -6,7 +6,6 @@ package com.soen.risk.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -22,33 +21,35 @@ import com.soen.risk.model.RiskTerritory;
 public class RiskArmyAllocationToPlayers {
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
+	 * @return 
 	 */
-	public void assignArmiesToPlayers(Map<RiskPlayer, List<RiskTerritory>> playerCountryMap ) {
-		List<RiskTerritory> countries;
+	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {
+		ArrayList<RiskTerritory> territories;
 		RiskPlayer currentPlayer;
 
-		int lastAssignedCountryIndex = 0;
-		List<RiskPlayer> playerList = new ArrayList<RiskPlayer>(playerCountryMap.keySet());
+		int lastAssignedTerritoryIndex = 0;
+		List<RiskPlayer> playerList = new ArrayList<RiskPlayer>(playerTerritoryMap.keySet());
 
 		for (int j = 0; j < playerList.size(); j++) {
-			countries= new ArrayList<RiskTerritory>();
-			countries=playerCountryMap.get(playerList.get(j));
+			territories= new ArrayList<RiskTerritory>();
+			territories=playerTerritoryMap.get(playerList.get(j));
 			currentPlayer=(RiskPlayer) playerList.get(j);
 			int armiesToAssign = currentPlayer.getArmiesOwned() ;
 			for (int i = 0; i < armiesToAssign; i++) {
-				if (lastAssignedCountryIndex >= countries.size()) {
-					lastAssignedCountryIndex = 0;
+				if (lastAssignedTerritoryIndex >= territories.size()) {
+					lastAssignedTerritoryIndex = 0;
 				}
-				RiskTerritory lastAssignedCountry = countries.get(lastAssignedCountryIndex);
-				Integer currentArmies=lastAssignedCountry.getArmiesPresent();
-				lastAssignedCountry.setArmiesPresent(currentArmies+1);
-				lastAssignedCountryIndex++;
+				RiskTerritory lastAssignedTerritory = territories.get(lastAssignedTerritoryIndex);
+				Integer currentArmies=lastAssignedTerritory.getArmiesPresent();
+				lastAssignedTerritory.setArmiesPresent(currentArmies+1);
+				lastAssignedTerritoryIndex++;
 			}
-			playerCountryMap.put(currentPlayer, countries);
+			playerTerritoryMap.put(currentPlayer, territories);
 
-			for (RiskTerritory riskTerritory : countries) {
+			for (RiskTerritory riskTerritory : territories) {
 				System.out.println(riskTerritory.getTerritoryName() + " armies in " + riskTerritory.getArmiesPresent());
 			}
 		}
+		return playerTerritoryMap;
 	}
 }
