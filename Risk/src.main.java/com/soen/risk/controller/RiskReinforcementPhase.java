@@ -37,34 +37,45 @@ public class RiskReinforcementPhase
      
 	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> armyCalculationPerPlayer(HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap, ArrayList<RiskContinent> riskContinentList)
 	{
-		
 		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>(playerMap);
 		Scanner sc = new Scanner(System.in);
 		String currentPlayerName = null;
+		
 		List<String> ownedContinents=new ArrayList<>();
+		ArrayList<RiskTerritory> currentPlayerTerritories;
+		int noOfArmiesForPlayer;
+
 		for ( RiskPlayer key : playerMap.keySet() ) {
 			currentPlayerName=key.getPlayerName();
 			ownedContinents=key.getOccupiedContinents();
 		}
-		
-	
-//		String currentPlayerName=playerMap.keySet().toArray()[0].toString();
-		ArrayList<RiskTerritory> currentPlayerTerritories;
-		int noOfArmiesForPlayer;
-
+		//Subcontinent Value selection
+		int controlVal = 0;
+		for(int i=0;i<riskContinentList.size();i++){
+            for(int j=i;j<ownedContinents.size();j++){
+            	if(riskContinentList.get(i).getContinentName().equals(ownedContinents))
+            	{
+            		controlVal = controlVal + riskContinentList.get(i).getControllValue();   		
+            	}
+            }
+		}
 		playerMap.containsKey(currentPlayerName);
 		currentPlayerTerritories=playerMap.get(currentPlayerName);
 		int noOfCountriesOwned = currentPlayerTerritories.size();
-		noOfArmiesForPlayer = noOfCountriesOwned/playerMap.size();
-		
 		int i = 0;
 		
+		if(controlVal > 0)
+		{
+			noOfArmiesForPlayer = controlVal;
+		}
+		else
+		{
+			noOfArmiesForPlayer = noOfCountriesOwned/playerMap.size();
+		}
 		System.out.println("Player name "+currentPlayerName);
 		System.out.println("Player has Countries "+noOfCountriesOwned);
 		System.out.println("And the player has no Of Armies"+noOfArmiesForPlayer);
 		System.out.println("Add Armies to the Countries");
-		
-		//iterating ArrayList
 		
 	    for(i=0;i<currentPlayerTerritories.size();i++)  
 	    {
@@ -83,15 +94,13 @@ public class RiskReinforcementPhase
 	    			   armyCal = sc.nextInt();
 	    			   
     			   }while(armyCal>noOfArmiesForPlayer);
-    			   noOfArmiesForPlayer = noOfArmiesForPlayer - armyCal;
-    			   
+    			   noOfArmiesForPlayer = noOfArmiesForPlayer - armyCal;  
     		   }
     		   else
     		   {
     	      
     		   noOfArmiesForPlayer = noOfArmiesForPlayer - armyCal; 
     		   } 
-	    	   //Map<Player><List of territories with updated armies>
 	    	   currentPlayerTerritories.get(i).setArmiesPresent((currentPlayerTerritories.get(i).getArmiesPresent())+(noOfArmiesForPlayer));
 	       }
 	       else
@@ -103,8 +112,6 @@ public class RiskReinforcementPhase
 	    reinforcedMap.put((RiskPlayer) playerMap.keySet().toArray()[0], currentPlayerTerritories);
 	    return reinforcedMap;
 	}
-	
-	
 	/**
 	 * Iteration 2
      * Implementation of a “card exchange view” using the Observer pattern.
