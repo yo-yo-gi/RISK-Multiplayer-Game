@@ -11,4 +11,5 @@ Please follow below steps to configure
 5)Run project from CheckGitRun.java file.
 
 Task to do 
-Check if random assignment don't assign whole continent to player
+1)Check if random assignment don't assign whole continent to player
+2) Yogesh please replace the static values with constant variables and define it in the constants file.
