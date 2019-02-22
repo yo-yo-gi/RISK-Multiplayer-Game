@@ -1,6 +1,5 @@
 package com.soen.risk.controller;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +15,7 @@ import com.soen.risk.model.RiskTerritory;
  * In the reinforcements phase, the player is given a number of armies that depends on the 
  * number of countries he owns (# of countries owned divided by 3, rounded down). 
  * If the player owns all the countries of an entire continent
- * else the player is given an amount of armies corresponding to the continent’s control value.
+ * else the player is given an amount of armies corresponding to the continentï¿½s control value.
  * 
  * @author Neha
  * @version 1.0
@@ -24,72 +23,46 @@ import com.soen.risk.model.RiskTerritory;
  */
 public class RiskReinforcementPhase 
 {
+     /**
+      * 
+      * Assigning the Armies to the Countries for the Player
+      * @param currentPlayer : Current player is passed
+      * @param playerTerritories : The territories assigned to the player
+      * @param riskContinentList : The total continent list
+      * @return
+      */
 
-	/**
-	 * Iteration 1
-     * Calculation the number of armies assigned to a players
-     * 
-	 * @param playerId the playerId to set
-	 * @param noOfCountriesOwned the number of countries assigned to the Player
-	 * @param noOfPlayers the total number of players set for the game
-	 * @param totalCountriesInContinent the total number of Countries in a continent
-	 */
-     
-	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> armyCalculationPerPlayer(HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap, ArrayList<RiskContinent> riskContinentList)
+	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
 	{
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>(playerMap);
+		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		Scanner sc = new Scanner(System.in);
 		String currentPlayerName = null;
 		
-		List<String> ownedContinents=new ArrayList<>();
 		ArrayList<RiskTerritory> currentPlayerTerritories;
 		int noOfArmiesForPlayer;
-
-		for ( RiskPlayer key : playerMap.keySet() ) {
-			currentPlayerName=key.getPlayerName();
-			ownedContinents=key.getOccupiedContinents();
-		}
-		//Subcontinent Value selection
-		int controlVal = 0;
-		for(int i=0;i<riskContinentList.size();i++){
-            for(int j=i;j<ownedContinents.size();j++){
-            	if(riskContinentList.get(i).getContinentName().equals(ownedContinents))
-            	{
-            		controlVal = controlVal + riskContinentList.get(i).getControllValue();   		
-            	}
-            }
-		}
-		playerMap.containsKey(currentPlayerName);
-		currentPlayerTerritories=playerMap.get(currentPlayerName);
-		int noOfCountriesOwned = currentPlayerTerritories.size();
-		int i = 0;
+		currentPlayerTerritories=playerTerritories;
+		int noOfCountriesOwned = currentPlayerTerritories.size();		
+		currentPlayerName=currentPlayer.getPlayerName();
 		
-		if(controlVal > 0)
-		{
-			noOfArmiesForPlayer = controlVal;
-		}
-		else
-		{
-			noOfArmiesForPlayer = noOfCountriesOwned/playerMap.size();
-		}
-		System.out.println("Player name "+currentPlayerName);
-		System.out.println("Player has Countries "+noOfCountriesOwned);
-		System.out.println("And the player has no Of Armies"+noOfArmiesForPlayer);
-		System.out.println("Add Armies to the Countries");
+		noOfArmiesForPlayer=calculateArmy(currentPlayer,currentPlayerTerritories, riskContinentList);
+		System.out.println("Player name : "+currentPlayerName);
+		System.out.println("The Territories Owned : "+noOfCountriesOwned);
+		System.out.println("The No Of Armies the player has : "+noOfArmiesForPlayer);
+		System.out.println("Add Armies to the Countries : ");
 		
-	    for(i=0;i<currentPlayerTerritories.size();i++)  
+	    for(int i=0;i<currentPlayerTerritories.size();i++)  
 	    {
 	       if(noOfArmiesForPlayer!=0)
 	       {
-	    	   System.out.println("The No Of Armies for Player "+noOfArmiesForPlayer);
-	    	   System.out.println("Enter the number of Armies for Country "+currentPlayerTerritories.get(i)+" From "+noOfArmiesForPlayer);
+	    	   System.out.println("The No Of Armies for Player : "+noOfArmiesForPlayer);
+	    	   System.out.println("Enter the number of Armies for Country : "+currentPlayerTerritories.get(i).getTerritoryName()+" From "+noOfArmiesForPlayer);
 	    	   int armyCal = sc.nextInt();
 	    	   if(armyCal == 0)
 	    	   {
 		    	   do 
 	 	    	   {
 	 	    		   
-	 	    		   System.out.println("No armies assigned cannot be zero, please add armies to the country"+currentPlayerTerritories.get(i));
+	 	    		   System.out.println("No armies assigned cannot be zero, please add armies to the country : "+currentPlayerTerritories.get(i));
 	 	    		   armyCal = sc.nextInt();
 	 	    		   
 	 	    	   }while(armyCal == 0);
@@ -110,7 +83,7 @@ public class RiskReinforcementPhase
     	      
     		   noOfArmiesForPlayer = noOfArmiesForPlayer - armyCal; 
     		   } 
-	    	   currentPlayerTerritories.get(i).setArmiesPresent((currentPlayerTerritories.get(i).getArmiesPresent())+(noOfArmiesForPlayer));
+	    	   currentPlayerTerritories.get(i).setArmiesPresent((currentPlayerTerritories.get(i).getArmiesPresent())+(armyCal));
 	       }
 	       else
 	       {
@@ -118,12 +91,43 @@ public class RiskReinforcementPhase
 	    	   break;
 	       }
 	    }
-	    reinforcedMap.put((RiskPlayer) playerMap.keySet().toArray()[0], currentPlayerTerritories);
+	    reinforcedMap.put(currentPlayer, currentPlayerTerritories);
 	    return reinforcedMap;
 	}
 	/**
+	 * Cacluation of Armies for the Player
+	 * @param currentPlayer
+	 * @param currTerritoryList
+	 * @param riskContinentList
+	 * @return
+	 */
+	public int calculateArmy(RiskPlayer currentPlayer, ArrayList<RiskTerritory> currTerritoryList, ArrayList<RiskContinent> riskContinentList) {
+		
+		List<String> ownedContinents=new ArrayList<>(currentPlayer.getOccupiedContinents()) ;
+		int controlVal=0,noOfArmiesForPlayer=0;
+		
+		if(ownedContinents.size()!=0)
+		{
+			for (int i = 0; i < riskContinentList.size(); i++) {
+				for (int j = 0; j < ownedContinents.size(); j++) {
+					if (riskContinentList.get(i).getContinentName().equals(ownedContinents.get(j))) {
+						controlVal = controlVal + riskContinentList.get(i).getControllValue();
+					}
+				}
+			}
+		}
+
+		if (currTerritoryList.size() < 10 && controlVal < 3) {
+			noOfArmiesForPlayer = 3;
+		} else {
+			noOfArmiesForPlayer = controlVal + currTerritoryList.size() / 3;
+		}
+
+		return noOfArmiesForPlayer;
+	}
+	/**
 	 * Iteration 2
-     * Implementation of a “card exchange view” using the Observer pattern.
+     * Implementation of a ï¿½card exchange viewï¿½ using the Observer pattern.
      * 
 	 * @param playerId the playerId to set
 	 * @param noOfCountriesOwned the number of countries assigned to the Player
