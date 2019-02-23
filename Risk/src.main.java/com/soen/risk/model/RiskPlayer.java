@@ -25,9 +25,22 @@ public class RiskPlayer {
 	private String playerId;
 	private String playerName;
 	private ArrayList<String> occupiedTerritories;
-	private ArrayList<String> occupiedContinents;
+	private ArrayList<String> occupiedContinents=new ArrayList<String>();
 	private int armiesOwned;
 	private ArrayList<String> cardOwned;
+	/**
+	 * @param string
+	 */
+	public RiskPlayer(String name) {
+		setPlayerName(name);
+	}
+	
+	/**
+	 * 
+	 */
+	public RiskPlayer() {
+	}
+
 	/**
 	 * @return the playerId
 	 */
