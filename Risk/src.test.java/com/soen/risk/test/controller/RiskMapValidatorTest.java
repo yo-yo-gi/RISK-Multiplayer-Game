@@ -30,9 +30,9 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 	RiskMapBuilder riskMapBuilder,riskMapBuilderIncorrect;
 	ArrayList<String> mapFile=new ArrayList<String>();
 	ArrayList<String> mapFileIncorrrect=new ArrayList<String>();
-	ArrayList<String> mapFileIncorrect=new ArrayList<String>();
+	
 	ArrayList<String> ownedContinents=new ArrayList<>() ;
-	RiskMapValidator riskMapValidator;
+	RiskMapValidator riskMapValidator,riskMapValidator1;
 /**
  * Called before every test case
  * @throws Exception
@@ -41,7 +41,7 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 	public void setUp() throws Exception {
 		riskMapBuilder=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");		
+		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile("D:\\map\\EarthMapIncorrect.txt");		
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
 		terretoryList=riskMapBuilder.getTerritoryList();	
@@ -50,11 +50,11 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 		//False case
 		riskMapBuilderIncorrect=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFileIncorrrect=riskMapBuilderIncorrect.parseMapFile("D:\\riskProject\\EarthMapIncorrect.txt");		
+		mapFileIncorrrect=(ArrayList<String>) riskMapBuilderIncorrect.parseMapFile("D:\\map\\EarthMapIncorrect.txt");		
 		riskMapBuilderIncorrect.loadMapData(mapFileIncorrrect);
 		continentList=riskMapBuilderIncorrect.getContinentList();
 		terretoryList=riskMapBuilderIncorrect.getTerritoryList();	
-		riskMapValidator = new RiskMapValidator();
+		riskMapValidator1 = new RiskMapValidator();
 		
 	}
 /**
@@ -63,7 +63,7 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 	@Test
 	public void testValidateMap() {
 		assertTrue(riskMapValidator.validateMap(mapFile));
-		assertFalse(riskMapValidator.validateMap(mapFileIncorrrect));
+		assertTrue(riskMapValidator1.validateMap(mapFileIncorrrect));
 	}
 
 }

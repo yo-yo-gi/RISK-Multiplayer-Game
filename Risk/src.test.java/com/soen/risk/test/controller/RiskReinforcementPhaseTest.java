@@ -1,10 +1,5 @@
 package com.soen.risk.test.controller;
-/**
- * Junit Test Case for the Risk Reinforcement Phase with testing of the Actual Army
- * Calcuation and Subcontinent
- * @author Neha
- * @version 1.0
- */
+
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,33 +25,30 @@ public class RiskReinforcementPhaseTest {
 	ArrayList<String> mapFile=new ArrayList<String>();
 	ArrayList<String> ownedContinents=new ArrayList<>() ;
 	
-	/**
-	 * Called before every test Case
-	 */
+	
 	@Before
 	public void setUp() {
 		riskMapBuilder=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");		
+		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile("D:\\map\\EarthMap.txt");		
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
 		terretoryList=riskMapBuilder.getTerritoryList();		
+//		reinforcedMap	= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>(playerMap);
 		riskReinforcementPhase = new RiskReinforcementPhase();
 	}
-	/**
-	 * Army Calculation Test Case
-	 */
 	@Test
 	public void testArmyCalculationPerPlayer() {
 		assertEquals(14,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
 	}
-	/**]
-	 * ArmyCalculationFor the SubContinent Test Case
-	 */
+	
 	@Test
 	public void testArmyCalculationPerPlayer_controlValue() {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
 		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
 	}
+	
+	
+//	RiskMapValidator.validate(mapFile);
 }
