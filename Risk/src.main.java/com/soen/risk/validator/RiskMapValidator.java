@@ -144,6 +144,7 @@ public class RiskMapValidator {
 	private boolean checkContinentSyntax(List<String> parsedMapFile) {
 			boolean continentValidation=false;			
 			String currentContinent;			
+			initContinentList=new ArrayList<String>();
 			
 			for (int i=indexOfContinents+1;i<indexOfDash;i++) {
 				currentContinent=parsedMapFile.get(i);
@@ -301,7 +302,7 @@ public class RiskMapValidator {
 	 */	
 	private boolean checkTerritorySyntax(List<String> parsedMapFile) {
 			boolean territoryValidation=false;
-			
+			initTerritoryList=new ArrayList<String>();
 			String currentTerritory;
 			
 			
