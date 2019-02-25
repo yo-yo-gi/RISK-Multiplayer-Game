@@ -20,29 +20,52 @@ public class RiskPlayerBuilder {
 	private ArrayList<String> playersNameList;
 	
 	
- //public static void main(String args[]) {
-	public RiskPlayerBuilder(){
-
+   //public static void main(String args[]) {
+	 public RiskPlayerBuilder(){
+		 playersNameList = new ArrayList<String>();
+	 }
+	 public void setUpPlayers() {
 		Scanner s = new Scanner(System.in);
-		int numberOfPlayers;
-		playersNameList = new ArrayList<String>();
+		int numberOfPlayers = -1;
+		
 		int playerCounter=1;
 		RiskPlayerValidator riskPlayerValidator=new RiskPlayerValidator();
-
-		do {
+		 	      
+		
 			System.out.println("Enter no. of players");
-			numberOfPlayers = s.nextInt();
-		} while (!riskPlayerValidator.isValid(numberOfPlayers));
-		
-		System.out.println("Enter names");
-		
-		
-		while( playerCounter<=numberOfPlayers) {
-//			System.out.println(s.next());
-			playersNameList.add(s.next());
-			playerCounter++;
+			
+		    while(numberOfPlayers<0) {
+		    	
+		    	try {
+		    		
+		    		numberOfPlayers = s.nextInt();
+		    		
+		    		if(numberOfPlayers <3 || numberOfPlayers>6) {
+		    			System.out.println("Try Again!!");
+		    			numberOfPlayers = -1;
+		    		}
+	                   }catch(Exception e){
+		               System.out.println("Please enter number");
+			numberOfPlayers = -1;
+			s.next();
+	 }
 		}
-		
+		System.out.println("Enter names");
+		int count = 0;
+		while(count<numberOfPlayers) {
+			//System.out.println("playersNameList size: "+playersNameList.size());
+			String name = s.next();
+			// System.out.println("Entered name is " + name);
+			if(playersNameList!=null) {
+				if(!playersNameList.contains(name)) {
+					playersNameList.add(name);
+					count++;					
+				}
+				else {
+					System.out.println("Player " + name+ " already exists");
+				}
+			}
+		}		
 
 		ArrayList numbers = new ArrayList();
 		for (int j = 1; j <= numberOfPlayers; j++) {
