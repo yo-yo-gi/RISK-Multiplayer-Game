@@ -7,8 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
+import com.soen.risk.helper.RiskArmyAllocationToPlayers;
+import com.soen.risk.helper.RiskMapEditor;
+import com.soen.risk.helper.RiskMapFileWriter;
+import com.soen.risk.helper.RiskMapUserCreator;
+import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -36,13 +42,20 @@ public static void main(String[] args) {
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
 		Scanner scanner;
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=false, currentMapAvailableStaus=false ;
-		List<String> mapFile = null, currentMapFile=null;
+		List<String> mapFile=new ArrayList<String>(), currentMapFile=new ArrayList<String>();
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
-		List<RiskContinent> riskContinentList;
-		int mapType=1, editType = 1;
+		ArrayList<RiskContinent> riskContinentList;
+		int mapType=1, editType = 0;
 		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
+		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
+		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
+		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
+		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
+		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		RiskMapEditor riskMapEditor;
 		
 		
 		
@@ -61,11 +74,8 @@ public static void main(String[] args) {
 			}
 		}
 		if (mapType==2) {
-//			call constructor
-//			if (riskMapWriter.getMapWriteStatus()) {			//need to add code for create map status
-//			mapFile=riskMapWriter.getInitialMap();
-//				mapInitStatus=true;
-//			}
+			mapFile=riskMapUserCreator.mapCreator();
+			mapInitCompletionStatus=true;
 		}
 		}while(!mapInitCompletionStatus); //need to add logic for checking status of map upload or create
 		
@@ -92,7 +102,10 @@ public static void main(String[] args) {
 			if(editType==1) {
 				mapValidationStatus=false;
 				currentMapAvailableStaus=false;
+				riskMapEditor=new RiskMapEditor(mapFile);
+				riskMapEditor.editMap();
 //				call edit method 
+//				riskMapEditor.editMap();
 //				parse newly created current map text file
 //				send new map string arraylist
 //				get and check copletion status of edit i.e. editStatus
@@ -124,7 +137,8 @@ public static void main(String[] args) {
 		
 		if (currentMapAvailableStaus) {
 			System.out.println("loading game...please wait...");
-			riskMapBuilder.loadMapData();
+			
+			riskMapBuilder.loadMapData(currentMapFile);
 		}else {
 			System.out.println("Map file not available...Please provide the current map file to load game...");
 			System.exit(0);
@@ -159,15 +173,26 @@ public static void main(String[] args) {
 		riskTerritoryList=riskMapBuilder.getTerritoryList();
 		
 //		passing list of players and List of countries to assign random territories
+		riskMainMap=riskTerritoryAssignmentToPlayer.assignTerritory(riskPlayerList,riskTerritoryList);
+//		assigning round robin army to above map
+		riskMainMap=riskArmyAllocationToPlayers.assignArmiesToPlayers(riskMainMap);
 //		riskMainMap=assignRandomTerritories(riskPlayerList,riskTerritoryList);
 //		Map returned in above line and sent that map for round robin army distribution
 		
 		
 		/*		 
-		 * Starting game reinforcement state and fortigy state		 * 
+		 * Starting game reinforcement state and fortify state		 * 
 		 */
 		riskContinentList=riskMapBuilder.getContinentList();
 //		starting turn by turn reinforcement, attack and fortify
+
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
+		{
+//		    System.out.println(entry.getKey() + "/" + entry.getValue());
+			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
+			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
+		}
+		
 		
 //		send Map<StringAsPlayerName, List<Countries>> and List of continents to reinforcement state
 		
