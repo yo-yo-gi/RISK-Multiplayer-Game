@@ -58,10 +58,15 @@ public class RiskMapBuilder {
 
 	/**
 	 * Load initial game data to before starting game.
+	 * @param currentMapFile 
 	 */
-	public void loadMapData() {
+	public void loadMapData(List<String> MapFile) {
+		ArrayList<String> parsedMapFile= new ArrayList<String>();
+		for (String currLine : MapFile) {
+			parsedMapFile.add(currLine.toLowerCase());
+		}
 		riskMapBuilder = new RiskMapBuilder(); 
-		List<String> parsedMapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");
+//		List<String> parsedMapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");
 		continentList=riskMapBuilder.addContinents(parsedMapFile);
 		terretoryList=riskMapBuilder.addTerretories(parsedMapFile);
 		continentList=riskMapBuilder.addTerretoriesToContinents(continentList,terretoryList); 
@@ -75,10 +80,10 @@ public class RiskMapBuilder {
 	 * @param mapFilePath 
      * @return mapFileList list of strings with each line in map file.
      */
-	public List<String> parseMapFile(String mapFilePath) {
-		List<String> mapFileList = new ArrayList<String>();
+	public ArrayList<String> parseMapFile(String mapFilePath) {
+		ArrayList<String> mapFileList = new ArrayList<String>();
 		try {
-			mapFileList = Files.readAllLines(Paths.get(mapFilePath), StandardCharsets.UTF_8);
+			mapFileList = (ArrayList<String>) Files.readAllLines(Paths.get(mapFilePath), StandardCharsets.UTF_8);
 			setMapUploadStatus(true);
 		} catch (IOException e) {
 			System.out.println("Error while reading map file.");
@@ -92,13 +97,13 @@ public class RiskMapBuilder {
      * @param mapFileList line by line list of map file
      * @return addedContinentList list of Continents objects.
      */
-	private ArrayList<RiskContinent> addContinents(List<String> mapFileList) {		
+	public ArrayList<RiskContinent> addContinents(List<String> mapFileList) {		
 		ArrayList<RiskContinent> addedContinentList;
 		int startIndex = 0;
 		int endIndex = 0;
 		RiskContinent riskContinent;
 		
-		startIndex=mapFileList.indexOf("[Continents]")+1;
+		startIndex=mapFileList.indexOf("[continents]")+1;
 		endIndex=mapFileList.indexOf("-")-1;
 		addedContinentList = new ArrayList<RiskContinent>();
 		for(int i=startIndex;i<=endIndex;i++) {
@@ -115,24 +120,22 @@ public class RiskMapBuilder {
      * @param mapFileList line by line list of map file
      * @return addedTerretoryList list of Territory objects.
      */
-	private ArrayList<RiskTerritory> addTerretories(List<String> mapFileList) {
+	public ArrayList<RiskTerritory> addTerretories(List<String> mapFileList) {
 		ArrayList<RiskTerritory> addedTerretoryList;
 		int startIndex = 0;
 		int endIndex = 0;
 		RiskTerritory riskTerritory;
+		int idCounter=0;
 		
-		
-		startIndex=mapFileList.indexOf("[Territories]")+1;
+		startIndex=mapFileList.indexOf("[territories]")+1;
 		endIndex=mapFileList.indexOf(";;")-1;
 		addedTerretoryList=new ArrayList<RiskTerritory>();
 		for(int i=startIndex;i<=endIndex;i++) {
 			String[] parsedTerritory=mapFileList.get(i).split(",");
-//			if(riskMapValidator.validateContinent(parsedTerritory[1])) {
 				riskTerritory=new RiskTerritory(parsedTerritory);
+				riskTerritory.setTerritoryId(idCounter);
 				addedTerretoryList.add(riskTerritory);
-//			}
-//			else
-//				System.out.println("Invalid Continent added for country : "+parsedTerritory[0]);
+				idCounter++;
 		}
 		return addedTerretoryList;
 	}
@@ -229,6 +232,15 @@ public class RiskMapBuilder {
 	}
 
 
-
+	public int getIdByTerritoryName(String riskTerritory) {
+		int idForTerritory=0;
+		for (RiskTerritory currTerritory : terretoryList) {
+			if(riskTerritory.equalsIgnoreCase(currTerritory.getTerritoryName())) {
+				idForTerritory=currTerritory.getTerritoryId();
+			}
+		}
+		
+		return idForTerritory;		
+	}
 
 }

@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.RiskArmyAllocationToPlayers;
+import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
@@ -41,12 +42,12 @@ public static void main(String[] args) {
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
 		Scanner scanner;
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=false, currentMapAvailableStaus=false ;
-		List<String> mapFile = null, currentMapFile=null;
+		List<String> mapFile=new ArrayList<String>(), currentMapFile=new ArrayList<String>();
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
-		int mapType=1, editType = 1;
+		int mapType=1, editType = 0;
 		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
@@ -54,6 +55,7 @@ public static void main(String[] args) {
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
 		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		RiskMapEditor riskMapEditor;
 		
 		
 		
@@ -81,7 +83,7 @@ public static void main(String[] args) {
 		
 		if (mapValidationStatus) {
 			System.out.println("Map loaded and validated successfully...");
-			riskMapFileWriter.writeMapToTextFile(mapFile);
+//			riskMapFileWriter.writeMapToTextFile(mapFile);
 //			if(riskMapFileWriter.getCompletionStatus){
 //			currentMapAvailableStaus=true;
 //		}
@@ -100,7 +102,10 @@ public static void main(String[] args) {
 			if(editType==1) {
 				mapValidationStatus=false;
 				currentMapAvailableStaus=false;
+				riskMapEditor=new RiskMapEditor(mapFile);
+				riskMapEditor.editMap();
 //				call edit method 
+//				riskMapEditor.editMap();
 //				parse newly created current map text file
 //				send new map string arraylist
 //				get and check copletion status of edit i.e. editStatus
