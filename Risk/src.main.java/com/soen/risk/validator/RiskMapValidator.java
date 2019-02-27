@@ -49,28 +49,6 @@ public class RiskMapValidator {
 	private int adjVertices; // No. of vertices 
 	private LinkedList<Integer> adjList[]; //Adjacency List 
 	private LinkedList<Integer> adjListTranspose[]; //Adjacency List for transpose DFS
-
-	
-	
-	
-	public static void main(String[] args) {
-		ArrayList<String> mapFile=new ArrayList<String>();
-//		ArrayList<RiskContinent> continentList =new ArrayList<RiskContinent>();
-//		ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
-		RiskMapBuilder riskMapBuilder;
-		riskMapBuilder=new RiskMapBuilder();
-		mapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");		
-//		riskMapBuilder.loadMapData(mapFile);
-//		continentList=riskMapBuilder.getContinentList();
-//		terretoryList=riskMapBuilder.getTerritoryList();	
-		RiskMapValidator riskMapValidator=new RiskMapValidator();
-		
-//		riskMapValidator.validateMapSyntax(mapFile);
-		riskMapValidator.validateMap(mapFile);
-		
-	}
-	
-	
 	
 	/**
 	 * Main validation method
