@@ -8,19 +8,20 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * <h2>Map Creation by user</h2>
+ * <h2>User Map Creator</h2>
  * <ul>
- * <li>This logic creates an ArrayList of map elements and will send it for validation.
- * <li>Once the validation is done for correctness, the said ArrayList will write into a new text file.
- * <li>This map will become the current map to be loaded.
+ * <li>Creation of map by user.
+ * <li>Creation of map by user taking appropriate values for continents and territories.
  *
  * </ul>
  *
  * @author Shashank Rao
  * @version 1.0.0
- * @since 2019-02-20
+ * @since 2019-02-25
+ * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
  */
 public class RiskMapUserCreator {
+	
 
 	public List<String> mapCreator() {
 
@@ -28,61 +29,78 @@ public class RiskMapUserCreator {
 		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
-		ArrayList<String> map=new ArrayList<String>();
+		ArrayList<String> Map1=new ArrayList<String>();
+		ArrayList<String> Map2=new ArrayList<String>();
+		ArrayList<String> Map3=new ArrayList<String>();
+		ArrayList<String> Map4=new ArrayList<String>();
+		ArrayList<String> Map5=new ArrayList<String>();
+		Map1.add("[Map]");
+		Map1.add("");
+		Map1.add("[Continents]");
+		
+		Map3.add("-");
+		Map3.add("[Territories]");
+		
+		Map5.add(";;");
+		ArrayList<String> finalmap=new ArrayList<String>();
+		
+		
+		
+		
 		
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		char selection1=scanner.nextLine().charAt(0);
 		if(selection1=='Y'||selection1=='y') {
-			map.add("[Map]");
-			map.add("");
-			//map.add("\n");
-			map.add("[Continent]");
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
 			String text1=scanner.nextLine();
-			map.add(text1);
+			Map2.add(text1);
 			while(flag1) {
 				System.out.print("Do you want to add more continents?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
 				if(selection2=='Y'||selection2=='y') {
-					System.out.print("Enter the continent name and control value in the format<Continent Name=Control value>:");
+					System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
 					String text2=scanner.nextLine();
-					map.add(text2);
+					Map2.add(text2);
 				}
 				else {
 					System.out.println("User does not want to enter more continents.Exit");
 					flag1=false;
-					//map.add("\n");
-					map.add("-");
+				
 										
 				}
 			}
 			System.out.println("Enter the territory details in the format:");
 			String text3=scanner.nextLine();
-			//map.add("\n");
-			map.add("[Territories]");
-			//map.add("\n");
-			map.add(text3);
+			Map4.add(text3);
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
 				if(selection2=='Y'||selection2=='y') {
 					System.out.println("Enter the territory details in the format:");
 					String text4=scanner.nextLine();
-					map.add(text4);
+					Map4.add(text4);
 				}
 				else {
 					System.out.println("User does not want to enter more territories.Exit");
 					flag2=false;
-					//map.add("\n");
-					map.add(";;");
+					
 				}
 			}
 			
 		}
 		else {
-			System.out.println("User selected N");
+			System.out.println("User entered No[N]");
 		}
-		scanner.close();
-		return map;
+//		scanner.close();
+		if(Map2.isEmpty()&&Map4.isEmpty()) {
+			System.out.println("Nothing has been created. File is without continent or territory");
+		}
+		finalmap.addAll(Map1);
+		finalmap.addAll(Map2);
+		finalmap.addAll(Map3);
+		finalmap.addAll(Map4);
+		finalmap.addAll(Map5);
+		
+		return finalmap;
 	}
 }
