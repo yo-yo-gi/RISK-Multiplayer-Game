@@ -5,6 +5,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ * <h2>User Map Editor</h2>
+ * <ul>
+ * <li>Editing of user created map.
+ * <li>User is given an option to Add or Delete continents or territories.
+ * <li>Appropriate input is taken and continents/territories are deleted from the map file and validated before uploading the map for the game.
+ *
+ * </ul>
+ *
+ * @author Shashank Rao
+ * @version 1.0.0
+ * @since 2019-02-25
+ */
 public class RiskMapEditor {
 	Scanner scanner = new Scanner(System.in);
 	ArrayList<String> fullmap=new ArrayList<String>();
@@ -18,6 +32,15 @@ public class RiskMapEditor {
 	ArrayList<String> territoryList=new ArrayList<String>();
 	ArrayList<String> continentList=new ArrayList<String>();
 	int TerrStartIndex=0, TerrEndIndex=0, contiStartIndex=0, contEndIndex=0,startIndexMap1=0,endIndexMap1=0,startIndexMap3=0,endIndexMap3=0,index=0;
+	
+	/**
+	 * <h2>User Map Editor Constructor</h2>
+	 * 
+	 * <li>The constructor is called when an object of the RiskMapEditor class is created.
+	 * <li>The constructor is responsible to parse the passed map file into different ArrayLists containing the continents and territories
+	 * @param mapFile Contains the entire map.txt file in ArrayList format used for parsing into continent and territory list. 
+	 *
+	 */
 	
 	public RiskMapEditor(List<String> mapFile) {
 		
@@ -54,7 +77,7 @@ public class RiskMapEditor {
 		for (String s : mapFile) {
 			if(s.equalsIgnoreCase("-"))
 				startIndexMap3=mapFile.indexOf(s);
-			if(s.equalsIgnoreCase("[Territory]"))
+			if(s.equalsIgnoreCase("[Territories]"))
 				endIndexMap3=mapFile.indexOf(s);
 		}
 		for(int i=startIndexMap3;i<=endIndexMap3;i++)
@@ -69,6 +92,13 @@ public class RiskMapEditor {
 	
 	
 //	public ArrayList<String> editMap(ArrayList<String> mapList, ArrayList<String> continentList, ArrayList<String> territoryList) {
+	/**
+	 * <h2>Implementation of Edit Map functionality</h2>
+	 * <li> The method editMap() is used for interaction with user.
+	 * <li> The method takes input from user on addition/deletion of continents or territories.
+	 * @return A edited arrayList containing the updates requested by the user.
+	 * 
+	 */
 	public void editMap() {
 		
 //		ArrayList<String> continent=new ArrayList<String>();
@@ -168,6 +198,13 @@ public class RiskMapEditor {
         
 //		return newMap;
 	}
+    
+    /**
+	 * <h2>Concatenation of ArrayList/h2>
+	 * <li> The fullMapList() method is used to create a concatenated list of ArrayList.
+	 * @return A concatenated ArrayList containing the elements of map.
+	 * 
+	 */
 
 	private void fullMapList() {
 		Map2=(ArrayList<String>) getContinentList();
@@ -207,6 +244,12 @@ public class RiskMapEditor {
 		continentList.add(continent);
 		
 	}
+	
+	/**
+	 * <h2>Logic to delete a territory from the territory ArrayList</h2>
+	 * 
+	 */
+
 
 	private void deleteTerritory(String deleteTerritory) {
 		ArrayList<String> deletedTerritoryList=new  ArrayList<String>(territoryList);
@@ -243,6 +286,11 @@ public class RiskMapEditor {
 		
 		territoryList=deletedTerritoryList;
 	}
+	
+	/**
+	 * <h2>Logic to delete a continent from the continent ArrayList and territory ArrayList</h2>
+	 * 
+	 */
 
 /*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
 //private void DeleteContinent(ArrayList<String> continentList, ArrayList<String> territoryList , String continentToRemove) {
