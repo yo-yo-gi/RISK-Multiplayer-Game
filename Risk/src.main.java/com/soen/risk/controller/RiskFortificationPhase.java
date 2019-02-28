@@ -23,7 +23,6 @@ import com.soen.risk.model.RiskTerritory;
 public class RiskFortificationPhase {
 
 	/** The logger. */
-	//private static final Logger LOGGER = Logger.getLogger(RiskPlayer.class.getName());
 	RiskLogger logger= new RiskLogger();
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);

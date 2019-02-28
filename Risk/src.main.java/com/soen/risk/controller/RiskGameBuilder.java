@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.RiskArmyAllocationToPlayers;
+import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
@@ -41,7 +42,7 @@ import com.soen.risk.validator.RiskMapValidator;
 public class RiskGameBuilder {
 	
 public static void main(String[] args) throws IOException {
-		
+		RiskLogger logger= new RiskLogger();
 		RiskPlayerBuilder riskPlayerBuilder;
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
@@ -71,7 +72,7 @@ public static void main(String[] args) throws IOException {
 		System.out.println("Select appropriate number");
 		System.out.println("1. Upload");
 		System.out.println("2. Create");
-		
+		logger.doLogging("Map Loading Phase------> ");
 		mapType=scanner.nextInt();	//need to add validation
 		scanner.nextLine();
 		if (mapType==1) {
