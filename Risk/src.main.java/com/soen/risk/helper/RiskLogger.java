@@ -30,7 +30,7 @@ public class RiskLogger {
 	 */
 	public RiskLogger() {
 
-		 String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/").toAbsolutePath().toString();
+		 String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/RiskLog").toAbsolutePath().toString();
 		SimpleDateFormat format = new SimpleDateFormat("M-d_HHmmss");
 		try {
 			fileHandler = new FileHandler(logFilePath+ format.format(Calendar.getInstance().getTime()) + ".log");
@@ -38,7 +38,6 @@ public class RiskLogger {
 			e.printStackTrace();
 		}
 
-		// fh.setFormatter(new SimpleFormatter());
 		fileHandler.setFormatter(new Formatter() {
 			@Override
 			public String format(LogRecord record) {
