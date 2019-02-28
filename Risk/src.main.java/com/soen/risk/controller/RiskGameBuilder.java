@@ -65,7 +65,7 @@ public static void main(String[] args) throws IOException {
 		RiskMapEditor riskMapEditor;
 		char continueEditChoice = 0,editChoice=0;
 		String filename;
-		RiskFortifyPhase riskFortifyPhase=new RiskFortifyPhase();
+		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
 		
 		do {
 		System.out.println("Select appropriate number");
