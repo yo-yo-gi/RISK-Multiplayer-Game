@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.soen.risk.test.controller;
 
 import static org.junit.Assert.*;
@@ -35,7 +34,6 @@ public class RiskReinforcementPhaseTest {
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
 		terretoryList=riskMapBuilder.getTerritoryList();		
-//		reinforcedMap	= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>(playerMap);
 		riskReinforcementPhase = new RiskReinforcementPhase();
 	}
 	@Test
@@ -44,43 +42,20 @@ public class RiskReinforcementPhaseTest {
 	}
 	
 	@Test
+	public void testArmyCalculationPerPlayerFail() {
+		assertNotEquals(15,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
+	}
+	
+	@Test
 	public void testArmyCalculationPerPlayer_controlValue() {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
 		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
 	}
-	
-	
-//	RiskMapValidator.validate(mapFile);
-}
-=======
-/*
- * 
- */
-package com.soen.risk.test.controller;
-
-import static org.junit.Assert.assertNull;
-
-import org.junit.jupiter.api.Test;
-
-// TODO: Auto-generated Javadoc
-/**
- * The Class RiskReinforcementPhaseTest.
- * @author Chirag
- * @version 1.0
- */
-public class RiskReinforcementPhaseTest {
-	
-	/** The x is sample to test the junit functionality */
-	String x= null;
-	
-	/**
-	 * Test.
-	 */
 	@Test
-	public void test() { // sample test method to check the functionality
-		assertNull(x);
+	public void testArmyCalculationPerPlayer_controlValueFail() {
+		ownedContinents.add("North_America");
+		riskPlayer.setOccupiedContinents(ownedContinents);		
+		assertNotEquals(33,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
 	}
-
 }
->>>>>>> 17afa81ceb0635856eb90cb72e9b0ccba92a7cbe
