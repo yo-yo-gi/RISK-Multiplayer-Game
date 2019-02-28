@@ -3,10 +3,8 @@
  */
 package com.soen.risk.controller;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -25,9 +23,6 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
-import com.sun.org.apache.xerces.internal.impl.dv.ValidationContext;
-
-import sun.java2d.pipe.BufferedBufImgOps;
 
 /**
  * <h2>Main Game Controller</h2>
@@ -65,10 +60,12 @@ public static void main(String[] args) throws IOException {
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
+		HashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
 		char continueEditChoice = 0,editChoice=0;
 		String filename;
+		RiskFortifyPhase riskFortifyPhase=new RiskFortifyPhase();
 		
 		do {
 		System.out.println("Select appropriate number");
@@ -206,6 +203,7 @@ public static void main(String[] args) throws IOException {
 		 */
 		
 		riskPlayerBuilder=new RiskPlayerBuilder();
+		riskPlayerBuilder.setUpPlayers();
 		riskPlayersNames=new ArrayList<String>();
 		riskPlayersNames=riskPlayerBuilder.getPlayersNameList();
 		
@@ -235,9 +233,15 @@ public static void main(String[] args) throws IOException {
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
 		{
+			reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+			fortifiedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 
-			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
+//			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
+			
+			fortifiedMap=riskFortifyPhase.getFortifiedMap(entry.getKey(), entry.getValue());
+					
 			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
+			
 		}
 		
 		
