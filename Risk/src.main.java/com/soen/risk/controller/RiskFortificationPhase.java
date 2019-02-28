@@ -7,23 +7,31 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RiskFortificationPhase.
+ * The Class RiskFortificationPhase to move as many armies 
+ * as you would like from one (and only one) of your territories 
+ * into one (and only one) of your adjacent territories.
+ * 
+ * @author Chirag
+ * @version 1.0
  */
 public class RiskFortificationPhase {
 	
+	//private static final Logger LOGGER = Logger.getLogger(RiskPlayer.class.getName());
+	RiskLogger logger= new RiskLogger();
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);
 	
-	/** The adj territory list. */
+	/** The adjacent territory list. */
 	ArrayList<String> adjTerritoryList;
 	
-	/** The destination territoy object. */
-	RiskTerritory sourceTerritoryObject,destinationTerritoyObject;
+	/** The destination territory object. */
+	RiskTerritory sourceTerritoryObject,destinationTerritoryObject;
 	
 	/**
 	 * Gets the fortified map.
@@ -41,6 +49,7 @@ public class RiskFortificationPhase {
 		String sourceTerritoryName, destinationTName;
 		System.out.println(currentPlayer.getPlayerName());
 	
+		logger.doLogging("currentPlayer name is: "+currentPlayer);
 		
 		do {
 		System.out.println("select the source territory");
@@ -97,7 +106,7 @@ public class RiskFortificationPhase {
 		
 		for (RiskTerritory currTerritory : playerTerritories) {
 			if (currTerritory.getTerritoryName().equalsIgnoreCase(destinationTName)) {
-				destinationTerritoyObject=currTerritory;
+				destinationTerritoryObject=currTerritory;
 				destinationArmy=currTerritory.getArmiesPresent();
 				
 			}		
@@ -114,11 +123,11 @@ public class RiskFortificationPhase {
 		if (finalMoveOfArmies>0 && finalMoveOfArmies<sourceArmy) {
 			
 			sourceArmy=sourceTerritoryObject.getArmiesPresent()-finalMoveOfArmies;
-			destinationArmy=destinationTerritoyObject.getArmiesPresent()+finalMoveOfArmies;
+			destinationArmy=destinationTerritoryObject.getArmiesPresent()+finalMoveOfArmies;
 			sourceTerritoryObject.setArmiesPresent(sourceArmy);
-			destinationTerritoyObject.setArmiesPresent(destinationArmy);
+			destinationTerritoryObject.setArmiesPresent(destinationArmy);
 			finalFortifyList.set(playerTerritories.indexOf(sourceTerritoryObject), sourceTerritoryObject);
-			finalFortifyList.set(playerTerritories.indexOf(destinationTerritoyObject), destinationTerritoyObject);
+			finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
 			
 		}else System.out.println("Wrong number of army selected");
 		
