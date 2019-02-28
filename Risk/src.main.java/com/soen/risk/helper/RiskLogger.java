@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,10 +30,10 @@ public class RiskLogger {
 	 */
 	public RiskLogger() {
 
+		 String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/").toAbsolutePath().toString();
 		SimpleDateFormat format = new SimpleDateFormat("M-d_HHmmss");
 		try {
-			fileHandler = new FileHandler("G:/temp/test/MyLogFile_"
-					+ format.format(Calendar.getInstance().getTime()) + ".log");
+			fileHandler = new FileHandler(logFilePath+ format.format(Calendar.getInstance().getTime()) + ".log");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
