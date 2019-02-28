@@ -43,13 +43,12 @@ public class RiskMapValidator {
 	RiskMapBuilder riskMapBuilder;
 	boolean validation=false;
 	int indexOfMap=0, indexOfContinents=0, indexOfDash=0, indexOfTerritories=0, indexOfDSColon=0;
-	private ArrayList<String> initContinentList=new ArrayList<String>();
-	private ArrayList<String> initTerritoryList=new ArrayList<String>();
+	private ArrayList<String> initContinentList;
+	private ArrayList<String> initTerritoryList;
 	private ArrayList<String> initAdjucencyList=new ArrayList<String>();
 	private int adjVertices; // No. of vertices 
 	private LinkedList<Integer> adjList[]; //Adjacency List 
 	private LinkedList<Integer> adjListTranspose[]; //Adjacency List for transpose DFS
-
 	
 	/**
 	 * Main validation method
@@ -75,6 +74,7 @@ public class RiskMapValidator {
 		
 		}else {validation=false;}
 		
+
 		return validation;
 	}
 	
@@ -143,7 +143,7 @@ public class RiskMapValidator {
 	 */
 	private boolean checkContinentSyntax(List<String> parsedMapFile) {
 			boolean continentValidation=false;			
-			String currentContinent;			
+			String currentContinent;
 			initContinentList=new ArrayList<String>();
 			
 			for (int i=indexOfContinents+1;i<indexOfDash;i++) {
@@ -175,7 +175,23 @@ public class RiskMapValidator {
 		 */
 		private boolean validateTerritories(ArrayList<RiskTerritory> territoryList, Map<String, List<String>> adjMap) {
 			boolean territoryValidation=false;
+			int matchCounter=0;
+			for (String key : adjMap.keySet()) {
+				matchCounter=0;
+			    for (String currAdj : adjMap.get(key)) {			    		
+			    	  for (String newAdj :adjMap.get(currAdj)){			    		  
+			    		  if (newAdj.equalsIgnoreCase(key)) {
+			    			  matchCounter++;
+						}
+			    	  }			    	  
+				}
+			    if (!(matchCounter==adjMap.get(key).size())) {
+			    	territoryValidation=false;
+					break;
+				}else territoryValidation=true;
+			}
 			
+			if(territoryValidation) {
 	//		graph initialize 
 			initializeAdj(territoryList.size());
 	//		adding edges in graph
@@ -187,7 +203,7 @@ public class RiskMapValidator {
 			}
 	//		checking if connected or not
 			territoryValidation=checkTerritoryAdjucency();
-			
+			}
 			return territoryValidation;
 		}
 

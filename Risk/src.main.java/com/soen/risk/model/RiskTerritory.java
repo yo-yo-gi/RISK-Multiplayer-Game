@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 public class RiskTerritory {
 	private static final Logger LOGGER = Logger.getLogger(RiskTerritory.class.getName());
 	
-	protected String territoryId;
+	protected int territoryId;
 	private int x;
 	private int y;
 	private String territoryName;
@@ -46,13 +46,13 @@ public class RiskTerritory {
 	/**
 	 * @return the territoryId
 	 */
-	public String getTerritoryId() {
+	public int getTerritoryId() {
 		return territoryId;
 	}
 	/**
 	 * @param territoryId the territoryId to set
 	 */
-	public void setTerritoryId(String territoryId) {
+	public void setTerritoryId(int territoryId) {
 		this.territoryId = territoryId;
 	}
 	/**
