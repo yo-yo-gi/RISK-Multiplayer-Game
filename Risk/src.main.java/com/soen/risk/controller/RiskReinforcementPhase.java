@@ -110,7 +110,7 @@ public class RiskReinforcementPhase
 		{
 			for (int i = 0; i < riskContinentList.size(); i++) {
 				for (int j = 0; j < ownedContinents.size(); j++) {
-					if (riskContinentList.get(i).getContinentName().equals(ownedContinents.get(j))) {
+					if (riskContinentList.get(i).getContinentName().equalsIgnoreCase(ownedContinents.get(j))) {
 						controlVal = controlVal + riskContinentList.get(i).getControllValue();
 					}
 				}
