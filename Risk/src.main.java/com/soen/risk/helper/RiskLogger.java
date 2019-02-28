@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.helper;
 
 import java.text.SimpleDateFormat;
@@ -8,23 +11,34 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RiskLogger for creating unique log files for every running instance.
+ */
 public class RiskLogger {
+
+	/** The logger. */
 	private final Logger logger = Logger.getLogger(RiskLogger.class
 			.getName());
-	private FileHandler fh = null;
 
+	/** The fileHandler. */
+	private FileHandler fileHandler = null;
+
+	/**
+	 * Instantiates a new risk logger.
+	 */
 	public RiskLogger() {
 
 		SimpleDateFormat format = new SimpleDateFormat("M-d_HHmmss");
 		try {
-			fh = new FileHandler("G:/temp/test/MyLogFile_"
+			fileHandler = new FileHandler("G:/temp/test/MyLogFile_"
 					+ format.format(Calendar.getInstance().getTime()) + ".log");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		// fh.setFormatter(new SimpleFormatter());
-		fh.setFormatter(new Formatter() {
+		fileHandler.setFormatter(new Formatter() {
 			@Override
 			public String format(LogRecord record) {
 				SimpleDateFormat logTime = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
@@ -42,10 +56,15 @@ public class RiskLogger {
 						+ record.getMessage() + "\n";
 			}
 		});
-		logger.addHandler(fh);
+		logger.addHandler(fileHandler);
 
 	}
 
+	/**
+	 * Do logging.
+	 *
+	 * @param log the log
+	 */
 	public void doLogging(String log) {
 		logger.info(""+log);
 	}
