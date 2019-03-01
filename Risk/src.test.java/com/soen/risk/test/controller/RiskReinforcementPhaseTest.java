@@ -13,7 +13,12 @@ import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-
+/**
+ * 
+ * @author Neha
+ * Junit Test case for Reinforcement
+ *
+ */
 public class RiskReinforcementPhaseTest {
 	HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
 	ArrayList<RiskContinent> continentList =new ArrayList<RiskContinent>();

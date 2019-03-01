@@ -1,9 +1,5 @@
 package com.soen.risk.test.controller;
-/**
- * Junit Test Case for the Risk Map Validator
- * @author Neha
- * @version 1.0
- */
+
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,13 +11,13 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
-
+/**
+ * Junit Test Case for the Risk Map Validator
+ * @author Neha
+ * @version 1.0
+ */
 public class RiskMapValidatorTest extends RiskMapValidator {
-//	HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
-	
-// 	HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
-//	RiskReinforcementPhase riskReinforcementPhase ;
-//	RiskPlayer riskPlayer;
+
 	RiskMapBuilder riskMapBuilder,riskMapBuilderIncorrect,riskMapBuilderConnectivity,riskMapBuilderDuplicacy;
 	ArrayList<String> mapFile=new ArrayList<String>();
 	ArrayList<String> mapFileIncorrrect=new ArrayList<String>();
