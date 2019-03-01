@@ -225,6 +225,7 @@ public class RiskMapValidator {
 		int continentCounter=0;
 		int territoryCounter=0;
 		int adjucentCounter=0;
+		int adjucentCounterSelf = 0;
 		int continentCorrectCount=0;
 //		name of territory and name of continent should not be same
 		for (String currTerritory : territories) {
@@ -281,6 +282,17 @@ public class RiskMapValidator {
 				}if(adjucentCounter>2) {duplicacyValidation=false; break;}
 			}
 			
+//			there can not be  adjacent territory with same name as territory name
+			for (String currTerritory : territories) {
+				initAdjucencyList=new ArrayList<String>();
+				initAdjucencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
+				for (String currAdjucent : initAdjucencyList) {
+					adjucentCounterSelf = 0;
+					if(currAdjucent.equalsIgnoreCase(currTerritory))
+						adjucentCounterSelf++;				
+				}if(adjucentCounterSelf>0) {duplicacyValidation=false; break;}
+			}
+			
 //			continent name in territory should be present in continent list
 			for (String currTerritory : territories) {
 				continentCorrectCount=0;
@@ -291,7 +303,7 @@ public class RiskMapValidator {
 				}if(continentCorrectCount!=1) {duplicacyValidation=false; break;}
 			}
 			
-			if(continentCounter<2 && territoryCounter<2 && adjucentCounter<2 && continentCorrectCount==1) {
+			if(continentCounter<2 && territoryCounter<2 && adjucentCounter<2 && continentCorrectCount==1&&adjucentCounterSelf!=0) {
 				duplicacyValidation=true;
 			}else {duplicacyValidation=false;}
 		}
