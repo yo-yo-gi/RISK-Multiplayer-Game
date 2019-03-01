@@ -206,7 +206,7 @@ public class RiskMapEditor {
 	 * 
 	 */
 
-	private void fullMapList() {
+	public void fullMapList() {
 		Map2=(ArrayList<String>) getContinentList();
 		Map4=(ArrayList<String>) getTerritoryList();
 		
@@ -233,13 +233,13 @@ public class RiskMapEditor {
 	}
 	
 	
-	private void addTerritory(String territory) {
+	public void addTerritory(String territory) {
 		
 		territoryList.add(territory);
 		
 	}
 
-	private void addContinent(String continent) {
+	public void addContinent(String continent) {
 
 		continentList.add(continent);
 		
@@ -251,7 +251,7 @@ public class RiskMapEditor {
 	 */
 
 
-	private void deleteTerritory(String deleteTerritory) {
+	public void deleteTerritory(String deleteTerritory) {
 		ArrayList<String> deletedTerritoryList=new  ArrayList<String>(territoryList);
 		int indexOfterritory=-1;
 		boolean flag=false;
@@ -295,7 +295,7 @@ public class RiskMapEditor {
 /*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
 //private void DeleteContinent(ArrayList<String> continentList, ArrayList<String> territoryList , String continentToRemove) {
 	
-	private void deleteContinent(String continentToRemove) {
+	public void deleteContinent(String continentToRemove) {
 		ArrayList<String> deletedContinentList=new  ArrayList<String>(continentList);
 		ArrayList<String> deletedTerritoryList=new  ArrayList<String>(territoryList);
 		int indexOfContinent=-1;
