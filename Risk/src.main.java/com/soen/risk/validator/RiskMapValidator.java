@@ -303,7 +303,7 @@ public class RiskMapValidator {
 				}if(continentCorrectCount!=1) {duplicacyValidation=false; break;}
 			}
 			
-			if(continentCounter<2 && territoryCounter<2 && adjucentCounter<2 && continentCorrectCount==1&&adjucentCounterSelf!=0) {
+			if(continentCounter<2 && territoryCounter<2 && adjucentCounter<2 && continentCorrectCount==1&&adjucentCounterSelf==0) {
 				duplicacyValidation=true;
 			}else {duplicacyValidation=false;}
 		}
