@@ -32,6 +32,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	 */
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
+		System.out.println("Assignment of territories to Player...");
 		List<RiskPlayer> players = new ArrayList<RiskPlayer>();
 		List<RiskTerritory> territories = new ArrayList<RiskTerritory>();
 		riskMapBuilder = new RiskMapBuilder();
@@ -67,8 +68,8 @@ public class RiskTerritoryAssignmentToPlayer {
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> stringListEntry : playerTerritoryMap.entrySet()) {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
-			System.out.println("-> " + player + " <- has " + value.size() + " Territories");
-			System.out.println("\t\t" + value);
+			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
+		//	System.out.println("\t\t" + value);
 		}
 		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
 		return playerTerritoryMap;

@@ -6,6 +6,8 @@ package com.soen.risk.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -26,6 +28,7 @@ public class RiskArmyAllocationToPlayers {
 	 */
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {
 		logger.doLogging("Allocating armies to players in round robin fashion------");
+		System.out.println("Allocating armies to players in round robin fashion...");
 		ArrayList<RiskTerritory> territories;
 		RiskPlayer currentPlayer;
 
@@ -47,9 +50,9 @@ public class RiskArmyAllocationToPlayers {
 				lastAssignedTerritoryIndex++;
 			}
 			playerTerritoryMap.put(currentPlayer, territories);
-
+			System.out.println("Player: "+currentPlayer.getPlayerName()+" has territories with their respective armies");
 			for (RiskTerritory riskTerritory : territories) {
-				System.out.println(riskTerritory.getTerritoryName() + " armies in " + riskTerritory.getArmiesPresent());
+				System.out.println(riskTerritory.getTerritoryName()+"("+riskTerritory.getArmiesPresent()+")");
 			}
 		}
 		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
