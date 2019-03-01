@@ -19,11 +19,13 @@ import com.soen.risk.model.RiskTerritory;
  * @version 1.0
  */
 public class RiskArmyAllocationToPlayers {
+	RiskLogger logger= new RiskLogger();
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
 	 * @return 
 	 */
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {
+		logger.doLogging("Allocating armies to players in round robin fashion------");
 		ArrayList<RiskTerritory> territories;
 		RiskPlayer currentPlayer;
 
@@ -50,6 +52,7 @@ public class RiskArmyAllocationToPlayers {
 				System.out.println(riskTerritory.getTerritoryName() + " armies in " + riskTerritory.getArmiesPresent());
 			}
 		}
+		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

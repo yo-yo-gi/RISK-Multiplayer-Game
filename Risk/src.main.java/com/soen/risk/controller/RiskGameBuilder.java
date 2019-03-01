@@ -67,7 +67,7 @@ public static void main(String[] args) throws IOException {
 		char continueEditChoice = 0,editChoice=0;
 		String filename;
 		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
-		
+		logger.doLogging("In RiskGameBuilder class------> ");
 		do {
 		System.out.println("Select appropriate number");
 		System.out.println("1. Upload");
@@ -161,7 +161,7 @@ public static void main(String[] args) throws IOException {
 //		parsing finally written map file and validating it once again before 
 		//currentMapFile=riskMapBuilder.parseMapFile("C:\\RiskProject\\map.txt");
 		mapValidationStatus=riskMapValidator.validateMap(mapFile);
-		
+		logger.doLogging("Map validation status------> "+mapValidationStatus);
 		if (mapValidationStatus) {
 			if(mapType==1) {
 				System.out.println("Map loaded and validated successfully...");
@@ -195,10 +195,7 @@ public static void main(String[] args) throws IOException {
 		 * Game map loading and validation completed..... 
 		 * 
 		 */
-		
-		
-		
-		
+				
 		/*		  
 		 * Adding players, assigning initial armies to players and loading appropriate graphs...		 * 
 		 */

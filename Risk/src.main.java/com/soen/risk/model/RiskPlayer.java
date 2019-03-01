@@ -5,8 +5,6 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
-
 /**
  * <h2>Player Model</h2>
  * <ul>
@@ -20,8 +18,6 @@ import org.apache.log4j.Logger;
  */
 public class RiskPlayer {
 
-	private static final Logger LOGGER = Logger.getLogger(RiskPlayer.class.getName());
-
 	private String playerId;
 	private String playerName;
 	private ArrayList<String> occupiedTerritories;
@@ -34,7 +30,7 @@ public class RiskPlayer {
 	public RiskPlayer(String name) {
 		setPlayerName(name);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -113,6 +109,6 @@ public class RiskPlayer {
 	public void setCardOwned(ArrayList<String> cardOwned) {
 		this.cardOwned = cardOwned;
 	}
-	
-	
+
+
 }

@@ -5,8 +5,6 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
-
 /**
  * <h2>Territory Model</h2>
  * <ul>
@@ -19,8 +17,6 @@ import org.apache.log4j.Logger;
  * @since 2019-01-28
  */
 public class RiskTerritory {
-	private static final Logger LOGGER = Logger.getLogger(RiskTerritory.class.getName());
-	
 	protected int territoryId;
 	private int x;
 	private int y;
@@ -30,7 +26,7 @@ public class RiskTerritory {
 	private int continentId;
 	private RiskPlayer terrtoryOwner;
 	private ArrayList<String> adjacents;
-	
+
 	/**
 	 * @param parsedTerritory
 	 */
@@ -151,5 +147,5 @@ public class RiskTerritory {
 	public void setAdjacents(ArrayList<String> adjacents) {
 		this.adjacents = adjacents;
 	}
-			
+
 }

@@ -42,17 +42,18 @@ public class RiskFortificationPhase {
 	 */
 	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
 	{
+		logger.doLogging("Inside the fortification phase----------");
 		HashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println("Fortification started...");
-		int sourceTerritory, destinationTerritory, sourceArmy, destinationArmy, sourceIndex, destinationIndex;
+		int sourceTerritory, destinationTerritory, sourceArmy, destinationArmy;
 		String sourceTerritoryName, destinationTName;
 		System.out.println(currentPlayer.getPlayerName());
 
 		logger.doLogging("currentPlayer name is: "+currentPlayer);
 
 		do {
-			System.out.println("select the source territory");
+			System.out.println("Select the source territory: ");
 			int sourceTCoutner=1;
 
 			for (RiskTerritory currTerritory : playerTerritories) {
@@ -66,14 +67,14 @@ public class RiskFortificationPhase {
 
 		}while(!(playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1));
 
-		//		--------------------------------------------------------------------------------
+		logger.doLogging("Selected source territory  "+sourceTerritoryName);
 		adjTerritoryList=new ArrayList<String>();
 		for (RiskTerritory currTerritory : playerTerritories) {			
 			if (currTerritory.getTerritoryName().equalsIgnoreCase(sourceTerritoryName)) {
 				adjTerritoryList=currTerritory.getAdjacents();
 			}
 		}
-		//		----------------------------------------------------------------------------------
+
 		ArrayList<String> OwnedAdjList=new ArrayList<String>();
 		for (String currAdj : adjTerritoryList) {
 			for (RiskTerritory currTerritory : playerTerritories) {
@@ -83,15 +84,9 @@ public class RiskFortificationPhase {
 			}
 		}
 
+		if (!OwnedAdjList.isEmpty()) {  //&& !(sourceArmy<=1
 
-
-		//		----------------------------------------------------
-
-		if (!OwnedAdjList.isEmpty()) {
-
-
-
-			System.out.println("select the destination territory");
+			System.out.println("Select the destination territory: ");
 			int destinationTCoutner=1;
 			for (String currAdj : OwnedAdjList) {
 				System.out.println(destinationTCoutner+"." + currAdj);
@@ -100,23 +95,19 @@ public class RiskFortificationPhase {
 			destinationTerritory=scanner.nextInt();
 			scanner.nextLine();
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
-
-
-			//		-------------------------------------------------------------------------------------------------------------------------------
-
+			
+			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
+			
 			for (RiskTerritory currTerritory : playerTerritories) {
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(destinationTName)) {
 					destinationTerritoryObject=currTerritory;
 					destinationArmy=currTerritory.getArmiesPresent();
-
 				}		
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(sourceTerritoryName)) {
 					sourceTerritoryObject=currTerritory;
-
 				}
 			}
 
-			//		------------------------------------------------------
 			System.out.println("Enter the number of armies to be moved to destination territory:  ");
 			int finalMoveOfArmies = scanner.nextInt();
 			scanner.nextLine();
@@ -129,17 +120,12 @@ public class RiskFortificationPhase {
 				finalFortifyList.set(playerTerritories.indexOf(sourceTerritoryObject), sourceTerritoryObject);
 				finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
 
-			}else System.out.println("Wrong number of army selected");
-
-		}
-
-
-		System.out.println("Fortification complete");
-
-
+			}else System.out.println("invalid number of armies entered");
+		}		
+		System.out.println("Fortification complete...");
 
 		fortifiedMap.put(currentPlayer, finalFortifyList);
-
+		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
 		return fortifiedMap;
 	}
 }

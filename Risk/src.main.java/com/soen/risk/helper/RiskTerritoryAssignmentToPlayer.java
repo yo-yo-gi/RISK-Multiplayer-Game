@@ -23,17 +23,15 @@ import com.soen.risk.model.RiskTerritory;
  * @version 1.0
  */
 public class RiskTerritoryAssignmentToPlayer {
+	RiskLogger logger= new RiskLogger();
 	RiskMapBuilder riskMapBuilder;
-
-
 	/**
 	 * Assign countries to each player randomly.
 	 * @param riskTerritoryList 
 	 * @param riskPlayerList 
 	 */
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
-
-//two argument List<riskPlayers> and List of all territories
+		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		List<RiskPlayer> players = new ArrayList<RiskPlayer>();
 		List<RiskTerritory> territories = new ArrayList<RiskTerritory>();
 		riskMapBuilder = new RiskMapBuilder();
@@ -61,7 +59,6 @@ public class RiskTerritoryAssignmentToPlayer {
 					playerTerritories = new ArrayList<>();
 				}
 				RiskTerritory playerAssignedTerritory = shuffledTerritories.get(i + j);
-				// TODO: Handle adjacent country
 				playerTerritories.add(playerAssignedTerritory);
 				playerTerritoryMap.put(currentPlayer, playerTerritories);
 			}
@@ -73,6 +70,7 @@ public class RiskTerritoryAssignmentToPlayer {
 			System.out.println("-> " + player + " <- has " + value.size() + " Territories");
 			System.out.println("\t\t" + value);
 		}
+		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }
