@@ -1,9 +1,7 @@
 package com.soen.risk.test.helper;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,9 +64,9 @@ public class RiskMapEditorTest {
 	@Test
 	public void testAddTerritory() {
 		List<String> after=new ArrayList<String>();
-		riskMapEditor.addTerritory("VenezuelaADD");
+		riskMapEditor.addTerritory("VenezuelaADD,Continent,adj1,adj2");
 		after=riskMapEditor.getTerritoryList();
-		assertTrue(after.contains("VenezuelaADD"));
+		assertTrue(after.contains("VenezuelaADD,Continent,adj1,adj2"));
 	}
 
 	@Test
@@ -76,7 +74,7 @@ public class RiskMapEditorTest {
 		List<String> after=new ArrayList<String>();
 		riskMapEditor.deleteContinent("South_America=2");
 		after=riskMapEditor.getContinentList();
-		assertTrue(after.contains("South_America=2"));
+		assertFalse(after.contains("South_America=2"));
 	}
 
 	@Test

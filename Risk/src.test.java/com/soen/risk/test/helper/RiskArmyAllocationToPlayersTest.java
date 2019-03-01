@@ -26,7 +26,7 @@ public class RiskArmyAllocationToPlayersTest {
 		RiskArmyAllocationToPlayers riskAssignmentToPlayer = new RiskArmyAllocationToPlayers();
 		
 		RiskPlayer player1 = new RiskPlayer("Player1");
-		
+		player1.setArmiesOwned(6);
 		String[] parsedTerritory = {"Venezuela","South America","Brazil"};
 		RiskTerritory tr1 = new RiskTerritory(parsedTerritory);
 		
@@ -47,7 +47,7 @@ public class RiskArmyAllocationToPlayersTest {
 		for (RiskTerritory riskTerritory : territories) {
 			System.out.println(riskTerritory.getTerritoryName() + " armies in " + riskTerritory.getArmiesPresent());	
 			
-			assertEquals(0,riskTerritory.getArmiesPresent());
+			assertEquals(2,riskTerritory.getArmiesPresent());
 		}	
 	}
 }
