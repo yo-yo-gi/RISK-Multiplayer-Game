@@ -178,18 +178,22 @@ public class RiskMapValidator {
 			int matchCounter=0;
 			for (String key : adjMap.keySet()) {
 				matchCounter=0;
-			    for (String currAdj : adjMap.get(key)) {			    		
+				if(adjMap.containsKey(key)) {
+			    for (String currAdj : adjMap.get(key)) {
+			    	if(adjMap.containsKey(currAdj)) {
 			    	  for (String newAdj :adjMap.get(currAdj)){			    		  
 			    		  if (newAdj.equalsIgnoreCase(key)) {
 			    			  matchCounter++;
 						}
 			    	  }			    	  
 				}
+				}
 			    if (!(matchCounter==adjMap.get(key).size())) {
 			    	territoryValidation=false;
 					break;
 				}else territoryValidation=true;
 			}
+		}
 			
 			if(territoryValidation) {
 	//		graph initialize 
