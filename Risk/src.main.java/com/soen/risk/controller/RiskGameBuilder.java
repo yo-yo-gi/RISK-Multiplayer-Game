@@ -15,6 +15,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.RiskArmyAllocationToPlayers;
+import com.soen.risk.helper.RiskGamehelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
@@ -67,6 +68,7 @@ public static void main(String[] args) throws IOException {
 		char continueEditChoice = 0,editChoice=0;
 		String filename;
 		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
+		RiskGamehelper riskGamehelper=new RiskGamehelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
 		do {
 		System.out.println("Select appropriate number");
@@ -214,9 +216,11 @@ public static void main(String[] args) throws IOException {
 		 */
 		
 		riskTerritoryList=riskMapBuilder.getTerritoryList();
-		
+		riskContinentList=riskMapBuilder.getContinentList();
 //		passing list of players and List of countries to assign random territories
 		riskMainMap=riskTerritoryAssignmentToPlayer.assignTerritory(riskPlayerList,riskTerritoryList);
+//		assigning control value as per territories owned by player
+		riskMainMap=riskGamehelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
 //		assigning round robin army to above map
 		riskMainMap=riskArmyAllocationToPlayers.assignArmiesToPlayers(riskMainMap);
 
@@ -226,7 +230,7 @@ public static void main(String[] args) throws IOException {
 		/*		 
 		 * Starting game reinforcement state and fortify state		 * 
 		 */
-		riskContinentList=riskMapBuilder.getContinentList();
+		
 //		starting turn by turn reinforcement, attack and fortify
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
@@ -234,7 +238,7 @@ public static void main(String[] args) throws IOException {
 			reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 			fortifiedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 
-//			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
+			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
 			
 			fortifiedMap=riskFortifyPhase.getFortifiedMap(entry.getKey(), entry.getValue());
 					
