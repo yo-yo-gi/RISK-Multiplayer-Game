@@ -17,18 +17,19 @@ import java.util.Scanner;
  *
  * @author Shashank Rao
  * @version 1.0.0
- * @since 2019-02-25
  * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
  */
 public class RiskMapUserCreator {
 	
 
+	boolean createStatus=true;
 	public List<String> mapCreator() {
 
 		
 		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
+		
 		ArrayList<String> Map1=new ArrayList<String>();
 		ArrayList<String> Map2=new ArrayList<String>();
 		ArrayList<String> Map3=new ArrayList<String>();
@@ -51,6 +52,7 @@ public class RiskMapUserCreator {
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		char selection1=scanner.nextLine().charAt(0);
 		if(selection1=='Y'||selection1=='y') {
+			createStatus=true;
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
 			String text1=scanner.nextLine();
 			Map2.add(text1);
@@ -58,7 +60,7 @@ public class RiskMapUserCreator {
 				System.out.print("Do you want to add more continents?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
 				if(selection2=='Y'||selection2=='y') {
-					System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
+					System.out.println("Enter the continent name and control value in the format:<Continent Name=Control value>");
 					String text2=scanner.nextLine();
 					Map2.add(text2);
 				}
@@ -69,14 +71,14 @@ public class RiskMapUserCreator {
 										
 				}
 			}
-			System.out.println("Enter the territory details in the format:");
+			System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 			String text3=scanner.nextLine();
 			Map4.add(text3);
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
 				if(selection2=='Y'||selection2=='y') {
-					System.out.println("Enter the territory details in the format:");
+					System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 					String text4=scanner.nextLine();
 					Map4.add(text4);
 				}
@@ -89,6 +91,7 @@ public class RiskMapUserCreator {
 			
 		}
 		else {
+			createStatus=false;
 			System.out.println("User entered No[N]");
 		}
 //		scanner.close();
@@ -102,5 +105,8 @@ public class RiskMapUserCreator {
 		finalmap.addAll(Map5);
 		
 		return finalmap;
+	}
+	public boolean getcreateStatus() {
+		return createStatus;
 	}
 }

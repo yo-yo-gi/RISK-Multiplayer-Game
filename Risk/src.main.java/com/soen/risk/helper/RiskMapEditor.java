@@ -17,7 +17,6 @@ import java.util.Scanner;
  *
  * @author Shashank Rao
  * @version 1.0.0
- * @since 2019-02-25
  */
 public class RiskMapEditor {
 	Scanner scanner = new Scanner(System.in);
@@ -109,7 +108,7 @@ public class RiskMapEditor {
         boolean flag2 = true;
         boolean flag3 = true;
         while (flag1) {
-            System.out.println("Please select from below:");
+            System.out.println("Please select an option from below:");
             System.out.println("1. ADD");
             System.out.println("2. DELETE");
             System.out.println("3. EXIT");
@@ -126,6 +125,7 @@ public class RiskMapEditor {
                         switch (choiceofAdd){
                             case 1:
                                 System.out.println("Add continent selected");
+                                System.out.println();
                                 System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
                                 String continent=scanner.next();
                                 addContinent(continent);
@@ -133,17 +133,18 @@ public class RiskMapEditor {
                                 break;
                             case 2:
                                 System.out.println("Add terrritory selected");
-                                System.out.println("Add territory name in the format");
+                                System.out.println();
+                                System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
                                 String territory=scanner.next();
                                 addTerritory(territory);
 //                                territoryList.add(territory);
                                 break;
                             case 3:
-                            	//continentList.add(continentList.size(),"-");
-                                //territoryList.add(territoryList.size(),"-");
+//                            	continentList.add(continentList.size(),"-");
+//                                territoryList.add(territoryList.size(),"-");
                                 flag2=false;
-                                System.out.println(continentList);
-                                System.out.println(territoryList);
+//                                System.out.println(continentList);
+//                                System.out.println(territoryList);
                                 break;
                             default:
                                 System.out.println("Invalid input");
@@ -174,8 +175,8 @@ public class RiskMapEditor {
                                 break;
                             case 3:
                                 flag3=false;
-                                System.out.println(continentList);
-                                System.out.println(territoryList);
+//                                System.out.println(continentList);
+//                                System.out.println(territoryList);
                                 break;
                             default:
                                 System.out.println("Invalid input");
@@ -316,6 +317,7 @@ public class RiskMapEditor {
 				tempContinentList.remove(indexOfContinent);
 				}
 			}
+//			else {System.out.println("Continent not found.");}
 		}
 		
 		deletedContinentList=tempContinentList;
@@ -328,7 +330,8 @@ public class RiskMapEditor {
 				indexOfTerritory=tempTerritoryList.indexOf(currTerritory);
 				if(indexOfTerritory>=0)
 					tempTerritoryList.remove(indexOfTerritory);
-			}		
+			}
+//			else {System.out.println("Continent not found.");}
 		}
 		deletedTerritoryList=tempTerritoryList;
 	}
@@ -336,8 +339,8 @@ public class RiskMapEditor {
 		if (deletedFlag) {
 			continentList=deletedContinentList;
 			territoryList=deletedTerritoryList;
-			System.out.println("found and deleted");
-		}else System.err.println("Not found");
+			System.out.println("Deleted successfully");
+		}else System.err.println("Continent/Territory not found. Please check again.");
 		
 		
 	}

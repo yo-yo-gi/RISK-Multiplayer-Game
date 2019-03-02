@@ -39,7 +39,6 @@ import com.soen.risk.validator.RiskMapValidator;
  * @author Yogesh Nimbhorkar
  * @author SHASHANK RAO
  * @version 1.0.0
- * @since 2019-02-17
  */
 public class RiskGameBuilder {
 	
@@ -71,10 +70,16 @@ public static void main(String[] args) throws IOException {
 		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
 		RiskGamehelper riskGamehelper=new RiskGamehelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
+		
+		
 		do {
-		System.out.println("Select appropriate number");
-		System.out.println("1. Upload");
-		System.out.println("2. Create");
+		System.out.println("Welcome to RISK GAME!!!");
+		System.out.println();
+		System.out.println();
+		System.out.println("Game Starting");
+		System.out.println("Please enter your choice:");
+		System.out.println("1. Upload from existing maps");
+		System.out.println("2. Create map from scratch");
 		logger.doLogging("Map Loading Phase------> ");
 		mapType=scanner.nextInt();	//need to add validation
 		scanner.nextLine();
@@ -86,8 +91,9 @@ public static void main(String[] args) throws IOException {
 			File folder = new File(mapFilePath);
 			File[] listOfFiles = folder.listFiles();
 			int fileCounter=1;
-
-			System.out.println("Select the file to load the game....");
+			
+			System.out.println("Upload selected.");
+			System.out.println("Please select the map you want to upload:");
 			for (File file : listOfFiles) {
 				System.out.println(fileCounter+". "+file.getName());
 				fileCounter++;
@@ -102,6 +108,7 @@ public static void main(String[] args) throws IOException {
 				mapInitCompletionStatus=true;
 			}}
 		if (mapType==2) {
+			System.out.println("Create Map selected");
 			mapFile=riskMapUserCreator.mapCreator();
 			mapInitCompletionStatus=true;
 		}
@@ -123,13 +130,14 @@ public static void main(String[] args) throws IOException {
 		
 		
 			
-			if(mapType==1) {
-				System.out.println("No edit option available when upload map is selected");
-			}
+//			if(mapType==1) {
+//				System.out.println("No edit option available when upload map is selected");
+//			}
 			if(mapType==2) {
+				if(riskMapUserCreator.getcreateStatus()) {
 				while(editCompletionStatus) {
 					boolean continueEdit=true;
-					System.out.println("Do you want to edit map before starting the game: Yes[Y]/No[N]");
+					System.out.println("Do you want to edit map you created before starting the game: Yes[Y]/No[N]");
 					editChoice=scanner.nextLine().charAt(0);
 					if(editChoice=='Y'||editChoice=='y') {
 						mapValidationStatus=false;
@@ -148,6 +156,7 @@ public static void main(String[] args) throws IOException {
 								mapFile=riskMapEditor.getFullMap();
 							}
 							else {
+								System.out.println("User selecte No[N].");
 								continueEdit=false;
 								break;
 							}
@@ -155,10 +164,12 @@ public static void main(String[] args) throws IOException {
 						break;
 					}
 					else {
+						System.out.println("User selecte No[N].");
 						editCompletionStatus=false;
 					}
 				}
 			}
+		}
 
 		
 //		parsing finally written map file and validating it once again before 
@@ -172,7 +183,7 @@ public static void main(String[] args) throws IOException {
 			}
 			else {
 				System.out.println("Map loaded and validated successfully...");
-				System.out.println("Please enter the filename you want to save the map with.");
+				System.out.println("Please enter the filename you want to save the map with:");
 				filename=scanner.nextLine();
 				riskMapFileWriter.writeMapToTextFile(mapFile, filename);
 				currentMapAvailableStaus=true;
@@ -184,7 +195,7 @@ public static void main(String[] args) throws IOException {
 		}
 		
 		if (currentMapAvailableStaus) {
-			System.out.println("loading game...please wait...");
+			System.out.println("Loading Game...please wait...");
 			
 			riskMapBuilder.loadMapData(mapFile);
 		}else {

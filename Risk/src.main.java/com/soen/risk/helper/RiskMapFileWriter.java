@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.soen.risk.helper;
 
 import java.io.File;
@@ -10,8 +7,14 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * @author SHASHANK RAO
- * 
+ * <h2>Map file generator</h2>
+ * <ul>
+ * <li>A text file containing the user created map elements.
+ *
+ * </ul>
+ *
+ * @author Shashank Rao
+ * @version 1.0.0
  */
 public class RiskMapFileWriter {
 
