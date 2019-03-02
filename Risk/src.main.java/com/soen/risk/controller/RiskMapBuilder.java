@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.soen.risk.helper.Constants;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
@@ -53,14 +54,14 @@ public class RiskMapBuilder {
 		continentList=riskMapBuilder.addTerretoriesToContinents(continentList,terretoryList); 
 		adjucencyMap=riskMapBuilder.buildAdjucencyMap(terretoryList);
 	}
-	
-	
+
+
 
 	/**
-     * Parse map file and create arraylist to store it.
+	 * Parse map file and create arraylist to store it.
 	 * @param mapFilePath 
-     * @return mapFileList list of strings with each line in map file.
-     */
+	 * @return mapFileList list of strings with each line in map file.
+	 */
 	public ArrayList<String> parseMapFile(String mapFilePath) {
 		ArrayList<String> mapFileList = new ArrayList<String>();
 		ArrayList<String> processedMapFileList = new ArrayList<String>();
@@ -76,18 +77,18 @@ public class RiskMapBuilder {
 		}
 		return processedMapFileList;
 	}
-	
+
 	/**
-     * Parse map file and initializes the continents.
-     * @param mapFileList line by line list of map file
-     * @return addedContinentList list of Continents objects.
-     */
+	 * Parse map file and initializes the continents.
+	 * @param mapFileList line by line list of map file
+	 * @return addedContinentList list of Continents objects.
+	 */
 	public ArrayList<RiskContinent> addContinents(List<String> mapFileList) {		
 		ArrayList<RiskContinent> addedContinentList;
-		int startIndex = 0;
-		int endIndex = 0;
+		int startIndex = Constants.ZERO;
+		int endIndex = Constants.ZERO;
 		RiskContinent riskContinent;
-		
+
 		startIndex=mapFileList.indexOf("[continents]")+1;
 		endIndex=mapFileList.indexOf("-")-1;
 		addedContinentList = new ArrayList<RiskContinent>();
@@ -96,51 +97,51 @@ public class RiskMapBuilder {
 			riskContinent=new RiskContinent(parsedContinenet[0],Integer.parseInt(parsedContinenet[1]));
 			addedContinentList.add(riskContinent);
 		}
-		
+
 		return addedContinentList;
 	}
 
 	/**
-     * Parse map file and initializes the territories.
-     * @param mapFileList line by line list of map file
-     * @return addedTerretoryList list of Territory objects.
-     */
+	 * Parse map file and initializes the territories.
+	 * @param mapFileList line by line list of map file
+	 * @return addedTerretoryList list of Territory objects.
+	 */
 	public ArrayList<RiskTerritory> addTerretories(List<String> mapFileList) {
 		ArrayList<RiskTerritory> addedTerretoryList;
-		int startIndex = 0;
-		int endIndex = 0;
+		int startIndex = Constants.ZERO;
+		int endIndex = Constants.ZERO;
 		RiskTerritory riskTerritory;
-		int idCounter=0;
-		
+		int idCounter=Constants.ZERO;
+
 		startIndex=mapFileList.indexOf("[territories]")+1;
 		endIndex=mapFileList.indexOf(";;")-1;
 		addedTerretoryList=new ArrayList<RiskTerritory>();
 		for(int i=startIndex;i<=endIndex;i++) {
 			String[] parsedTerritory=mapFileList.get(i).split(",");
-				riskTerritory=new RiskTerritory(parsedTerritory);
-				riskTerritory.setTerritoryId(idCounter);
-				addedTerretoryList.add(riskTerritory);
-				idCounter++;
+			riskTerritory=new RiskTerritory(parsedTerritory);
+			riskTerritory.setTerritoryId(idCounter);
+			addedTerretoryList.add(riskTerritory);
+			idCounter++;
 		}
 		return addedTerretoryList;
 	}
-	
+
 	/**
-     * Adding territories to continents.
-     * @param continentList list of continents
-     * @param territoryList list of territories
-     * @return loadedContinentList list of continents with territory objects.
-     */
+	 * Adding territories to continents.
+	 * @param continentList list of continents
+	 * @param territoryList list of territories
+	 * @return loadedContinentList list of continents with territory objects.
+	 */
 	private ArrayList<RiskContinent> addTerretoriesToContinents(ArrayList<RiskContinent> continentList, List<RiskTerritory> territoryList) {
 		ArrayList<RiskContinent> loadedContinentList = continentList;
 		ArrayList<String> tempRiskTerritories;
-		
+
 		for (RiskTerritory currentTerritory : territoryList) {
 			for (RiskContinent currentContinent : loadedContinentList) {
 				if((currentContinent.getContinentName()).equalsIgnoreCase(currentTerritory.getContinent())) {
 					tempRiskTerritories=new ArrayList<String>();
 					if(null!=currentContinent.getIncludedTerritories())
-					tempRiskTerritories=currentContinent.getIncludedTerritories();
+						tempRiskTerritories=currentContinent.getIncludedTerritories();
 					tempRiskTerritories.add(currentTerritory.getTerritoryName());
 					currentContinent.setIncludedTerritories(tempRiskTerritories);
 				}
@@ -149,45 +150,45 @@ public class RiskMapBuilder {
 		return loadedContinentList;
 	}
 
-	
-	
+
+
 	/**
 	 * @param terretoryList list of territories
 	 * @return loadedAdjMap 
 	 */
 	private Map<String, List<String>> buildAdjucencyMap(ArrayList<RiskTerritory> terretoryList) {
 		Map<String, List<String>> loadedAdjMap=new HashMap<String, List<String>>();
-		
+
 		for (RiskTerritory currentTerritory : terretoryList) {
 			loadedAdjMap.put(currentTerritory.getTerritoryName(), currentTerritory.getAdjacents());
 		}
 		return loadedAdjMap;
 	}
-	
+
 
 	/**
 	 * @return terretoryList 
 	 */
 	public ArrayList<RiskTerritory> getTerritoryList(){
-	
+
 		return terretoryList;
 	}
-	
+
 
 	/**
 	 * @return continentList 
 	 */
 	public ArrayList<RiskContinent> getContinentList(){
-		
+
 		return continentList;
 	}
-	
+
 
 	/**
 	 * @return adjucencyMap 
 	 */
 	public Map<String, List<String>> getAdjucencyMap(){
-		
+
 		return adjucencyMap;
 	}
 
@@ -209,13 +210,13 @@ public class RiskMapBuilder {
 
 
 	public int getIdByTerritoryName(String riskTerritory) {
-		int idForTerritory=0;
+		int idForTerritory=Constants.ZERO;
 		for (RiskTerritory currTerritory : terretoryList) {
 			if(riskTerritory.equalsIgnoreCase(currTerritory.getTerritoryName())) {
 				idForTerritory=currTerritory.getTerritoryId();
 			}
 		}
-		
+
 		return idForTerritory;		
 	}
 

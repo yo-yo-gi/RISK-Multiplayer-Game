@@ -26,12 +26,14 @@ public class RiskMapEditor {
 	ArrayList<String> Map3=new ArrayList<String>();
 	ArrayList<String> Map4=new ArrayList<String>();
 	ArrayList<String> Map5=new ArrayList<String>();
-	
-	
+
+
 	ArrayList<String> territoryList=new ArrayList<String>();
 	ArrayList<String> continentList=new ArrayList<String>();
-	int TerrStartIndex=0, TerrEndIndex=0, contiStartIndex=0, contEndIndex=0,startIndexMap1=0,endIndexMap1=0,startIndexMap3=0,endIndexMap3=0,index=0;
-	
+	int TerrStartIndex=Constants.ZERO, TerrEndIndex=Constants.ZERO, contiStartIndex=Constants.ZERO, 
+			contEndIndex=Constants.ZERO,startIndexMap1=Constants.ZERO,endIndexMap1=Constants.ZERO,
+			startIndexMap3=Constants.ZERO,endIndexMap3=Constants.ZERO,index=Constants.ZERO;
+
 	/**
 	 * <h2>User Map Editor Constructor</h2>
 	 * 
@@ -40,9 +42,9 @@ public class RiskMapEditor {
 	 * @param mapFile Contains the entire map.txt file in ArrayList format used for parsing into continent and territory list. 
 	 *
 	 */
-	
+
 	public RiskMapEditor(List<String> mapFile) {
-		
+
 		for (String currLine : mapFile) {
 			if (currLine.equalsIgnoreCase("[Territories]")) {
 				TerrStartIndex=mapFile.indexOf("[Territories]")+1;
@@ -57,7 +59,7 @@ public class RiskMapEditor {
 				contEndIndex=mapFile.indexOf("-")-1;
 			}
 		}
-		
+
 		for (int i = TerrStartIndex; i <= TerrEndIndex; i++) {
 			territoryList.add(mapFile.get(i));
 		}
@@ -72,7 +74,7 @@ public class RiskMapEditor {
 		}
 		for(int i=startIndexMap1;i<=endIndexMap1;i++)
 			Map1.add(mapFile.get(i));
-		
+
 		for (String s : mapFile) {
 			if(s.equalsIgnoreCase("-"))
 				startIndexMap3=mapFile.indexOf(s);
@@ -86,11 +88,11 @@ public class RiskMapEditor {
 				index=mapFile.indexOf(s);			
 		}
 		Map5.add(mapFile.get(index));
-		
+
 	}
-	
-	
-//	public ArrayList<String> editMap(ArrayList<String> mapList, ArrayList<String> continentList, ArrayList<String> territoryList) {
+
+
+	//	public ArrayList<String> editMap(ArrayList<String> mapList, ArrayList<String> continentList, ArrayList<String> territoryList) {
 	/**
 	 * <h2>Implementation of Edit Map functionality</h2>
 	 * <li> The method editMap() is used for interaction with user.
@@ -99,108 +101,108 @@ public class RiskMapEditor {
 	 * 
 	 */
 	public void editMap() {
-		
-//		ArrayList<String> continent=new ArrayList<String>();
-//		ArrayList<String> territory=new ArrayList<String>();
-//		continent=continentList;
-//		territory=territoryList;
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag3 = true;
-        while (flag1) {
-            System.out.println("Please select an option from below:");
-            System.out.println("1. ADD");
-            System.out.println("2. DELETE");
-            System.out.println("3. EXIT");
-            int choiceofEdit = scanner.nextInt();
-            switch (choiceofEdit){
-                case 1:
-                    System.out.println("Add selected");
-                    while(flag2){
-                        System.out.println("Please select what you want to add from the options below:");
-                        System.out.println("1. Continent");
-                        System.out.println("2. Territory");
-                        System.out.println("3. Exit");
-                        int choiceofAdd=scanner.nextInt();
-                        switch (choiceofAdd){
-                            case 1:
-                                System.out.println("Add continent selected");
-                                System.out.println();
-                                System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
-                                String continent=scanner.next();
-                                addContinent(continent);
-//                                continentList.add(continent);
-                                break;
-                            case 2:
-                                System.out.println("Add terrritory selected");
-                                System.out.println();
-                                System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
-                                String territory=scanner.next();
-                                addTerritory(territory);
-//                                territoryList.add(territory);
-                                break;
-                            case 3:
-//                            	continentList.add(continentList.size(),"-");
-//                                territoryList.add(territoryList.size(),"-");
-                                flag2=false;
-//                                System.out.println(continentList);
-//                                System.out.println(territoryList);
-                                break;
-                            default:
-                                System.out.println("Invalid input");
-                        }
-                    }
-                    break;
-                case 2:
-                    System.out.println("Delete selected");
-                    while(flag3){
-                        System.out.println("Please select what you want to delete from the options below:");
-                        System.out.println("1. Continent");
-                        System.out.println("2. Territory");
-                        System.out.println("3. Exit");
-                        int choiceofAdd=scanner.nextInt();
-                        switch (choiceofAdd){
-                            case 1:
-                                System.out.println("Delete continent selected");
-                                System.out.println("Enter the continent you want to remove:");
-                                String removeContinent=scanner.next();
-//                                DeleteContinent(continentList,territoryList,removeContinent);
-                                deleteContinent(removeContinent);
-                                break;
-                            case 2:
-                                System.out.println("Delete terrritory selected");
-                                System.out.println("Enter the name of territory you wish to delete:");
-                                String territoryToRemove=scanner.next();
-                                deleteTerritory(territoryToRemove);
-                                break;
-                            case 3:
-                                flag3=false;
-//                                System.out.println(continentList);
-//                                System.out.println(territoryList);
-                                break;
-                            default:
-                                System.out.println("Invalid input");
-                        }
-                    }
-                    break;
-                case 3:
-                	fullMapList();
-                    flag1=false;
-                    break;
-                default:
-                    System.out.println("Invalid input");
-            }
+
+		//		ArrayList<String> continent=new ArrayList<String>();
+		//		ArrayList<String> territory=new ArrayList<String>();
+		//		continent=continentList;
+		//		territory=territoryList;
+		boolean flag1 = true;
+		boolean flag2 = true;
+		boolean flag3 = true;
+		while (flag1) {
+			System.out.println("Please select an option from below:");
+			System.out.println("1. ADD");
+			System.out.println("2. DELETE");
+			System.out.println("3. EXIT");
+			int choiceofEdit = scanner.nextInt();
+			switch (choiceofEdit){
+			case 1:
+				System.out.println("Add selected");
+				while(flag2){
+					System.out.println("Please select what you want to add from the options below:");
+					System.out.println("1. Continent");
+					System.out.println("2. Territory");
+					System.out.println("3. Exit");
+					int choiceofAdd=scanner.nextInt();
+					switch (choiceofAdd){
+					case 1:
+						System.out.println("Add continent selected");
+						System.out.println();
+						System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
+						String continent=scanner.next();
+						addContinent(continent);
+						//                                continentList.add(continent);
+						break;
+					case 2:
+						System.out.println("Add terrritory selected");
+						System.out.println();
+						System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
+						String territory=scanner.next();
+						addTerritory(territory);
+						//                                territoryList.add(territory);
+						break;
+					case 3:
+						//                            	continentList.add(continentList.size(),"-");
+						//                                territoryList.add(territoryList.size(),"-");
+						flag2=false;
+						//                                System.out.println(continentList);
+						//                                System.out.println(territoryList);
+						break;
+					default:
+						System.out.println("Invalid input");
+					}
+				}
+				break;
+			case 2:
+				System.out.println("Delete selected");
+				while(flag3){
+					System.out.println("Please select what you want to delete from the options below:");
+					System.out.println("1. Continent");
+					System.out.println("2. Territory");
+					System.out.println("3. Exit");
+					int choiceofAdd=scanner.nextInt();
+					switch (choiceofAdd){
+					case 1:
+						System.out.println("Delete continent selected");
+						System.out.println("Enter the continent you want to remove:");
+						String removeContinent=scanner.next();
+						//                                DeleteContinent(continentList,territoryList,removeContinent);
+						deleteContinent(removeContinent);
+						break;
+					case 2:
+						System.out.println("Delete terrritory selected");
+						System.out.println("Enter the name of territory you wish to delete:");
+						String territoryToRemove=scanner.next();
+						deleteTerritory(territoryToRemove);
+						break;
+					case 3:
+						flag3=false;
+						//                                System.out.println(continentList);
+						//                                System.out.println(territoryList);
+						break;
+					default:
+						System.out.println("Invalid input");
+					}
+				}
+				break;
+			case 3:
+				fullMapList();
+				flag1=false;
+				break;
+			default:
+				System.out.println("Invalid input");
+			}
 
 
-        }
-//        newMap.addAll(mapList);
-//        newMap.addAll(continentList);
-//        newMap.addAll(territoryList);
-        
-//		return newMap;
+		}
+		//        newMap.addAll(mapList);
+		//        newMap.addAll(continentList);
+		//        newMap.addAll(territoryList);
+
+		//		return newMap;
 	}
-    
-    /**
+
+	/**
 	 * <h2>Concatenation of ArrayList/h2>
 	 * <li> The fullMapList() method is used to create a concatenated list of ArrayList.
 	 * @return A concatenated ArrayList containing the elements of map.
@@ -210,42 +212,42 @@ public class RiskMapEditor {
 	public void fullMapList() {
 		Map2=(ArrayList<String>) getContinentList();
 		Map4=(ArrayList<String>) getTerritoryList();
-		
+
 		fullmap.addAll(Map1);
 		fullmap.addAll(Map2	);
 		fullmap.addAll(Map3);
 		fullmap.addAll(Map4);
 		fullmap.addAll(Map5);
-		
+
 		//return fullmap;
 	}
-		
-	
+
+
 	public List<String> getContinentList(){
 		return continentList;
 	}
-	
+
 	public List<String> getTerritoryList(){
 		return territoryList;
 	}
-	
+
 	public List<String> getFullMap(){
 		return fullmap;
 	}
-	
-	
+
+
 	public void addTerritory(String territory) {
-		
+
 		territoryList.add(territory);
-		
+
 	}
 
 	public void addContinent(String continent) {
 
 		continentList.add(continent);
-		
+
 	}
-	
+
 	/**
 	 * <h2>Logic to delete a territory from the territory ArrayList</h2>
 	 * 
@@ -259,7 +261,7 @@ public class RiskMapEditor {
 		ArrayList<String> adjList;
 		int indexOfAdjacent=-1;
 		ArrayList<String> currTerritoryList;
-		
+
 		for (String currTerritory : territoryList) {
 			indexOfterritory=-1;
 			if((currTerritory.split(",")[0]).equalsIgnoreCase(deleteTerritory)) {
@@ -281,21 +283,21 @@ public class RiskMapEditor {
 						deletedTerritoryList.set(territoryList.indexOf(currTerritory), String.join(",", currTerritoryList));
 					}					
 				}
-				
+
 			}						
 		}
-		
+
 		territoryList=deletedTerritoryList;
 	}
-	
+
 	/**
 	 * <h2>Logic to delete a continent from the continent ArrayList and territory ArrayList</h2>
 	 * 
 	 */
 
-/*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
-//private void DeleteContinent(ArrayList<String> continentList, ArrayList<String> territoryList , String continentToRemove) {
-	
+	/*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
+	//private void DeleteContinent(ArrayList<String> continentList, ArrayList<String> territoryList , String continentToRemove) {
+
 	public void deleteContinent(String continentToRemove) {
 		ArrayList<String> deletedContinentList=new  ArrayList<String>(continentList);
 		ArrayList<String> deletedTerritoryList=new  ArrayList<String>(territoryList);
@@ -304,47 +306,47 @@ public class RiskMapEditor {
 		boolean deletedFlag=false;
 		ArrayList<String> tempContinentList;
 		ArrayList<String> tempTerritoryList;
-		
+
 
 		tempContinentList=new ArrayList<String>(deletedContinentList);
 		for (String currContinent : deletedContinentList) {
 			indexOfContinent=-1;
 			if((currContinent.split("=")[0]).equalsIgnoreCase(continentToRemove)) {
-				
+
 				indexOfContinent=tempContinentList.indexOf(currContinent);
 				if(indexOfContinent>=0) {
-				deletedFlag=true;
-				tempContinentList.remove(indexOfContinent);
+					deletedFlag=true;
+					tempContinentList.remove(indexOfContinent);
 				}
 			}
-//			else {System.out.println("Continent not found.");}
+			//			else {System.out.println("Continent not found.");}
 		}
-		
+
 		deletedContinentList=tempContinentList;
-		
+
 		if(deletedFlag) {
 			tempTerritoryList=new ArrayList<String>(deletedTerritoryList);
-		for (String currTerritory : deletedTerritoryList) {
-			indexOfTerritory=-1;
-			if((currTerritory.split(",")[1]).equalsIgnoreCase(continentToRemove)) {
-				indexOfTerritory=tempTerritoryList.indexOf(currTerritory);
-				if(indexOfTerritory>=0)
-					tempTerritoryList.remove(indexOfTerritory);
+			for (String currTerritory : deletedTerritoryList) {
+				indexOfTerritory=-1;
+				if((currTerritory.split(",")[1]).equalsIgnoreCase(continentToRemove)) {
+					indexOfTerritory=tempTerritoryList.indexOf(currTerritory);
+					if(indexOfTerritory>=0)
+						tempTerritoryList.remove(indexOfTerritory);
+				}
+				//			else {System.out.println("Continent not found.");}
 			}
-//			else {System.out.println("Continent not found.");}
+			deletedTerritoryList=tempTerritoryList;
 		}
-		deletedTerritoryList=tempTerritoryList;
-	}
-		
+
 		if (deletedFlag) {
 			continentList=deletedContinentList;
 			territoryList=deletedTerritoryList;
 			System.out.println("Deleted successfully");
 		}else System.err.println("Continent/Territory not found. Please check again.");
-		
-		
+
+
 	}
-	
-	
-	
+
+
+
 }

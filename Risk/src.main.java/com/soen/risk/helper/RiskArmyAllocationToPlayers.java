@@ -6,7 +6,6 @@ package com.soen.risk.helper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -32,7 +31,7 @@ public class RiskArmyAllocationToPlayers {
 		ArrayList<RiskTerritory> territories;
 		RiskPlayer currentPlayer;
 
-		int lastAssignedTerritoryIndex = 0;
+		int lastAssignedTerritoryIndex = Constants.ZERO;
 		List<RiskPlayer> playerList = new ArrayList<RiskPlayer>(playerTerritoryMap.keySet());
 
 		for (int j = 0; j < playerList.size(); j++) {
@@ -42,7 +41,7 @@ public class RiskArmyAllocationToPlayers {
 			int armiesToAssign = currentPlayer.getArmiesOwned() ;
 			for (int i = 0; i < armiesToAssign; i++) {
 				if (lastAssignedTerritoryIndex >= territories.size()) {
-					lastAssignedTerritoryIndex = 0;
+					lastAssignedTerritoryIndex = Constants.ZERO;
 				}
 				RiskTerritory lastAssignedTerritory = territories.get(lastAssignedTerritoryIndex);
 				Integer currentArmies=lastAssignedTerritory.getArmiesPresent();

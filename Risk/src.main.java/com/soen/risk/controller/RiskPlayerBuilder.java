@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskPlayerHelper;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.validator.RiskPlayerValidator;
@@ -53,7 +54,7 @@ public RiskPlayerBuilder(){
 		        }
 //                  Validation for names entering should not be repeated.
 		           System.out.println("Enter names");
-		           int count = 0;
+		           int count = Constants.ZERO;
 		           while(count<numberOfPlayers) {
 			       String name = s.next();
 	    		   if(playersNameList!=null) {

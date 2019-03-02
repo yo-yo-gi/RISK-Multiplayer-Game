@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -27,6 +28,7 @@ public class RiskFortificationPhase {
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);
 
+	int sourceTerritory;
 	/** The adjacent territory list. */
 	ArrayList<String> adjTerritoryList;
 	/** The owned territory list. */
@@ -49,7 +51,7 @@ public class RiskFortificationPhase {
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println("Fortification started...");
-		int sourceTerritory, destinationTerritory, sourceArmy, destinationArmy = 0;
+		int destinationTerritory, sourceArmy, destinationArmy = Constants.ZERO;
 		String sourceTerritoryName, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
 
@@ -65,8 +67,17 @@ public class RiskFortificationPhase {
 					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName());
 					sourceTCoutner++;			
 				}
+				try {
+				if(scanner.hasNextInt()) {
 				sourceTerritory=scanner.nextInt();
 				scanner.nextLine();
+				
+				}
+				else System.out.println("Please enter a number");
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
 				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
 				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
 	
@@ -142,7 +153,7 @@ public class RiskFortificationPhase {
 				finalFortifyList.set(playerTerritories.indexOf(sourceTerritoryObject), sourceTerritoryObject);
 				finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
 
-			}else System.out.println("invalid number of armies entered");
+			}//else System.out.println("invalid number of armies entered");
 		}
 		
 		System.out.println("Fortification completed for the Player "+currentPlayer.getPlayerName());
