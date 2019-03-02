@@ -57,6 +57,7 @@ public class RiskLogger {
 			}
 		});
 		logger.addHandler(fileHandler);
+		logger.setUseParentHandlers(false);
 
 	}
 
