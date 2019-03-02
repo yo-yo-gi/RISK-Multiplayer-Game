@@ -14,7 +14,6 @@ import java.util.Map;
 
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
-import com.soen.risk.validator.RiskMapValidator;
 
 /**
  * <h2>Map Builder</h2>
@@ -31,30 +30,13 @@ import com.soen.risk.validator.RiskMapValidator;
  */
 public class RiskMapBuilder {
 
-//	private String mapFilePath = "D:\\riskProject\\EarthMap.txt";
+
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
 	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
 	private Map<String, List<String>> adjucencyMap=new HashMap<String, List<String>>();
-//	static boolean isMapSyntaxValid;
-//	static RiskMapValidator riskMapValidator=new RiskMapValidator();
-	private boolean mapUploadStatus=false;
-	
+
+	private boolean mapUploadStatus=false;	
 	RiskMapBuilder riskMapBuilder;
-	
-	/*
-	 * public static void main(String[] args) { 
-	 * riskMapBuilder = new RiskMapBuilder(); 
-	 * List<String> parsedMapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");
-	 * isMapSyntaxValid = riskMapValidator.validateMapSyntax(parsedMapFile);
-	 * continentList=riskMapBuilder.addContinents(parsedMapFile);
-	 * terretoryList=riskMapBuilder.addTerretories(parsedMapFile);
-	 * riskMapValidator.validateMap(parsedMapFile);
-	 * continentList=riskMapBuilder.addTerretoriesToContinents(continentList,terretoryList); 
-	 * adjucencyMap=riskMapBuilder.buildAdjucencyMap(terretoryList);
-	 * 
-	 * }
-	 */
-	
 
 	/**
 	 * Load initial game data to before starting game.
@@ -66,7 +48,6 @@ public class RiskMapBuilder {
 			parsedMapFile.add(currLine.toLowerCase());
 		}
 		riskMapBuilder = new RiskMapBuilder(); 
-//		List<String> parsedMapFile=riskMapBuilder.parseMapFile("D:\\riskProject\\EarthMap.txt");
 		continentList=riskMapBuilder.addContinents(parsedMapFile);
 		terretoryList=riskMapBuilder.addTerretories(parsedMapFile);
 		continentList=riskMapBuilder.addTerretoriesToContinents(continentList,terretoryList); 
@@ -82,14 +63,18 @@ public class RiskMapBuilder {
      */
 	public ArrayList<String> parseMapFile(String mapFilePath) {
 		ArrayList<String> mapFileList = new ArrayList<String>();
+		ArrayList<String> processedMapFileList = new ArrayList<String>();
 		try {
 			mapFileList = (ArrayList<String>) Files.readAllLines(Paths.get(mapFilePath), StandardCharsets.UTF_8);
+			for (String currLine : mapFileList) {
+				processedMapFileList.add(currLine.replaceAll("\\s", ""));
+			}			
 			setMapUploadStatus(true);
 		} catch (IOException e) {
 			System.out.println("Error while reading map file.");
 			e.printStackTrace();
 		}
-		return mapFileList;
+		return processedMapFileList;
 	}
 	
 	/**
@@ -160,8 +145,7 @@ public class RiskMapBuilder {
 					currentContinent.setIncludedTerritories(tempRiskTerritories);
 				}
 			}
-		}
-		
+		}		
 		return loadedContinentList;
 	}
 
@@ -208,20 +192,12 @@ public class RiskMapBuilder {
 	}
 
 
-
-
-
-
 	/**
 	 * @return the mapUploadStatus
 	 */
 	public boolean getMapUploadStatus() {
 		return mapUploadStatus;
 	}
-
-
-
-
 
 
 	/**
