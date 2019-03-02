@@ -4,7 +4,7 @@
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import com.soen.risk.helper.RiskLogger;
@@ -43,10 +43,10 @@ public class RiskFortificationPhase {
 	 * @param playerTerritories the player territories
 	 * @return the fortified map
 	 */
-	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
 	{
 		logger.doLogging("Inside the fortification phase----------");
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println("Fortification started...");
 		int sourceTerritory, destinationTerritory, sourceArmy, destinationArmy = 0;

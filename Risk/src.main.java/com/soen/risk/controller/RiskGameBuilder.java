@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -56,14 +57,14 @@ public static void main(String[] args) throws IOException {
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
 		int mapType=1, typeOfEdit=0;
-		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
 		char continueEditChoice = 0,editChoice=0;
 		String filename;
@@ -235,14 +236,14 @@ public static void main(String[] args) throws IOException {
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
 		{
-			reinforcedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-			fortifiedMap=new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+			reinforcedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+			fortifiedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 
 			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
 			
-			fortifiedMap=riskFortifyPhase.getFortifiedMap(entry.getKey(), entry.getValue());
+			fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
 					
-			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
+//			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
 			
 		}
 		

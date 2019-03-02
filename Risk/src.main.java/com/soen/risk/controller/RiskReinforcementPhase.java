@@ -1,9 +1,8 @@
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import com.soen.risk.model.RiskContinent;
@@ -32,9 +31,9 @@ public class RiskReinforcementPhase
       * @return
       */
 
-	public HashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
 	{
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		Scanner sc = new Scanner(System.in);
 		String currentPlayerName = null;
 		
