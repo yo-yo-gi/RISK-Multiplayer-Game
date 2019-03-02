@@ -126,12 +126,12 @@ public class RiskFortificationPhase {
 				finalMoveOfArmies = scanner.nextInt();
 				
 				scanner.nextLine();
-				if(finalMoveOfArmies<0 || finalMoveOfArmies>sourceArmy)
+				if(finalMoveOfArmies<0 || finalMoveOfArmies>=sourceArmy)
 				{
 					System.out.println("invalid number of armies entered"
 							+ "\nPlease enter valid armies");
 				}
-			}while(finalMoveOfArmies<0 || finalMoveOfArmies>sourceArmy);
+			}while(finalMoveOfArmies<0 || finalMoveOfArmies>=sourceArmy);
 			
 			if (true) {
 
