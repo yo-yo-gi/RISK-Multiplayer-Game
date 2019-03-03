@@ -67,7 +67,7 @@ public class RiskFortificationPhase {
 				int sourceTCoutner=1;
 	
 				for (RiskTerritory currTerritory : playerTerritories) {
-					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName());
+					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 					sourceTCoutner++;			
 				}
 				try {

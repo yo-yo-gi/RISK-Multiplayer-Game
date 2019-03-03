@@ -31,7 +31,6 @@ public class RiskReinforcementPhase
 	 * @param riskContinentList : The total continent list
 	 * @return
 	 */
-
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
 	{
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
@@ -52,8 +51,11 @@ public class RiskReinforcementPhase
 		System.out.println("Territories of the player "+currentPlayerName+" are as following: ");
 		int territoryCounter=1;
 		
+		
+		
 		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
-			System.out.println(territoryCounter+". "+riskTerritory.getTerritoryName());
+			
+			System.out.println(territoryCounter+". "+riskTerritory.getTerritoryName()+" ("+riskTerritory.getArmiesPresent()+") ");
 			territoryCounter++;
 		}
 		System.out.println("Select the territory for reinforcement: ");
