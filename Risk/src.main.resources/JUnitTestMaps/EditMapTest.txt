@@ -1,0 +1,8 @@
+[Map]
+
+[Continents]
+South_America=2
+-
+[Territories]
+Venezuela
+;;

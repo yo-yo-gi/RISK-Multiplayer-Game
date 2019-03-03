@@ -76,7 +76,7 @@ public class RiskMapValidator {
 		}else {validation=false;}
 
 
-		return true;
+		return validation;
 	}
 
 

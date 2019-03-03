@@ -1,6 +1,8 @@
 package com.soen.risk.test.controller;
 
 import static org.junit.Assert.*;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.Before;
@@ -24,7 +26,6 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 	ArrayList<String> mapFileConnectivity=new ArrayList<String>();
 	ArrayList<String> mapFileDuplicacy=new ArrayList<String>();
 		
-//	ArrayList<String> ownedContinents=new ArrayList<>() ;
 	RiskMapValidator riskMapValidator,riskMapValidator1,riskMapValidator2,riskMapValidator3;
 /**
  * Called before every test case
@@ -33,22 +34,23 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 	@Before
 	public void setUp() throws Exception {
 		riskMapBuilder=new RiskMapBuilder();
-		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile("D:\\map\\EarthMap.txt");		
+		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/JUnitTestMaps/").toAbsolutePath().toString();
+		mapFile = (ArrayList<String>) riskMapBuilder.parseMapFile(mapFilePath.concat("ValidEarthMap.txt"));
 		riskMapValidator = new RiskMapValidator();
 		
 		//Check for wrong syntax of map file
 		riskMapBuilderIncorrect=new RiskMapBuilder();
-		mapFileIncorrrect=(ArrayList<String>) riskMapBuilderIncorrect.parseMapFile("D:\\map\\EarthMapIncorrect.txt");		
+		mapFileIncorrrect=(ArrayList<String>) riskMapBuilderIncorrect.parseMapFile(mapFilePath.concat("EarthMapIncorrect.txt"));		
 		riskMapValidator1 = new RiskMapValidator();
 		
 		//Check for connectivity of territory graph
 		riskMapBuilderConnectivity=new RiskMapBuilder();
-		mapFileConnectivity=(ArrayList<String>) riskMapBuilderConnectivity.parseMapFile("D:\\map\\EarthMapConnectivity.txt");			
+		mapFileConnectivity=(ArrayList<String>) riskMapBuilderConnectivity.parseMapFile(mapFilePath.concat("EarthMapConnectivity.txt"));			
 		riskMapValidator2 = new RiskMapValidator();
 		
 		//Check for duplicacy
 		riskMapBuilderDuplicacy=new RiskMapBuilder();
-		mapFileDuplicacy=(ArrayList<String>) riskMapBuilderDuplicacy.parseMapFile("D:\\map\\EarthMapDuplicacy.txt");		
+		mapFileDuplicacy=(ArrayList<String>) riskMapBuilderDuplicacy.parseMapFile(mapFilePath.concat("EarthMapDuplicacy.txt"));		
 		riskMapValidator3 = new RiskMapValidator();
 	}
 /**
@@ -56,7 +58,7 @@ public class RiskMapValidatorTest extends RiskMapValidator {
  */
 	@Test
 	public void testValidateMap() {
-		assertFalse(riskMapValidator.validateMap(mapFile));	
+		assertTrue(riskMapValidator.validateMap(mapFile));	
 	}
 	/**
 	 * Test Case to Validate map file - Correct File

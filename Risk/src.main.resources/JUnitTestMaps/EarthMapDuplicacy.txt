@@ -1,0 +1,26 @@
+[Map]
+author=Brigham Judd
+image=Earth.bmp
+wrap=yes
+scroll=horizontal
+warn=yes
+
+[Continents]
+South_America=2
+Africa=3
+Europe=5
+Asia=7
+Australia=2
+North_America=7
+-
+[Territories]
+Alaska,North_America,Alaska,Alberta
+Northwest_Territory,North_America,Alaska,Greenland,Alberta,Ontario
+Greenland,North_America,Northwest_Territory,Ontario,Eastern_Canada,Iceland
+Alberta,North_America,Alaska,Northwest_Territory,Ontario,Western_United_States,
+Ontario,North_America,Northwest_Territory,Greenland,Alberta,Eastern_Canada,Western_United_States,Eastern_United_States
+Eastern_Canada,North_America,Greenland,Ontario,Eastern_United_States
+Western_United_States,North_America,Alberta,Ontario,Eastern_United_States,Central_America
+Eastern_United_States,North_America,Ontario,Eastern_Canada,Western_United_States,Central_America
+Central_America,North_America,Western_United_States,Eastern_United_States,Venezuela
+;;

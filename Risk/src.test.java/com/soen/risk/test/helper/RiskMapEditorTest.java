@@ -3,6 +3,7 @@ package com.soen.risk.test.helper;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,25 +33,11 @@ public class RiskMapEditorTest {
 	@Before
 	public void setUp() throws Exception {
 		riskMapBuilder = new RiskMapBuilder();
-		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile("D:\\map\\EditMap\\TestMap.txt");
+		
+		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/JUnitTestMaps/").toAbsolutePath().toString();
+		mapFile = (ArrayList<String>) riskMapBuilder.parseMapFile(mapFilePath.concat("EditMapTest.txt"));
 		riskMapEditor = new RiskMapEditor(mapFile);
 		
-		
-		/*
-		 * continentList = (ArrayList<String>) riskMapEditor.getContinentList();
-		 * riskMapEditor.addContinent("TESTContinent");
-		 * 
-		 * continentList.add("South_America=2");
-		 * territoryList.add("Venezuela,South_America,Central_America,Peru,Brazil");
-		 * territoryList.add("Peru,South_America,Venezuela,Brazil,Argentina");
-		 * territoryList.add(
-		 * "Brazil,South_America,Venezuela,Peru,Argentina,North_Africa");
-		 * territoryList.add("Argentina,South_America,Peru,Brazil");
-		 * MapList.add("[Map]"); MapList.add(""); MapList.add("[Continents]");
-		 * MapList.addAll(continentList); MapList.add("-");
-		 * MapList.add("[Territories]"); MapList.addAll(territoryList);
-		 * MapList.add(";;");
-		 */
 	}
 
 	
