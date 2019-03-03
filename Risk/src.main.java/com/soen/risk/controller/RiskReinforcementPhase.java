@@ -51,26 +51,28 @@ public class RiskReinforcementPhase
 		System.out.println("Number of Territories Owned : "+noOfCountriesOwned);
 		System.out.println("Countries owned by player "+currentPlayerName+" are :");
 		int territoryCounter=1;
-
+		System.out.println("Add Armies to the Countries : ");
 		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
 			System.out.println(territoryCounter+". "+riskTerritory.getTerritoryName());
 			territoryCounter++;
 		}
-		System.out.println("Add Armies to the Countries : ");
+		int selectedTerrIndex = scanner.nextInt();
+		
+		
 		do
 		{
-			for(int i=0;i<currentPlayerTerritories.size();i++)  
-			{
+//			for(int i=0;i<currentPlayerTerritories.size();i++)  
+//			{
 				if(noOfRemainingArmies!=0)
 				{
 					System.out.println("The No Of Armies available for reinforcement : "+noOfRemainingArmies);
-					System.out.println("Enter the number of Armies for Country : "+currentPlayerTerritories.get(i).getTerritoryName()+" From "+noOfRemainingArmies);
+					System.out.println("Enter the number of Armies ");
 					int userEnteredArmy = scanner.nextInt();
 					if(userEnteredArmy < 0)
 					{
 						do 
 						{
-							System.out.println("No armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get(i));
+							System.out.println("No armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
 							userEnteredArmy = scanner.nextInt();	 	    		   
 						}while(userEnteredArmy < 0);
 					}
@@ -79,7 +81,7 @@ public class RiskReinforcementPhase
 						do
 						{
 							System.out.println("Invalid Input");
-							System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get(i).getTerritoryName());
+							System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
 							userEnteredArmy = scanner.nextInt();
 
 						}while(userEnteredArmy>noOfRemainingArmies);
@@ -90,18 +92,17 @@ public class RiskReinforcementPhase
 
 						noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy; 
 					} 
-					currentPlayerTerritories.get(i).setArmiesPresent((currentPlayerTerritories.get(i).getArmiesPresent())+(userEnteredArmy));
+					currentPlayerTerritories.get((selectedTerrIndex-1)).setArmiesPresent((currentPlayerTerritories.get((selectedTerrIndex-1)).getArmiesPresent())+(userEnteredArmy));
 				}
 				else
 				{
 					break;
 				}
-			}
+//			}
 			if(noOfRemainingArmies > 0)
 			{
-				System.out.println("The number of armies is still present"
-						+ "\nPlease Add armies to the countries to complete the Reinforcement phase \n"
-						+ "Iterating through the countries again");
+				System.out.println("Please select next territory");
+				selectedTerrIndex = scanner.nextInt();
 			}
 		}while(noOfRemainingArmies > 0);
 
