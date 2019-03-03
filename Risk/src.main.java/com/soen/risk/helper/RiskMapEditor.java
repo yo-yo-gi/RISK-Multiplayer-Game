@@ -295,7 +295,7 @@ public class RiskMapEditor {
 			}			
 		}	
 		territoryList=deletedTerritoryList;
-		if (flag) {
+		
 			for (String currTerritory : territoryList) {
 				adjList=new ArrayList<String>(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
 				currTerritoryList=new ArrayList<String>(Arrays.asList(currTerritory.split(",")));
@@ -305,13 +305,19 @@ public class RiskMapEditor {
 						indexOfAdjacent=currTerritoryList.indexOf(deleteTerritory);
 						currTerritoryList.remove(indexOfAdjacent);
 						deletedTerritoryList.set(territoryList.indexOf(currTerritory), String.join(",", currTerritoryList));
+						flag=true;
 					}					
 				}
 
 			}						
-		}
+			if (flag) {
+//				continentList=deletedContinentList;
+				territoryList=deletedTerritoryList;
+				System.out.println("Deleted successfully");
+			}else System.err.println("Territory not found. Please check again.");
 
 		territoryList=deletedTerritoryList;
+		
 	}
 
 	/**
@@ -366,7 +372,7 @@ public class RiskMapEditor {
 			continentList=deletedContinentList;
 			territoryList=deletedTerritoryList;
 			System.out.println("Deleted successfully");
-		}else System.err.println("Continent/Territory not found. Please check again.");
+		}else System.err.println("Continent not found. Please check again.");
 
 
 	}
