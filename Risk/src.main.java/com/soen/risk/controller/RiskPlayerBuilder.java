@@ -30,9 +30,7 @@ public RiskPlayerBuilder(){
 	     public void setUpPlayers() {
 		 Scanner s = new Scanner(System.in);
 		 int numberOfPlayers = -1;
-		 int playerCounter=1;
-		 
-		 RiskPlayerValidator riskPlayerValidator=new RiskPlayerValidator();
+
 //		 To take number of players
 		 System.out.println("Enter no. of players");
 			
@@ -41,7 +39,7 @@ public RiskPlayerBuilder(){
 			 try {
 		    		numberOfPlayers = s.nextInt();
 //                  To check whether the numberofPlayers are between 2 to 6		    		
-		    		if(numberOfPlayers <2 || numberOfPlayers>6) {
+		    		if(numberOfPlayers <3 || numberOfPlayers>6) {
 		    			System.out.println("Try Again!!");
 		    			numberOfPlayers = -1;
 		    		    }
@@ -66,14 +64,6 @@ public RiskPlayerBuilder(){
 				    }
 			      }
 		        }		
-
-		       ArrayList numbers = new ArrayList();
-		       for (int j = 1; j <= numberOfPlayers; j++) {
-			   numbers.add(j);
-		       }
-//             Collections used to shuffle the numbers and give number of position to player to start the game with.		
-		       Collections.shuffle(numbers);
-		       System.out.println(numbers);
 	           }
 	
     void addPlayers(List<String> riskPlayersNames){
@@ -89,6 +79,7 @@ public RiskPlayerBuilder(){
 			riskPlayer.setArmiesOwned(initialArmy);
 			tempRiskPlayerList.add(riskPlayer);
 		}
+		Collections.shuffle(tempRiskPlayerList);
 		riskPlayerList= tempRiskPlayerList;
         }
 	
