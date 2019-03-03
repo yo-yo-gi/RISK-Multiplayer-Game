@@ -34,8 +34,8 @@ public class RiskMapEditorTest {
 	public void setUp() throws Exception {
 		riskMapBuilder = new RiskMapBuilder();
 		
-		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/JUnitTestMaps/").toAbsolutePath().toString();
-		mapFile = (ArrayList<String>) riskMapBuilder.parseMapFile(mapFilePath.concat("EditMapTest.txt"));
+		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/JUnitTestMaps").toAbsolutePath().toString();
+		mapFile = (ArrayList<String>) riskMapBuilder.parseMapFile(mapFilePath.concat("//EditMapTest.txt"));
 		riskMapEditor = new RiskMapEditor(mapFile);
 		
 	}
@@ -59,9 +59,9 @@ public class RiskMapEditorTest {
 	@Test
 	public void testDeleteContinent() {
 		List<String> after=new ArrayList<String>();
-		riskMapEditor.deleteContinent("South_America=2");
+		riskMapEditor.deleteContinent("south_america=2");
 		after=riskMapEditor.getContinentList();
-		assertFalse(after.contains("South_America=2"));
+		assertFalse(after.contains("south_america=2"));
 	}
 
 	@Test
