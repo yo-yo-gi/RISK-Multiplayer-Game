@@ -70,17 +70,12 @@ public class RiskFortificationPhase {
 					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 					sourceTCoutner++;			
 				}
-				try {
-				if(scanner.hasNextInt()) {
+				while (!scanner.hasNextInt()) {
+			 		System.out.println("Try Again!!");
+			 		scanner.next();
+			 	}
 				sourceTerritory=scanner.nextInt();
-				scanner.nextLine();
 				
-				}
-				else System.out.println("Please enter a number");
-				}
-				catch(Exception e) {
-					e.printStackTrace();
-				}
 				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
 				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
 	
@@ -116,8 +111,11 @@ public class RiskFortificationPhase {
 				System.out.println(destinationTCoutner+"." + currAdj);
 				destinationTCoutner++;			
 			}
+			while (!scanner.hasNextInt()) {
+		 		System.out.println("Try Again!!");
+		 		scanner.next();
+		 	}
 			destinationTerritory=scanner.nextInt();
-			scanner.nextLine();
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
 			
 			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
@@ -137,9 +135,11 @@ public class RiskFortificationPhase {
 			
 			do
 			{
+				while (!scanner.hasNextInt()) {
+			 		System.out.println("Try Again!!");
+			 		scanner.next();
+			 	}
 				finalMoveOfArmies = scanner.nextInt();
-				
-				scanner.nextLine();
 				if(finalMoveOfArmies==sourceArmy)
 				{
 					System.out.println("All armies cannot be moved."

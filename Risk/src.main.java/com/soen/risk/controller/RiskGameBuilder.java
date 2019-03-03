@@ -50,12 +50,12 @@ public class RiskGameBuilder {
 		//		RiskMapFileWriter riskMapFileWriter = new RiskMapFileWriter(); 
 		Scanner scanner = new Scanner(System.in);
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false ;
-		List<String> mapFile = null, currentMapFile=null;
+		List<String> mapFile = null;
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
-		int mapType=0, typeOfEdit= Constants.ZERO,count=1;
+		int mapType=0, count=1;
 		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
@@ -81,21 +81,23 @@ public class RiskGameBuilder {
 			System.out.println("1. Upload from existing maps");
 			System.out.println("2. Create map from scratch");
 			logger.doLogging("Map Loading Phase------> ");
-			try {
-				if(scanner.hasNextInt()) {
-					mapType=scanner.nextInt();	//need to add validation
-					scanner.nextLine();
-				}
-				else System.out.println("Please enter a number");
+
+			do {
+			while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
+		 		System.out.println("Try Again!!");
+		 		scanner.next();
+		 	}
+			mapType=scanner.nextInt();
+			if(!(mapType==1 || mapType==2)) {
+				System.out.println("Try Again!!");
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			}while(!(mapType==1 || mapType==2));
+				
 			if (mapType==1) {
 
 				String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps").toAbsolutePath().toString();
 				Path path;
-				String fileName;
+				int fileName;
 				File folder = new File(mapFilePath);
 				File[] listOfFiles = folder.listFiles();
 				int fileCounter=1;
@@ -106,9 +108,18 @@ public class RiskGameBuilder {
 					System.out.println(fileCounter+". "+file.getName());
 					fileCounter++;
 				}
-				fileName=scanner.nextLine();
+				do {
+					while (!scanner.hasNextInt()) {
+				 		System.out.println("Try Again!!");
+				 		scanner.next();
+				 	}
+					fileName=scanner.nextInt();
+					if(!(fileName<fileCounter)) {
+						System.out.println("Try Again!!");
+					}
+					}while(!(fileName<fileCounter));
 
-				path=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+(listOfFiles[(Integer.parseInt(fileName))-1]).getName());	
+				path=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+(listOfFiles[fileName-1].getName()));	
 
 
 				mapFile=riskMapBuilder.parseMapFile(path.toAbsolutePath().toString());
@@ -146,7 +157,13 @@ public class RiskGameBuilder {
 				while(editCompletionStatus) {
 					boolean continueEdit=true;
 					System.out.println("Do you want to edit map you created before starting the game: Yes[Y]/No[N]");
-					editChoice=scanner.nextLine().charAt(0);
+					
+					do {
+						editChoice=scanner.next().charAt(0);
+					if(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N')) {
+						System.out.println("Try Again!!");
+					}
+					}while(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N'));
 					if(editChoice=='Y'||editChoice=='y') {
 						mapValidationStatus=false;
 						currentMapAvailableStaus=false;
@@ -155,7 +172,12 @@ public class RiskGameBuilder {
 						mapFile=riskMapEditor.getFullMap();
 						while(continueEdit) {
 							System.out.println("Do you want to edit the map again before starting the game:Yes[Y]/No[N]");
-							continueEditChoice=scanner.nextLine().charAt(0);
+							do {
+								continueEditChoice=scanner.next().charAt(0);
+							if(!(continueEditChoice=='Y' || continueEditChoice=='y' || continueEditChoice=='n' || continueEditChoice=='N')) {
+								System.out.println("Try Again!!");
+							}
+							}while(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N'));
 							if(continueEditChoice=='Y'||continueEditChoice=='y') {
 								mapValidationStatus=false;
 								currentMapAvailableStaus=false;
