@@ -50,7 +50,9 @@ public class RiskFortificationPhase {
 		logger.doLogging("Inside the fortification phase----------");
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
+		System.out.println();
 		System.out.println("Fortification started...");
+		System.out.println();
 		int destinationTerritory, sourceArmy, destinationArmy = Constants.ZERO;
 		String sourceTerritoryName, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
@@ -60,7 +62,8 @@ public class RiskFortificationPhase {
 		do
 		{
 			do {
-				System.out.println("Select the source territory: ");
+				System.out.println();
+				System.out.println("Select the source territory to move army from: ");
 				int sourceTCoutner=1;
 	
 				for (RiskTerritory currTerritory : playerTerritories) {
@@ -137,9 +140,18 @@ public class RiskFortificationPhase {
 				finalMoveOfArmies = scanner.nextInt();
 				
 				scanner.nextLine();
-				if(finalMoveOfArmies<0 || finalMoveOfArmies>=sourceArmy)
+				if(finalMoveOfArmies==sourceArmy)
+				{
+					System.out.println("All armies cannot be moved."
+							+ "\nPlease enter number of armies less than total armies in the territory.");
+				}
+				if(finalMoveOfArmies<0)
 				{
 					System.out.println("invalid number of armies entered"
+							+ "\nPlease enter valid armies");
+				}
+				if(finalMoveOfArmies>sourceArmy) {
+					System.out.println("Number of armies cannot be greater than that available."
 							+ "\nPlease enter valid armies");
 				}
 			}while(finalMoveOfArmies<0 || finalMoveOfArmies>=sourceArmy);
@@ -156,9 +168,12 @@ public class RiskFortificationPhase {
 			}//else System.out.println("invalid number of armies entered");
 		}
 		
+		System.out.println();
 		System.out.println("Fortification completed for the Player "+currentPlayer.getPlayerName());
+		System.out.println();
 		System.out.println("Source Territory: "+sourceTerritoryName+" has armies: "+sourceArmy);
 		System.out.println("Destination Territory: "+destinationTName+" has armies: "+destinationArmy);
+		System.out.println();
 
 		fortifiedMap.put(currentPlayer, finalFortifyList);
 		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
