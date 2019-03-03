@@ -55,7 +55,7 @@ public class RiskGameBuilder {
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
-		int mapType=1, typeOfEdit= Constants.ZERO;
+		int mapType=0, typeOfEdit= Constants.ZERO,count=1;
 		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
@@ -230,6 +230,14 @@ public class RiskGameBuilder {
 		riskPlayerList=new ArrayList<RiskPlayer>();				
 		riskPlayerBuilder.addPlayers(riskPlayersNames);
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
+		System.out.println("Players numbers initialized. Game started.");
+//		List<String> playerList= new ArrayList<String>();
+//		playerList=riskPlayerList.toString();
+		for(RiskPlayer curPlayer:riskPlayerList) {
+			System.out.println("Player #"+count+" -> "+curPlayer.getPlayerName());
+			count++;
+		}
+		System.out.println();
 
 		/*
 		 * assigning random territories to players and assigning random armies		 * 
@@ -275,6 +283,9 @@ public class RiskGameBuilder {
 		//		send same map for fortify
 
 		//		get fortify map
+		
+		System.out.println("Reinforcement & Fortification phases complete for all players. Phase 1 complete. Thank You!! ");
+		
 		scanner.close();
 	}
 
