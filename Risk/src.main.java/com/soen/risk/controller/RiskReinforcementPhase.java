@@ -45,60 +45,56 @@ public class RiskReinforcementPhase
 		currentPlayerName=currentPlayer.getPlayerName();
 
 		noOfRemainingArmies=calculateArmy(currentPlayer,currentPlayerTerritories, riskContinentList);
-		System.out.println("Reinforcement started.....");
+		System.out.println("\nReinforcement started.....");
 
 		System.out.println("Player name : "+currentPlayerName);
-		System.out.println("Number of Territories Owned : "+noOfCountriesOwned);
-		System.out.println("Countries owned by player "+currentPlayerName+" are :");
+		System.out.println("Number of territories owned : "+noOfCountriesOwned);
+		System.out.println("Territories of the player "+currentPlayerName+" are as following: ");
 		int territoryCounter=1;
-		System.out.println("Add Armies to the Countries : ");
+		
 		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
 			System.out.println(territoryCounter+". "+riskTerritory.getTerritoryName());
 			territoryCounter++;
 		}
+		System.out.println("Select the territory for reinforcement: ");
 		int selectedTerrIndex = scanner.nextInt();
-		
 		
 		do
 		{
-//			for(int i=0;i<currentPlayerTerritories.size();i++)  
-//			{
-				if(noOfRemainingArmies!=0)
+			if(noOfRemainingArmies!=0)
+			{
+				System.out.println("The number of armies available for reinforcement : "+noOfRemainingArmies);
+				System.out.println("Enter armies for "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+				int userEnteredArmy = scanner.nextInt();
+				if(userEnteredArmy < 0)
 				{
-					System.out.println("The No Of Armies available for reinforcement : "+noOfRemainingArmies);
-					System.out.println("Enter the number of Armies ");
-					int userEnteredArmy = scanner.nextInt();
-					if(userEnteredArmy < 0)
+					do 
 					{
-						do 
-						{
-							System.out.println("No armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
-							userEnteredArmy = scanner.nextInt();	 	    		   
-						}while(userEnteredArmy < 0);
-					}
-					if(userEnteredArmy > noOfRemainingArmies)
+						System.out.println("No armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
+						userEnteredArmy = scanner.nextInt();	 	    		   
+					}while(userEnteredArmy < 0);
+				}
+				if(userEnteredArmy > noOfRemainingArmies)
+				{
+					do
 					{
-						do
-						{
-							System.out.println("Invalid Input");
-							System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
-							userEnteredArmy = scanner.nextInt();
+						System.out.println("Invalid Input");
+						System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+						userEnteredArmy = scanner.nextInt();
 
-						}while(userEnteredArmy>noOfRemainingArmies);
-						noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy;  
-					}
-					else
-					{
-
-						noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy; 
-					} 
-					currentPlayerTerritories.get((selectedTerrIndex-1)).setArmiesPresent((currentPlayerTerritories.get((selectedTerrIndex-1)).getArmiesPresent())+(userEnteredArmy));
+					}while(userEnteredArmy>noOfRemainingArmies);
+					noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy;  
 				}
 				else
 				{
-					break;
-				}
-//			}
+					noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy; 
+				} 
+				currentPlayerTerritories.get((selectedTerrIndex-1)).setArmiesPresent((currentPlayerTerritories.get((selectedTerrIndex-1)).getArmiesPresent())+(userEnteredArmy));
+			}
+			else
+			{
+				break;
+			}
 			if(noOfRemainingArmies > 0)
 			{
 				System.out.println("Please select next territory");
@@ -108,6 +104,7 @@ public class RiskReinforcementPhase
 
 		reinforcedMap.put(currentPlayer, currentPlayerTerritories);
 		System.out.println("Reinforcement Phase Completed for the Player "+currentPlayerName);
+		System.out.println("\n");
 		return reinforcedMap;
 	}
 	/**
