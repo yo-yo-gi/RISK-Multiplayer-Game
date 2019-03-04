@@ -16,7 +16,7 @@ import com.soen.risk.validator.RiskPlayerValidator;
  * <h2>Player Builder Class</h2>
  * The class takes the number of players and names from user to randomly allocate the chance of player.
  * 
- * @author pooja
+ * @author Pooja Dhir
  * @version 1.0
  */
 public class RiskPlayerBuilder {
@@ -31,26 +31,26 @@ public RiskPlayerBuilder(){
 		 Scanner s = new Scanner(System.in);
 		 int numberOfPlayers = -1;
 
-//		 To take number of players
+         //		 To take number of players
 		 System.out.println("Enter no. of players");
 			
 		 while(numberOfPlayers<0) {
 		    	
 			 try {
 		    		numberOfPlayers = s.nextInt();
-//                  To check whether the numberofPlayers are between 2 to 6		    		
+                    //		To check whether the numberofPlayers are between 2 to 6		    		
 		    		if(numberOfPlayers <3 || numberOfPlayers>6) {
 		    			System.out.println("Try Again!!");
 		    			numberOfPlayers = -1;
 		    		    }
 	              }catch(Exception e) {
-//	            	 Validation for entering only number not character. 
+                      //		Validation for entering only number not character. 
 		               System.out.println("Please enter number");
 			           numberOfPlayers = -1;
 			           s.next();
 	                   }
 		        }
-//                  Validation for names entering should not be repeated.
+                   //		Validation for names entering should not be repeated.
 		           System.out.println("Enter names");
 		           int count = Constants.ZERO;
 		           while(count<numberOfPlayers) {
@@ -86,6 +86,7 @@ public RiskPlayerBuilder(){
 	/**
 	 * @return the riskPlayerList
 	 */
+    
 	public ArrayList<RiskPlayer> getRiskPlayerList() {
 		return riskPlayerList;
 	}
@@ -101,6 +102,7 @@ public RiskPlayerBuilder(){
 	/**
 	 * @return the playersNameList
 	 */
+	
 	public ArrayList<String> getPlayersNameList() {
 		return playersNameList;
 	}
@@ -108,6 +110,7 @@ public RiskPlayerBuilder(){
 	/**
 	 * @param playersNameList the playersNameList to set
 	 */
+	
 	public void setPlayersNameList(ArrayList<String> playersNameList) {
 		this.playersNameList = playersNameList;
 	}

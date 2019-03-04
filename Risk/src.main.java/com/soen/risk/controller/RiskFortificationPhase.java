@@ -12,15 +12,16 @@ import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
+ * <h2>Fortification Phase Controller</h2>
  * The Class RiskFortificationPhase to move as many armies 
  * as you would like from one (and only one) of your territories 
  * into one (and only one) of your adjacent territories.
  * 
- * @author Chirag
+ * @author Chirag Vora
  * @version 1.0
  */
+
 public class RiskFortificationPhase {
 
 	/** The logger. */
@@ -45,6 +46,7 @@ public class RiskFortificationPhase {
 	 * @param playerTerritories the player territories
 	 * @return the fortified map
 	 */
+	
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
 	{
 		logger.doLogging("Inside the fortification phase----------");
@@ -103,8 +105,8 @@ public class RiskFortificationPhase {
 						+ "\nPlease select different source territory");
 			}
 		}while(OwnedAdjList.isEmpty());
-		if (!OwnedAdjList.isEmpty()) {  //&& !(sourceArmy<=1
-
+		
+		if (!OwnedAdjList.isEmpty()) {  
 			System.out.println("Select the destination territory: ");
 			int destinationTCoutner=1;
 			for (String currAdj : OwnedAdjList) {
@@ -165,7 +167,8 @@ public class RiskFortificationPhase {
 				finalFortifyList.set(playerTerritories.indexOf(sourceTerritoryObject), sourceTerritoryObject);
 				finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
 
-			}//else System.out.println("invalid number of armies entered");
+			}
+			//		else System.out.println("invalid number of armies entered");
 		}
 		
 		System.out.println();

@@ -7,15 +7,11 @@ import java.util.Scanner;
 
 /**
  * <h2>Map Creation by user</h2>
- * <ul>
- * <li>User Creation of map
- *
- * </ul>
+ * This class allows user to create the map for his choice.
  *
  * @author Shashank Rao
- * @version 1.0.0
- * @since 2019-02-18
- */
+ * @version 1.0
+  */
 
 public class RiskMapCreatorUser {
 	
@@ -26,7 +22,7 @@ public static void main(String[] args) {
 		boolean flag2=true;
 		
 		
-		//Logic for adding continents manually - START
+		//		Logic for adding continents manually - START
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		char selection1=scanner.nextLine().charAt(0);
 		if(selection1=='Y'||selection1=='y') {
@@ -37,6 +33,7 @@ public static void main(String[] args) {
 			System.out.print("Enter the continent name and control value in the format<Continent Name=Control value>:");
 			String text1=scanner.nextLine();
 			Append(text1);
+			
 			while(flag1) {
 				System.out.print("Do you want to add more continents?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
@@ -45,9 +42,7 @@ public static void main(String[] args) {
 					String text2=scanner.nextLine();
 					Append("\n");
 					Append(text2);
-					
-				}
-				else {
+				}else {
 					flag1=false;
 					Append("\n");
 					Append("-");
@@ -55,6 +50,7 @@ public static void main(String[] args) {
 										
 				}
 			}
+			
 			System.out.println("Enter the territory details in the format:");
 			String text3=scanner.nextLine();
 			Append("\n");
@@ -69,22 +65,18 @@ public static void main(String[] args) {
 					String text4=scanner.nextLine();
 					Append("\n");
 					Append(text4);
-					
-				}
-				else {
+				}else {
 					flag2=false;
 					Append("\n");
 					Append(";;");
 					System.out.println("User selected N.Exit");
-										
 				}
 			}
-		}
-		else {
-			//append.Append("-");
+		}else {
+			//		append.Append("-");
 			System.out.println("User selected N. Exit");
 		}
-		//Logic for adding continents manually - END		
+		//		Logic for adding continents manually - END		
 		
 	}
 
@@ -92,6 +84,7 @@ public static void main(String[] args) {
 	public static void Write(String text) {
 		FileWriter fWriter = null;
         BufferedWriter writer = null;
+        
         try {
           fWriter = new FileWriter("text.txt");
           writer = new BufferedWriter(fWriter);
@@ -112,8 +105,7 @@ public static void main(String[] args) {
             fw.write(text);//appends the string to the file
             fw.close();
             System.out.println("Append done");
-        }
-        catch(IOException ioe)
+        }catch(IOException ioe)
         {
             System.err.println("IOException: " + ioe.getMessage());
         }

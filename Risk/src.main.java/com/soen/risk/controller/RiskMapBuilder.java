@@ -18,19 +18,14 @@ import com.soen.risk.model.RiskTerritory;
 
 /**
  * <h2>Map Builder</h2>
- * <ul>
- * <li>Parsing and validating map file.
- * <li>Saving countries and Continents to build map.
- * <li>Creating adjucency list and returning map file
- *
- * </ul>
+ * This class parse and validate map file,
+ * save countries and continents to build map,
+ * create adjacency list and return map file.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0.0
- * @since 2019-01-28
+ * @version 1.0
  */
 public class RiskMapBuilder {
-
 
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
 	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
@@ -43,6 +38,7 @@ public class RiskMapBuilder {
 	 * Load initial game data to before starting game.
 	 * @param currentMapFile 
 	 */
+	
 	public void loadMapData(List<String> MapFile) {
 		ArrayList<String> parsedMapFile= new ArrayList<String>();
 		for (String currLine : MapFile) {
@@ -55,13 +51,12 @@ public class RiskMapBuilder {
 		adjucencyMap=riskMapBuilder.buildAdjucencyMap(terretoryList);
 	}
 
-
-
 	/**
 	 * Parse map file and create arraylist to store it.
 	 * @param mapFilePath 
 	 * @return mapFileList list of strings with each line in map file.
 	 */
+	
 	public ArrayList<String> parseMapFile(String mapFilePath) {
 		ArrayList<String> mapFileList = new ArrayList<String>();
 		ArrayList<String> processedMapFileList = new ArrayList<String>();
@@ -83,6 +78,7 @@ public class RiskMapBuilder {
 	 * @param mapFileList line by line list of map file
 	 * @return addedContinentList list of Continents objects.
 	 */
+	
 	public ArrayList<RiskContinent> addContinents(List<String> mapFileList) {		
 		ArrayList<RiskContinent> addedContinentList;
 		int startIndex = Constants.ZERO;
@@ -106,6 +102,7 @@ public class RiskMapBuilder {
 	 * @param mapFileList line by line list of map file
 	 * @return addedTerretoryList list of Territory objects.
 	 */
+	
 	public ArrayList<RiskTerritory> addTerretories(List<String> mapFileList) {
 		ArrayList<RiskTerritory> addedTerretoryList;
 		int startIndex = Constants.ZERO;
@@ -132,6 +129,7 @@ public class RiskMapBuilder {
 	 * @param territoryList list of territories
 	 * @return loadedContinentList list of continents with territory objects.
 	 */
+	
 	private ArrayList<RiskContinent> addTerretoriesToContinents(ArrayList<RiskContinent> continentList, List<RiskTerritory> territoryList) {
 		ArrayList<RiskContinent> loadedContinentList = continentList;
 		ArrayList<String> tempRiskTerritories;
@@ -150,12 +148,11 @@ public class RiskMapBuilder {
 		return loadedContinentList;
 	}
 
-
-
 	/**
 	 * @param terretoryList list of territories
 	 * @return loadedAdjMap 
 	 */
+	
 	private Map<String, List<String>> buildAdjucencyMap(ArrayList<RiskTerritory> terretoryList) {
 		Map<String, List<String>> loadedAdjMap=new HashMap<String, List<String>>();
 
@@ -165,49 +162,48 @@ public class RiskMapBuilder {
 		return loadedAdjMap;
 	}
 
-
 	/**
 	 * @return terretoryList 
 	 */
+	
 	public ArrayList<RiskTerritory> getTerritoryList(){
 
 		return terretoryList;
 	}
 
-
 	/**
 	 * @return continentList 
 	 */
+	
 	public ArrayList<RiskContinent> getContinentList(){
 
 		return continentList;
 	}
 
-
 	/**
 	 * @return adjucencyMap 
 	 */
+	
 	public Map<String, List<String>> getAdjucencyMap(){
 
 		return adjucencyMap;
 	}
 
-
 	/**
 	 * @return the mapUploadStatus
 	 */
+	
 	public boolean getMapUploadStatus() {
 		return mapUploadStatus;
 	}
 
-
 	/**
 	 * @param mapUploadStatus the mapUploadStatus to set
 	 */
+	
 	public void setMapUploadStatus(boolean mapUploadStatus) {
 		this.mapUploadStatus = mapUploadStatus;
 	}
-
 
 	public int getIdByTerritoryName(String riskTerritory) {
 		int idForTerritory=Constants.ZERO;
