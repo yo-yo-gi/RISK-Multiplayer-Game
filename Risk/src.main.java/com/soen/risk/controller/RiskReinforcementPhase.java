@@ -23,6 +23,9 @@ import com.soen.risk.model.RiskTerritory;
  */
 public class RiskReinforcementPhase 
 {
+
+    int selectedTerrIndex=0;
+	boolean flag=false;
 	/**
 	 * 
 	 * Assigning the Armies to the Countries for the Player
@@ -60,7 +63,16 @@ public class RiskReinforcementPhase
 			territoryCounter++;
 		}
 		System.out.println("Select the territory for reinforcement: ");
-		int selectedTerrIndex = scanner.nextInt();
+		do {
+			while (!(scanner.hasNextInt() || selectedTerrIndex>=1)) {
+		 		System.out.println("Try Again!!");
+		 		scanner.next();
+		 	}
+			selectedTerrIndex=scanner.nextInt();
+			if(!(selectedTerrIndex>=1)) {
+				System.out.println("Try Again!!");
+			}
+			}while(!(selectedTerrIndex>=1));
 		
 		do
 		{
@@ -72,7 +84,7 @@ public class RiskReinforcementPhase
 				int userEnteredArmy = scanner.nextInt();
 				if(userEnteredArmy < 0){
 				do {
-					System.out.println("No armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
+					System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
 					userEnteredArmy = scanner.nextInt();	 	    		   
 					}while(userEnteredArmy < 0);
 				  }
@@ -92,9 +104,19 @@ public class RiskReinforcementPhase
 				  break;
 			      }
 			      if(noOfRemainingArmies > 0){
-				  System.out.println("Please select next territory");
-				  selectedTerrIndex = scanner.nextInt();
-			      }
+			    	  selectedTerrIndex=0;
+			    	  System.out.println("Please select next territory");
+			    	  do {
+						while (!(scanner.hasNextInt() || selectedTerrIndex>=1)) {
+					 		System.out.println("Try Again!!");
+					 		scanner.next();
+					 	}
+						selectedTerrIndex=scanner.nextInt();
+						if(!(selectedTerrIndex>=1)) {
+							System.out.println("Try Again!!");
+						}
+						}while(!(selectedTerrIndex>=1));
+			    	  }
 		        }while(noOfRemainingArmies > 0);
 
 		         reinforcedMap.put(currentPlayer, currentPlayerTerritories);
