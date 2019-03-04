@@ -5,15 +5,12 @@ package com.soen.risk.model;
 
 /**
  * <h2>Card Enum Model</h2>
- * <ul>
- * <li>Model for Card.
- * <li>Setters and getters to set and get the values of the parameters.
- * </ul>
+ * This class is used to set and get the values of the parameters for cards.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0.0
- * @since 2019-01-28
+ * @version 1.0
  */
+
 public enum RiskCard {
 
 	/** The infant. */
@@ -31,6 +28,7 @@ public enum RiskCard {
 	 *
 	 * @param name the name
 	 */
+	
 	private RiskCard(String name) {
 		this.name = name;
 	}
