@@ -12,15 +12,18 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-// TODO: Auto-generated Javadoc
 /**
+ * <h2>Risk Logger Class</h2>
  * The Class RiskLogger for creating unique log files for every running instance.
+ * 
+ * @author Chirag Vora
+ * @version 1.0
  */
+
 public class RiskLogger {
 
 	/** The logger. */
-	private final Logger logger = Logger.getLogger(RiskLogger.class
-			.getName());
+	private final Logger logger = Logger.getLogger(RiskLogger.class.getName());
 
 	/** The fileHandler. */
 	private FileHandler fileHandler = null;
@@ -28,6 +31,7 @@ public class RiskLogger {
 	/**
 	 * Instantiates a new risk logger.
 	 */
+	
 	public RiskLogger() {
 
 		 String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/RiskLog").toAbsolutePath().toString();
@@ -66,6 +70,7 @@ public class RiskLogger {
 	 *
 	 * @param log the log
 	 */
+	
 	public void doLogging(String log) {
 		logger.info(""+log);
 	}

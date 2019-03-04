@@ -6,14 +6,13 @@ package com.soen.risk.helper;
 import java.util.List;
 
 /**
- * <h2>Helper class for main controller</h2>
- * 
-
+ * <h2>Player Helper class for main controller</h2>
+ * This class is used to assign initial armies for players.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0.0
- * @since 2019-02-17
+ * @version 1.0
  */
+
 public class RiskPlayerHelper {
 
 	public int calculateInitialArmies(List<String> riskPlayersNames) {

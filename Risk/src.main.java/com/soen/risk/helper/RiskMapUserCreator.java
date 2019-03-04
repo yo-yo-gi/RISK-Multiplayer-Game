@@ -9,18 +9,17 @@ import java.util.Scanner;
 
 /**
  * <h2>User Map Creator</h2>
- * <ul>
- * <li>Creation of map by user.
- * <li>Creation of map by user taking appropriate values for continents and territories.
- *
- * </ul>
+ * This class is used for creation of map by user,
+ * Creation of map by user taking appropriate values for continents and territories.
  *
  * @author Shashank Rao
- * @version 1.0.0
- * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
+ * @version 1.0
  */
-public class RiskMapUserCreator {
-	
+
+ public class RiskMapUserCreator {
+	 /**
+	  * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
+	  */
 
 	boolean createStatus=true;
 	public List<String> mapCreator() {
@@ -45,10 +44,6 @@ public class RiskMapUserCreator {
 		Map5.add(";;");
 		ArrayList<String> finalmap=new ArrayList<String>();
 		
-		
-		
-		
-		
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		char selection1=scanner.nextLine().charAt(0);
 		if(selection1=='Y'||selection1=='y') {
@@ -63,17 +58,18 @@ public class RiskMapUserCreator {
 					System.out.println("Enter the continent name and control value in the format:<Continent Name=Control value>");
 					String text2=scanner.nextLine();
 					Map2.add(text2);
-				}
-				else {
+				}else {
 					System.out.println("User does not want to enter more continents.Exit");
 					flag1=false;
 				
 										
 				}
 			}
+			
 			System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 			String text3=scanner.nextLine();
 			Map4.add(text3);
+			
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
 				char selection2=scanner.nextLine().charAt(0);
@@ -81,20 +77,18 @@ public class RiskMapUserCreator {
 					System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 					String text4=scanner.nextLine();
 					Map4.add(text4);
-				}
-				else {
+				}else {
 					System.out.println("User does not want to enter more territories.Exit");
 					flag2=false;
 					
 				}
 			}
 			
-		}
-		else {
+		}else {
 			createStatus=false;
 			System.out.println("User entered No[N]");
 		}
-//		scanner.close();
+       //		scanner.close();
 		if(Map2.isEmpty()&&Map4.isEmpty()) {
 			System.out.println("Nothing has been created. File is without continent or territory");
 		}
@@ -106,6 +100,7 @@ public class RiskMapUserCreator {
 		
 		return finalmap;
 	}
+	
 	public boolean getcreateStatus() {
 		return createStatus;
 	}

@@ -14,22 +14,25 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class CountryAssignmentToPlayer defines number of the armies given to the player based 
- * on the number of players. 
+ * <h2> Territory assignment class</h2>
+ * The Class CountryAssignmentToPlayer defines number of the armies 
+ * given to the player based on the number of players. 
  *
- * @author Chirag
+ * @author Chirag Vora
  * @version 1.0
  */
+
 public class RiskTerritoryAssignmentToPlayer {
 	RiskLogger logger= new RiskLogger();
 	RiskMapBuilder riskMapBuilder;
+	
 	/**
 	 * Assign countries to each player randomly.
 	 * @param riskTerritoryList 
 	 * @param riskPlayerList 
 	 */
+	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println("Assignment of territories to Player...");
@@ -69,7 +72,7 @@ public class RiskTerritoryAssignmentToPlayer {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
-		//	System.out.println("\t\t" + value);
+		//		System.out.println("\t\t" + value);
 		}
 		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
 		return playerTerritoryMap;

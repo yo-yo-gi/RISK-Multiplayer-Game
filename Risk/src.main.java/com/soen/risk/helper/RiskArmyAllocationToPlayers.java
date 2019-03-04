@@ -10,21 +10,24 @@ import java.util.Map;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ArmyAllocationToPlayers.
- * In the assignment phase, the player is given a number of armies in
- * round robin fashion depending on the number of countries he owns.
+ * <h2> Army Allocation to player class</h2>
+ * The Class is used in assignment phase where 
+ * the player is given a number of armies in round robin fashion
+ * depending on the number of countries he owns.
  *
- * @author Chirag
+ * @author Chirag Vora
  * @version 1.0
  */
+
 public class RiskArmyAllocationToPlayers {
 	RiskLogger logger= new RiskLogger();
+	
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
 	 * @return 
 	 */
+	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {
 		logger.doLogging("Allocating armies to players in round robin fashion------");
 		System.out.println("Allocating armies to players in round robin fashion...");
@@ -43,6 +46,7 @@ public class RiskArmyAllocationToPlayers {
 				if (lastAssignedTerritoryIndex >= territories.size()) {
 					lastAssignedTerritoryIndex = Constants.ZERO;
 				}
+				
 				RiskTerritory lastAssignedTerritory = territories.get(lastAssignedTerritoryIndex);
 				Integer currentArmies=lastAssignedTerritory.getArmiesPresent();
 				lastAssignedTerritory.setArmiesPresent(currentArmies+1);
@@ -54,6 +58,7 @@ public class RiskArmyAllocationToPlayers {
 				System.out.println(riskTerritory.getTerritoryName()+"("+riskTerritory.getArmiesPresent()+")");
 			}
 		}
+		
 		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
