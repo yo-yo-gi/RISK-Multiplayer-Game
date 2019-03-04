@@ -114,10 +114,10 @@ public class RiskGameBuilder {
 				 		scanner.next();
 				 	    }
 					    fileName=scanner.nextInt();
-					    if(!(fileName<fileCounter)) {
+					    if(fileName>=fileCounter || fileName<0) {
 						System.out.println("Try Again!!");
 					    }
-					}while(!(fileName<fileCounter));
+					}while(fileName>=fileCounter || fileName<0);
 
 				path=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+(listOfFiles[fileName-1].getName()));	
 				mapFile=riskMapBuilder.parseMapFile(path.toAbsolutePath().toString());
