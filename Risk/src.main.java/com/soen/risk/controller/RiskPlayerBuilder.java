@@ -32,6 +32,7 @@ public RiskPlayerBuilder(){
 		 int numberOfPlayers = -1;
 
          //		 To take number of players
+         System.out.println();
 		 System.out.println("Enter no. of players");
 			
 		 while(numberOfPlayers<0) {

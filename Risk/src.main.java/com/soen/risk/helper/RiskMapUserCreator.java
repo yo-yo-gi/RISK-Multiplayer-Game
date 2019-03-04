@@ -17,17 +17,19 @@ import java.util.Scanner;
  */
 
  public class RiskMapUserCreator {
-	 /**
-	  * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
-	  */
+	 
 
 	boolean createStatus=true;
+    /**
+	  * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
+	  */
 	public List<String> mapCreator() {
 
 		
 		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
+        char selection1, selection2;
 		
 		ArrayList<String> Map1=new ArrayList<String>();
 		ArrayList<String> Map2=new ArrayList<String>();
@@ -45,7 +47,13 @@ import java.util.Scanner;
 		ArrayList<String> finalmap=new ArrayList<String>();
 		
 		System.out.print("Do you want to create the map manually?(Y/N)");
-		char selection1=scanner.nextLine().charAt(0);
+//		char selection1=scanner.nextLine().charAt(0);
+		do {
+			selection1=scanner.nextLine().charAt(0);
+		if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+			System.out.println("Try Again!!");
+		}
+		}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
 		if(selection1=='Y'||selection1=='y') {
 			createStatus=true;
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
@@ -53,7 +61,13 @@ import java.util.Scanner;
 			Map2.add(text1);
 			while(flag1) {
 				System.out.print("Do you want to add more continents?(Y/N)");
-				char selection2=scanner.nextLine().charAt(0);
+//				char selection2=scanner.nextLine().charAt(0);
+				do {
+					selection2=scanner.nextLine().charAt(0);
+					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {
+						System.out.println("Try Again!!");
+					}
+				} while(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N'));
 				if(selection2=='Y'||selection2=='y') {
 					System.out.println("Enter the continent name and control value in the format:<Continent Name=Control value>");
 					String text2=scanner.nextLine();
@@ -72,7 +86,13 @@ import java.util.Scanner;
 			
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
-				char selection2=scanner.nextLine().charAt(0);
+//				selection2=scanner.nextLine().charAt(0);
+				do {
+					selection2=scanner.nextLine().charAt(0);
+					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {
+						System.out.println("Try Again!!");
+					}
+				} while(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N'));
 				if(selection2=='Y'||selection2=='y') {
 					System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 					String text4=scanner.nextLine();

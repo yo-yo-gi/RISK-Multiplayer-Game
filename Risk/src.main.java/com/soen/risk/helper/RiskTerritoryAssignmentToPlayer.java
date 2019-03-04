@@ -35,6 +35,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
+		System.out.println();
 		System.out.println("Assignment of territories to Player...");
 		List<RiskPlayer> players = new ArrayList<RiskPlayer>();
 		List<RiskTerritory> territories = new ArrayList<RiskTerritory>();

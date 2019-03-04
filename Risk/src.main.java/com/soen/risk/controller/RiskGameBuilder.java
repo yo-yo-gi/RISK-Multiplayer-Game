@@ -251,6 +251,7 @@ public class RiskGameBuilder {
 		riskPlayerList=new ArrayList<RiskPlayer>();				
 		riskPlayerBuilder.addPlayers(riskPlayersNames);
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
+		System.out.println();
 		System.out.println("Players numbers initialized. Game started.");
         //		List<String> playerList= new ArrayList<String>();
         //		playerList=riskPlayerList.toString();

@@ -30,7 +30,9 @@ public class RiskArmyAllocationToPlayers {
 	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {
 		logger.doLogging("Allocating armies to players in round robin fashion------");
+        System.out.println();
 		System.out.println("Allocating armies to players in round robin fashion...");
+        System.out.println();
 		ArrayList<RiskTerritory> territories;
 		RiskPlayer currentPlayer;
 
@@ -53,6 +55,7 @@ public class RiskArmyAllocationToPlayers {
 				lastAssignedTerritoryIndex++;
 			}
 			playerTerritoryMap.put(currentPlayer, territories);
+            System.out.println();
 			System.out.println("Player: "+currentPlayer.getPlayerName()+" has territories with their respective armies");
 			for (RiskTerritory riskTerritory : territories) {
 				System.out.println(riskTerritory.getTerritoryName()+"("+riskTerritory.getArmiesPresent()+")");
