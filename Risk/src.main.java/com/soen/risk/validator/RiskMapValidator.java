@@ -19,31 +19,29 @@ import com.soen.risk.model.RiskTerritory;
 
 /**
  * <h2>Map File Validator</h2>
- * <ul>
- * <li>Check for wrong syntax of map file
- * <li>Check for wrong syntax of territory
- * <li>Check for wrong syntax of continent
- * <li>Check for duplicate territory
- * <li>Check for duplicate continent
- * <li>Check for duplicate adjacent territory
- * <li>Check for missing continent
- * <li>Check for connectivity of territory graph
- * </ul>
+ * This class is used to check for wrong syntax of map file,
+ * check for wrong syntax of territory,
+ * check for wrong syntax of continent,
+ * check for duplicate territory,
+ * check for duplicate continent,
+ * check for duplicate adjacent territory,
+ * check for missing continent, and
+ * check for connectivity of territory graph.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0.0
- * @since 2019-02-12
+ * @version 1.0
  */
+
 public class RiskMapValidator {
-
-
 
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
 	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
 	private Map<String, List<String>> adjucencyMap=new HashMap<String, List<String>>();
 	RiskMapBuilder riskMapBuilder;
+	
 	boolean validation=false;
 	int indexOfMap=0, indexOfContinents=0, indexOfDash=0, indexOfTerritories=0, indexOfDSColon=0;
+	
 	private ArrayList<String> initContinentList;
 	private ArrayList<String> initTerritoryList;
 	private ArrayList<String> initAdjucencyList=new ArrayList<String>();
@@ -58,6 +56,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if parsedMapFile is valid
 	 */
+	
 	public boolean validateMap(List<String> parsedMapFile) {		
 		if(validateMapSyntax(parsedMapFile)) {
 			if(validateDuplicacy(initContinentList, initTerritoryList)) {
@@ -85,6 +84,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if map syntax is valid
 	 */
+	
 	public boolean validateMapSyntax(List<String> parsedMapFile) {
 		boolean syntaxValidation=false;
 
@@ -110,6 +110,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if file is valid with tags
 	 */
+	
 	private boolean checkMustTags(List<String> parsedMapFile) {
 		boolean mustTagsValidation=false;			
 		List<String> mustHaveTags=new ArrayList<String>(Arrays.asList("[Map]", "[Continents]","[Territories]","-",";;"));
@@ -142,6 +143,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true continent syntax is valid
 	 */
+	
 	private boolean checkContinentSyntax(List<String> parsedMapFile) {
 		boolean continentValidation=false;			
 		String currentContinent;
@@ -155,8 +157,7 @@ public class RiskMapValidator {
 				if(splitArray[1].matches("^[1-9]+[0-9]*$") && splitArray[0].matches("^[a-zA-Z]+(([\\-\\_][a-zA-Z])?[a-zA-Z]*)*$")) {
 					initContinentList.add(splitArray[0]);
 					continentValidation=true;
-				}
-				else { continentValidation=false; break;}
+				}else { continentValidation=false; break;}
 
 			}else { continentValidation=false; break;}
 
@@ -174,6 +175,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if territories are connected
 	 */
+	
 	private boolean validateTerritories(ArrayList<RiskTerritory> territoryList, Map<String, List<String>> adjMap) {
 		boolean territoryValidation=false;
 		int matchCounter=Constants.ZERO;
@@ -221,6 +223,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if no duplicate territory or continent
 	 */
+	
 	private boolean validateDuplicacy(ArrayList<String> continents, ArrayList<String> territories) {
 		boolean duplicacyValidation=false;
 		int continentCounter=Constants.ZERO;
@@ -319,6 +322,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true if continents are valid
 	 */
+	
 	public boolean validateContinents(ArrayList<RiskContinent> continentList){
 		boolean ContinentValidation=true;
 		//		need to think about this
@@ -333,6 +337,7 @@ public class RiskMapValidator {
 	 * 
 	 * @return true territory syntax is valid
 	 */	
+	
 	private boolean checkTerritorySyntax(List<String> parsedMapFile) {
 		boolean territoryValidation=false;
 		initTerritoryList=new ArrayList<String>();
@@ -342,11 +347,11 @@ public class RiskMapValidator {
 		for (int i=indexOfTerritories+1;i<indexOfDSColon;i++) {
 			currentTerritory=parsedMapFile.get(i);
 			String [] splitArray=currentTerritory.split(",");
-			//			checking that each territory line contains minimum 3 words
+			//		checking that each territory line contains minimum 3 words
 			if(splitArray.length>=3 ) {
 				initTerritoryList.add(currentTerritory);
 				territoryValidation=true;
-				//				need to write further validation if required
+				//		need to write further validation if required
 
 			}else { territoryValidation=false; break;}
 
@@ -362,6 +367,7 @@ public class RiskMapValidator {
 	 * @param v total vertices in graph
 	 * 
 	 */	
+	
 	public void initializeAdj(int v) 
 	{ 
 		adjVertices = v; 
@@ -388,6 +394,7 @@ public class RiskMapValidator {
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
+	
 	void DFSUtil(int v,Boolean visited[]) 
 	{ 
 		// Mark the current node as visited and print it 
@@ -409,14 +416,15 @@ public class RiskMapValidator {
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
+	
 	public void DFSUtilTranspose(int v,Boolean visited[]) 
 	{ 
-		// Mark the current node as visited and print it 
+		//		Mark the current node as visited and print it 
 		visited[v] = true; 
 
 		int n; 
 
-		// Recur for all the vertices adjacent to this vertex 
+		//		Recur for all the vertices adjacent to this vertex 
 		Iterator<Integer> i = adjListTranspose[v].iterator(); 
 		while (i.hasNext()) 
 		{ 
@@ -432,6 +440,7 @@ public class RiskMapValidator {
 	 * 
 	 * @param v current vertex in graph
 	 */	
+	
 	public void initializeAdjTranspose(int v) 
 	{ 
 		adjVertices = v; 
@@ -455,37 +464,38 @@ public class RiskMapValidator {
 	 * 
 	 * @return returns true if graph is strongly connected 
 	 */
+	
 	Boolean checkTerritoryAdjucency() 
 	{ 
-		// Step 1: Mark all the vertices as not visited 
-		// (For first DFS) 
+		//		Step 1: Mark all the vertices as not visited 
+		//		(For first DFS) 
 		Boolean visited[] = new Boolean[adjVertices]; 
 		for (int i = 0; i < adjVertices; i++) 
 			visited[i] = false; 
 
-		// Step 2: Do DFS traversal starting from first vertex. 
+		//		Step 2: Do DFS traversal starting from first vertex. 
 		DFSUtil(0, visited); 
 
-		// If DFS traversal doesn't visit all vertices, then 
-		// return false. 
+		//		If DFS traversal doesn't visit all vertices, then 
+		//		return false. 
 		for (int i = 0; i < adjVertices; i++) 
 			if (visited[i] == false) 
 				return false; 
 
-		// Step 3: Create a reversed graph 
+		//		Step 3: Create a reversed graph 
 		initializeAdjTranspose(adjVertices);
 
-		// Step 4: Mark all the vertices as not visited (For second DFS) 
+		//		Step 4: Mark all the vertices as not visited (For second DFS) 
 		for (int i = 0; i < adjVertices; i++) 
 			visited[i] = false; 
 
-		// Step 5: Do DFS for reversed graph starting from 
-		// first vertex. Staring Vertex must be same starting 
-		// point of first DFS 
+		//		Step 5: Do DFS for reversed graph starting from 
+		//		first vertex. Staring Vertex must be same starting 
+		//		point of first DFS 
 		DFSUtilTranspose(0, visited); 
 
-		// If all vertices are not visited in second DFS, then 
-		// return false 
+		//		If all vertices are not visited in second DFS, then 
+		//		return false 
 		for (int i = 0; i < adjVertices; i++) 
 			if (visited[i] == false) 
 				return false; 
