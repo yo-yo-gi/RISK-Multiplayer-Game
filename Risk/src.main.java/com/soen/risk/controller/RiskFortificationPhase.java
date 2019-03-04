@@ -72,14 +72,20 @@ public class RiskFortificationPhase {
 					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 					sourceTCoutner++;			
 				}
+							
+			do {
 				while (!scanner.hasNextInt()) {
-			 		System.out.println("Try Again!!");
-			 		scanner.next();
-			 	}
+		 		System.out.println("Try Again!!");
+		 		scanner.next();
+		 	    }
 				sourceTerritory=scanner.nextInt();
-				
-				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
-				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
+			    if(sourceTerritory>=sourceTCoutner || sourceTerritory<0) {
+				System.out.println("Try Again!!");
+			    }
+			}while(sourceTerritory>=sourceTCoutner || sourceTerritory<0);
+			
+			sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
+			sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
 	
 			}while(!(playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1));
 	
@@ -113,11 +119,18 @@ public class RiskFortificationPhase {
 				System.out.println(destinationTCoutner+"." + currAdj);
 				destinationTCoutner++;			
 			}
+				
+		do {
 			while (!scanner.hasNextInt()) {
-		 		System.out.println("Try Again!!");
-		 		scanner.next();
-		 	}
+	 		System.out.println("Try Again!!");
+	 		scanner.next();
+	 	    }
 			destinationTerritory=scanner.nextInt();
+		    if(destinationTerritory>=destinationTCoutner || destinationTerritory<0) {
+			System.out.println("Try Again!!");
+		    }
+		}while(destinationTerritory>=destinationTCoutner || destinationTerritory<0);
+		
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
 			
 			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);

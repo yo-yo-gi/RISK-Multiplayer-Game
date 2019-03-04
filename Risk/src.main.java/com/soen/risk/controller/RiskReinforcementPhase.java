@@ -64,15 +64,15 @@ public class RiskReinforcementPhase
 		}
 		System.out.println("Select the territory for reinforcement: ");
 		do {
-			while (!(scanner.hasNextInt() || selectedTerrIndex>=1)) {
+			while (!scanner.hasNextInt()) {
 		 		System.out.println("Try Again!!");
 		 		scanner.next();
-		 	}
+		 	    }
 			selectedTerrIndex=scanner.nextInt();
-			if(!(selectedTerrIndex>=1)) {
+			if(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0) {
 				System.out.println("Try Again!!");
-			}
-			}while(!(selectedTerrIndex>=1));
+			    }
+			}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
 		
 		do
 		{
@@ -80,11 +80,18 @@ public class RiskReinforcementPhase
 			{
 				System.out.println("The number of armies available for reinforcement : "+noOfRemainingArmies);
 				System.out.println("Enter armies for "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
-				
+				while (!scanner.hasNextInt()) {
+					System.out.println("Try Again!!");
+					scanner.next();
+					}
 				int userEnteredArmy = scanner.nextInt();
 				if(userEnteredArmy < 0){
 				do {
 					System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
+					while (!scanner.hasNextInt()) {
+						System.out.println("Try Again!!");
+						scanner.next();
+						}
 					userEnteredArmy = scanner.nextInt();	 	    		   
 					}while(userEnteredArmy < 0);
 				  }
@@ -92,6 +99,10 @@ public class RiskReinforcementPhase
 				do{
 					System.out.println("Invalid Input");
 					System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+					while (!scanner.hasNextInt()) {
+						System.out.println("Try Again!!");
+						scanner.next();
+						}
 					userEnteredArmy = scanner.nextInt();
 					}while(userEnteredArmy>noOfRemainingArmies);
 					
@@ -107,15 +118,15 @@ public class RiskReinforcementPhase
 			    	  selectedTerrIndex=0;
 			    	  System.out.println("Please select next territory");
 			    	  do {
-						while (!(scanner.hasNextInt() || selectedTerrIndex>=1)) {
-					 		System.out.println("Try Again!!");
-					 		scanner.next();
-					 	}
-						selectedTerrIndex=scanner.nextInt();
-						if(!(selectedTerrIndex>=1)) {
-							System.out.println("Try Again!!");
-						}
-						}while(!(selectedTerrIndex>=1));
+			  			while (!scanner.hasNextInt()) {
+			  		 		System.out.println("Try Again!!");
+			  		 		scanner.next();
+			  		 	    }
+			  			selectedTerrIndex=scanner.nextInt();
+			  			if(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0) {
+			  				System.out.println("Try Again!!");
+			  			    }
+			  			}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
 			    	  }
 		        }while(noOfRemainingArmies > 0);
 
