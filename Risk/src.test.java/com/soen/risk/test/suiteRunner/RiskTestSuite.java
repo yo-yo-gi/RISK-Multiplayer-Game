@@ -11,7 +11,7 @@ import com.soen.risk.test.controller.RiskFortificationPhaseTest;
 import com.soen.risk.test.controller.RiskReinforcementPhaseTest;
 import com.soen.risk.test.helper.RiskArmyAllocationToPlayersTest;
 import com.soen.risk.test.helper.RiskMapEditorTest;
-import com.soen.risk.test.helper.RiskMapUserCreatorTest;
+//import com.soen.risk.test.helper.RiskMapUserCreatorTest;
 import com.soen.risk.test.helper.RiskTerritoryAssignmentToPlayerTest;
 import com.soen.risk.test.validator.RiskMapValidatorTest;
 
@@ -23,13 +23,13 @@ import com.soen.risk.test.validator.RiskMapValidatorTest;
  * @version 1.0
  */
 @RunWith(Suite.class)
-@SuiteClasses({ RiskReinforcementPhaseTest.class,
-	RiskFortificationPhaseTest.class,
-	RiskArmyAllocationToPlayersTest.class,
-	RiskTerritoryAssignmentToPlayerTest.class,
-	RiskMapEditorTest.class,
+@SuiteClasses({ 
 	RiskMapValidatorTest.class,
-	RiskMapUserCreatorTest.class
+	RiskMapEditorTest.class,
+	RiskTerritoryAssignmentToPlayerTest.class,
+	RiskArmyAllocationToPlayersTest.class,
+	RiskReinforcementPhaseTest.class,
+	RiskFortificationPhaseTest.class,
 })
 public class RiskTestSuite {
 }
