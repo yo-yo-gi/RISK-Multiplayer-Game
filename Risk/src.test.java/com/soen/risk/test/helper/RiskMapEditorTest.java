@@ -25,32 +25,32 @@ import com.soen.risk.helper.RiskMapUserCreator;
  * Junit Test cases for Risk MapEditor Test
  */
 public class RiskMapEditorTest {
-	
+
 	/** The risk map creator. */
 	RiskMapUserCreator riskMapCreator;
-	
+
 	/** The map file. */
 	ArrayList<String> mapFile=new ArrayList<String>();
-	
+
 	/** The risk map editor. */
 	RiskMapEditor riskMapEditor;
-	
+
 	/** The continent list. */
 	ArrayList<String> continentList = new ArrayList<String>();
-	
+
 	/** The continent list new. */
 	ArrayList<String> continentListNew = new ArrayList<String>();
-	
+
 	/** The territory list. */
 	ArrayList<String> territoryList = new ArrayList<String>();
-	
+
 	/** The Map list. */
 	ArrayList<String> MapList = new ArrayList<String>();
-	
+
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 
-	
+
 	/**
 	 * Sets the up.
 	 *
@@ -59,14 +59,14 @@ public class RiskMapEditorTest {
 	@Before
 	public void setUp() throws Exception {
 		riskMapBuilder = new RiskMapBuilder();
-		
+
 		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/JUnitTestMaps").toAbsolutePath().toString();
 		mapFile = (ArrayList<String>) riskMapBuilder.parseMapFile(mapFilePath.concat("//EditMapTest.txt"));
 		riskMapEditor = new RiskMapEditor(mapFile);
-		
+
 	}
 
-	
+
 	/**
 	 * Test add continent.
 	 */
@@ -77,7 +77,7 @@ public class RiskMapEditorTest {
 		after=riskMapEditor.getContinentList();
 		assertTrue(after.contains("Antartica=2"));
 	}
-	
+
 	/**
 	 * Test add territory.
 	 */

@@ -28,12 +28,12 @@ import com.soen.risk.model.RiskTerritory;
 public class RiskReinforcementPhase 
 {
 
-    /** The selected terr index. */
-    int selectedTerrIndex=0;
-	
+	/** The selected terr index. */
+	int selectedTerrIndex=0;
+
 	/** The flag. */
 	boolean flag=false;
-	
+
 	/**
 	 * Assigning the Armies to the Countries for the Player.
 	 *
@@ -42,46 +42,46 @@ public class RiskReinforcementPhase
 	 * @param riskContinentList : The total continent list
 	 * @return the reinforced map
 	 */
-	
+
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
 	{
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		Scanner scanner = new Scanner(System.in);
-		
+
 		String currentPlayerName = null;
 		ArrayList<RiskTerritory> currentPlayerTerritories;
-		
+
 		int noOfRemainingArmies;
 		currentPlayerTerritories=playerTerritories;
-		
+
 		int noOfCountriesOwned = currentPlayerTerritories.size();		
 		currentPlayerName=currentPlayer.getPlayerName();
 		noOfRemainingArmies=calculateArmy(currentPlayer,currentPlayerTerritories, riskContinentList);
-		
+
 		System.out.println("\nReinforcement started.....");
 		System.out.println("Player name : "+currentPlayerName);
 		System.out.println("Number of territories owned : "+noOfCountriesOwned);
 		System.out.println("Territories of the player "+currentPlayerName+" are as following: ");
-		
+
 		int territoryCounter=1;
-				
+
 		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
-			
+
 			System.out.println(territoryCounter+". "+riskTerritory.getTerritoryName()+" ("+riskTerritory.getArmiesPresent()+") ");
 			territoryCounter++;
 		}
 		System.out.println("Select the territory for reinforcement: ");
 		do {
 			while (!scanner.hasNextInt()) {
-		 		System.out.println("Try Again!!");
-		 		scanner.next();
-		 	    }
+				System.out.println("Try Again!!");
+				scanner.next();
+			}
 			selectedTerrIndex=scanner.nextInt();
 			if(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0) {
 				System.out.println("Try Again!!");
-			    }
-			}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
-		
+			}
+		}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
+
 		do
 		{
 			if(noOfRemainingArmies!=0)
@@ -91,59 +91,59 @@ public class RiskReinforcementPhase
 				while (!scanner.hasNextInt()) {
 					System.out.println("Try Again!!");
 					scanner.next();
-					}
+				}
 				int userEnteredArmy = scanner.nextInt();
 				if(userEnteredArmy < 0){
-				do {
-					System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
-					while (!scanner.hasNextInt()) {
-						System.out.println("Try Again!!");
-						scanner.next();
+					do {
+						System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+						while (!scanner.hasNextInt()) {
+							System.out.println("Try Again!!");
+							scanner.next();
 						}
-					userEnteredArmy = scanner.nextInt();	 	    		   
+						userEnteredArmy = scanner.nextInt();	 	    		   
 					}while(userEnteredArmy < 0);
-				  }
+				}
 				if(userEnteredArmy > noOfRemainingArmies){
-				do{
-					System.out.println("Invalid Input");
-					System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+					do{
+						System.out.println("Invalid Input");
+						System.out.println("Enter the number of Armies to reinforce for Country  "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
+						while (!scanner.hasNextInt()) {
+							System.out.println("Try Again!!");
+							scanner.next();
+						}
+						userEnteredArmy = scanner.nextInt();
+					}while(userEnteredArmy>noOfRemainingArmies);
+
+					noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy;  
+				}else{
+					noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy; 
+				} 
+				currentPlayerTerritories.get((selectedTerrIndex-1)).setArmiesPresent((currentPlayerTerritories.get((selectedTerrIndex-1)).getArmiesPresent())+(userEnteredArmy));
+			}else{
+				break;
+			}
+			if(noOfRemainingArmies > 0){
+				selectedTerrIndex=0;
+				System.out.println("Please select next territory");
+				do {
 					while (!scanner.hasNextInt()) {
 						System.out.println("Try Again!!");
 						scanner.next();
-						}
-					userEnteredArmy = scanner.nextInt();
-					}while(userEnteredArmy>noOfRemainingArmies);
-					
-					 noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy;  
-				}else{
-					 noOfRemainingArmies = noOfRemainingArmies - userEnteredArmy; 
-				     } 
-				     currentPlayerTerritories.get((selectedTerrIndex-1)).setArmiesPresent((currentPlayerTerritories.get((selectedTerrIndex-1)).getArmiesPresent())+(userEnteredArmy));
-			     }else{
-				  break;
-			      }
-			      if(noOfRemainingArmies > 0){
-			    	  selectedTerrIndex=0;
-			    	  System.out.println("Please select next territory");
-			    	  do {
-			  			while (!scanner.hasNextInt()) {
-			  		 		System.out.println("Try Again!!");
-			  		 		scanner.next();
-			  		 	    }
-			  			selectedTerrIndex=scanner.nextInt();
-			  			if(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0) {
-			  				System.out.println("Try Again!!");
-			  			    }
-			  			}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
-			    	  }
-		        }while(noOfRemainingArmies > 0);
+					}
+					selectedTerrIndex=scanner.nextInt();
+					if(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0) {
+						System.out.println("Try Again!!");
+					}
+				}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
+			}
+		}while(noOfRemainingArmies > 0);
 
-		         reinforcedMap.put(currentPlayer, currentPlayerTerritories);
-		         System.out.println("Reinforcement Phase Completed for the Player "+currentPlayerName);
-		         System.out.println("\n");
-		         return reinforcedMap;
-	            }
-	
+		reinforcedMap.put(currentPlayer, currentPlayerTerritories);
+		System.out.println("Reinforcement Phase Completed for the Player "+currentPlayerName);
+		System.out.println("\n");
+		return reinforcedMap;
+	}
+
 	/**
 	 * Cacluation of Armies for the Player.
 	 *
@@ -152,7 +152,7 @@ public class RiskReinforcementPhase
 	 * @param riskContinentList the risk continent list
 	 * @return the int
 	 */
-	
+
 	public int calculateArmy(RiskPlayer currentPlayer, ArrayList<RiskTerritory> currTerritoryList, ArrayList<RiskContinent> riskContinentList) {
 
 		List<String> ownedContinents=new ArrayList<>(currentPlayer.getOccupiedContinents()) ;
@@ -177,7 +177,7 @@ public class RiskReinforcementPhase
 
 		return noOfArmiesForPlayer;
 	}
-	
+
 	/**
 	 * Iteration 2
 	 * Implementation of a card exchange view using the Observer pattern.
@@ -187,7 +187,7 @@ public class RiskReinforcementPhase
 	 * @param noOfPlayers the total number of players set for the game
 	 * @param totalCountriesInContinent the total number of Countries in a continent
 	 */
-	
+
 	public void CardExchangeView(int playerID, int noOfCountriesOwned, int noOfPlayers,int totalCountriesInContinent)
 	{
 	}

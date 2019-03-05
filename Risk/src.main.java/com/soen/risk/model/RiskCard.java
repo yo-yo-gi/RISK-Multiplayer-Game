@@ -29,7 +29,7 @@ public enum RiskCard {
 	 *
 	 * @param name the name
 	 */
-	
+
 	private RiskCard(String name) {
 		this.name = name;
 	}

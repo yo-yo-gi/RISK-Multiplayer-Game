@@ -3,7 +3,7 @@
  */
 package com.soen.risk.test.helper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
@@ -24,26 +24,26 @@ public class RiskMapUserCreatorTest {
 
 	/** The risk map creator. */
 	RiskMapUserCreator riskMapCreator;
-	
+
 	/** The map file. */
 	ArrayList<String> mapFile=new ArrayList<String>();
-	
+
 	/** The risk map editor. */
 	RiskMapEditor riskMapEditor;
-	
+
 	/** The continent list. */
 	ArrayList<String> continentList = new ArrayList<String>();
-	
+
 	/** The territory list. */
 	ArrayList<String> territoryList = new ArrayList<String>();
-	
+
 	/** The Map list. */
 	ArrayList<String> MapList = new ArrayList<String>();
-	
+
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 
-	
+
 	/**
 	 * Sets the up.
 	 *
@@ -52,9 +52,9 @@ public class RiskMapUserCreatorTest {
 	@Before
 	public void setUp() throws Exception {
 		riskMapBuilder = new RiskMapBuilder();
-		
+
 		riskMapCreator = new RiskMapUserCreator();
-		
+
 		continentList.add("South_America=2");
 		territoryList.add("Venezuela,South_America,Central_America,Peru,Brazil");
 		territoryList.add("Peru,South_America,Venezuela,Brazil,Argentina");
@@ -68,8 +68,8 @@ public class RiskMapUserCreatorTest {
 		MapList.add("[Territories]");
 		MapList.addAll(territoryList);
 		MapList.add(";;");
-	
-		
+
+
 	}
 
 	/**

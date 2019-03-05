@@ -21,10 +21,8 @@ import com.soen.risk.model.RiskTerritory;
 
 /**
  * The Class RiskTerritoryAssignmentToPlayerTest.
- */
-/* Junit test for RiskTerritoryAssignemnt
  * 
- * @Author Neha
+ * @author Neha
  * @version 1.0
  * 
  */

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="F:\software\java\Eclipse\eclipse\plugins\org.hamcrest.core_1.3.0.v201303031735.jar;lib/junit-4.12.jar;lib/apache-logging-log4j.jar;F:\software\java\Eclipse\eclipse\plugins\org.junit_4.12.0.v201504281640\junit.jar" destdir="javaDoc" doctitle="RISK_JavaDoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.soen.risk.test.helper,com.soen.risk.view,com.soen.risk.test.validator,com.soen.risk.controller,com.soen.risk.test.suiteRunner,com.soen.risk.test.view,com.soen.risk.test.controller,com.soen.risk.helper,com.soen.risk.model,com.soen.risk.validator" source="1.8" sourcepath="src.main.resources;src.main.java;src.test.java" splitindex="true" use="true" version="true">
+            <link href="file:/F:/Concordia/APP6441Risk-Interation1/APP6441Risk-Interation1/Risk/javaDoc/"/>
+        </javadoc>
+    </target>
+</project>

@@ -22,35 +22,35 @@ import java.util.Scanner;
  */
 
 public class RiskMapEditor {
-	
+
 	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);
-	
+
 	/** The fullmap. */
 	ArrayList<String> fullmap=new ArrayList<String>();
-	
+
 	/** The Map 1. */
 	ArrayList<String> Map1=new ArrayList<String>();
-	
+
 	/** The Map 2. */
 	ArrayList<String> Map2=new ArrayList<String>();
-	
+
 	/** The Map 3. */
 	ArrayList<String> Map3=new ArrayList<String>();
-	
+
 	/** The Map 4. */
 	ArrayList<String> Map4=new ArrayList<String>();
-	
+
 	/** The Map 5. */
 	ArrayList<String> Map5=new ArrayList<String>();
 
 
 	/** The territory list. */
 	ArrayList<String> territoryList=new ArrayList<String>();
-	
+
 	/** The continent list. */
 	ArrayList<String> continentList=new ArrayList<String>();
-	
+
 	/** The index. */
 	int TerrStartIndex=Constants.ZERO, TerrEndIndex=Constants.ZERO, contiStartIndex=Constants.ZERO, 
 			contEndIndex=Constants.ZERO,startIndexMap1=Constants.ZERO,endIndexMap1=Constants.ZERO,
@@ -120,7 +120,7 @@ public class RiskMapEditor {
 	 * The method takes input from user on addition/deletion of continents or territories.
 	 * 
 	 */
-	
+
 	public void editMap() {
 
 		//		ArrayList<String> continent=new ArrayList<String>();
@@ -138,16 +138,16 @@ public class RiskMapEditor {
 			System.out.println("2. DELETE");
 			System.out.println("3. EXIT");
 			do {
-			    while (!scanner.hasNextInt()) {
-		 		System.out.println("Try Again!!");
-		 		scanner.next();
-		 	    }
-			    choiceofEdit = scanner.nextInt();
-			    if(choiceofEdit>3 || choiceofEdit<1) {
-				System.out.println("Try Again!!");
-			    }
+				while (!scanner.hasNextInt()) {
+					System.out.println("Try Again!!");
+					scanner.next();
+				}
+				choiceofEdit = scanner.nextInt();
+				if(choiceofEdit>3 || choiceofEdit<1) {
+					System.out.println("Try Again!!");
+				}
 			}while(choiceofEdit>3 || choiceofEdit<1);			
-			
+
 			switch (choiceofEdit){
 			case 1:
 				System.out.println("Add selected");
@@ -157,14 +157,14 @@ public class RiskMapEditor {
 					System.out.println("2. Territory");
 					System.out.println("3. Exit");
 					do {
-					    while (!scanner.hasNextInt()) {
-				 		System.out.println("Try Again!!");
-				 		scanner.next();
-				 	    }
-					    choiceofAdd=scanner.nextInt();
-					    if(choiceofAdd>3 || choiceofAdd<1) {
-						System.out.println("Try Again!!");
-					    }
+						while (!scanner.hasNextInt()) {
+							System.out.println("Try Again!!");
+							scanner.next();
+						}
+						choiceofAdd=scanner.nextInt();
+						if(choiceofAdd>3 || choiceofAdd<1) {
+							System.out.println("Try Again!!");
+						}
 					}while(choiceofAdd>3 || choiceofAdd<1);
 					switch (choiceofAdd){
 					case 1:
@@ -203,16 +203,16 @@ public class RiskMapEditor {
 					System.out.println("2. Territory");
 					System.out.println("3. Exit");
 					do {
-					    while (!scanner.hasNextInt()) {
-				 		System.out.println("Try Again!!");
-				 		scanner.next();
-				 	    }
-					    choiceofAdd=scanner.nextInt();
-					    if(choiceofAdd>3 || choiceofAdd<1) {
-						System.out.println("Try Again!!");
-					    }
+						while (!scanner.hasNextInt()) {
+							System.out.println("Try Again!!");
+							scanner.next();
+						}
+						choiceofAdd=scanner.nextInt();
+						if(choiceofAdd>3 || choiceofAdd<1) {
+							System.out.println("Try Again!!");
+						}
 					}while(choiceofAdd>3 || choiceofAdd<1);	
-					 
+
 					switch (choiceofAdd){
 					case 1:
 						System.out.println("Delete continent selected");
@@ -346,29 +346,29 @@ public class RiskMapEditor {
 			}			
 		}	
 		territoryList=deletedTerritoryList;
-		
-			for (String currTerritory : territoryList) {
-				adjList=new ArrayList<String>(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
-				currTerritoryList=new ArrayList<String>(Arrays.asList(currTerritory.split(",")));
-				for (String currAdjucency : adjList) {
-					indexOfAdjacent=-1;
-					if (currAdjucency.equalsIgnoreCase(deleteTerritory)) {
-						indexOfAdjacent=currTerritoryList.indexOf(deleteTerritory);
-						currTerritoryList.remove(indexOfAdjacent);
-						deletedTerritoryList.set(territoryList.indexOf(currTerritory), String.join(",", currTerritoryList));
-						flag=true;
-					}					
-				}
 
-			}						
-			if (flag) {
-            //		continentList=deletedContinentList;
-				territoryList=deletedTerritoryList;
-				System.out.println("Deleted successfully");
-			}else System.err.println("Territory not found. Please check again.");
+		for (String currTerritory : territoryList) {
+			adjList=new ArrayList<String>(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
+			currTerritoryList=new ArrayList<String>(Arrays.asList(currTerritory.split(",")));
+			for (String currAdjucency : adjList) {
+				indexOfAdjacent=-1;
+				if (currAdjucency.equalsIgnoreCase(deleteTerritory)) {
+					indexOfAdjacent=currTerritoryList.indexOf(deleteTerritory);
+					currTerritoryList.remove(indexOfAdjacent);
+					deletedTerritoryList.set(territoryList.indexOf(currTerritory), String.join(",", currTerritoryList));
+					flag=true;
+				}					
+			}
+
+		}						
+		if (flag) {
+			//		continentList=deletedContinentList;
+			territoryList=deletedTerritoryList;
+			System.out.println("Deleted successfully");
+		}else System.err.println("Territory not found. Please check again.");
 
 		territoryList=deletedTerritoryList;
-		
+
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class RiskMapEditor {
 		ArrayList<String> deletedTerritoryList=new  ArrayList<String>(territoryList);
 		int indexOfContinent=-1;
 		int indexOfTerritory=-1;
-		
+
 		boolean deletedFlag=false;
 		ArrayList<String> tempContinentList;
 		ArrayList<String> tempTerritoryList;

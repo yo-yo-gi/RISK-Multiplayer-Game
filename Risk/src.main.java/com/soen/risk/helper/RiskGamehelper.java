@@ -20,10 +20,10 @@ import com.soen.risk.model.RiskTerritory;
  *
  * @author Yogesh Nimbhorkar
  * @version 1.0
-  */
-public class RiskGamehelper {
+ */
+public class RiskGameHelper {
 
-	
+
 	/**
 	 * updates existing map player with continents own by players.
 	 *
@@ -31,41 +31,41 @@ public class RiskGamehelper {
 	 * @param riskContinentList list of continents objects
 	 * @return controlValueAssignedMap updated map of players and territories own by player
 	 */
-	
+
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignControlValuesToPlayer(
 			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> riskContinentList) {
-			
+
 		HashMap<RiskPlayer, ArrayList<RiskTerritory>> controlValueAssignedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		List<RiskContinent> continentList= new ArrayList<RiskContinent>(riskContinentList);
-				
-		 for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
-		        
-			 RiskPlayer currentPlayer=entry.getKey();
-			 ArrayList<String> currentPlayerOwnedContinents=new ArrayList<String>(currentPlayer.getOccupiedContinents());
-			 ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>(entry.getValue());
-			 List<String> currPlayerTerritoriesNames=new ArrayList<String>();
-			 ArrayList<String> currContTerriNames;
-            //		System.out.println(entry.getKey()+" "+entry.getValue());
-			 
-			 
-			 for (RiskTerritory currTerritory : currentPlayerTerritories) {
-				 currPlayerTerritoriesNames.add(currTerritory.getTerritoryName());
+
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
+
+			RiskPlayer currentPlayer=entry.getKey();
+			ArrayList<String> currentPlayerOwnedContinents=new ArrayList<String>(currentPlayer.getOccupiedContinents());
+			ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>(entry.getValue());
+			List<String> currPlayerTerritoriesNames=new ArrayList<String>();
+			ArrayList<String> currContTerriNames;
+			//		System.out.println(entry.getKey()+" "+entry.getValue());
+
+
+			for (RiskTerritory currTerritory : currentPlayerTerritories) {
+				currPlayerTerritoriesNames.add(currTerritory.getTerritoryName());
 			}
-			 
-            //		Populating currentPlayerOwnedContinents list
-			 for (RiskContinent currContinent : continentList) {
-				 currContTerriNames=new ArrayList<String>(currContinent.getIncludedTerritories());
-				 if (currPlayerTerritoriesNames.containsAll(currContTerriNames)) {
-					 currentPlayerOwnedContinents.add(currContinent.getContinentName());
+
+			//		Populating currentPlayerOwnedContinents list
+			for (RiskContinent currContinent : continentList) {
+				currContTerriNames=new ArrayList<String>(currContinent.getIncludedTerritories());
+				if (currPlayerTerritoriesNames.containsAll(currContTerriNames)) {
+					currentPlayerOwnedContinents.add(currContinent.getContinentName());
 				}
 			}
-            //		Updating current player list of occupied continents
+			//		Updating current player list of occupied continents
 			currentPlayer.setOccupiedContinents(currentPlayerOwnedContinents);
-			 
-            //		Re populating map with updated player object
+
+			//		Re populating map with updated player object
 			controlValueAssignedMap.put(currentPlayer, currentPlayerTerritories);			 
-			 
-		    }
+
+		}
 
 		return controlValueAssignedMap;
 	}

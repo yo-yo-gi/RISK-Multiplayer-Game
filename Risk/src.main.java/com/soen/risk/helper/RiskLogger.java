@@ -32,10 +32,10 @@ public class RiskLogger {
 	/**
 	 * Instantiates a new risk logger.
 	 */
-	
+
 	public RiskLogger() {
 
-		 String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/RiskLog").toAbsolutePath().toString();
+		String logFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/logs/RiskLog").toAbsolutePath().toString();
 		SimpleDateFormat format = new SimpleDateFormat("M-d_HHmmss");
 		try {
 			fileHandler = new FileHandler(logFilePath+ format.format(Calendar.getInstance().getTime()) + ".log");
@@ -71,7 +71,7 @@ public class RiskLogger {
 	 *
 	 * @param log the log
 	 */
-	
+
 	public void doLogging(String log) {
 		logger.info(""+log);
 	}

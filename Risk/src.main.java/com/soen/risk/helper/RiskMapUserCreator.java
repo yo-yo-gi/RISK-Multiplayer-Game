@@ -17,25 +17,25 @@ import java.util.Scanner;
  * @version 1.0
  */
 
- public class RiskMapUserCreator {
-	 
+public class RiskMapUserCreator {
+
 
 	/** The create status. */
 	boolean createStatus=true;
-    
-    /**
-     * Map creator.
-     *
-     * @return finalMap Returns a full list of map file containing the continents and territories entered by the user.
-     */
+
+	/**
+	 * Map creator.
+	 *
+	 * @return finalMap Returns a full list of map file containing the continents and territories entered by the user.
+	 */
 	public List<String> mapCreator() {
 
-		
+
 		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
-        char selection1, selection2;
-		
+		char selection1, selection2;
+
 		ArrayList<String> Map1=new ArrayList<String>();
 		ArrayList<String> Map2=new ArrayList<String>();
 		ArrayList<String> Map3=new ArrayList<String>();
@@ -44,19 +44,19 @@ import java.util.Scanner;
 		Map1.add("[Map]");
 		Map1.add("");
 		Map1.add("[Continents]");
-		
+
 		Map3.add("-");
 		Map3.add("[Territories]");
-		
+
 		Map5.add(";;");
 		ArrayList<String> finalmap=new ArrayList<String>();
-		
+
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		do {
 			selection1=scanner.nextLine().charAt(0);
-		if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
-			System.out.println("Try Again!!");
-		}
+			if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+				System.out.println("Try Again!!");
+			}
 		}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
 		if(selection1=='Y'||selection1=='y') {
 			createStatus=true;
@@ -76,17 +76,17 @@ import java.util.Scanner;
 					String text2=scanner.nextLine();
 					Map2.add(text2);
 				}else {
-					System.out.println("User does not want to enter more continents.Exit");
+					//System.out.println("User does not want to enter more continents.");
 					flag1=false;
-				
-										
+
+
 				}
 			}
-			
+
 			System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 			String text3=scanner.nextLine();
 			Map4.add(text3);
-			
+
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
 				do {
@@ -100,17 +100,17 @@ import java.util.Scanner;
 					String text4=scanner.nextLine();
 					Map4.add(text4);
 				}else {
-					System.out.println("User does not want to enter more territories.Exit");
+					//System.out.println("User does not want to enter more territories.Exit");
 					flag2=false;
-					
+
 				}
 			}
-			
+
 		}else {
 			createStatus=false;
 			System.out.println("User entered No[N]");
 		}
-       //		scanner.close();
+		//		scanner.close();
 		if(Map2.isEmpty()&&Map4.isEmpty()) {
 			System.out.println("Nothing has been created. File is without continent or territory");
 		}
@@ -119,10 +119,10 @@ import java.util.Scanner;
 		finalmap.addAll(Map3);
 		finalmap.addAll(Map4);
 		finalmap.addAll(Map5);
-		
+
 		return finalmap;
 	}
-	
+
 	/**
 	 * Gets the creates the status.
 	 *

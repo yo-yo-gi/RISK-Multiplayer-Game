@@ -14,15 +14,15 @@ package com.soen.risk.helper;
  */
 
 public final class Constants {
-	
+
 	/**
 	 * Instantiates new constants.
 	 */
-	
+
 	private Constants(){
 		//		To restrict instantiation
 	}
-	
+
 	/** The Constant ZERO. */
 	public static final int ZERO = 0;
 

@@ -25,13 +25,13 @@ import com.soen.risk.model.RiskTerritory;
  */
 
 public class RiskTerritoryAssignmentToPlayer {
-	
+
 	/** The logger. */
 	RiskLogger logger= new RiskLogger();
-	
+
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
-	
+
 	/**
 	 * Assign countries to each player randomly.
 	 *
@@ -39,7 +39,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	 * @param riskTerritoryList the risk territory list
 	 * @return the map
 	 */
-	
+
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println();
@@ -58,7 +58,7 @@ public class RiskTerritoryAssignmentToPlayer {
 		for (RiskPlayer currentPlayer : riskPlayerList) {
 			playerTerritoryMap.put(currentPlayer, new ArrayList<RiskTerritory>());
 		}
-		
+
 		for (int i = 0; i < shuffledTerritories.size(); i = i + players.size()) {
 			for (int j = 0; j < players.size(); j++) {
 				if ((i + j) >= shuffledTerritories.size()) {
@@ -80,7 +80,7 @@ public class RiskTerritoryAssignmentToPlayer {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
-		//		System.out.println("\t\t" + value);
+			//		System.out.println("\t\t" + value);
 		}
 		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
 		return playerTerritoryMap;

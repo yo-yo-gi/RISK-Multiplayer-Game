@@ -21,19 +21,19 @@ import java.util.Scanner;
  */
 
 public class RiskMapCreatorUser {
-	
-/**
- * The main method.
- *
- * @param args the arguments
- */
-public static void main(String[] args) {
-		
+
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
+	public static void main(String[] args) {
+
 		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
-		
-		
+
+
 		//Logic for adding continents manually - START
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		char selection1=scanner.nextLine().charAt(0);
@@ -53,14 +53,14 @@ public static void main(String[] args) {
 					String text2=scanner.nextLine();
 					Append("\n");
 					Append(text2);
-					
+
 				}
 				else {
 					flag1=false;
 					Append("\n");
 					Append("-");
 					System.out.println("User selected N.Exit");
-										
+
 				}
 			}
 			System.out.println("Enter the territory details in the format:");
@@ -77,14 +77,14 @@ public static void main(String[] args) {
 					String text4=scanner.nextLine();
 					Append("\n");
 					Append(text4);
-					
+
 				}
 				else {
 					flag2=false;
 					Append("\n");
 					Append(";;");
 					System.out.println("User selected N.Exit");
-										
+
 				}
 			}
 		}
@@ -93,10 +93,10 @@ public static void main(String[] args) {
 			System.out.println("User selected N. Exit");
 		}
 		//Logic for adding continents manually - END		
-		
+
 	}
 
-	
+
 	/**
 	 * Write.
 	 *
@@ -104,19 +104,19 @@ public static void main(String[] args) {
 	 */
 	public static void Write(String text) {
 		FileWriter fWriter = null;
-        BufferedWriter writer = null;
-        try {
-          fWriter = new FileWriter("text.txt");
-          writer = new BufferedWriter(fWriter);
-          writer.write(text);
-          writer.newLine();
-          writer.close();
-          System.out.println("Input saved");
-        } catch (Exception e) {
-            System.out.println("Error!");
-        }
+		BufferedWriter writer = null;
+		try {
+			fWriter = new FileWriter("text.txt");
+			writer = new BufferedWriter(fWriter);
+			writer.write(text);
+			writer.newLine();
+			writer.close();
+			System.out.println("Input saved");
+		} catch (Exception e) {
+			System.out.println("Error!");
+		}
 	}
-	
+
 	/**
 	 * Append.
 	 *
@@ -124,17 +124,17 @@ public static void main(String[] args) {
 	 */
 	public static void Append(String text) {
 		try
-        {
-            String filename= "text.txt";
-            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-            fw.write(text);//appends the string to the file
-            fw.close();
-            System.out.println("Append done");
-        }
-        catch(IOException ioe)
-        {
-            System.err.println("IOException: " + ioe.getMessage());
-        }
+		{
+			String filename= "text.txt";
+			FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+			fw.write(text);//appends the string to the file
+			fw.close();
+			System.out.println("Append done");
+		}
+		catch(IOException ioe)
+		{
+			System.err.println("IOException: " + ioe.getMessage());
+		}
 	}
 
 }

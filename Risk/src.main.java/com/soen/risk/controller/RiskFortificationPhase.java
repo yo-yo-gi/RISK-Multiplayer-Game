@@ -36,7 +36,7 @@ public class RiskFortificationPhase {
 	ArrayList<String> adjTerritoryList;
 	/** The owned territory list. */
 	ArrayList<String> OwnedAdjList;
-	
+
 	/**  The number of armies to be moved. */
 	int finalMoveOfArmies;
 	/** The destination territory object. */
@@ -49,7 +49,7 @@ public class RiskFortificationPhase {
 	 * @param playerTerritories the player territories
 	 * @return the fortified map
 	 */
-	
+
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
 	{
 		logger.doLogging("Inside the fortification phase----------");
@@ -68,33 +68,33 @@ public class RiskFortificationPhase {
 		{
 			do {
 				if ((playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1)) {
-					System.out.println("Source territory must have at single army \n please select different source territory");
+					System.out.println("Source territory must have at least one army \n please select different source territory");
 				}
 				System.out.println();
 				System.out.println("Select the source territory to move army from: ");
 				int sourceTCoutner=1;
-	
+
 				for (RiskTerritory currTerritory : playerTerritories) {
 					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 					sourceTCoutner++;			
 				}
-							
-			do {
-				while (!scanner.hasNextInt()) {
-		 		System.out.println("Try Again!!");
-		 		scanner.next();
-		 	    }
-				sourceTerritory=scanner.nextInt();
-			    if(sourceTerritory>=sourceTCoutner || sourceTerritory<0) {
-				System.out.println("Try Again!!");
-			    }
-			}while(sourceTerritory>=sourceTCoutner || sourceTerritory<0);
-			
-			sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
-			sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
-	
+
+				do {
+					while (!scanner.hasNextInt()) {
+						System.out.println("Try Again!!");
+						scanner.next();
+					}
+					sourceTerritory=scanner.nextInt();
+					if(sourceTerritory>=sourceTCoutner || sourceTerritory<0) {
+						System.out.println("Try Again!!");
+					}
+				}while(sourceTerritory>=sourceTCoutner || sourceTerritory<0);
+
+				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
+				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
+
 			}while(!(playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1));
-	
+
 			logger.doLogging("Selected source territory  "+sourceTerritoryName);
 			adjTerritoryList=new ArrayList<String>();
 			for (RiskTerritory currTerritory : playerTerritories) {			
@@ -102,7 +102,7 @@ public class RiskFortificationPhase {
 					adjTerritoryList=currTerritory.getAdjacents();
 				}
 			}
-	
+
 			OwnedAdjList=new ArrayList<String>();
 			for (String currAdj : adjTerritoryList) {
 				for (RiskTerritory currTerritory : playerTerritories) {
@@ -117,7 +117,7 @@ public class RiskFortificationPhase {
 						+ "\nPlease select different source territory");
 			}
 		}while(OwnedAdjList.isEmpty());
-		
+
 		if (!OwnedAdjList.isEmpty()) {  
 			System.out.println("Select the destination territory: ");
 			int destinationTCoutner=1;
@@ -125,22 +125,22 @@ public class RiskFortificationPhase {
 				System.out.println(destinationTCoutner+"." + currAdj);
 				destinationTCoutner++;			
 			}
-				
-		do {
-			while (!scanner.hasNextInt()) {
-	 		System.out.println("Try Again!!");
-	 		scanner.next();
-	 	    }
-			destinationTerritory=scanner.nextInt();
-		    if(destinationTerritory>=destinationTCoutner || destinationTerritory<0) {
-			System.out.println("Try Again!!");
-		    }
-		}while(destinationTerritory>=destinationTCoutner || destinationTerritory<0);
-		
+
+			do {
+				while (!scanner.hasNextInt()) {
+					System.out.println("Try Again!!");
+					scanner.next();
+				}
+				destinationTerritory=scanner.nextInt();
+				if(destinationTerritory>=destinationTCoutner || destinationTerritory<0) {
+					System.out.println("Try Again!!");
+				}
+			}while(destinationTerritory>=destinationTCoutner || destinationTerritory<0);
+
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
-			
+
 			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
-			
+
 			for (RiskTerritory currTerritory : playerTerritories) {
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(destinationTName)) {
 					destinationTerritoryObject=currTerritory;
@@ -153,13 +153,13 @@ public class RiskFortificationPhase {
 			System.out.println("Number of armies are: "+sourceArmy+ " in the source territory: "+sourceTerritoryName);
 			System.out.println("Number of armies are: "+destinationArmy+ " in the destination territory: "+destinationTName);
 			System.out.println("Enter the number of armies to be moved to destination territory");
-			
+
 			do
 			{
 				while (!scanner.hasNextInt()) {
-			 		System.out.println("Try Again!!");
-			 		scanner.next();
-			 	}
+					System.out.println("Try Again!!");
+					scanner.next();
+				}
 				finalMoveOfArmies = scanner.nextInt();
 				if(finalMoveOfArmies==sourceArmy)
 				{
@@ -176,7 +176,7 @@ public class RiskFortificationPhase {
 							+ "\nPlease enter valid armies");
 				}
 			}while(finalMoveOfArmies<0 || finalMoveOfArmies>=sourceArmy);
-			
+
 			if (true) {
 
 				sourceArmy=sourceTerritoryObject.getArmiesPresent()-finalMoveOfArmies;
@@ -189,7 +189,7 @@ public class RiskFortificationPhase {
 			}
 			//		else System.out.println("invalid number of armies entered");
 		}
-		
+
 		System.out.println();
 		System.out.println("Fortification completed for the Player "+currentPlayer.getPlayerName());
 		System.out.println();

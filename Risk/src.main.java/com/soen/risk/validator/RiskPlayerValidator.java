@@ -11,7 +11,7 @@ package com.soen.risk.validator;
  * @version 1.0
  */
 public class RiskPlayerValidator {
-	
+
 	/**
 	 * Checks if is valid.
 	 *

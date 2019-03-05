@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskArmyAllocationToPlayers;
-import com.soen.risk.helper.RiskGamehelper;
+import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
@@ -27,6 +27,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Main Game Controller</h2>
  * This class works as a main game controller where it
@@ -39,6 +40,12 @@ import com.soen.risk.validator.RiskMapValidator;
  */
 public class RiskGameBuilder {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		RiskLogger logger= new RiskLogger();
 		RiskPlayerBuilder riskPlayerBuilder;
@@ -46,14 +53,14 @@ public class RiskGameBuilder {
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
 		//		RiskMapFileWriter riskMapFileWriter = new RiskMapFileWriter(); 
 		Scanner scanner = new Scanner(System.in);
-		
+
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false ;
 		List<String> mapFile = null, currentMap=null;
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
-		
+
 		int mapType=0, count=1;
 		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
@@ -64,11 +71,11 @@ public class RiskGameBuilder {
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
-		
+
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
 		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
-		RiskGamehelper riskGamehelper=new RiskGamehelper();
+		RiskGameHelper riskGameHelper=new RiskGameHelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
 
 
@@ -83,16 +90,16 @@ public class RiskGameBuilder {
 			logger.doLogging("Map Loading Phase------> ");
 
 			do {
-			while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
-		 		System.out.println("Try Again!!");
-		 		scanner.next();
-		 	}
-			mapType=scanner.nextInt();
-			if(!(mapType==1 || mapType==2)) {
-				System.out.println("Try Again!!");
-			}
+				while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
+					System.out.println("Try Again!!");
+					scanner.next();
+				}
+				mapType=scanner.nextInt();
+				if(!(mapType==1 || mapType==2)) {
+					System.out.println("Try Again!!");
+				}
 			}while(!(mapType==1 || mapType==2));
-				
+
 			if (mapType==1) {
 				String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps").toAbsolutePath().toString();
 				Path path;
@@ -107,61 +114,61 @@ public class RiskGameBuilder {
 					System.out.println(fileCounter+". "+file.getName());
 					fileCounter++;
 				}
-				
+
 				do {
-					    while (!scanner.hasNextInt()) {
-				 		System.out.println("Try Again!!");
-				 		scanner.next();
-				 	    }
-					    fileName=scanner.nextInt();
-					    if(fileName>=fileCounter || fileName<0) {
+					while (!scanner.hasNextInt()) {
 						System.out.println("Try Again!!");
-					    }
-					}while(fileName>=fileCounter || fileName<0);
+						scanner.next();
+					}
+					fileName=scanner.nextInt();
+					if(fileName>=fileCounter || fileName<0) {
+						System.out.println("Try Again!!");
+					}
+				}while(fileName>=fileCounter || fileName<0);
 
 				path=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+(listOfFiles[fileName-1].getName()));	
 				mapFile=riskMapBuilder.parseMapFile(path.toAbsolutePath().toString());
-				      if (riskMapBuilder.getMapUploadStatus()) {
-					  mapInitCompletionStatus=true;
-				      }
-				  }
-			         if (mapType==2) {
-				     System.out.println("Create Map selected");
-				     mapFile=riskMapUserCreator.mapCreator();
-				     mapInitCompletionStatus=true;
-			       }
-		        }while(!mapInitCompletionStatus);
-		
+				if (riskMapBuilder.getMapUploadStatus()) {
+					mapInitCompletionStatus=true;
+				}
+			}
+			if (mapType==2) {
+				System.out.println("Create Map selected");
+				mapFile=riskMapUserCreator.mapCreator();
+				mapInitCompletionStatus=true;
+			}
+		}while(!mapInitCompletionStatus);
+
 		if(mapType==2) {
-			   if(riskMapUserCreator.getcreateStatus()) {
+			if(riskMapUserCreator.getcreateStatus()) {
 				while(editCompletionStatus) {
-					
-				boolean continueEdit=true;
-				System.out.println("Do you want to edit map you created before starting the game: Yes[Y]/No[N]");
-					
+
+					boolean continueEdit=true;
+					System.out.println("Do you want to edit map you created before starting the game: Yes[Y]/No[N]");
+
 					do {
 						editChoice=scanner.next().charAt(0);
-					if(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N')) {
-						System.out.println("Try Again!!");
-					    }
+						if(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N')) {
+							System.out.println("Try Again!!");
+						}
 					}while(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N'));
-					
-					    if(editChoice=='Y'||editChoice=='y') {
+
+					if(editChoice=='Y'||editChoice=='y') {
 						mapValidationStatus=false;
 						currentMapAvailableStaus=false;
 						riskMapEditor=new RiskMapEditor(mapFile);
 						riskMapEditor.editMap();
 						mapFile=riskMapEditor.getFullMap();
-						
+
 						while(continueEdit) {
 							System.out.println("Do you want to edit the map again before starting the game:Yes[Y]/No[N]");
 							do {
 								continueEditChoice=scanner.next().charAt(0);
-							if(!(continueEditChoice=='Y' || continueEditChoice=='y' || continueEditChoice=='n' || continueEditChoice=='N')) {
-								System.out.println("Try Again!!");
-							   }
-						}while(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N'));
-							
+								if(!(continueEditChoice=='Y' || continueEditChoice=='y' || continueEditChoice=='n' || continueEditChoice=='N')) {
+									System.out.println("Try Again!!");
+								}
+							}while(!(editChoice=='Y' || editChoice=='y' || editChoice=='n' || editChoice=='N'));
+
 							if(continueEditChoice=='Y'||continueEditChoice=='y') {
 								mapValidationStatus=false;
 								currentMapAvailableStaus=false;
@@ -190,7 +197,7 @@ public class RiskGameBuilder {
 		for (String currLine : mapFile) {
 			currentMap.add(currLine.replace("\\s", ""));
 		}
-		
+
 		mapValidationStatus=riskMapValidator.validateMap(currentMap);
 		logger.doLogging("Map validation status------> "+mapValidationStatus);
 		if (mapValidationStatus) {
@@ -207,7 +214,7 @@ public class RiskGameBuilder {
 
 		}else {			
 			System.out.println("Invalid map... \r\n Please choose / enter valid map...");
-			
+
 			System.exit(0);
 		}
 
@@ -241,8 +248,8 @@ public class RiskGameBuilder {
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
 		System.out.println();
 		System.out.println("Players numbers initialized. Game started.");
-        //		List<String> playerList= new ArrayList<String>();
-        //		playerList=riskPlayerList.toString();
+		//		List<String> playerList= new ArrayList<String>();
+		//		playerList=riskPlayerList.toString();
 		for(RiskPlayer curPlayer:riskPlayerList) {
 			System.out.println("Player #"+count+" -> "+curPlayer.getPlayerName());
 			count++;
@@ -258,7 +265,7 @@ public class RiskGameBuilder {
 		//		passing list of players and List of countries to assign random territories
 		riskMainMap=riskTerritoryAssignmentToPlayer.assignTerritory(riskPlayerList,riskTerritoryList);
 		//		assigning control value as per territories owned by player
-		riskMainMap=riskGamehelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
+		riskMainMap=riskGameHelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
 		//		assigning round robin army to above map
 		riskMainMap=riskArmyAllocationToPlayers.assignArmiesToPlayers(riskMainMap);
 
@@ -278,16 +285,16 @@ public class RiskGameBuilder {
 
 			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
 
-			System.out.print("Do you want to fortify?(Y/N)");
+			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
 			char selection1;
 			do {
 				selection1=scanner.next().charAt(0);
-			if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
-				System.out.println("Try Again!!");
-			}
+				if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+					System.out.println("Try Again!!");
+				}
 			}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
 			if(selection1=='Y'||selection1=='y') {
-			fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
+				fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
 			}else System.out.println("Fortification phase skipped...");
 			//			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
 
@@ -301,9 +308,9 @@ public class RiskGameBuilder {
 		//		send same map for fortify
 
 		//		get fortify map
-		
+
 		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
-		
+
 		scanner.close();
 	}
 

@@ -28,35 +28,35 @@ import com.soen.risk.model.RiskTerritory;
  * Junit Test case for Reinforcement
  */
 public class RiskReinforcementPhaseTest {
-	
+
 	/** The player map. */
 	HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
-	
+
 	/** The continent list. */
 	ArrayList<RiskContinent> continentList =new ArrayList<RiskContinent>();
-	
+
 	/** The territory list. */
 	ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
- 	
-	 /** The reinforced map. */
-	 HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
-	
+
+	/** The reinforced map. */
+	HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
+
 	/** The risk reinforcement phase. */
 	RiskReinforcementPhase riskReinforcementPhase ;
-	
+
 	/** The risk player. */
 	RiskPlayer riskPlayer;
-	
+
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
-	
+
 	/** The map file. */
 	ArrayList<String> mapFile=new ArrayList<String>();
-	
+
 	/** The owned continents. */
 	ArrayList<String> ownedContinents=new ArrayList<>() ;
-	
-	
+
+
 	/**
 	 * Sets the up.
 	 */
@@ -70,7 +70,7 @@ public class RiskReinforcementPhaseTest {
 		territoryList=riskMapBuilder.getTerritoryList();		
 		riskReinforcementPhase = new RiskReinforcementPhase();
 	}
-	
+
 	/**
 	 * Test army calculation per player.
 	 */
@@ -78,7 +78,7 @@ public class RiskReinforcementPhaseTest {
 	public void testArmyCalculationPerPlayer() {
 		assertEquals(14,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
-	
+
 	/**
 	 * Test army calculation per player fail.
 	 */
@@ -86,7 +86,7 @@ public class RiskReinforcementPhaseTest {
 	public void testArmyCalculationPerPlayerFail() {
 		assertNotEquals(15,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
-	
+
 	/**
 	 * Test army calculation per player control value.
 	 */
@@ -96,7 +96,7 @@ public class RiskReinforcementPhaseTest {
 		riskPlayer.setOccupiedContinents(ownedContinents);		
 		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
-	
+
 	/**
 	 * Test army calculation per player control value fail.
 	 */

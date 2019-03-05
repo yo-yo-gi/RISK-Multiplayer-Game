@@ -37,37 +37,37 @@ public class RiskMapValidator {
 
 	/** The continent list. */
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
-	
+
 	/** The terretory list. */
 	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
-	
+
 	/** The adjucency map. */
 	private Map<String, List<String>> adjucencyMap=new HashMap<String, List<String>>();
-	
+
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
-	
+
 	/** The validation. */
 	boolean validation=false;
-	
+
 	/** The index of DS colon. */
 	int indexOfMap=0, indexOfContinents=0, indexOfDash=0, indexOfTerritories=0, indexOfDSColon=0;
-	
+
 	/** The init continent list. */
 	private ArrayList<String> initContinentList;
-	
+
 	/** The init territory list. */
 	private ArrayList<String> initTerritoryList;
-	
+
 	/** The init adjucency list. */
 	private ArrayList<String> initAdjucencyList=new ArrayList<String>();
-	
+
 	/** The adj vertices. */
 	private int adjVertices; // No. of vertices 
-	
+
 	/** The adj list. */
 	private LinkedList<Integer> adjList[]; //Adjacency List 
-	
+
 	/** The adj list transpose. */
 	private LinkedList<Integer> adjListTranspose[]; //Adjacency List for transpose DFS
 
@@ -77,7 +77,7 @@ public class RiskMapValidator {
 	 * @param parsedMapFile list of parsed map file
 	 * @return true if parsedMapFile is valid
 	 */
-	
+
 	public boolean validateMap(List<String> parsedMapFile) {		
 		if(validateMapSyntax(parsedMapFile)) {
 			if(validateDuplicacy(initContinentList, initTerritoryList)) {
@@ -85,7 +85,7 @@ public class RiskMapValidator {
 				riskMapBuilder.loadMapData(parsedMapFile);
 				continentList=riskMapBuilder.getContinentList();
 				terretoryList=riskMapBuilder.getTerritoryList();
-				adjucencyMap=riskMapBuilder.getAdjucencyMap();
+				adjucencyMap=riskMapBuilder.getAdjacencyMap();
 				if(validateContinents(continentList)) {
 					if(validateTerritories(terretoryList, adjucencyMap)) {			
 						validation=true;
@@ -106,7 +106,7 @@ public class RiskMapValidator {
 	 * @param parsedMapFile list of parsed map file
 	 * @return true if map syntax is valid
 	 */
-	
+
 	public boolean validateMapSyntax(List<String> parsedMapFile) {
 		boolean syntaxValidation=false;
 
@@ -131,7 +131,7 @@ public class RiskMapValidator {
 	 * @param parsedMapFile list of parsed map file
 	 * @return true if file is valid with tags
 	 */
-	
+
 	private boolean checkMustTags(List<String> parsedMapFile) {
 		boolean mustTagsValidation=false;			
 		List<String> mustHaveTags=new ArrayList<String>(Arrays.asList("[Map]", "[Continents]","[Territories]","-",";;"));
@@ -163,7 +163,7 @@ public class RiskMapValidator {
 	 * @param parsedMapFile list of parsed map file
 	 * @return true continent syntax is valid
 	 */
-	
+
 	private boolean checkContinentSyntax(List<String> parsedMapFile) {
 		boolean continentValidation=false;			
 		String currentContinent;
@@ -194,33 +194,33 @@ public class RiskMapValidator {
 	 * @param adjMap adjacency map
 	 * @return true if territories are connected
 	 */
-	
+
 	private boolean validateTerritories(ArrayList<RiskTerritory> territoryList, Map<String, List<String>> adjMap) {
 		boolean territoryValidation=false;
 		int matchCounter=Constants.ZERO;
 		if (territoryList.size()<3) {
 			territoryValidation=false;
 		}else territoryValidation=true;
-		
+
 		if(territoryValidation) {
-		for (String key : adjMap.keySet()) {
-			matchCounter=0;
-			if(adjMap.containsKey(key)) {
-				for (String currAdj : adjMap.get(key)) {
-					if(adjMap.containsKey(currAdj)) {
-						for (String newAdj :adjMap.get(currAdj)){			    		  
-							if (newAdj.equalsIgnoreCase(key)) {
-								matchCounter++;
-							}
-						}			    	  
+			for (String key : adjMap.keySet()) {
+				matchCounter=0;
+				if(adjMap.containsKey(key)) {
+					for (String currAdj : adjMap.get(key)) {
+						if(adjMap.containsKey(currAdj)) {
+							for (String newAdj :adjMap.get(currAdj)){			    		  
+								if (newAdj.equalsIgnoreCase(key)) {
+									matchCounter++;
+								}
+							}			    	  
+						}
 					}
+					if (!(matchCounter==adjMap.get(key).size())) {
+						territoryValidation=false;
+						break;
+					}else territoryValidation=true;
 				}
-				if (!(matchCounter==adjMap.get(key).size())) {
-					territoryValidation=false;
-					break;
-				}else territoryValidation=true;
 			}
-		}
 		}
 
 		if(territoryValidation) {
@@ -247,7 +247,7 @@ public class RiskMapValidator {
 	 * @param territories list of territories
 	 * @return true if no duplicate territory or continent
 	 */
-	
+
 	private boolean validateDuplicacy(ArrayList<String> continents, ArrayList<String> territories) {
 		boolean duplicacyValidation=false;
 		int continentCounter=Constants.ZERO;
@@ -345,7 +345,7 @@ public class RiskMapValidator {
 	 * @param continentList list of continent
 	 * @return true if continents are valid
 	 */
-	
+
 	public boolean validateContinents(ArrayList<RiskContinent> continentList){
 		boolean ContinentValidation=false;
 		if (continentList.size()>1) {
@@ -361,7 +361,7 @@ public class RiskMapValidator {
 	 * @param parsedMapFile list of parsed map file
 	 * @return true territory syntax is valid
 	 */	
-	
+
 	private boolean checkTerritorySyntax(List<String> parsedMapFile) {
 		boolean territoryValidation=false;
 		initTerritoryList=new ArrayList<String>();
@@ -390,7 +390,7 @@ public class RiskMapValidator {
 	 *
 	 * @param v total vertices in graph
 	 */	
-	
+
 	public void initializeAdj(int v) 
 	{ 
 		adjVertices = v; 
@@ -417,7 +417,7 @@ public class RiskMapValidator {
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
-	
+
 	void DFSUtil(int v,Boolean visited[]) 
 	{ 
 		// Mark the current node as visited and print it 
@@ -439,7 +439,7 @@ public class RiskMapValidator {
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
-	
+
 	public void DFSUtilTranspose(int v,Boolean visited[]) 
 	{ 
 		//		Mark the current node as visited and print it 
@@ -463,7 +463,7 @@ public class RiskMapValidator {
 	 *
 	 * @param v current vertex in graph
 	 */	
-	
+
 	public void initializeAdjTranspose(int v) 
 	{ 
 		adjVertices = v; 
@@ -487,7 +487,7 @@ public class RiskMapValidator {
 	 *
 	 * @return returns true if graph is strongly connected
 	 */
-	
+
 	Boolean checkTerritoryAdjucency() 
 	{ 
 		//		Step 1: Mark all the vertices as not visited 
