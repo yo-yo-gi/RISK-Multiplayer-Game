@@ -23,7 +23,6 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 1.0
  */
-
 public class RiskTerritoryAssignmentToPlayer {
 
 	/** The logger. */

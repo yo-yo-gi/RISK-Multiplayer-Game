@@ -32,7 +32,6 @@ import com.soen.risk.model.RiskTerritory;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-
 public class RiskMapValidator {
 
 	/** The continent list. */

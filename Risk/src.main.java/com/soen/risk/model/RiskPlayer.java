@@ -13,7 +13,6 @@ import java.util.ArrayList;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-
 public class RiskPlayer {
 
 	/** The player id. */

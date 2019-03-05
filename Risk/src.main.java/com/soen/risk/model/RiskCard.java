@@ -11,7 +11,6 @@ package com.soen.risk.model;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-
 public enum RiskCard {
 
 	/** The infant. */

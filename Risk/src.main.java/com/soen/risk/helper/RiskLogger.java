@@ -20,7 +20,6 @@ import java.util.logging.Logger;
  * @author Chirag Vora
  * @version 1.0
  */
-
 public class RiskLogger {
 
 	/** The logger. */

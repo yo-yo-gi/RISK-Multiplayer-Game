@@ -12,7 +12,6 @@ package com.soen.risk.helper;
  * @author Chirag Vora
  * @version 1.0
  */
-
 public final class Constants {
 
 	/**
