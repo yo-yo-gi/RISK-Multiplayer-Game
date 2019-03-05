@@ -11,10 +11,10 @@ Please follow below steps to configure
 5)Run project from CheckGitRun.java file.
 
 Task to do :
-1) Replace the static values with constant variables and define it in the constants file.
+1) Replace the static values with constant variables and define it in the constants file.--------- Done
 2) Apply logs to all the files
-3) Refactoring the files
-4) Documentation in progress
+3) Refactoring the files------------------- done
+4) Documentation ------------- done
 5) 3 valid maps and 3 invalid maps
 6) Exception handling
 7) Junits with positive and negative tests for all classes
@@ -22,5 +22,7 @@ Task to do :
  b) calculation of number of reinforcement armies - 2 done
  d) RiskArmyAllocationToPlayers 
  e) RiskTerritoryAssignmentToPlayers 
- f) Fortification 
+ f) Fortification
  g) Map Editing -> addContinent, deleteContinent, addTerritory, deleteTerritory - in progress
+ 
+8) API Documentation ---------------- done
