@@ -181,7 +181,7 @@ public class RiskMapValidator {
 		int matchCounter=Constants.ZERO;
 		if (territoryList.size()<3) {
 			territoryValidation=false;
-		}
+		}else territoryValidation=true;
 		
 		if(territoryValidation) {
 		for (String key : adjMap.keySet()) {
