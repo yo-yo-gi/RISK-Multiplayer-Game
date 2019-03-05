@@ -26,6 +26,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
+import com.soen.risk.view.RiskMapUserCreatorView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -54,7 +55,7 @@ public class RiskGameBuilder {
 		//		RiskMapFileWriter riskMapFileWriter = new RiskMapFileWriter(); 
 		Scanner scanner = new Scanner(System.in);
 
-		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false ;
+		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false,checkflag=false ;
 		List<String> mapFile = null, currentMap=null;
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
@@ -66,8 +67,9 @@ public class RiskGameBuilder {
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
-		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
+		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();  
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
+        RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
@@ -78,13 +80,15 @@ public class RiskGameBuilder {
 		RiskGameHelper riskGameHelper=new RiskGameHelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
 
-
-		do {
-			System.out.println("Welcome to RISK GAME!!!");
+            System.out.println("Welcome to RISK GAME!!!");
 			System.out.println();
 			System.out.println();
 			System.out.println("Game Starting");
-			System.out.println("Please enter your choice:");
+
+
+		do {
+			
+			System.out.println("\nPlease enter your choice:");
 			System.out.println("1. Upload from existing maps");
 			System.out.println("2. Create map from scratch");
 			logger.doLogging("Map Loading Phase------> ");
@@ -135,11 +139,19 @@ public class RiskGameBuilder {
 			if (mapType==2) {
 				System.out.println("Create Map selected");
 				mapFile=riskMapUserCreator.mapCreator();
-				mapInitCompletionStatus=true;
+				checkflag=riskMapUserCreator.getcreateStatus();
+				     if(checkflag) {
+			        	 mapInitCompletionStatus=true; 
+			         }
+			         else {
+			        	 mapInitCompletionStatus=false;
+			         }
+			       }
 			}
 		}while(!mapInitCompletionStatus);
 
 		if(mapType==2) {
+        riskMapUserCreatorView.displayMap(mapFile);	
 			if(riskMapUserCreator.getcreateStatus()) {
 				while(editCompletionStatus) {
 
@@ -161,6 +173,7 @@ public class RiskGameBuilder {
 						mapFile=riskMapEditor.getFullMap();
 
 						while(continueEdit) {
+                        riskMapUserCreatorView.displayMap(mapFile);	
 							System.out.println("Do you want to edit the map again before starting the game:Yes[Y]/No[N]");
 							do {
 								continueEditChoice=scanner.next().charAt(0);
@@ -176,7 +189,7 @@ public class RiskGameBuilder {
 								riskMapEditor.editMap();
 								mapFile=riskMapEditor.getFullMap();
 							}else {
-								System.out.println("User selecte No[N].");
+								System.out.println("No[N] selected.");
 								continueEdit=false;
 								break;
 							}
