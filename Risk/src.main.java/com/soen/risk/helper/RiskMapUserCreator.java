@@ -47,7 +47,6 @@ import java.util.Scanner;
 		ArrayList<String> finalmap=new ArrayList<String>();
 		
 		System.out.print("Do you want to create the map manually?(Y/N)");
-//		char selection1=scanner.nextLine().charAt(0);
 		do {
 			selection1=scanner.nextLine().charAt(0);
 		if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
@@ -61,7 +60,6 @@ import java.util.Scanner;
 			Map2.add(text1);
 			while(flag1) {
 				System.out.print("Do you want to add more continents?(Y/N)");
-//				char selection2=scanner.nextLine().charAt(0);
 				do {
 					selection2=scanner.nextLine().charAt(0);
 					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {
@@ -86,7 +84,6 @@ import java.util.Scanner;
 			
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
-//				selection2=scanner.nextLine().charAt(0);
 				do {
 					selection2=scanner.nextLine().charAt(0);
 					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {

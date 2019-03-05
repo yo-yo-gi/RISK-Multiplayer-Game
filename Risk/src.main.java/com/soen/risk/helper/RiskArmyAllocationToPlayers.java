@@ -56,7 +56,7 @@ public class RiskArmyAllocationToPlayers {
 			}
 			playerTerritoryMap.put(currentPlayer, territories);
             System.out.println();
-			System.out.println("Player: "+currentPlayer.getPlayerName()+" has territories with their respective armies");
+			System.out.println("Player: "+currentPlayer.getPlayerName()+" has following territories with their respective armies");
 			for (RiskTerritory riskTerritory : territories) {
 				System.out.println(riskTerritory.getTerritoryName()+"("+riskTerritory.getArmiesPresent()+")");
 			}

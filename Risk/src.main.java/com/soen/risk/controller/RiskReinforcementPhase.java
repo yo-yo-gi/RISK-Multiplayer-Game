@@ -16,7 +16,7 @@ import com.soen.risk.model.RiskTerritory;
  * In the reinforcements phase, the player is given a number of armies that depends on the 
  * number of countries he owns (# of countries owned divided by 3, rounded down). 
  * If the player owns all the countries of an entire continent
- * else the player is given an amount of armies corresponding to the continent�s control value.
+ * else the player is given an amount of armies corresponding to the continent's control value.
  * 
  * @author Neha Dighe
  * @version 1.0
@@ -78,7 +78,7 @@ public class RiskReinforcementPhase
 		{
 			if(noOfRemainingArmies!=0)
 			{
-				System.out.println("The number of armies available for reinforcement : "+noOfRemainingArmies);
+				System.out.println("The number of armies calculated for reinforcement : "+noOfRemainingArmies);
 				System.out.println("Enter armies for "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
 				while (!scanner.hasNextInt()) {
 					System.out.println("Try Again!!");
@@ -87,7 +87,7 @@ public class RiskReinforcementPhase
 				int userEnteredArmy = scanner.nextInt();
 				if(userEnteredArmy < 0){
 				do {
-					System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)));
+					System.out.println("Armies assigned cannot be less than zero, please add armies to the country : "+currentPlayerTerritories.get((selectedTerrIndex-1)).getTerritoryName());
 					while (!scanner.hasNextInt()) {
 						System.out.println("Try Again!!");
 						scanner.next();

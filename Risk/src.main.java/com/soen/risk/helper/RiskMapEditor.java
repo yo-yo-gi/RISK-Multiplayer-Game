@@ -109,17 +109,24 @@ public class RiskMapEditor {
 		boolean flag1 = true;
 		boolean flag2 = true;
 		boolean flag3 = true;
+		int choiceofEdit =0;
+		int choiceofAdd=0;
 		while (flag1) {
 			System.out.println("Please select an option from below:");
 			System.out.println("1. ADD");
 			System.out.println("2. DELETE");
 			System.out.println("3. EXIT");
-			while (!scanner.hasNextInt()) {
+			do {
+			    while (!scanner.hasNextInt()) {
 		 		System.out.println("Try Again!!");
 		 		scanner.next();
-		 	}
+		 	    }
+			    choiceofEdit = scanner.nextInt();
+			    if(choiceofEdit>3 || choiceofEdit<1) {
+				System.out.println("Try Again!!");
+			    }
+			}while(choiceofEdit>3 || choiceofEdit<1);			
 			
-			int choiceofEdit = scanner.nextInt();
 			switch (choiceofEdit){
 			case 1:
 				System.out.println("Add selected");
@@ -128,25 +135,21 @@ public class RiskMapEditor {
 					System.out.println("1. Continent");
 					System.out.println("2. Territory");
 					System.out.println("3. Exit");
-					while (!scanner.hasNextInt()) {
+					do {
+					    while (!scanner.hasNextInt()) {
 				 		System.out.println("Try Again!!");
 				 		scanner.next();
-				 	}
-					while (!scanner.hasNextInt()) {
-				 		System.out.println("Try Again!!");
-				 		scanner.next();
-				 	}
-					
-					int choiceofAdd=scanner.nextInt();
+				 	    }
+					    choiceofAdd=scanner.nextInt();
+					    if(choiceofAdd>3 || choiceofAdd<1) {
+						System.out.println("Try Again!!");
+					    }
+					}while(choiceofAdd>3 || choiceofAdd<1);
 					switch (choiceofAdd){
 					case 1:
 						System.out.println("Add continent selected");
 						System.out.println();
 						System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
-						while (!scanner.hasNextInt()) {
-					 		System.out.println("Try Again!!");
-					 		scanner.next();
-					 	}
 						String continent=scanner.next();
 						addContinent(continent);
 						//		continentList.add(continent);
@@ -155,10 +158,6 @@ public class RiskMapEditor {
 						System.out.println("Add terrritory selected");
 						System.out.println();
 						System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
-						while (!scanner.hasNextInt()) {
-					 		System.out.println("Try Again!!");
-					 		scanner.next();
-					 	}
 						String territory=scanner.next();
 						addTerritory(territory);
 						//		territoryList.add(territory);
@@ -182,12 +181,17 @@ public class RiskMapEditor {
 					System.out.println("1. Continent");
 					System.out.println("2. Territory");
 					System.out.println("3. Exit");
-					while (!scanner.hasNextInt()) {
+					do {
+					    while (!scanner.hasNextInt()) {
 				 		System.out.println("Try Again!!");
 				 		scanner.next();
-				 	}
-					
-					int choiceofAdd=scanner.nextInt();
+				 	    }
+					    choiceofAdd=scanner.nextInt();
+					    if(choiceofAdd>3 || choiceofAdd<1) {
+						System.out.println("Try Again!!");
+					    }
+					}while(choiceofAdd>3 || choiceofAdd<1);	
+					 
 					switch (choiceofAdd){
 					case 1:
 						System.out.println("Delete continent selected");
