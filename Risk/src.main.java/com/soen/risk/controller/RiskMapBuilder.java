@@ -142,7 +142,7 @@ public class RiskMapBuilder {
 	 */
 	
 	private ArrayList<RiskContinent> addTerritoriesToContinents(ArrayList<RiskContinent> continentList, List<RiskTerritory> territoryList) {
-		ArrayList<RiskContinent> loadedContinentList = continentList;
+		ArrayList<RiskContinent> loadedContinentList = new ArrayList<RiskContinent>(continentList);
 		ArrayList<String> tempRiskTerritories;
 
 		for (RiskTerritory currentTerritory : territoryList) {
@@ -154,6 +154,11 @@ public class RiskMapBuilder {
 					tempRiskTerritories.add(currentTerritory.getTerritoryName());
 					currentContinent.setIncludedTerritories(tempRiskTerritories);
 				}
+			}
+		}
+        for (RiskContinent currContinent : continentList) {
+			if (null==currContinent.getIncludedTerritories()) {
+				loadedContinentList.remove(currContinent);
 			}
 		}		
 		return loadedContinentList;
