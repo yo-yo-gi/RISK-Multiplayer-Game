@@ -11,7 +11,6 @@ import java.util.Scanner;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskPlayerHelper;
 import com.soen.risk.model.RiskPlayer;
-import com.soen.risk.validator.RiskPlayerValidator;
 /**
  * <h2>Player Builder Class</h2>
  * The class takes the number of players and names from user to randomly allocate the chance of player.
