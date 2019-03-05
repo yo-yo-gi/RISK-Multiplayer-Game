@@ -7,7 +7,8 @@ package com.soen.risk.validator;
 /**
  * The Class RiskPlayerValidator.
  *
- * @author pooja
+ * @author Pooja
+ * @version 1.0
  */
 public class RiskPlayerValidator {
 	

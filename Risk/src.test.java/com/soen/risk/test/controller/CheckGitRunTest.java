@@ -14,6 +14,7 @@ import com.soen.risk.controller.CheckGitRun;
  * The Class CheckGitRunTest.
  *
  * @author Yogesh Nimbhorkar
+ * @version 1.0
  */
 public class CheckGitRunTest {
 	

@@ -11,6 +11,7 @@ import java.util.Scanner;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskPlayerHelper;
 import com.soen.risk.model.RiskPlayer;
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Player Builder Class</h2>
  * The class takes the number of players and names from user to randomly allocate the chance of player.
@@ -20,13 +21,23 @@ import com.soen.risk.model.RiskPlayer;
  */
 public class RiskPlayerBuilder {
 
+/** The risk player list. */
 private ArrayList<RiskPlayer> riskPlayerList;
+
+/** The players name list. */
 private ArrayList<String> playersNameList;
 	
+/**
+ * Instantiates a new risk player builder.
+ */
 public RiskPlayerBuilder(){
 		 playersNameList = new ArrayList<String>();
 	     }
-	     public void setUpPlayers() {
+	     
+     	/**
+     	 * Sets the up players.
+     	 */
+     	public void setUpPlayers() {
 		 Scanner s = new Scanner(System.in);
 		 int numberOfPlayers = -1;
 
@@ -66,6 +77,11 @@ public RiskPlayerBuilder(){
 		        }		
 	           }
 	
+    /**
+     * Adds the players.
+     *
+     * @param riskPlayersNames the risk players names
+     */
     void addPlayers(List<String> riskPlayersNames){
 		ArrayList<RiskPlayer> tempRiskPlayerList=new ArrayList<RiskPlayer>();
 		RiskPlayer riskPlayer; 
@@ -84,6 +100,8 @@ public RiskPlayerBuilder(){
         }
 	
 	/**
+	 * Gets the risk player list.
+	 *
 	 * @return the riskPlayerList
 	 */
     
@@ -92,6 +110,8 @@ public RiskPlayerBuilder(){
 	}
 
 	/**
+	 * Sets the risk player list.
+	 *
 	 * @param riskPlayerList the riskPlayerList to set
 	 */
 	
@@ -100,6 +120,8 @@ public RiskPlayerBuilder(){
 	}
 
 	/**
+	 * Gets the players name list.
+	 *
 	 * @return the playersNameList
 	 */
 	
@@ -108,6 +130,8 @@ public RiskPlayerBuilder(){
 	}
 
 	/**
+	 * Sets the players name list.
+	 *
 	 * @param playersNameList the playersNameList to set
 	 */
 	

@@ -5,6 +5,7 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Player Model</h2>
  * This class is used to set and get the values of the parameters for players.
@@ -15,15 +16,28 @@ import java.util.ArrayList;
 
 public class RiskPlayer {
 
+	/** The player id. */
 	private String playerId;
+	
+	/** The player name. */
 	private String playerName;
+	
+	/** The occupied territories. */
 	private ArrayList<String> occupiedTerritories;
+	
+	/** The occupied continents. */
 	private ArrayList<String> occupiedContinents=new ArrayList<String>();
+	
+	/** The armies owned. */
 	private int armiesOwned;
+	
+	/** The card owned. */
 	private ArrayList<String> cardOwned;
 	
 	/**
-	 * @param string
+	 * Instantiates a new risk player.
+	 *
+	 * @param name the name
 	 */
 	
 	public RiskPlayer(String name) {
@@ -31,13 +45,15 @@ public class RiskPlayer {
 	}
 
 	/**
-	 * 
+	 * Instantiates a new risk player.
 	 */
 	
 	public RiskPlayer() {
 	}
 
 	/**
+	 * Gets the player id.
+	 *
 	 * @return the playerId
 	 */
 	
@@ -46,6 +62,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the player id.
+	 *
 	 * @param playerId the playerId to set
 	 */
 	
@@ -54,6 +72,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Gets the player name.
+	 *
 	 * @return the playerName
 	 */
 	
@@ -62,6 +82,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the player name.
+	 *
 	 * @param playerName the playerName to set
 	 */
 	
@@ -70,6 +92,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Gets the occupied territories.
+	 *
 	 * @return the occupiedTerritories
 	 */
 	
@@ -78,6 +102,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the occupied territories.
+	 *
 	 * @param occupiedTerritories the occupiedTerritories to set
 	 */
 	
@@ -86,6 +112,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Gets the occupied continents.
+	 *
 	 * @return the occupiedContinents
 	 */
 	
@@ -94,6 +122,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the occupied continents.
+	 *
 	 * @param occupiedContinents the occupiedContinents to set
 	 */
 	
@@ -102,6 +132,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Gets the armies owned.
+	 *
 	 * @return the armiesOwned
 	 */
 	
@@ -110,6 +142,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the armies owned.
+	 *
 	 * @param armiesOwned the armiesOwned to set
 	 */
 	
@@ -118,6 +152,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Gets the card owned.
+	 *
 	 * @return the cardOwned
 	 */
 	
@@ -126,6 +162,8 @@ public class RiskPlayer {
 	}
 	
 	/**
+	 * Sets the card owned.
+	 *
 	 * @param cardOwned the cardOwned to set
 	 */
 	

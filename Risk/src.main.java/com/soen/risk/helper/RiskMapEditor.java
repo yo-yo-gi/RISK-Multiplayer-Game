@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.helper;
 
 import java.util.ArrayList;
@@ -5,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>User Map Editor</h2>
  * This class is used for editing the user created map,
@@ -12,32 +16,50 @@ import java.util.Scanner;
  * appropriate input is taken and continents/territories are deleted from the map file
  * and validated before uploading the map for the game.
  *
- *
  * @author Shashank Rao
  * @version 1.0
+ * 
  */
 
 public class RiskMapEditor {
+	
+	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);
+	
+	/** The fullmap. */
 	ArrayList<String> fullmap=new ArrayList<String>();
+	
+	/** The Map 1. */
 	ArrayList<String> Map1=new ArrayList<String>();
+	
+	/** The Map 2. */
 	ArrayList<String> Map2=new ArrayList<String>();
+	
+	/** The Map 3. */
 	ArrayList<String> Map3=new ArrayList<String>();
+	
+	/** The Map 4. */
 	ArrayList<String> Map4=new ArrayList<String>();
+	
+	/** The Map 5. */
 	ArrayList<String> Map5=new ArrayList<String>();
 
 
+	/** The territory list. */
 	ArrayList<String> territoryList=new ArrayList<String>();
+	
+	/** The continent list. */
 	ArrayList<String> continentList=new ArrayList<String>();
+	
+	/** The index. */
 	int TerrStartIndex=Constants.ZERO, TerrEndIndex=Constants.ZERO, contiStartIndex=Constants.ZERO, 
 			contEndIndex=Constants.ZERO,startIndexMap1=Constants.ZERO,endIndexMap1=Constants.ZERO,
 			startIndexMap3=Constants.ZERO,endIndexMap3=Constants.ZERO,index=Constants.ZERO;
 
 	/**
 	 * <h2>User Map Editor Constructor</h2>
-	 * 
-	 * <li>The constructor is called when an object of the RiskMapEditor class is created.
-	 * <li>The constructor is responsible to parse the passed map file into different ArrayLists containing the continents and territories
+	 * The constructor is called when an object of the RiskMapEditor class is created.
+	 * The constructor is responsible to parse the passed map file into different ArrayLists containing the continents and territories
 	 * @param mapFile Contains the entire map.txt file in ArrayList format used for parsing into continent and territory list. 
 	 *
 	 */
@@ -94,9 +116,8 @@ public class RiskMapEditor {
 	//		public ArrayList<String> editMap(ArrayList<String> mapList, ArrayList<String> continentList, ArrayList<String> territoryList) {
 	/**
 	 * <h2>Implementation of Edit Map functionality</h2>
-	 * <li> The method editMap() is used for interaction with user.
-	 * <li> The method takes input from user on addition/deletion of continents or territories.
-	 * @return A edited arrayList containing the updates requested by the user.
+	 * The method editMap() is used for interaction with user.
+	 * The method takes input from user on addition/deletion of continents or territories.
 	 * 
 	 */
 	
@@ -234,9 +255,8 @@ public class RiskMapEditor {
 	}
 
 	/**
-	 * <h2>Concatenation of ArrayList/h2>
-	 * <li> The fullMapList() method is used to create a concatenated list of ArrayList.
-	 * @return A concatenated ArrayList containing the elements of map.
+	 * <h2>Concatenation of ArrayList</h2>
+	 * The fullMapList() method is used to create a concatenated list of ArrayList.
 	 * 
 	 */
 
@@ -254,24 +274,49 @@ public class RiskMapEditor {
 	}
 
 
+	/**
+	 * Gets the continent list.
+	 *
+	 * @return the continent list
+	 */
 	public List<String> getContinentList(){
 		return continentList;
 	}
 
+	/**
+	 * Gets the territory list.
+	 *
+	 * @return the territory list
+	 */
 	public List<String> getTerritoryList(){
 		return territoryList;
 	}
 
+	/**
+	 * Gets the full map.
+	 *
+	 * @return the full map
+	 */
 	public List<String> getFullMap(){
 		return fullmap;
 	}
 
+	/**
+	 * Adds the territory.
+	 *
+	 * @param territory the territory
+	 */
 	public void addTerritory(String territory) {
 
 		territoryList.add(territory);
 
 	}
 
+	/**
+	 * Adds the continent.
+	 *
+	 * @param continent the continent
+	 */
 	public void addContinent(String continent) {
 
 		continentList.add(continent);
@@ -279,8 +324,9 @@ public class RiskMapEditor {
 	}
 
 	/**
-	 * <h2>Logic to delete a territory from the territory ArrayList</h2>
-	 * 
+	 * <h2>Logic to delete a territory from the territory ArrayList</h2>.
+	 *
+	 * @param deleteTerritory the delete territory
 	 */
 
 	public void deleteTerritory(String deleteTerritory) {
@@ -326,8 +372,9 @@ public class RiskMapEditor {
 	}
 
 	/**
-	 * <h2>Logic to delete a continent from the continent ArrayList and territory ArrayList</h2>
-	 * 
+	 * <h2>Logic to delete a continent from the continent ArrayList and territory ArrayList</h2>.
+	 *
+	 * @param continentToRemove the continent to remove
 	 */
 
 	/*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/

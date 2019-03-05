@@ -10,6 +10,7 @@ import java.util.Map;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2> Army Allocation to player class</h2>
  * The Class is used in assignment phase where 
@@ -21,11 +22,15 @@ import com.soen.risk.model.RiskTerritory;
  */
 
 public class RiskArmyAllocationToPlayers {
+	
+	/** The logger. */
 	RiskLogger logger= new RiskLogger();
 	
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
-	 * @return 
+	 *
+	 * @param playerTerritoryMap the player territory map
+	 * @return the map
 	 */
 	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap ) {

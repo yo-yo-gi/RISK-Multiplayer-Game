@@ -13,6 +13,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Game play helper</h2>
  * This class is used for writing utility functions related to game play.
@@ -24,8 +25,8 @@ public class RiskGamehelper {
 
 	
 	/**
-	 * updates existing map player with continents own by players
-	 * 
+	 * updates existing map player with continents own by players.
+	 *
 	 * @param riskMainMap map of players and territories own by player
 	 * @param riskContinentList list of continents objects
 	 * @return controlValueAssignedMap updated map of players and territories own by player

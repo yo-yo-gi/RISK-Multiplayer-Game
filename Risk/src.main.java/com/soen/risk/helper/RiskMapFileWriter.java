@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.helper;
 
 import java.io.File;
@@ -6,6 +9,7 @@ import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Map file generator</h2>
  * This class is used for containing the user created map elements.
@@ -17,7 +21,10 @@ import java.util.List;
 public class RiskMapFileWriter {
 
 	/**
-	 * @param mapFile
+	 * Write map to text file.
+	 *
+	 * @param mapFile the map file
+	 * @param filename the filename
 	 */
 	
 	public void writeMapToTextFile(List<String> mapFile,String filename) {

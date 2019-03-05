@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
@@ -10,6 +13,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2> Reinforcement Phase Controller</h2>
  * The class defines number of the armies given to the player calculation.
@@ -24,15 +28,19 @@ import com.soen.risk.model.RiskTerritory;
 public class RiskReinforcementPhase 
 {
 
+    /** The selected terr index. */
     int selectedTerrIndex=0;
+	
+	/** The flag. */
 	boolean flag=false;
+	
 	/**
-	 * 
-	 * Assigning the Armies to the Countries for the Player
+	 * Assigning the Armies to the Countries for the Player.
+	 *
 	 * @param currentPlayer : Current player is passed
 	 * @param playerTerritories : The territories assigned to the player
 	 * @param riskContinentList : The total continent list
-	 * @return
+	 * @return the reinforced map
 	 */
 	
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
@@ -135,12 +143,14 @@ public class RiskReinforcementPhase
 		         System.out.println("\n");
 		         return reinforcedMap;
 	            }
+	
 	/**
-	 * Cacluation of Armies for the Player
-	 * @param currentPlayer
-	 * @param currTerritoryList
-	 * @param riskContinentList
-	 * @return
+	 * Cacluation of Armies for the Player.
+	 *
+	 * @param currentPlayer the current player
+	 * @param currTerritoryList the curr territory list
+	 * @param riskContinentList the risk continent list
+	 * @return the int
 	 */
 	
 	public int calculateArmy(RiskPlayer currentPlayer, ArrayList<RiskTerritory> currTerritoryList, ArrayList<RiskContinent> riskContinentList) {
@@ -167,11 +177,12 @@ public class RiskReinforcementPhase
 
 		return noOfArmiesForPlayer;
 	}
+	
 	/**
 	 * Iteration 2
 	 * Implementation of a card exchange view using the Observer pattern.
-	 * 
-	 * @param playerId the playerId to set
+	 *
+	 * @param playerID the player ID
 	 * @param noOfCountriesOwned the number of countries assigned to the Player
 	 * @param noOfPlayers the total number of players set for the game
 	 * @param totalCountriesInContinent the total number of Countries in a continent

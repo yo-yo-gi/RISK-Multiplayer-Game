@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>User Map Creator</h2>
  * This class is used for creation of map by user,
@@ -19,10 +20,14 @@ import java.util.Scanner;
  public class RiskMapUserCreator {
 	 
 
+	/** The create status. */
 	boolean createStatus=true;
+    
     /**
-	  * @return finalMap Returns a full list of mapfile containing the continents and territories entered by the user.
-	  */
+     * Map creator.
+     *
+     * @return finalMap Returns a full list of map file containing the continents and territories entered by the user.
+     */
 	public List<String> mapCreator() {
 
 		
@@ -118,6 +123,11 @@ import java.util.Scanner;
 		return finalmap;
 	}
 	
+	/**
+	 * Gets the creates the status.
+	 *
+	 * @return the creates the status
+	 */
 	public boolean getcreateStatus() {
 		return createStatus;
 	}

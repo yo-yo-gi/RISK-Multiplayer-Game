@@ -3,10 +3,12 @@
  */
 package com.soen.risk.test.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +24,7 @@ import com.soen.risk.model.RiskTerritory;
  * The Class RiskReinforcementPhaseTest.
  *
  * @author Neha
+ * @version 1.0
  * Junit Test case for Reinforcement
  */
 public class RiskReinforcementPhaseTest {
@@ -32,8 +35,8 @@ public class RiskReinforcementPhaseTest {
 	/** The continent list. */
 	ArrayList<RiskContinent> continentList =new ArrayList<RiskContinent>();
 	
-	/** The terretory list. */
-	ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
+	/** The territory list. */
+	ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
  	
 	 /** The reinforced map. */
 	 HashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
@@ -61,10 +64,10 @@ public class RiskReinforcementPhaseTest {
 	public void setUp() {
 		riskMapBuilder=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile("D:\\map\\EarthMap.txt");		
+		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile(Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/EarthMap.txt").toAbsolutePath().toString());		
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
-		terretoryList=riskMapBuilder.getTerritoryList();		
+		territoryList=riskMapBuilder.getTerritoryList();		
 		riskReinforcementPhase = new RiskReinforcementPhase();
 	}
 	
@@ -73,7 +76,7 @@ public class RiskReinforcementPhaseTest {
 	 */
 	@Test
 	public void testArmyCalculationPerPlayer() {
-		assertEquals(14,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
+		assertEquals(14,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
 	
 	/**
@@ -81,7 +84,7 @@ public class RiskReinforcementPhaseTest {
 	 */
 	@Test
 	public void testArmyCalculationPerPlayerFail() {
-		assertNotEquals(15,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
+		assertNotEquals(15,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
 	
 	/**
@@ -91,7 +94,7 @@ public class RiskReinforcementPhaseTest {
 	public void testArmyCalculationPerPlayer_controlValue() {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
-		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
+		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
 	
 	/**
@@ -101,6 +104,6 @@ public class RiskReinforcementPhaseTest {
 	public void testArmyCalculationPerPlayer_controlValueFail() {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
-		assertNotEquals(33,riskReinforcementPhase.calculateArmy(riskPlayer,terretoryList,continentList ));
+		assertNotEquals(33,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
 }

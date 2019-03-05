@@ -27,6 +27,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Main Game Controller</h2>
  * This class works as a main game controller where it
@@ -39,6 +40,12 @@ import com.soen.risk.validator.RiskMapValidator;
  */
 public class RiskGameBuilder {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(String[] args) throws IOException {
 		RiskLogger logger= new RiskLogger();
 		RiskPlayerBuilder riskPlayerBuilder;

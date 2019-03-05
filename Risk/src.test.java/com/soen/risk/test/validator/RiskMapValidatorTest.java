@@ -14,32 +14,32 @@ import org.junit.Test;
 
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.validator.RiskMapValidator;
-// TODO: Auto-generated Javadoc
 
+// TODO: Auto-generated Javadoc
 /**
- * Junit Test Case for the Risk Map Validator.
- *
+ * The Class RiskMapValidatorTest.
  * @author Neha
  * @version 1.0
  */
 public class RiskMapValidatorTest extends RiskMapValidator {
 
+	
 	/** The risk map builder duplicacy. */
 	RiskMapBuilder riskMapBuilder,riskMapBuilderIncorrect,riskMapBuilderConnectivity,riskMapBuilderDuplicacy;
 	
 	/** The map file. */
 	ArrayList<String> mapFile=new ArrayList<String>();
 	
-	/** The map file incorrrect. */
+	/** The map file incorrect. */
 	ArrayList<String> mapFileIncorrrect=new ArrayList<String>();
 	
 	/** The map file connectivity. */
 	ArrayList<String> mapFileConnectivity=new ArrayList<String>();
 	
-	/** The map file duplicacy. */
+	/** The map file mapFileDuplicacy. */
 	ArrayList<String> mapFileDuplicacy=new ArrayList<String>();
 		
-	/** The risk map validator 3. */
+	/** The risk map validator3. */
 	RiskMapValidator riskMapValidator,riskMapValidator1,riskMapValidator2,riskMapValidator3;
 
 /**

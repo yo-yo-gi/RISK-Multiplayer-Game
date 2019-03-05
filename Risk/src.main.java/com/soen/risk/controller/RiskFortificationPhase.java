@@ -12,6 +12,7 @@ import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Fortification Phase Controller</h2>
  * The Class RiskFortificationPhase to move as many armies 
@@ -29,12 +30,14 @@ public class RiskFortificationPhase {
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);
 
+	/** The source territory. */
 	int sourceTerritory;
 	/** The adjacent territory list. */
 	ArrayList<String> adjTerritoryList;
 	/** The owned territory list. */
 	ArrayList<String> OwnedAdjList;
-	/** The number of armies to be moved*/
+	
+	/**  The number of armies to be moved. */
 	int finalMoveOfArmies;
 	/** The destination territory object. */
 	RiskTerritory sourceTerritoryObject,destinationTerritoryObject;
