@@ -179,6 +179,11 @@ public class RiskMapValidator {
 	private boolean validateTerritories(ArrayList<RiskTerritory> territoryList, Map<String, List<String>> adjMap) {
 		boolean territoryValidation=false;
 		int matchCounter=Constants.ZERO;
+		if (territoryList.size()<3) {
+			territoryValidation=false;
+		}
+		
+		if(territoryValidation) {
 		for (String key : adjMap.keySet()) {
 			matchCounter=0;
 			if(adjMap.containsKey(key)) {
@@ -196,6 +201,7 @@ public class RiskMapValidator {
 					break;
 				}else territoryValidation=true;
 			}
+		}
 		}
 
 		if(territoryValidation) {
@@ -324,8 +330,10 @@ public class RiskMapValidator {
 	 */
 	
 	public boolean validateContinents(ArrayList<RiskContinent> continentList){
-		boolean ContinentValidation=true;
-		//		need to think about this
+		boolean ContinentValidation=false;
+		if (continentList.size()>1) {
+			ContinentValidation=true;
+		}
 		return ContinentValidation;
 	}
 
