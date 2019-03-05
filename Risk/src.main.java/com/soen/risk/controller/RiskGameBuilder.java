@@ -67,9 +67,9 @@ public class RiskGameBuilder {
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
-		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();  
+		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
-        RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
+		RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
@@ -79,12 +79,11 @@ public class RiskGameBuilder {
 		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
 		RiskGameHelper riskGameHelper=new RiskGameHelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
-
-            System.out.println("Welcome to RISK GAME!!!");
-			System.out.println();
-			System.out.println();
-			System.out.println("Game Starting");
-
+		
+		System.out.println("Welcome to RISK GAME!!!");
+		System.out.println();
+		System.out.println();
+		System.out.println("Game Starting");
 
 		do {
 			
@@ -140,18 +139,17 @@ public class RiskGameBuilder {
 				System.out.println("Create Map selected");
 				mapFile=riskMapUserCreator.mapCreator();
 				checkflag=riskMapUserCreator.getcreateStatus();
-				     if(checkflag) {
-			        	 mapInitCompletionStatus=true; 
-			         }
-			         else {
-			        	 mapInitCompletionStatus=false;
-			         }
-			       }
+				if(checkflag) {
+					mapInitCompletionStatus=true; 
+				}
+				else {
+					mapInitCompletionStatus=false; 
+				}
 			}
 		}while(!mapInitCompletionStatus);
 
 		if(mapType==2) {
-        riskMapUserCreatorView.displayMap(mapFile);	
+			riskMapUserCreatorView.displayMap(mapFile);	
 			if(riskMapUserCreator.getcreateStatus()) {
 				while(editCompletionStatus) {
 
@@ -173,7 +171,7 @@ public class RiskGameBuilder {
 						mapFile=riskMapEditor.getFullMap();
 
 						while(continueEdit) {
-                        riskMapUserCreatorView.displayMap(mapFile);	
+							riskMapUserCreatorView.displayMap(mapFile);	
 							System.out.println("Do you want to edit the map again before starting the game:Yes[Y]/No[N]");
 							do {
 								continueEditChoice=scanner.next().charAt(0);
