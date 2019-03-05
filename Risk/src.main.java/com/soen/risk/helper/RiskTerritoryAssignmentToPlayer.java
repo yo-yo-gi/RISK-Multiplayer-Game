@@ -14,6 +14,7 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2> Territory assignment class</h2>
  * The Class CountryAssignmentToPlayer defines number of the armies 
@@ -24,13 +25,19 @@ import com.soen.risk.model.RiskTerritory;
  */
 
 public class RiskTerritoryAssignmentToPlayer {
+	
+	/** The logger. */
 	RiskLogger logger= new RiskLogger();
+	
+	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 	
 	/**
 	 * Assign countries to each player randomly.
-	 * @param riskTerritoryList 
-	 * @param riskPlayerList 
+	 *
+	 * @param riskPlayerList the risk player list
+	 * @param riskTerritoryList the risk territory list
+	 * @return the map
 	 */
 	
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {

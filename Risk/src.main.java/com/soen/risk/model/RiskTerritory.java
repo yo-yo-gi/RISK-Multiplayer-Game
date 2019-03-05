@@ -5,6 +5,7 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Territory Model</h2>
  * This class is used to set and get the values of the parameters for territories.
@@ -14,18 +15,38 @@ import java.util.ArrayList;
  */
 
 public class RiskTerritory {
+	
+	/** The territory id. */
 	protected int territoryId;
+	
+	/** The x. */
 	private int x;
+	
+	/** The y. */
 	private int y;
+	
+	/** The territory name. */
 	private String territoryName;
+	
+	/** The armies present. */
 	private int armiesPresent;
+	
+	/** The continent. */
 	private String continent;
+	
+	/** The continent id. */
 	private int continentId;
+	
+	/** The terrtory owner. */
 	private RiskPlayer terrtoryOwner;
+	
+	/** The adjacents. */
 	private ArrayList<String> adjacents;
 
 	/**
-	 * @param parsedTerritory
+	 * Instantiates a new risk territory.
+	 *
+	 * @param parsedTerritory the parsed territory
 	 */
 	
 	public RiskTerritory(String[] parsedTerritory) {
@@ -39,6 +60,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the territory id.
+	 *
 	 * @return the territoryId
 	 */
 	
@@ -47,6 +70,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the territory id.
+	 *
 	 * @param territoryId the territoryId to set
 	 */
 	
@@ -55,6 +80,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the x.
+	 *
 	 * @return the x
 	 */
 	
@@ -63,6 +90,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the x.
+	 *
 	 * @param x the x to set
 	 */
 	
@@ -71,6 +100,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the y.
+	 *
 	 * @return the y
 	 */
 	
@@ -79,6 +110,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the y.
+	 *
 	 * @param y the y to set
 	 */
 	
@@ -87,6 +120,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the territory name.
+	 *
 	 * @return the territoryName
 	 */
 	
@@ -95,6 +130,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the territory name.
+	 *
 	 * @param territoryName the territoryName to set
 	 */
 	
@@ -103,6 +140,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the armies present.
+	 *
 	 * @return the armiesPresent
 	 */
 	
@@ -111,6 +150,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the armies present.
+	 *
 	 * @param armiesPresent the armiesPresent to set
 	 */
 	
@@ -119,6 +160,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the continent.
+	 *
 	 * @return the continent
 	 */
 	
@@ -127,6 +170,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the continent.
+	 *
 	 * @param continent the continent to set
 	 */
 	
@@ -135,6 +180,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the continent id.
+	 *
 	 * @return the continentId
 	 */
 	
@@ -143,6 +190,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the continent id.
+	 *
 	 * @param continentId the continentId to set
 	 */
 	
@@ -151,6 +200,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the terrtory owner.
+	 *
 	 * @return the terrtoryOwner
 	 */
 	
@@ -159,6 +210,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the terrtory owner.
+	 *
 	 * @param terrtoryOwner the terrtoryOwner to set
 	 */
 	
@@ -167,6 +220,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Gets the adjacents.
+	 *
 	 * @return the adjacents
 	 */
 	
@@ -175,6 +230,8 @@ public class RiskTerritory {
 	}
 	
 	/**
+	 * Sets the adjacents.
+	 *
 	 * @param adjacents the adjacents to set
 	 */
 	

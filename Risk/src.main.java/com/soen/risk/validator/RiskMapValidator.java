@@ -17,6 +17,7 @@ import com.soen.risk.helper.Constants;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Map File Validator</h2>
  * This class is used to check for wrong syntax of map file,
@@ -34,26 +35,46 @@ import com.soen.risk.model.RiskTerritory;
 
 public class RiskMapValidator {
 
+	/** The continent list. */
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
+	
+	/** The terretory list. */
 	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
+	
+	/** The adjucency map. */
 	private Map<String, List<String>> adjucencyMap=new HashMap<String, List<String>>();
+	
+	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 	
+	/** The validation. */
 	boolean validation=false;
+	
+	/** The index of DS colon. */
 	int indexOfMap=0, indexOfContinents=0, indexOfDash=0, indexOfTerritories=0, indexOfDSColon=0;
 	
+	/** The init continent list. */
 	private ArrayList<String> initContinentList;
+	
+	/** The init territory list. */
 	private ArrayList<String> initTerritoryList;
+	
+	/** The init adjucency list. */
 	private ArrayList<String> initAdjucencyList=new ArrayList<String>();
+	
+	/** The adj vertices. */
 	private int adjVertices; // No. of vertices 
+	
+	/** The adj list. */
 	private LinkedList<Integer> adjList[]; //Adjacency List 
+	
+	/** The adj list transpose. */
 	private LinkedList<Integer> adjListTranspose[]; //Adjacency List for transpose DFS
 
 	/**
-	 * Main validation method
-	 * 
+	 * Main validation method.
+	 *
 	 * @param parsedMapFile list of parsed map file
-	 * 
 	 * @return true if parsedMapFile is valid
 	 */
 	
@@ -80,8 +101,9 @@ public class RiskMapValidator {
 
 
 	/**
+	 * Validate map syntax.
+	 *
 	 * @param parsedMapFile list of parsed map file
-	 * 
 	 * @return true if map syntax is valid
 	 */
 	
@@ -104,10 +126,9 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Validation for file syntax for tags
-	 * 
+	 * Validation for file syntax for tags.
+	 *
 	 * @param parsedMapFile list of parsed map file
-	 * 
 	 * @return true if file is valid with tags
 	 */
 	
@@ -137,10 +158,9 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Validation for file syntax for tags
-	 * 
+	 * Validation for file syntax for tags.
+	 *
 	 * @param parsedMapFile list of parsed map file
-	 * 
 	 * @return true continent syntax is valid
 	 */
 	
@@ -168,11 +188,10 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Validation for Territories
-	 * 
+	 * Validation for Territories.
+	 *
+	 * @param territoryList the territory list
 	 * @param adjMap adjacency map
-	 * @param terretoryList list of territories
-	 * 
 	 * @return true if territories are connected
 	 */
 	
@@ -222,11 +241,10 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Validate territory and continent duplicate
-	 * 
-	 * @param territories list of territories
+	 * Validate territory and continent duplicate.
+	 *
 	 * @param continents list of continent
-	 * 
+	 * @param territories list of territories
 	 * @return true if no duplicate territory or continent
 	 */
 	
@@ -322,10 +340,9 @@ public class RiskMapValidator {
 	}
 
 	/**
-	 * Validation for continents
-	 * 
+	 * Validation for continents.
+	 *
 	 * @param continentList list of continent
-	 * 
 	 * @return true if continents are valid
 	 */
 	
@@ -339,10 +356,9 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Validation for file syntax for tags
-	 * 
+	 * Validation for file syntax for tags.
+	 *
 	 * @param parsedMapFile list of parsed map file
-	 * 
 	 * @return true territory syntax is valid
 	 */	
 	
@@ -370,10 +386,9 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Initializing adjacency
-	 * 
+	 * Initializing adjacency.
+	 *
 	 * @param v total vertices in graph
-	 * 
 	 */	
 	
 	public void initializeAdj(int v) 
@@ -386,8 +401,8 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Function to add an edge into the graph 
-	 * 
+	 * Function to add an edge into the graph .
+	 *
 	 * @param v current vertex in graph
 	 * @param w next vertex in graph to draw edge
 	 */	
@@ -397,8 +412,8 @@ public class RiskMapValidator {
 
 
 	/**
-	 * A recursive function to print DFS starting from v 
-	 * 
+	 * A recursive function to print DFS starting from v .
+	 *
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
@@ -419,8 +434,8 @@ public class RiskMapValidator {
 	} 
 
 	/**
-	 * A recursive function to print DFS starting from v 
-	 * 
+	 * A recursive function to print DFS starting from v .
+	 *
 	 * @param v current vertex in graph
 	 * @param visited array of visited vertices
 	 */	
@@ -444,8 +459,8 @@ public class RiskMapValidator {
 
 
 	/**
-	 * Initializing transpose of adjacency matrix
-	 * 
+	 * Initializing transpose of adjacency matrix.
+	 *
 	 * @param v current vertex in graph
 	 */	
 	
@@ -468,9 +483,9 @@ public class RiskMapValidator {
 
 
 	/**
-	 * The main function to check adjacency  
-	 * 
-	 * @return returns true if graph is strongly connected 
+	 * The main function to check adjacency  .
+	 *
+	 * @return returns true if graph is strongly connected
 	 */
 	
 	Boolean checkTerritoryAdjucency() 

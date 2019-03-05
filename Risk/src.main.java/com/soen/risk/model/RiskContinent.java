@@ -5,6 +5,7 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Continent Model</h2>
  * This class is used to set and get the values of the parameters for continents.
@@ -15,17 +16,32 @@ import java.util.ArrayList;
 
 public class RiskContinent {
 
+	/** The continent id. */
 	private String continentId;
+	
+	/** The continent name. */
 	private String continentName;
+	
+	/** The controll value. */
 	private int controllValue;
+	
+	/** The included territories. */
 	private ArrayList<String> includedTerritories;
 	
+	/**
+	 * Instantiates a new risk continent.
+	 *
+	 * @param continentName the continent name
+	 * @param controllValue the controll value
+	 */
 	public RiskContinent(String continentName, int controllValue) {
 		setContinentName(continentName);
 		setControllValue(controllValue);
 	}
 	
 	/**
+	 * Gets the continent id.
+	 *
 	 * @return the continentId
 	 */
 	
@@ -34,6 +50,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Sets the continent id.
+	 *
 	 * @param continentId the continentId to set
 	 */
 	
@@ -42,6 +60,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Gets the continent name.
+	 *
 	 * @return the continentName
 	 */
 	
@@ -50,6 +70,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Sets the continent name.
+	 *
 	 * @param continentName the continentName to set
 	 */
 	
@@ -58,6 +80,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Gets the controll value.
+	 *
 	 * @return the controllValue
 	 */
 	
@@ -66,6 +90,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Sets the controll value.
+	 *
 	 * @param controllValue the controllValue to set
 	 */
 	
@@ -74,6 +100,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Gets the included territories.
+	 *
 	 * @return the includedTerritories
 	 */
 	
@@ -82,6 +110,8 @@ public class RiskContinent {
 	}
 	
 	/**
+	 * Sets the included territories.
+	 *
 	 * @param includedTerritories the includedTerritories to set
 	 */
 	

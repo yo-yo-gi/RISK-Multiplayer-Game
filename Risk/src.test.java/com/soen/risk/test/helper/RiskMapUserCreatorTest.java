@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.test.helper;
 
 import static org.junit.Assert.*;
@@ -11,17 +14,41 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapUserCreator;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RiskMapUserCreatorTest.
+ * @author Neha
+ * @version 1.0
+ */
 public class RiskMapUserCreatorTest {
 
+	/** The risk map creator. */
 	RiskMapUserCreator riskMapCreator;
+	
+	/** The map file. */
 	ArrayList<String> mapFile=new ArrayList<String>();
+	
+	/** The risk map editor. */
 	RiskMapEditor riskMapEditor;
+	
+	/** The continent list. */
 	ArrayList<String> continentList = new ArrayList<String>();
+	
+	/** The territory list. */
 	ArrayList<String> territoryList = new ArrayList<String>();
+	
+	/** The Map list. */
 	ArrayList<String> MapList = new ArrayList<String>();
+	
+	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 
 	
+	/**
+	 * Sets the up.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		riskMapBuilder = new RiskMapBuilder();
@@ -45,6 +72,9 @@ public class RiskMapUserCreatorTest {
 		
 	}
 
+	/**
+	 * Test map creator.
+	 */
 	@Test
 	public void testMapCreator() {
 		assertEquals(MapList,riskMapCreator.mapCreator());

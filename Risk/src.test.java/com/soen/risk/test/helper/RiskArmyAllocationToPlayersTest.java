@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.test.helper;
 
 import static org.junit.Assert.*;
@@ -13,8 +16,15 @@ import com.soen.risk.helper.RiskArmyAllocationToPlayers;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RiskArmyAllocationToPlayersTest.
+ */
 public class RiskArmyAllocationToPlayersTest {
 
+	/**
+	 * Test assign armies to players.
+	 */
 	@Test
 	public void testAssignArmiesToPlayers() {
 		HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
