@@ -53,7 +53,7 @@ public class RiskMapUserCreator {
 
 		System.out.print("Do you want to create the map manually?(Y/N)");
 		do {
-			selection1=scanner.nextLine().charAt(0);
+			selection1=scanner.next().charAt(0);
 			if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
 				System.out.println("Try Again!!");
 			}
@@ -61,19 +61,19 @@ public class RiskMapUserCreator {
 		if(selection1=='Y'||selection1=='y') {
 			createStatus=true;
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
-			String text1=scanner.nextLine();
+			String text1=scanner.next();
 			Map2.add(text1);
 			while(flag1) {
 				System.out.print("Do you want to add more continents?(Y/N)");
 				do {
-					selection2=scanner.nextLine().charAt(0);
+					selection2=scanner.next().charAt(0);
 					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {
 						System.out.println("Try Again!!");
 					}
 				} while(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N'));
 				if(selection2=='Y'||selection2=='y') {
 					System.out.println("Enter the continent name and control value in the format:<Continent Name=Control value>");
-					String text2=scanner.nextLine();
+					String text2=scanner.next();
 					Map2.add(text2);
 				}else {
 					//System.out.println("User does not want to enter more continents.");
@@ -84,20 +84,20 @@ public class RiskMapUserCreator {
 			}
 
 			System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
-			String text3=scanner.nextLine();
+			String text3=scanner.next();
 			Map4.add(text3);
 
 			while(flag2) {
 				System.out.print("Do you want to add more territories?(Y/N)");
 				do {
-					selection2=scanner.nextLine().charAt(0);
+					selection2=scanner.next().charAt(0);
 					if(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N')) {
 						System.out.println("Try Again!!");
 					}
 				} while(!(selection2=='Y' || selection2=='y' || selection2=='n' || selection2=='N'));
 				if(selection2=='Y'||selection2=='y') {
 					System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
-					String text4=scanner.nextLine();
+					String text4=scanner.next();
 					Map4.add(text4);
 				}else {
 					//System.out.println("User does not want to enter more territories.Exit");
