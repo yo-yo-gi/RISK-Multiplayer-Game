@@ -131,25 +131,7 @@ public class RiskGameBuilder {
 				     mapInitCompletionStatus=true;
 			       }
 		        }while(!mapInitCompletionStatus);
-		//		need to add logic for checking status of map upload or create
-
-		//		Map Validation initial - START
-		//		mapValidationStatus=riskMapValidator.validateMap(mapFile);
-		//				
-		//		if (mapValidationStatus) {
-		//				currentMapAvailableStaus=true;
-		//				System.out.println("Map loaded and validated successfully...");
-		//
-		//		}else {			
-		//			System.out.println("Invalid map file...exiting the game....Please choose / enter valid map...");
-		//			System.exit(0);
-		//		}
-		//		Map Validation initial - END
-
-
-		//			if(mapType==1) {
-		//				System.out.println("No edit option available when upload map is selected");
-		//			}
+		
 		if(mapType==2) {
 			   if(riskMapUserCreator.getcreateStatus()) {
 				while(editCompletionStatus) {
