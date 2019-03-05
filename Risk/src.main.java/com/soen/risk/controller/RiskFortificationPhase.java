@@ -67,6 +67,9 @@ public class RiskFortificationPhase {
 		do
 		{
 			do {
+				if ((playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1)) {
+					System.out.println("Source territory must have at single army \n please select different source territory");
+				}
 				System.out.println();
 				System.out.println("Select the source territory to move army from: ");
 				int sourceTCoutner=1;

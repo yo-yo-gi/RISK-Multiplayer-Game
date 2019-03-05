@@ -27,7 +27,6 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
 
-// TODO: Auto-generated Javadoc
 /**
  * <h2>Main Game Controller</h2>
  * This class works as a main game controller where it
@@ -40,12 +39,6 @@ import com.soen.risk.validator.RiskMapValidator;
  */
 public class RiskGameBuilder {
 
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
 	public static void main(String[] args) throws IOException {
 		RiskLogger logger= new RiskLogger();
 		RiskPlayerBuilder riskPlayerBuilder;
@@ -285,8 +278,17 @@ public class RiskGameBuilder {
 
 			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
 
+			System.out.print("Do you want to fortify?(Y/N)");
+			char selection1;
+			do {
+				selection1=scanner.next().charAt(0);
+			if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+				System.out.println("Try Again!!");
+			}
+			}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
+			if(selection1=='Y'||selection1=='y') {
 			fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
-
+			}else System.out.println("Fortification phase skipped...");
 			//			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
 
 		}
