@@ -201,7 +201,8 @@ public class RiskGameBuilder {
 			}
 
 		}else {			
-			System.out.println("Invalid map after editing...exiting the game....Please choose / enter valid map...");
+			System.out.println("Invalid map... \r\n Please choose / enter valid map...");
+			
 			System.exit(0);
 		}
 
@@ -287,7 +288,7 @@ public class RiskGameBuilder {
 
 		//		get fortify map
 		
-		System.out.println("Reinforcement & Fortification phases complete for all players. Phase 1 complete. Thank You!! ");
+		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
 		
 		scanner.close();
 	}
