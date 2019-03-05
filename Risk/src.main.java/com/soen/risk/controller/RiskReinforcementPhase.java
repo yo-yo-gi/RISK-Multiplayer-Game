@@ -169,7 +169,7 @@ public class RiskReinforcementPhase
 	}
 	/**
 	 * Iteration 2
-	 * Implementation of a �card exchange view� using the Observer pattern.
+	 * Implementation of a card exchange view using the Observer pattern.
 	 * 
 	 * @param playerId the playerId to set
 	 * @param noOfCountriesOwned the number of countries assigned to the Player

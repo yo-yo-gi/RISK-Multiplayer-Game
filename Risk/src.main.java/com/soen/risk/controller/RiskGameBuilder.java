@@ -48,7 +48,7 @@ public class RiskGameBuilder {
 		Scanner scanner = new Scanner(System.in);
 		
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false ;
-		List<String> mapFile = null;
+		List<String> mapFile = null, currentMap=null;
 		List<String> riskPlayersNames;
 		List<RiskPlayer> riskPlayerList;
 		List<RiskTerritory> riskTerritoryList;
@@ -186,7 +186,12 @@ public class RiskGameBuilder {
 
 		//		parsing finally written map file and validating it once again before 
 		//		currentMapFile=riskMapBuilder.parseMapFile("C:\\RiskProject\\map.txt");
-		mapValidationStatus=riskMapValidator.validateMap(mapFile);
+		currentMap=new ArrayList<String>();
+		for (String currLine : mapFile) {
+			currentMap.add(currLine.replace("\\s", ""));
+		}
+		
+		mapValidationStatus=riskMapValidator.validateMap(currentMap);
 		logger.doLogging("Map validation status------> "+mapValidationStatus);
 		if (mapValidationStatus) {
 			if(mapType==1) {
@@ -196,7 +201,7 @@ public class RiskGameBuilder {
 				System.out.println("Map loaded and validated successfully...");
 				System.out.println("Please enter the filename you want to save the map with:");
 				filename=scanner.nextLine();
-				riskMapFileWriter.writeMapToTextFile(mapFile, filename);
+				riskMapFileWriter.writeMapToTextFile(currentMap, filename);
 				currentMapAvailableStaus=true;
 			}
 
@@ -209,7 +214,7 @@ public class RiskGameBuilder {
 		if (currentMapAvailableStaus) {
 			System.out.println("Loading Game...please wait...");
 
-			riskMapBuilder.loadMapData(mapFile);
+			riskMapBuilder.loadMapData(currentMap);
 		}else {
 			System.out.println("Map file not available...Please provide the current map file to load game...");
 			System.exit(0);
