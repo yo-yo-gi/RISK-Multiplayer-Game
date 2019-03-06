@@ -38,16 +38,24 @@ public class RiskArmyAllocationToPlayers {
 
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMapParam ) {
 		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(assignInitialArmy(playerTerritoryMapParam));
+		Map<RiskPlayer, Integer> countMap = new LinkedHashMap<RiskPlayer, Integer>();
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){	
+			countMap.put(entry.getKey(), entry.getKey().getArmiesOwned());
+		}
 		logger.doLogging("Allocating armies to players in round robin fashion------");
 		System.out.println();
 		System.out.println("Allocating armies to players in round robin fashion...");
 		System.out.println();	
 		Scanner scanner = new Scanner(System.in);
-		int initArmy=((RiskPlayer)(playerTerritoryMapParam.keySet().toArray()[0])).getArmiesOwned();
-		do {
-			System.out.println();
-			System.out.println("Remaining armies - "+initArmy);
-			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){	
+		int totalArmyPresent=0;
+		do {	
+			System.out.println();	
+			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){
+				int currentArmy=countMap.get(entry.getKey());
+				if (currentArmy>0) {
+					
+				
+					System.out.println("Remaining armies - "+countMap.get(entry.getKey()));
 				String PlayerName=entry.getKey().getPlayerName();
 				int territoryCounter=1;
 				int selectedTerrIndex=0;
@@ -70,15 +78,26 @@ public class RiskArmyAllocationToPlayers {
 						System.out.println("Try Again!!");
 					}
 				}while(selectedTerrIndex>=territoryCounter || selectedTerrIndex<0);
+				
 				riskTerritory=currentTerrList.get(selectedTerrIndex-1);
 				newArmyToSet=riskTerritory.getArmiesPresent()+1;
 				riskTerritory.setArmiesPresent(newArmyToSet);
 				currentTerrList.set(selectedTerrIndex-1,riskTerritory);
-				entry.setValue(currentTerrList);			
-			}	
-			initArmy--;		
-		}while(initArmy>0);
+				entry.setValue(currentTerrList);		
+				
+				countMap.put(entry.getKey(), currentArmy-1);				
+				
+				}
+			}
+			
+			totalArmyPresent=0;
+			for (Entry<RiskPlayer, Integer> entry : countMap.entrySet()){	
+				totalArmyPresent=totalArmyPresent+entry.getValue();
+			}			
+			
+		}while(totalArmyPresent>0);
 
+		
 		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
