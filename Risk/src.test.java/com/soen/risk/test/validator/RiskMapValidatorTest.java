@@ -15,10 +15,14 @@ import org.junit.Test;
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.validator.RiskMapValidator;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class RiskMapValidatorTest.
- * @author Neha
+ * <h2> Risk Map Validator Test</h2>
+ * this class is used to test the wrong syntax of map file,
+ * check for duplicate territory,
+ * check for duplicate adjacent territory, and
+ * check for connectivity of territory graph.
+ * 
+ * @author Neha Dighe
  * @version 1.0
  */
 public class RiskMapValidatorTest extends RiskMapValidator {

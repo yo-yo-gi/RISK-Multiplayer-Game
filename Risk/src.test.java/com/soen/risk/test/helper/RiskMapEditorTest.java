@@ -16,15 +16,15 @@ import org.junit.Test;
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapUserCreator;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class RiskMapEditorTest.
+ * <h2> Risk Map Editor Test</h2>
+ * This class is used to test whether edit map functionality is working or not.
  *
- * @author Neha
- * Junit Test cases for Risk MapEditor Test
+ * @author Neha Dighe
+ * @version 1.0
  */
-public class RiskMapEditorTest {
+ public class RiskMapEditorTest {
 
 	/** The risk map creator. */
 	RiskMapUserCreator riskMapCreator;

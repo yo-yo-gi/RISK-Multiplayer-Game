@@ -17,9 +17,14 @@ import com.soen.risk.helper.RiskArmyAllocationToPlayers;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class RiskArmyAllocationToPlayersTest.
+ * <h2> Risk Army Allocation To Players Test</h2>
+ * This class is used to test assignment phase where 
+ * the player is given a number of armies in round robin fashion
+ * depending on the number of countries he owns.
+ * 
+ * @author Neha Dighe
+ * @version 1.0
  */
 public class RiskArmyAllocationToPlayersTest {
 

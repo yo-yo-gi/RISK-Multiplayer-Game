@@ -16,12 +16,15 @@ import com.soen.risk.controller.RiskFortificationPhase;
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class RiskFortificationPhaseTest.
+ * <h2>Risk Fortification Phase Test</h2>
+ * This class is used to test moving armies from adjacent territories to another.
  *
- * @author Neha
+ * @author Neha Dighe
+ * @version 1.0
+ */
+/**
  * Fortification done from Venezuela with army 5 to Brazil
  */
 public class RiskFortificationPhaseTest {

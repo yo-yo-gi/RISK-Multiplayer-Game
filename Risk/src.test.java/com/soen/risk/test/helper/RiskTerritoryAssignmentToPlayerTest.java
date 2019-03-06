@@ -17,14 +17,14 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class RiskTerritoryAssignmentToPlayerTest.
+ * <h2> Risk Territory Assignment To Player Test</h2>
+ * This class is used to test the number of the armies 
+ * given to the player based on the number of players.
  * 
- * @author Neha
+ * @author Neha Dighe
  * @version 1.0
- * 
  */
 public class RiskTerritoryAssignmentToPlayerTest {
 

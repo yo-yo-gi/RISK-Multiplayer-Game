@@ -18,14 +18,13 @@ import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class RiskReinforcementPhaseTest.
- *
- * @author Neha
+ * <h2>Risk Reinforcement Phase Test</h2>
+ * This class is used to test number of the armies given to the player calculation.
+ * 
+ * @author Neha Dighe
  * @version 1.0
- * Junit Test case for Reinforcement
  */
 public class RiskReinforcementPhaseTest {
 

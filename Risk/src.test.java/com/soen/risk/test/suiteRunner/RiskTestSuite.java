@@ -16,10 +16,12 @@ import com.soen.risk.test.helper.RiskTerritoryAssignmentToPlayerTest;
 import com.soen.risk.test.validator.RiskMapValidatorTest;
 
 /**
- * The Class RiskTestSuite is a test case runner used to automatically run all the test cases.
- * Test suite includes all the test cases in package src.test.java
+ * <h2> Test Suite</h2>
+ * The Class RiskTestSuite is a test case runner used to automatically run 
+ * all the test cases.Test suite includes all the test cases in
+ * package src.test.java
  * 
- * @author Chirag
+ * @author Chirag Vora
  * @version 1.0
  */
 @RunWith(Suite.class)

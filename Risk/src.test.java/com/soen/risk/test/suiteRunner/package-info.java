@@ -1,10 +1,11 @@
 /**
  * 
  */
+package com.soen.risk.test.suiteRunner;
 /**
- * The class RiskViewTest tests the outlook of the game by providing certain inputs.
+ * The class RiskViewTest tests the outlook of the game 
+ * by providing certain inputs.
  *  
- * @author Pooja
+ * @author Pooja Dhir
  * @version 1.0
  */
-package com.soen.risk.test.suiteRunner;
