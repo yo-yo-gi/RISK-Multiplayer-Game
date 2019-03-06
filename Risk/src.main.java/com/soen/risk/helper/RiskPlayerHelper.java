@@ -5,7 +5,7 @@ package com.soen.risk.helper;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Player Helper class for main controller</h2>
  * This class is used to assign initial armies for players.
@@ -13,7 +13,6 @@ import java.util.List;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-
 public class RiskPlayerHelper {
 
 	/**

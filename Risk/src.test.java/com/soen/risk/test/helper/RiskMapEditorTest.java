@@ -95,9 +95,9 @@ import com.soen.risk.helper.RiskMapUserCreator;
 	@Test
 	public void testDeleteContinent() {
 		List<String> after=new ArrayList<String>();
-		riskMapEditor.deleteContinent("south_america=2");
+		riskMapEditor.deleteContinent("south_america");
 		after=riskMapEditor.getContinentList();
-		assertFalse(after.contains("south_america=2"));
+		assertFalse(after.contains("south_america"));
 	}
 
 	/**

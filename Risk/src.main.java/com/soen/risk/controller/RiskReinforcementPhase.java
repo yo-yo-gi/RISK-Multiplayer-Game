@@ -13,7 +13,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2> Reinforcement Phase Controller</h2>
  * The class defines number of the armies given to the player calculation.

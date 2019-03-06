@@ -17,7 +17,7 @@ import com.soen.risk.helper.Constants;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Map File Validator</h2>
  * This class is used to check for wrong syntax of map file,

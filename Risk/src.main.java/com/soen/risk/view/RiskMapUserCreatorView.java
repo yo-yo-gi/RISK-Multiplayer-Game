@@ -2,7 +2,13 @@ package com.soen.risk.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * <h2>Risk map view</h2>
+ * Shows view for user created map.
+ *
+ * @author Shashank Rao
+ * @version 1.0
+ */
 public class RiskMapUserCreatorView {
 	int continentStartIndex=0,continentEndIndex=0,territoryStartIndex=0,territoryEndIndex=0;
 	ArrayList<String> displayList=new ArrayList<String>();
@@ -32,11 +38,6 @@ public class RiskMapUserCreatorView {
 			System.out.println(string);
 		}
 		displayList.clear();
-		
-//		for(int i=startIndexContinent;i<=endIndexContinent;i++)
-//			System.out.println(mapFile.get(i));
-//		for(int i=startIndexTerritory;i<=endIndexTerritory;i++)
-//			System.out.println(mapFile.get(i));
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>User Map Editor</h2>
  * This class is used for editing the user created map,
@@ -20,7 +20,6 @@ import java.util.Scanner;
  * @version 1.0
  * 
  */
-
 public class RiskMapEditor {
 
 	/** The scanner. */
@@ -60,7 +59,7 @@ public class RiskMapEditor {
 	 * <h2>User Map Editor Constructor</h2>
 	 * The constructor is called when an object of the RiskMapEditor class is created.
 	 * The constructor is responsible to parse the passed map file into different ArrayLists containing the continents and territories
-	 * @param mapFile Contains the entire map.txt file in ArrayList format used for parsing into continent and territory list. 
+	 * @param tempMapFile Contains the entire map.txt file in ArrayList format used for parsing into continent and territory list. 
 	 *
 	 */
 
@@ -251,11 +250,7 @@ public class RiskMapEditor {
 
 
 		}
-		//        newMap.addAll(mapList);
-		//        newMap.addAll(continentList);
-		//        newMap.addAll(territoryList);
 
-		//		return newMap;
 	}
 
 	/**
@@ -273,8 +268,6 @@ public class RiskMapEditor {
 		fullmap.addAll(Map3);
 		fullmap.addAll(Map4);
 		fullmap.addAll(Map5);
-
-		//		return fullmap;
 	}
 
 

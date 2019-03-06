@@ -12,7 +12,7 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Risk Logger Class</h2>
  * The Class RiskLogger for creating unique log files for every running instance.

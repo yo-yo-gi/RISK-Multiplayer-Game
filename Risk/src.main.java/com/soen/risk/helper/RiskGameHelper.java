@@ -13,7 +13,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Game play helper</h2>
  * This class is used for writing utility functions related to game play.

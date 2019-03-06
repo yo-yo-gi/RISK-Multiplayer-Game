@@ -2,8 +2,6 @@
  * 
  */
 package com.soen.risk.model;
-
-// TODO: Auto-generated Javadoc
 /**
  * <h2>Card Enum Model</h2>
  * This class is used to set and get the values of the parameters for cards.

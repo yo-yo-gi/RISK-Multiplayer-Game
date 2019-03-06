@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>User Map Creator</h2>
  * This class is used for creation of map by user,

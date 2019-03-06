@@ -12,7 +12,6 @@ import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
  * <h2>Fortification Phase Controller</h2>
  * The Class RiskFortificationPhase to move as many armies 
@@ -22,7 +21,6 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 1.0
  */
-
 public class RiskFortificationPhase {
 
 	/** The logger. */

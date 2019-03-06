@@ -3,7 +3,6 @@
  */
 package com.soen.risk.helper;
 
-// TODO: Auto-generated Javadoc
 /**
  * <h2> Constant Class</h2>
  * This class is used for declaring the constant values

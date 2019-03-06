@@ -12,7 +12,6 @@ import java.util.Scanner;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
  * <h2> Army Allocation to player class</h2>
  * The Class is used in assignment phase where 
@@ -23,7 +22,6 @@ import com.soen.risk.model.RiskTerritory;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-
 public class RiskArmyAllocationToPlayers {
 
 	/** The logger. */
@@ -53,10 +51,8 @@ public class RiskArmyAllocationToPlayers {
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){
 				int currentArmy=countMap.get(entry.getKey());
 				if (currentArmy>0) {
-					
-				
-					System.out.println("Remaining armies - "+countMap.get(entry.getKey()));
 				String PlayerName=entry.getKey().getPlayerName();
+				System.out.println("Remaining armies for "+ PlayerName+"--> "+countMap.get(entry.getKey()));				
 				int territoryCounter=1;
 				int selectedTerrIndex=0;
 				int newArmyToSet=0;
@@ -83,10 +79,9 @@ public class RiskArmyAllocationToPlayers {
 				newArmyToSet=riskTerritory.getArmiesPresent()+1;
 				riskTerritory.setArmiesPresent(newArmyToSet);
 				currentTerrList.set(selectedTerrIndex-1,riskTerritory);
-				entry.setValue(currentTerrList);		
-				
-				countMap.put(entry.getKey(), currentArmy-1);				
-				
+				entry.setValue(currentTerrList);					
+				countMap.put(entry.getKey(), currentArmy-1);
+				System.out.println("1 army added to "+riskTerritory.getTerritoryName());
 				}
 			}
 			

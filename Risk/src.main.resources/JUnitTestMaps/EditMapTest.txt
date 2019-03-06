@@ -1,8 +1,8 @@
-[Map]
+[map]
 
-[Continents]
-South_America=2
+[continents]
+south_america=2
 -
-[Territories]
-Venezuela
+[territories]
+venezuela,south_america,adjucent
 ;;

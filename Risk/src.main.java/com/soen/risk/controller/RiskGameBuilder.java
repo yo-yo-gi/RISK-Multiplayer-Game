@@ -28,7 +28,7 @@ import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Main Game Controller</h2>
  * This class works as a main game controller where it

@@ -4,8 +4,6 @@
 package com.soen.risk.model;
 
 import java.util.ArrayList;
-
-// TODO: Auto-generated Javadoc
 /**
  * <h2>Continent Model</h2>
  * This class is used to set and get the values of the parameters for continents.

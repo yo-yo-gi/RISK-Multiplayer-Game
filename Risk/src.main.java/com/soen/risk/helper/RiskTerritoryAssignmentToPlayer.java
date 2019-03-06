@@ -14,7 +14,7 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2> Territory assignment class</h2>
  * The Class CountryAssignmentToPlayer defines number of the armies 
@@ -42,6 +42,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println();
+		System.out.println("Start up phase...");
 		System.out.println("Assignment of territories to Player...");
 		List<RiskPlayer> players = new ArrayList<RiskPlayer>();
 		List<RiskTerritory> territories = new ArrayList<RiskTerritory>();

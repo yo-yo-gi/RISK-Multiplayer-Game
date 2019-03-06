@@ -11,7 +11,7 @@ import java.util.Scanner;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskPlayerHelper;
 import com.soen.risk.model.RiskPlayer;
-// TODO: Auto-generated Javadoc
+
 /**
  * <h2>Player Builder Class</h2>
  * The class takes the number of players and names from user to randomly allocate the chance of player.
@@ -43,7 +43,7 @@ public class RiskPlayerBuilder {
 
 		//		 To take number of players
 		System.out.println();
-		System.out.println("Enter no. of players");
+		System.out.println("Enter number of players");
 
 		while(numberOfPlayers<0) {
 
@@ -67,7 +67,7 @@ public class RiskPlayerBuilder {
 			}
 		}
 		//		Validation for names entering should not be repeated.
-		System.out.println("Enter names");
+		System.out.println("Enter names of Players");
 		int count = Constants.ZERO;
 		while(count<numberOfPlayers) {
 			String name = s.next();
