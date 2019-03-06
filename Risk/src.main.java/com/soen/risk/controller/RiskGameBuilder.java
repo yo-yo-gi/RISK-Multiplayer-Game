@@ -206,7 +206,7 @@ public class RiskGameBuilder {
 		//		currentMapFile=riskMapBuilder.parseMapFile("C:\\RiskProject\\map.txt");
 		currentMap=new ArrayList<String>();
 		for (String currLine : mapFile) {
-			currentMap.add(currLine.replace("\\s", ""));
+			currentMap.add(currLine.replace("\\s", "").toLowerCase());
 		}
 
 		mapValidationStatus=riskMapValidator.validateMap(currentMap);
@@ -224,8 +224,8 @@ public class RiskGameBuilder {
 			}
 
 		}else {			
-			System.out.println("Invalid map... \r\n Please choose / enter valid map...");
-
+			System.out.println("Invalid map. Please choose / enter valid map...");
+			System.out.println("Please restart the game");
 			System.exit(0);
 		}
 

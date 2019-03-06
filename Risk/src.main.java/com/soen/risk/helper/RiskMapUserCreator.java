@@ -51,14 +51,19 @@ public class RiskMapUserCreator {
 		ArrayList<String> finalmap=new ArrayList<String>();
 
 		System.out.print("Do you want to create the map manually?(Y/N)");
+		
+		
 		do {
 			selection1=scanner.next().charAt(0);
 			if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
 				System.out.println("Try Again!!");
 			}
 		}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
+		
+		
 		if(selection1=='Y'||selection1=='y') {
 			createStatus=true;
+			System.out.print("*****Note : Please use underscore(_) instead of spaces..*****");
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
 			String text1=scanner.next();
 			Map2.add(text1);

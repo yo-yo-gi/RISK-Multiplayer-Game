@@ -74,7 +74,7 @@ public class RiskMapBuilder {
 		try {
 			mapFileList = (ArrayList<String>) Files.readAllLines(Paths.get(mapFilePath), StandardCharsets.UTF_8);
 			for (String currLine : mapFileList) {
-				processedMapFileList.add(currLine.replaceAll("\\s", ""));
+				processedMapFileList.add(currLine.replaceAll("\\s", "").toLowerCase());
 			}			
 			setMapUploadStatus(true);
 		} catch (IOException e) {

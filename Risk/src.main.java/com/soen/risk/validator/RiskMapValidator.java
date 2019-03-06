@@ -133,13 +133,13 @@ public class RiskMapValidator {
 
 	private boolean checkMustTags(List<String> parsedMapFile) {
 		boolean mustTagsValidation=false;			
-		List<String> mustHaveTags=new ArrayList<String>(Arrays.asList("[Map]", "[Continents]","[Territories]","-",";;"));
+		List<String> mustHaveTags=new ArrayList<String>(Arrays.asList("[map]", "[continents]","[territories]","-",";;"));
 
 		//		check for [Map], [Continents], [Territories],- and ;;
 		if(parsedMapFile.containsAll(mustHaveTags)) {
-			indexOfMap=parsedMapFile.indexOf("[Map]");
-			indexOfContinents=parsedMapFile.indexOf("[Continents]");
-			indexOfTerritories=parsedMapFile.indexOf("[Territories]");
+			indexOfMap=parsedMapFile.indexOf("[map]");
+			indexOfContinents=parsedMapFile.indexOf("[continents]");
+			indexOfTerritories=parsedMapFile.indexOf("[territories]");
 			indexOfDash=parsedMapFile.indexOf("-");
 			indexOfDSColon=parsedMapFile.indexOf(";;");
 			int [] indexCompareArray= {indexOfMap,indexOfContinents,indexOfDash,indexOfTerritories,indexOfDSColon};
