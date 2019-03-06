@@ -20,6 +20,7 @@ import java.util.Scanner;
  * @version 1.0
  * 
  */
+
 public class RiskMapEditor {
 
 	/** The scanner. */
@@ -63,20 +64,24 @@ public class RiskMapEditor {
 	 *
 	 */
 
-	public RiskMapEditor(List<String> mapFile) {
+	public RiskMapEditor(List<String> tempMapFile) {
 
+		ArrayList<String> mapFile=new ArrayList<String>();
+		for (String currLine : tempMapFile) {
+			mapFile.add(currLine.toLowerCase());
+		}
 		for (String currLine : mapFile) {
 			if (currLine.equalsIgnoreCase("[Territories]")) {
-				TerrStartIndex=mapFile.indexOf("[Territories]")+1;
+				TerrStartIndex=mapFile.indexOf(currLine)+1;
 			}
 			if (currLine.equalsIgnoreCase(";;")) {
-				TerrEndIndex=mapFile.indexOf(";;")-1;
+				TerrEndIndex=mapFile.indexOf(currLine)-1;
 			}
 			if (currLine.equalsIgnoreCase("[Continents]")) {
-				contiStartIndex=mapFile.indexOf("[Continents]")+1;
+				contiStartIndex=mapFile.indexOf(currLine)+1;
 			}
 			if (currLine.equalsIgnoreCase("-")) {
-				contEndIndex=mapFile.indexOf("-")-1;
+				contEndIndex=mapFile.indexOf(currLine)-1;
 			}
 		}
 

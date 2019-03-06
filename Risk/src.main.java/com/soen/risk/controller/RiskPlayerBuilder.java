@@ -51,7 +51,12 @@ public class RiskPlayerBuilder {
 				numberOfPlayers = s.nextInt();
 				//		To check whether the numberofPlayers are between 2 to 6		    		
 				if(numberOfPlayers <3 || numberOfPlayers>6) {
-					System.out.println("Try Again!!");
+					if(numberOfPlayers<3) {
+						System.out.println("Number of players cannot be less than 3");
+					}
+					if(numberOfPlayers>6) {
+						System.out.println("Number of players cannot be greater than 6");
+					}
 					numberOfPlayers = -1;
 				}
 			}catch(Exception e) {

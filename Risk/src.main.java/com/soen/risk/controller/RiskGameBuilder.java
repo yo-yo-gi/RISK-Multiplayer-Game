@@ -94,12 +94,12 @@ public class RiskGameBuilder {
 
 			do {
 				while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
-					System.out.println("Try Again!!");
+					System.out.println("Invalid option. Please select from given options.");
 					scanner.next();
 				}
 				mapType=scanner.nextInt();
 				if(!(mapType==1 || mapType==2)) {
-					System.out.println("Try Again!!");
+					System.out.println("Invalid option. Please select from given options.");
 				}
 			}while(!(mapType==1 || mapType==2));
 
@@ -120,12 +120,12 @@ public class RiskGameBuilder {
 
 				do {
 					while (!scanner.hasNextInt()) {
-						System.out.println("Try Again!!");
+						System.out.println("Invalid option. Please select from given options.");
 						scanner.next();
 					}
 					fileName=scanner.nextInt();
 					if(fileName>=fileCounter || fileName<0) {
-						System.out.println("Try Again!!");
+						System.out.println("Invalid option. Please select from given options.");
 					}
 				}while(fileName>=fileCounter || fileName<0);
 

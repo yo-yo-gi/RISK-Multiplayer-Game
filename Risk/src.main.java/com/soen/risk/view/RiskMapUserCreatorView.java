@@ -10,16 +10,16 @@ public class RiskMapUserCreatorView {
 		
 		for (String currentLine : mapFile) {
 			if (currentLine.equalsIgnoreCase("[Continents]")) {
-				continentStartIndex=mapFile.indexOf("[Continents]");
+				continentStartIndex=mapFile.indexOf(currentLine);
 			}
 			if (currentLine.equalsIgnoreCase("-")) {
-				continentEndIndex=mapFile.indexOf("-");
+				continentEndIndex=mapFile.indexOf(currentLine);
 			}				
 			if (currentLine.equalsIgnoreCase("[Territories]")) {
-				territoryStartIndex=mapFile.indexOf("[Territories]");
+				territoryStartIndex=mapFile.indexOf(currentLine);
 			}
 			if (currentLine.equalsIgnoreCase(";;")) {
-				territoryEndIndex=mapFile.indexOf(";;")-1;
+				territoryEndIndex=mapFile.indexOf(currentLine)-1;
 			}			
 		}
 		
@@ -27,7 +27,7 @@ public class RiskMapUserCreatorView {
 			displayList.add(mapFile.get(i));
 		for(int i=territoryStartIndex;i<=territoryEndIndex;i++)
 			displayList.add(mapFile.get(i));
-		System.out.println("\nYour Map is shown below:");
+		
 		for (String string : displayList) {
 			System.out.println(string);
 		}

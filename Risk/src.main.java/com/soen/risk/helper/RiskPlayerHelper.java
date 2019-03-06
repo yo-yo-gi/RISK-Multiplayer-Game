@@ -27,7 +27,7 @@ public class RiskPlayerHelper {
 		int armies = Constants.ZERO;
 
 		if (numOfPlayers == 3)
-			armies = 10;
+			armies = 5;
 		else if (numOfPlayers == 4)
 			armies = 30; 
 		else if (numOfPlayers == 5)

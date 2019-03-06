@@ -22,6 +22,7 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 1.0
  */
+
 public class RiskFortificationPhase {
 
 	/** The logger. */
@@ -89,7 +90,7 @@ public class RiskFortificationPhase {
 
 				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
 				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
-				if ((playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1)) {
+				if ((playerTerritories.get(sourceTerritory-1).getArmiesPresent()==1)) {
 					System.out.println("Source territory must have at least one army \n please select different source territory");
 				}
 			}while(!(playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1));
