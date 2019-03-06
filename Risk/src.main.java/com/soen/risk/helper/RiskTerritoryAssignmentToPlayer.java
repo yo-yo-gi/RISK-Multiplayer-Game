@@ -80,7 +80,7 @@ public class RiskTerritoryAssignmentToPlayer {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
-			//		System.out.println("\t\t" + value);
+			
 		}
 		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
 		return playerTerritoryMap;

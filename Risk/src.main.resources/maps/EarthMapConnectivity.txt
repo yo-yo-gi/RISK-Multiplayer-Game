@@ -14,7 +14,7 @@ Australia=2
 North_America=7
 -
 [Territories]
-Alaska,North_America,Northwest_Territory,Alberta,Kamchatka
+Alaska,North_America,Northwest_Territory,Alberta
 Northwest_Territory,North_America,Alaska,Greenland,Alberta,Ontario
 Greenland,North_America,Northwest_Territory,Ontario,Eastern_Canada,Iceland
 Alberta,North_America,Alaska,Northwest_Territory,Ontario,Western_United_States,

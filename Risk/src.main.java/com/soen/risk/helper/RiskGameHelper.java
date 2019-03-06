@@ -45,7 +45,7 @@ public class RiskGameHelper {
 			ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>(entry.getValue());
 			List<String> currPlayerTerritoriesNames=new ArrayList<String>();
 			ArrayList<String> currContTerriNames;
-			//		System.out.println(entry.getKey()+" "+entry.getValue());
+			
 
 
 			for (RiskTerritory currTerritory : currentPlayerTerritories) {

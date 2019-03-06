@@ -57,7 +57,7 @@ public class RiskFortificationPhaseTest {
 		territories.add(tr2);
 		territories.add(tr3);
 
-		//playerTerritoryMap.put(player1,(ArrayList<RiskTerritory>) territories);
+		
 
 		playerTerritoryMap = riskFortificationTest.getFortifiedMap(player1,territories);
 

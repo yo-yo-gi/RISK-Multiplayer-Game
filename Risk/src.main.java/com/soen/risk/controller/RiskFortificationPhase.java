@@ -185,7 +185,7 @@ public class RiskFortificationPhase {
 				finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
 
 			}
-			//		else System.out.println("invalid number of armies entered");
+			
 		}
 
 		System.out.println();

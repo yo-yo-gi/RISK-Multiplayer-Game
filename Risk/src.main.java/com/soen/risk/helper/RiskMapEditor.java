@@ -126,10 +126,7 @@ public class RiskMapEditor {
 
 	public void editMap() {
 
-		//		ArrayList<String> continent=new ArrayList<String>();
-		//		ArrayList<String> territory=new ArrayList<String>();
-		//		continent=continentList;
-		//		territory=territoryList;
+		
 		boolean flag1 = true;
 		boolean flag2 = true;
 		boolean flag3 = true;
@@ -176,7 +173,7 @@ public class RiskMapEditor {
 						System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
 						String continent=scanner.next();
 						addContinent(continent);
-						//		continentList.add(continent);
+						
 						break;
 					case 2:
 						System.out.println("Add terrritory selected");
@@ -184,14 +181,11 @@ public class RiskMapEditor {
 						System.out.println("Enter the territory details in the format:<TerritoryName,ContinentName,AdjacentCountry1,AdjacentCountry2...AdjacentCountryN>");
 						String territory=scanner.next();
 						addTerritory(territory);
-						//		territoryList.add(territory);
 						break;
 					case 3:
-						//		continentList.add(continentList.size(),"-");
-						//		territoryList.add(territoryList.size(),"-");
+						
 						flag2=false;
-						//		System.out.println(continentList);
-						//		System.out.println(territoryList);
+						
 						break;
 					default:
 						System.out.println("Invalid input");
@@ -221,7 +215,7 @@ public class RiskMapEditor {
 						System.out.println("Delete continent selected");
 						System.out.println("Enter the continent you want to remove:");
 						String removeContinent=scanner.next();
-						//                                DeleteContinent(continentList,territoryList,removeContinent);
+						
 						deleteContinent(removeContinent);
 						break;
 					case 2:
@@ -232,8 +226,7 @@ public class RiskMapEditor {
 						break;
 					case 3:
 						flag3=false;
-						//		System.out.println(continentList);
-						//		System.out.println(territoryList);
+						
 						break;
 					default:
 						System.out.println("Invalid input");
@@ -375,7 +368,7 @@ public class RiskMapEditor {
 	 */
 
 	/*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
-	//		private void DeleteContinent(ArrayList<String> continentList, ArrayList<String> territoryList , String continentToRemove) {
+	
 
 	public void deleteContinent(String continentToRemove) {
 		ArrayList<String> deletedContinentList=new  ArrayList<String>(continentList);
@@ -398,7 +391,7 @@ public class RiskMapEditor {
 					tempContinentList.remove(indexOfContinent);
 				}
 			}
-			//			else {System.out.println("Continent not found.");}
+			
 		}
 
 		deletedContinentList=tempContinentList;
@@ -412,7 +405,7 @@ public class RiskMapEditor {
 					if(indexOfTerritory>=0)
 						tempTerritoryList.remove(indexOfTerritory);
 				}
-				//			else {System.out.println("Continent not found.");}
+				
 			}
 			deletedTerritoryList=tempTerritoryList;
 		}

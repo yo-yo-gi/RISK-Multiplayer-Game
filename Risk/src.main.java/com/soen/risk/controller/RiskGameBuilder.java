@@ -52,7 +52,7 @@ public class RiskGameBuilder {
 		RiskPlayerBuilder riskPlayerBuilder;
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
-		//		RiskMapFileWriter riskMapFileWriter = new RiskMapFileWriter(); 
+	 
 		Scanner scanner = new Scanner(System.in);
 
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false,checkflag=false ;
@@ -202,8 +202,7 @@ public class RiskGameBuilder {
 		}
 
 
-		//		parsing finally written map file and validating it once again before 
-		//		currentMapFile=riskMapBuilder.parseMapFile("C:\\RiskProject\\map.txt");
+		
 		currentMap=new ArrayList<String>();
 		for (String currLine : mapFile) {
 			currentMap.add(currLine.replace("\\s", "").toLowerCase());
@@ -259,8 +258,7 @@ public class RiskGameBuilder {
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
 		System.out.println();
 		System.out.println("Players numbers initialized. Game started.");
-		//		List<String> playerList= new ArrayList<String>();
-		//		playerList=riskPlayerList.toString();
+		
 		for(RiskPlayer curPlayer:riskPlayerList) {
 			System.out.println("Player #"+count+" -> "+curPlayer.getPlayerName());
 			count++;
@@ -307,19 +305,9 @@ public class RiskGameBuilder {
 			if(selection1=='Y'||selection1=='y') {
 				fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
 			}else System.out.println("Fortification phase skipped...");
-			//			riskMainMap.put(entry.getKey(), reinforcedMap.get(entry.getKey()));
+			
 
 		}
-
-
-		//		send Map<StringAsPlayerName, List<Countries>> and List of continents to reinforcement state
-
-		//		get same map with reinforced map
-
-		//		send same map for fortify
-
-		//		get fortify map
-
 		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
 
 		scanner.close();

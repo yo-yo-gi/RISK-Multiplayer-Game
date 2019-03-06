@@ -28,7 +28,7 @@ public class RiskMapFileWriter {
 	public void writeMapToTextFile(List<String> mapFile,String filename) {
 
 		PrintWriter writer = null;
-		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+filename+"txt").toAbsolutePath().toString();
+		String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/"+filename+".txt").toAbsolutePath().toString();
 
 		try {
 			File file = new File (mapFilePath);

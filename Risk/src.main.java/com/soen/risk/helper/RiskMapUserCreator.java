@@ -63,7 +63,7 @@ public class RiskMapUserCreator {
 		
 		if(selection1=='Y'||selection1=='y') {
 			createStatus=true;
-			System.out.print("*****Note : Please use underscore(_) instead of spaces..*****");
+			System.out.println("*****Note : Please use underscore(_) instead of spaces..*****");
 			System.out.println("Enter the continent name and control value in the format<Continent Name=Control value>:");
 			String text1=scanner.next();
 			Map2.add(text1);
@@ -80,7 +80,7 @@ public class RiskMapUserCreator {
 					String text2=scanner.next();
 					Map2.add(text2);
 				}else {
-					//System.out.println("User does not want to enter more continents.");
+					
 					flag1=false;
 
 
@@ -104,7 +104,7 @@ public class RiskMapUserCreator {
 					String text4=scanner.next();
 					Map4.add(text4);
 				}else {
-					//System.out.println("User does not want to enter more territories.Exit");
+					
 					flag2=false;
 
 				}
@@ -114,7 +114,7 @@ public class RiskMapUserCreator {
 			createStatus=false;
 			System.out.println("User entered No[N]");
 		}
-		//		scanner.close();
+
 		if(Map2.isEmpty()&&Map4.isEmpty()) {
 			System.out.println("Nothing has been created. File is without continent or territory");
 		}

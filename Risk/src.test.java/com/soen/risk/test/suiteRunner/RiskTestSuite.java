@@ -11,7 +11,6 @@ import com.soen.risk.test.controller.RiskFortificationPhaseTest;
 import com.soen.risk.test.controller.RiskReinforcementPhaseTest;
 import com.soen.risk.test.helper.RiskArmyAllocationToPlayersTest;
 import com.soen.risk.test.helper.RiskMapEditorTest;
-//import com.soen.risk.test.helper.RiskMapUserCreatorTest;
 import com.soen.risk.test.helper.RiskTerritoryAssignmentToPlayerTest;
 import com.soen.risk.test.validator.RiskMapValidatorTest;
 
