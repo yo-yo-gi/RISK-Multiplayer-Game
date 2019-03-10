@@ -1,0 +1,8 @@
+[map]
+
+[continents]
+south_america=2
+-
+[territories]
+venezuela,south_america,adjucent
+;;
