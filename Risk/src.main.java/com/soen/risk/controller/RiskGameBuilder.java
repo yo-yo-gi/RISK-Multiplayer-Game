@@ -217,7 +217,7 @@ public class RiskGameBuilder {
 			}else {
 				System.out.println("Map loaded and validated successfully...");
 				System.out.println("Please enter the filename you want to save the map with:");
-				filename=scanner.nextLine();
+				filename=scanner.next();
 				riskMapFileWriter.writeMapToTextFile(currentMap, filename);
 				currentMapAvailableStaus=true;
 			}
