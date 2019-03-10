@@ -1,11 +1,9 @@
-
 /*
  * 
  */
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -58,11 +56,8 @@ public class RiskReinforcementPhase
 
 		int noOfCountriesOwned = currentPlayerTerritories.size();		
 		currentPlayerName=currentPlayer.getPlayerName();
-		//noOfRemainingArmies=calculateArmy(currentPlayer,currentPlayerTerritories, riskContinentList);
+		noOfRemainingArmies=calculateArmy(currentPlayer,currentPlayerTerritories, riskContinentList);
 
-		noOfRemainingArmies=CardExchangeView(currentPlayer);
-		
-		
 		System.out.println("\nReinforcement started.....");
 		System.out.println("Player name : "+currentPlayerName);
 		System.out.println("Number of territories owned : "+noOfCountriesOwned);
@@ -191,37 +186,12 @@ public class RiskReinforcementPhase
 	 * @param noOfCountriesOwned the number of countries assigned to the Player
 	 * @param noOfPlayers the total number of players set for the game
 	 * @param totalCountriesInContinent the total number of Countries in a continent
-	 * @return 
 	 */
 
-	public int CardExchangeView(RiskPlayer player)
+	public void CardExchangeView(int playerID, int noOfCountriesOwned, int noOfPlayers,int totalCountriesInContinent)
 	{
-		ArrayList<String> listCard = new ArrayList<String>();
-        int[] selected = null;
-        int numOfArmies = 0;
-        if (selected.length != 3)
-        {
-        	System.out.println("Cards cannot be greater");
-        }
-        String[] selectedCards = new String[3];
-
-        for (int i = 0; i < selected.length; i++) {
-            selectedCards[i] = player.getCards().get(i);
-        }
-
-        if ((selectedCards[0].equalsIgnoreCase(selectedCards[1]) && selectedCards[1].equalsIgnoreCase(selectedCards[2]))) {
-            player.removeSimilarThreeCards(selectedCards[0]);
-        } else if (!selectedCards[0].equalsIgnoreCase(selectedCards[1]) && !selectedCards[1].equalsIgnoreCase(selectedCards[2])
-            && !selectedCards[0].equalsIgnoreCase(selectedCards[2])) {
-            player.removeDistinctCards();
-        }
-
-        player.cardHasBeenUsed();
-        
-        return numOfArmies;
 	}
-	
-	
+
 
 }
 
