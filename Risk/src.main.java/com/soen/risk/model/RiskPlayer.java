@@ -170,5 +170,10 @@ public class RiskPlayer {
 		this.cardOwned = cardOwned;
 	}
 
+	public int getCardsUsedCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 }

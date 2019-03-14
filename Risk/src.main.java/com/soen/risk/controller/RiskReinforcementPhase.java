@@ -4,8 +4,10 @@
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
@@ -188,8 +190,38 @@ public class RiskReinforcementPhase
 	 * @param totalCountriesInContinent the total number of Countries in a continent
 	 */
 
-	public void CardExchangeView(int playerID, int noOfCountriesOwned, int noOfPlayers,int totalCountriesInContinent)
+	public int CardExchangeView(RiskPlayer player)
 	{
+        int[] selected = null;
+        int numOfArmies = 0;
+        if (selected.length != 3)
+        {
+        	System.out.println("Cards cannot be greater");
+        }
+        String[] selectedCards = new String[3];
+
+        for (int i = 0; i < selected.length; i++) {
+            selectedCards[i] = player.getCardOwned().get(i);
+        }
+        Map<String, Integer> cardType = new HashMap<>();
+      //  System.out.println("Player has "+cardType.get(0));
+        
+        System.out.println("Similar cards");
+        System.out.println("Which card to select");
+        
+        System.out.println("Different cards");
+        System.out.println("Army calc");
+
+        if ((selectedCards[0].equalsIgnoreCase(selectedCards[1]) && selectedCards[1].equalsIgnoreCase(selectedCards[2]))) {
+          //  player.removeSimilarThreeCards(selectedCards[0]);
+        } else if (!selectedCards[0].equalsIgnoreCase(selectedCards[1]) && !selectedCards[1].equalsIgnoreCase(selectedCards[2])
+            && !selectedCards[0].equalsIgnoreCase(selectedCards[2])) {
+           // player.removeDistinctCards();
+        }
+        System.out.println(player.getPlayerName() + ": Cards have been exchanged. " + (player.getCardsUsedCount()*5) + " armies");
+     //   player.cardHasBeenUsed();
+        
+        return numOfArmies;
 	}
 
 
