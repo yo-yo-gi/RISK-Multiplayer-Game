@@ -4,6 +4,7 @@
 package com.soen.risk.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -32,6 +33,11 @@ public class RiskPlayer {
 
 	/** The card owned. */
 	private ArrayList<String> cardOwned;
+	
+	/** Cards Return Logic*/
+	 
+	private List<String> cards = new ArrayList<>();
+	RiskCard cardData;
 
 	/**
 	 * Instantiates a new risk player.
@@ -174,6 +180,21 @@ public class RiskPlayer {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	/**
+     * Removes either of three Infantry or Artillery or Cavalry cards
+     *
+     * @param type Sting type of card
+     */
+    public void removeSimilarThreeCards (String type) {
+        this.cards.remove(type);
+        this.cards.remove(type);
+        this.cards.remove(type);
+    }
 
-
+	public void removeDistinctCards() {
+		// TODO Auto-generated method stub
+		 this.cards.remove(cardData.INFANT);
+	     this.cards.remove(cardData.CAVALRY);
+	     this.cards.remove(cardData.ARTILLERY);
+	}
 }
