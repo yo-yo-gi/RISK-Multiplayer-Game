@@ -33,7 +33,7 @@ public class RiskAttackPhase {
 	Scanner scanner=new Scanner(System.in);
 
 	/**
-	 * Attack phase input.
+	 * Attack phase input for both modes.
 	 */
 	public void attackPhaseInput() {
 		int att_army =10, def_army = 5 ;
