@@ -30,7 +30,9 @@ public class RiskPlayer {
 
 	/** The armies owned. */
 	private int armiesOwned;
-
+	
+	/** Cards replaced with Armies Count */
+	private int cardArmies;
 	/** The card owned. */
 	private ArrayList<String> cardOwned;
 	
@@ -152,6 +154,10 @@ public class RiskPlayer {
 	 * @param armiesOwned the armiesOwned to set
 	 */
 
+	public void setCardArmyCount(int cardArmyCount)
+	{
+		this.cardArmies = cardArmyCount;
+	}
 	public void setArmiesOwned(int armiesOwned) {
 		this.armiesOwned = armiesOwned;
 	}
@@ -178,7 +184,7 @@ public class RiskPlayer {
 
 	public int getCardsUsedCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.cardArmies;
 	}
 	/**
      * Removes either of three Infantry or Artillery or Cavalry cards

@@ -35,7 +35,7 @@ public class RiskReinforcementPhase
 
 	/** The flag. */
 	boolean flag=false;
-
+	int i = 1;
 	/**
 	 * Assigning the Armies to the Countries for the Player.
 	 *
@@ -82,7 +82,7 @@ public class RiskReinforcementPhase
 		}
 		if(currentPlayer.getCardOwned().size()==5)
 		{
-			System.out.println("The players has 5 cards");
+			System.out.println("The players has 5 cards and must exchange cards with armies");
 			noOfRemainingArmies = CardExchangeView(currentPlayer);
 		}
 		else
@@ -221,7 +221,7 @@ public class RiskReinforcementPhase
 
 	public int CardExchangeView(RiskPlayer player)
 	{
-        
+        int firstIterationCount = 5,flag = 0;
         int numOfArmies = 0;
         Scanner scanner =  new Scanner(System.in);
         String decision = "";
@@ -236,7 +236,6 @@ public class RiskReinforcementPhase
             selectedCards[i] = player.getCardOwned().get(i);
         }
         Map<String, Integer> cardType = new HashMap<>();
-      //  System.out.println("Player has "+cardType.get(0));
         System.out.println("The Card Owned by the Player"+player.getCardOwned());
         
         System.out.println("Do you want to replace the armies for the Similar cards Y/N");
@@ -244,7 +243,7 @@ public class RiskReinforcementPhase
         
         if(player.getCardOwned().size() > 3)
         {
-        	if ((selectedCards[0].equalsIgnoreCase(selectedCards[1]) && selectedCards[1].equalsIgnoreCase(selectedCards[2])))
+        	if(decision.equals("Y"))
         	{
 		        System.out.println("From the below choices which cards to remove\n 1)Infantry \n 2)Artillery \n 3) Cavalry");
 		        decForSameCards = scanner.nextInt();
@@ -263,19 +262,17 @@ public class RiskReinforcementPhase
 		        	System.out.println("Invalid input");
 		        }
         	}
-        	else if (!selectedCards[0].equalsIgnoreCase(selectedCards[1]) && !selectedCards[1].equalsIgnoreCase(selectedCards[2])
-            && !selectedCards[0].equalsIgnoreCase(selectedCards[2]))
+        	else if (decision.equals("N"))
         	{
 		        System.out.println("The player owns different cards");
 		        player.removeDistinctCards();
         	}
         }
-        numOfArmies = player.getCardsUsedCount()*5;
-        System.out.println(player.getPlayerName() + ": Cards have been exchanged. " + (player.getCardsUsedCount()*5) + " armies");
-     
-        // todo: store the value 
-        //   player.cardHasBeenUsed();
+        numOfArmies = player.getArmiesOwned()*firstIterationCount;
+        System.out.println(player.getPlayerName() + ": Cards have been exchanged. " + (player.getArmiesOwned()*firstIterationCount*i) + " armies");
         
+        i++;
+       
         return numOfArmies;
 	}
 
