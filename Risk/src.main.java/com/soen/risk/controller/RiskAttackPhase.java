@@ -41,18 +41,16 @@ public class RiskAttackPhase {
 		int choice= scanner.nextInt();
 		switch(choice) {
 		case 1:
-			rollDiceForAttack(att_army,def_army);
+			rollDiceForNormalAttackMode(att_army,def_army);
 			break;
 		case 2:
-			//rollDiceForAllOutAttack(att_army,def_army);
+			//rollDiceForAllOutAttackMode(att_army,def_army);
 			break;
 
 		default:
 			System.out.println("Invalid input");
 
 		}
-
-
 
 	}
 
@@ -63,7 +61,7 @@ public class RiskAttackPhase {
 	 * @param defendingArmyCount the defending army count
 	 * @return the map
 	 */
-	public Map<String, Object> rollDiceForAttack(int attackingArmyCount, int defendingArmyCount) {
+	public Map<String, Object> rollDiceForNormalAttackMode(int attackingArmyCount, int defendingArmyCount) {
 
 		System.out.println("Enter the number of dice to roll for attack");
 
