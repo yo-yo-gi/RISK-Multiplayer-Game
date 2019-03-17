@@ -27,7 +27,7 @@ public class RiskAttackPhase {
 	RiskLogger logger= new RiskLogger();
 
 	/** The desired dice cast by defender. */
-	int desiredDiceCastByAttacker, desiredDiceCastByDefender;
+	int desiredDiceCastByAttacker, desiredDiceCastByDefender,diceCastOfAttacker,diceCastOfDefender;
 
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);
@@ -44,7 +44,7 @@ public class RiskAttackPhase {
 			rollDiceForNormalAttackMode(att_army,def_army);
 			break;
 		case 2:
-			//rollDiceForAllOutAttackMode(att_army,def_army);
+			rollDiceForAllOutAttackMode(att_army,def_army);
 			break;
 
 		default:
@@ -155,10 +155,10 @@ public class RiskAttackPhase {
 			output.put("defender_surviving_armies", defendingArmyCount);
 
 			if (noAttackerWin == noDefenderWin) {
-				output.put("is_draw", true);
+				//output.put("is_draw", true);
 				output.put("did_attacker_win", false);
 			} else {
-				output.put("is_draw", false);
+				//output.put("is_draw", false);
 				output.put("did_attacker_win", (noAttackerWin > noDefenderWin));
 			}
 		}
@@ -188,5 +188,73 @@ public class RiskAttackPhase {
 	 */
 	public int rollDice() {
 		return ((int) ((Math.random() * 100) % 6) + 1);
+	}
+
+	/**
+	 * Roll dice for all out attack mode.
+	 *
+	 * @param attackingArmyCount the attacking army count
+	 * @param defendingArmyCount the defending army count
+	 * @return the map
+	 */
+	public Map<String, Object> rollDiceForAllOutAttackMode(int attackingArmyCount, int defendingArmyCount) {
+		diceCastOfAttacker=3; diceCastOfDefender=2;
+		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
+		System.out.println("The number of dice for attack:"+diceCastOfAttacker +"The number of dice for defence:"+diceCastOfDefender);
+		Map<String, Object> output = new HashMap<>();
+		while (diceCastOfAttacker==3 && diceCastOfDefender==2) {
+			if(attackingArmyCount>=3 && defendingArmyCount>=2) {
+				List<Integer> attackerDiceList = rollDice(desiredDiceCastByAttacker);
+
+				System.out.println(attackerDiceList);
+
+				List<Integer> defenderDiceList = rollDice(desiredDiceCastByDefender);
+
+				System.out.println(defenderDiceList);
+				if (attackerDiceList.size() == 3) {
+					attackerDiceList = attackerDiceList.subList(0, 2);
+				}
+				Integer maxDiceCastByAttacker = Collections.max(attackerDiceList);
+				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
+				Integer minDiceCastByAttacker = Collections.min(attackerDiceList);
+				Integer minDiceCastByDefender = Collections.min(defenderDiceList);
+
+				//Attacker 2, Defender 2 or Attacker 3 Defender 1 etc.
+				int noAttackerWin = 0;
+				int noDefenderWin = 0;
+				for (int i = 0; i < diceCastOfDefender; i++) {
+					if ((i == 0 && maxDiceCastByAttacker > minDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > maxDiceCastByDefender)) {
+						defendingArmyCount--;
+						noAttackerWin++;
+					} else {
+						attackingArmyCount--;
+						noDefenderWin++;
+					}
+				}
+				output.put("attacker_surviving_armies", attackingArmyCount);
+				output.put("defender_surviving_armies", defendingArmyCount);
+
+				if (noAttackerWin == noDefenderWin) {
+					//output.put("is_draw", true);
+					output.put("did_attacker_win", false);
+				} else {
+					//output.put("is_draw", false);
+					output.put("did_attacker_win", (noAttackerWin > noDefenderWin));
+				}
+			}
+			else if(attackingArmyCount==2 && defendingArmyCount==2) {
+				diceCastOfAttacker=attackingArmyCount;
+				diceCastOfDefender=defendingArmyCount;
+
+			}
+			else if(attackingArmyCount==1 && defendingArmyCount==1) {
+				diceCastOfAttacker=attackingArmyCount;
+				diceCastOfDefender=defendingArmyCount;
+			}
+			logger.doLogging("Attack phase successful and the map with remaining armies is: "+output);
+			//return output;
+
+		}
+		return output;
 	}
 }
