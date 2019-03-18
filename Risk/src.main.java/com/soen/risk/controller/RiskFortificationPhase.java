@@ -5,6 +5,7 @@ package com.soen.risk.controller;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
@@ -48,8 +49,16 @@ public class RiskFortificationPhase {
 	 * @return the fortified map
 	 */
 
-	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories)
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackMap)
 	{
+		RiskPlayer currentPlayer = null;
+		ArrayList<RiskTerritory> playerTerritories = null;
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : attackMap.entrySet()) {
+			if (entry.getKey().isCurrentPlayerTurn()) {
+				currentPlayer=entry.getKey();
+				playerTerritories=entry.getValue();
+			}
+		}
 		logger.doLogging("Inside the fortification phase----------");
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);

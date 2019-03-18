@@ -7,6 +7,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class RiskFortificationPhaseTest {
 		RiskPlayer playerName = new RiskPlayer();
 		ArrayList<RiskTerritory> territories = new ArrayList<RiskTerritory>();
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
-		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskFortificationPhase riskFortificationTest = new RiskFortificationPhase();
 
 		RiskPlayer player1 = new RiskPlayer("Player1");
@@ -59,7 +60,7 @@ public class RiskFortificationPhaseTest {
 
 		
 
-		playerTerritoryMap = riskFortificationTest.getFortifiedMap(player1,territories);
+		playerTerritoryMap = riskFortificationTest.getFortifiedMap(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
 		Integer []  expected= {3,7};

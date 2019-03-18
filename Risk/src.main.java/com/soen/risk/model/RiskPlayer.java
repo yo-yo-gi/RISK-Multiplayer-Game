@@ -31,10 +31,14 @@ public class RiskPlayer {
 	/** The armies owned. */
 	private int armiesOwned;
 	
+	/** Current player turn*/
+	private boolean currentPlayerTurn=false;
+	
 	/** Cards replaced with Armies Count */
 	private int cardArmies;
+	
 	/** The card owned. */
-	private ArrayList<String> cardOwned;
+	private ArrayList<String> cardOwned= new ArrayList<String>();
 	
 	/** Cards Return Logic*/
 	 
@@ -160,6 +164,20 @@ public class RiskPlayer {
 	}
 	public void setArmiesOwned(int armiesOwned) {
 		this.armiesOwned = armiesOwned;
+	}
+
+	/**
+	 * @return the currentPlayerTurn
+	 */
+	public boolean isCurrentPlayerTurn() {
+		return currentPlayerTurn;
+	}
+
+	/**
+	 * @param currentPlayerTurn the currentPlayerTurn to set
+	 */
+	public void setCurrentPlayerTurn(boolean currentPlayerTurn) {
+		this.currentPlayerTurn = currentPlayerTurn;
 	}
 
 	/**

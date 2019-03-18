@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
@@ -45,20 +46,27 @@ public class RiskReinforcementPhase
 	 * @return the reinforced map
 	 */
 
-	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(RiskPlayer currentPlayer, ArrayList<RiskTerritory> playerTerritories, ArrayList<RiskContinent> riskContinentList)
-	{
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(
+			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> riskContinentList)	{
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		Scanner scanner = new Scanner(System.in);
-
 		String currentPlayerName = null;
 		String decision = "";
-		ArrayList<RiskTerritory> currentPlayerTerritories;
-
-		int noOfRemainingArmies = 0;
-		currentPlayerTerritories=playerTerritories;
-
-		int noOfCountriesOwned = currentPlayerTerritories.size();		
+		ArrayList<RiskTerritory> currentPlayerTerritories = null;
+		int noOfRemainingArmies = 0;			
+		ArrayList<RiskTerritory> playerTerritories = null;
+		RiskPlayer currentPlayer = null;
+		
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : reinforcedMap.entrySet()) {
+			if (entry.getKey().isCurrentPlayerTurn()) {
+				currentPlayer=entry.getKey();
+				playerTerritories=entry.getValue();
+			}
+		}
+		
+		currentPlayerTerritories=playerTerritories;				
 		currentPlayerName=currentPlayer.getPlayerName();
+		int noOfCountriesOwned = currentPlayerTerritories.size();	
 		/**
 		 * Condition to check the army calculated from the card exchange view or number of number of armies / control value calculation
 		 */
