@@ -6,6 +6,7 @@ package com.soen.risk.helper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -39,7 +40,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	 * @return the map
 	 */
 
-	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println();
 		System.out.println("Start up phase...");
@@ -54,7 +55,7 @@ public class RiskTerritoryAssignmentToPlayer {
 		shuffledTerritories=territories;
 		Collections.shuffle(shuffledTerritories);
 
-		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		for (RiskPlayer currentPlayer : riskPlayerList) {
 			playerTerritoryMap.put(currentPlayer, new ArrayList<RiskTerritory>());
 		}

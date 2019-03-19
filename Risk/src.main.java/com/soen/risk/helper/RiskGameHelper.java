@@ -5,6 +5,7 @@ package com.soen.risk.helper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -32,10 +33,10 @@ public class RiskGameHelper {
 	 * @return controlValueAssignedMap updated map of players and territories own by player
 	 */
 
-	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignControlValuesToPlayer(
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignControlValuesToPlayer(
 			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> riskContinentList) {
 
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> controlValueAssignedMap= new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> controlValueAssignedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		List<RiskContinent> continentList= new ArrayList<RiskContinent>(riskContinentList);
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){

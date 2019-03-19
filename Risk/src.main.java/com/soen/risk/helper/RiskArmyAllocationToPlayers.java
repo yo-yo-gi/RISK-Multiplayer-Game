@@ -34,8 +34,8 @@ public class RiskArmyAllocationToPlayers {
 	 * @return the map
 	 */
 
-	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMapParam ) {
-		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(assignInitialArmy(playerTerritoryMapParam));
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMapParam ) {
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(assignInitialArmy(playerTerritoryMapParam));
 		Map<RiskPlayer, Integer> countMap = new LinkedHashMap<RiskPlayer, Integer>();
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){	
 			countMap.put(entry.getKey(), entry.getKey().getArmiesOwned());

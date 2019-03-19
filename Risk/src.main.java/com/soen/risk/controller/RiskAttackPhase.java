@@ -6,11 +6,14 @@ package com.soen.risk.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.soen.risk.helper.RiskLogger;
+import com.soen.risk.model.RiskPlayer;
+import com.soen.risk.model.RiskTerritory;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
@@ -256,5 +259,15 @@ public class RiskAttackPhase {
 
 		}
 		return output;
+	}
+
+	/**
+	 * @param riskMainMap
+	 * @return
+	 */
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(
+			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+		
+		return null;
 	}
 }

@@ -71,7 +71,7 @@ public class RiskGameBuilder {
 		ArrayList<RiskContinent> riskContinentList;
 
 		int mapType=0, count=1;
-		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
@@ -306,16 +306,17 @@ public class RiskGameBuilder {
 //			riskDominationObservable.setArmiesOwned(entry.getKey().getArmiesOwned());
 			
 			
-			reinforcedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-			attackMap =new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(); 
-			fortifiedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+//			reinforcedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+//			attackMap =new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(); 
+//			fortifiedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+			RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
 			
 			entry.getKey().setCurrentPlayerTurn(true);
 			
-			reinforcedMap=riskReinforcementPhase.getReinforcedMap(riskMainMap, riskContinentList);
+			riskMainMap=riskReinforcementPhase.getReinforcedMap(riskMainMap, riskContinentList);
 			
 			
-			
+			riskMainMap=riskAttackPhase.getAttackphaseMap(riskMainMap);
 			
 			
 			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
@@ -327,7 +328,7 @@ public class RiskGameBuilder {
 				}
 			}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
 			if(selection1=='Y'||selection1=='y') {
-				fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap);
+				riskMainMap=riskFortifyPhase.getFortifiedMap(riskMainMap);
 			}else System.out.println("Fortification phase skipped...");
 			
 			entry.getKey().setCurrentPlayerTurn(false);
