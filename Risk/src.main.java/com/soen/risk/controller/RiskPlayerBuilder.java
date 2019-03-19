@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
-import com.soen.risk.helper.RiskPlayerHelper;
+import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskPlayer;
 
 /**
@@ -90,9 +90,7 @@ public class RiskPlayerBuilder {
 	void addPlayers(List<String> riskPlayersNames){
 		ArrayList<RiskPlayer> tempRiskPlayerList=new ArrayList<RiskPlayer>();
 		RiskPlayer riskPlayer; 
-		RiskPlayerHelper riskPlayerHelper=new RiskPlayerHelper();
-
-		int initialArmy=riskPlayerHelper.calculateInitialArmies(riskPlayersNames);
+		int initialArmy=RiskGameHelper.calculateInitialArmies(riskPlayersNames);
 
 		for (String currerntPlayerName: riskPlayersNames) {
 			riskPlayer=new RiskPlayer();

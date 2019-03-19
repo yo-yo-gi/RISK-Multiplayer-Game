@@ -266,8 +266,8 @@ public class RiskAttackPhase {
 	 * @return
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(
-			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 		
-		return null;
+		return riskMainMap;
 	}
 }

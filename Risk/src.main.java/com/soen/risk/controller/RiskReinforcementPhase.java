@@ -47,7 +47,7 @@ public class RiskReinforcementPhase
 	 */
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(
-			Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> riskContinentList)	{
+			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> riskContinentList)	{
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		Scanner scanner = new Scanner(System.in);
 		String currentPlayerName = null;

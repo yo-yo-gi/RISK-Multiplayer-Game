@@ -70,5 +70,70 @@ public class RiskGameHelper {
 
 		return controlValueAssignedMap;
 	}
+	
+	/**
+	 * Calculate initial armies.
+	 *
+	 * @param riskPlayersNames the risk players names
+	 * @return the int
+	 */
+	public static int calculateInitialArmies(List<String> riskPlayersNames) {
+		int numOfPlayers = riskPlayersNames.size();
+		int armies = Constants.ZERO;
 
+		if (numOfPlayers == 3)
+			armies = 5;
+		else if (numOfPlayers == 4)
+			armies = 30; 
+		else if (numOfPlayers == 5)
+			armies = 25;
+		else if (numOfPlayers == 6)
+			armies = 20;
+
+		return armies;
+	}
+	
+	/**
+	 * This method calculates map control for the domination view
+	 * 
+	 * @param totalTerritories total territories in map
+	 * @param ownedTerritories player owned territories
+	 * @return mapControll percentage of map controlled by player
+	 */
+	public static String calculateDominationMapControlled(long totalTerritories, long ownedTerritories) {
+		String mapControll = null;
+		
+		long calculation = Math.round((totalTerritories/ownedTerritories)*100.0);
+		mapControll=Long.toString(calculation);
+		return mapControll;
+	}
+	
+	/**
+	 * Finds the territory by name to use in attack phase
+	 * 
+	 * @param riskMap map of player
+	 * @param territoryName name of territory to search
+	 * @return riskTerritory territory to be returned
+	 */
+	public static RiskTerritory getRiskTerritoryByName(Map<RiskPlayer, ArrayList<RiskTerritory>> riskMap, String territoryName) {
+		RiskTerritory riskTerritory = new RiskTerritory();
+		ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
+		boolean foundFlag=false;
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMap.entrySet()){
+			territoryList.addAll(entry.getValue());
+		}
+		
+		for (RiskTerritory currTerritory : territoryList) {
+			if (currTerritory.getTerritoryName().equalsIgnoreCase(territoryName)) {
+				riskTerritory=currTerritory;
+				foundFlag=true;
+			}
+		}
+		
+		if (!foundFlag) {
+			riskTerritory.setArmiesPresent(-1);
+		}
+		
+		return riskTerritory;
+	}
 }

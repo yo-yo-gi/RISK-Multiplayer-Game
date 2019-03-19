@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -22,19 +21,11 @@ import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
-import com.soen.risk.helper.RiskUtility;
 import com.soen.risk.model.RiskContinent;
-import com.soen.risk.model.RiskDomination;
-import com.soen.risk.model.RiskDominationObservable;
-import com.soen.risk.model.RiskPhase;
-import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.validator.RiskMapValidator;
-import com.soen.risk.view.RiskDominationObserver;
-import com.soen.risk.view.RiskDominationView;
 import com.soen.risk.view.RiskMapUserCreatorView;
-import com.soen.risk.view.RiskPhaseView;
 
 
 /**
@@ -78,9 +69,6 @@ public class RiskGameBuilder {
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
 		RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackMap;
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
 
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
@@ -298,17 +286,14 @@ public class RiskGameBuilder {
 
 //		RiskDomination riskDominationObservable=new RiskDomination();
 //		RiskDominationView riskDominationObserver=new RiskDominationView(riskDominationObservable);
-		
-		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
-		{
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
+		while(tempMap.size()>1) {
+			
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : tempMap.entrySet()){
 //			riskDominationObservable.setPercentMapContr((RiskUtility.calculateDominationMapControlled(11, entry.getValue().size())));
 //			riskDominationObservable.setContinentsContr(entry.getKey().getOccupiedContinents());
 //			riskDominationObservable.setArmiesOwned(entry.getKey().getArmiesOwned());
-			
-			
-//			reinforcedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-//			attackMap =new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(); 
-//			fortifiedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+
 			RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
 			
 			entry.getKey().setCurrentPlayerTurn(true);
@@ -332,6 +317,8 @@ public class RiskGameBuilder {
 			}else System.out.println("Fortification phase skipped...");
 			
 			entry.getKey().setCurrentPlayerTurn(false);
+		}
+		tempMap=riskMainMap;
 		}
 		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
 

@@ -59,6 +59,13 @@ public class RiskTerritory {
 	}
 
 	/**
+	 * Default Constructor
+	 */
+	public RiskTerritory() {
+		
+	}
+
+	/**
 	 * Gets the territory id.
 	 *
 	 * @return the territoryId
