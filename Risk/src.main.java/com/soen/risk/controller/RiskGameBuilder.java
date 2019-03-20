@@ -21,6 +21,7 @@ import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
+import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -289,7 +290,7 @@ public class RiskGameBuilder {
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		while(tempMap.size()>1) {
 			
-		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : tempMap.entrySet()){
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
 //			riskDominationObservable.setPercentMapContr((RiskUtility.calculateDominationMapControlled(11, entry.getValue().size())));
 //			riskDominationObservable.setContinentsContr(entry.getKey().getOccupiedContinents());
 //			riskDominationObservable.setArmiesOwned(entry.getKey().getArmiesOwned());
@@ -297,7 +298,9 @@ public class RiskGameBuilder {
 			RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
 			
 			entry.getKey().setCurrentPlayerTurn(true);
-			
+			entry.getKey().setCardOwned(RiskCard.INFANT);
+			entry.getKey().setCardOwned(RiskCard.INFANT);
+			entry.getKey().setCardOwned(RiskCard.INFANT);
 			riskMainMap=riskReinforcementPhase.getReinforcedMap(riskMainMap, riskContinentList);
 			
 			
@@ -318,7 +321,7 @@ public class RiskGameBuilder {
 			
 			entry.getKey().setCurrentPlayerTurn(false);
 		}
-		tempMap=riskMainMap;
+		tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
 		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
 

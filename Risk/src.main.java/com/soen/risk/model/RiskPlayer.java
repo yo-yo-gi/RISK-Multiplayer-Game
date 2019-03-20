@@ -38,11 +38,12 @@ public class RiskPlayer {
 	private int cardArmies;
 	
 	/** The card owned. */
-	private ArrayList<String> cardOwned= new ArrayList<String>();
+	private ArrayList<RiskCard> cardOwned= new ArrayList<RiskCard>();
 	
 	/** Cards Return Logic*/
 	 
-	private List<String> cards = new ArrayList<>();
+	private int cardViewCount=1;
+
 	RiskCard cardData;
 
 	/**
@@ -186,7 +187,7 @@ public class RiskPlayer {
 	 * @return the cardOwned
 	 */
 
-	public ArrayList<String> getCardOwned() {
+	public ArrayList<RiskCard> getCardOwned() {
 		return cardOwned;
 	}
 
@@ -196,12 +197,25 @@ public class RiskPlayer {
 	 * @param cardOwned the cardOwned to set
 	 */
 
-	public void setCardOwned(ArrayList<String> cardOwned) {
-		this.cardOwned = cardOwned;
+	public void setCardOwned(RiskCard card) {
+		this.cardOwned.add(card);
+	}
+
+	/**
+	 * @return the cardViewCount
+	 */
+	public int getCardViewCount() {
+		return cardViewCount;
+	}
+
+	/**
+	 * @param cardViewCount the cardViewCount to set
+	 */
+	public void setCardViewCount(int cardViewCount) {
+		this.cardViewCount = cardViewCount;
 	}
 
 	public int getCardsUsedCount() {
-		// TODO Auto-generated method stub
 		return this.cardArmies;
 	}
 	/**
@@ -209,16 +223,15 @@ public class RiskPlayer {
      *
      * @param type Sting type of card
      */
-    public void removeSimilarThreeCards (String type) {
-        this.cards.remove(type);
-        this.cards.remove(type);
-        this.cards.remove(type);
+    public void removeSimilarThreeCards (RiskCard type) {
+        this.cardOwned.remove(type);
+        this.cardOwned.remove(type);
+        this.cardOwned.remove(type);
     }
 
 	public void removeDistinctCards() {
-		// TODO Auto-generated method stub
-		 this.cards.remove(cardData.INFANT);
-	     this.cards.remove(cardData.CAVALRY);
-	     this.cards.remove(cardData.ARTILLERY);
+		 this.cardOwned.remove(RiskCard.INFANT);
+	     this.cardOwned.remove(RiskCard.ARTILLERY);
+	     this.cardOwned.remove(RiskCard.CAVALRY);
 	}
 }
