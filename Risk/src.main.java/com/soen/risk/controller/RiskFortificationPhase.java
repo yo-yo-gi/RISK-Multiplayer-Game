@@ -20,7 +20,8 @@ import com.soen.risk.model.RiskTerritory;
  * into one (and only one) of your adjacent territories.
  * 
  * @author Chirag Vora
- * @version 1.0
+ * @author Yogesh Nimbhorkar
+ * @version 1.2
  */
 public class RiskFortificationPhase {
 
@@ -52,7 +53,7 @@ public class RiskFortificationPhase {
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackMap)
 	{
 		RiskPlayer currentPlayer = null;
-		ArrayList<RiskTerritory> playerTerritories = null;
+		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : attackMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
@@ -60,7 +61,7 @@ public class RiskFortificationPhase {
 			}
 		}
 		logger.doLogging("Inside the fortification phase----------");
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(attackMap);
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println();
 		System.out.println("Fortification started...");

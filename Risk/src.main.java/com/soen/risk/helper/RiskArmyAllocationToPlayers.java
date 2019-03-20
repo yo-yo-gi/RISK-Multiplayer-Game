@@ -105,12 +105,16 @@ public class RiskArmyAllocationToPlayers {
 	 */
 	private Map<RiskPlayer, ArrayList<RiskTerritory>> assignInitialArmy(
 			Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap) {
+		
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet())
 		{	
 			int armyOwned=entry.getKey().getArmiesOwned();
 			entry.getKey().setArmiesOwned(armyOwned-entry.getValue().size());
-			for (RiskTerritory currTerritory : entry.getValue()) {
+			for (RiskTerritory currTerritory : entry.getValue()) {		
+				if(armyOwned>0) {
 				currTerritory.setArmiesPresent(1);
+				armyOwned--;
+				}else currTerritory.setArmiesPresent(0);
 			}
 		}		
 		return playerTerritoryMap;
