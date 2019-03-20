@@ -70,7 +70,7 @@ public class RiskReinforcementPhase {
 		 * Condition to check the army calculated from the card exchange view or number
 		 * of number of armies / control value calculation
 		 */
-		do {
+	//	do {
 			if (currentPlayer.getCardOwned().size() >= 3 && currentPlayer.getCardOwned().size() < 5) {
 				System.out.println(
 						"The players number of cards: " + currentPlayer.getCardOwned().size() + "\n" + "Names");
@@ -97,11 +97,8 @@ public class RiskReinforcementPhase {
 			noOfRemainingArmies = calculateArmy(currentPlayer, currentPlayerTerritories, riskContinentList);
 			noOfRemainingArmies = noOfRemainingArmies + cardExchangeViewArmy;
 
-			if (currentPlayer.getCardOwned().size() >= 3 && decision.contentEquals("Y")) {
-				System.out.println("do you want to excahge again..");
-				decision = scanner.nextLine();
-			}
-		} while (currentPlayer.getCardOwned().size() >= 3 && decision.contentEquals("Y"));
+			
+		//} while (currentPlayer.getCardOwned().size() >= 3 && decision.contentEquals("Y"));
 
 		System.out.println("The number of armies calculated for reinforcement : " + noOfRemainingArmies);
 		System.out.println("\nReinforcement started.....");
