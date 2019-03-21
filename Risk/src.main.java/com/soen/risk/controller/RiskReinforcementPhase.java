@@ -51,7 +51,7 @@ public class RiskReinforcementPhase {
 				riskMainMap);
 		Scanner scanner = new Scanner(System.in);
 		String currentPlayerName = null;
-		String decision = "";
+		char decision ;
 		ArrayList<RiskTerritory> currentPlayerTerritories = new ArrayList<RiskTerritory>();
 		int noOfRemainingArmies = 0, cardExchangeViewArmy = 0;
 		ArrayList<RiskTerritory> playerTerritories = null;
@@ -70,20 +70,29 @@ public class RiskReinforcementPhase {
 		 * Condition to check the army calculated from the card exchange view or number
 		 * of number of armies / control value calculation
 		 */
-	//	do {
+			System.out.println("\nCalculation of armies for the  player: "+currentPlayer.getPlayerName());
 			if (currentPlayer.getCardOwned().size() >= 3 && currentPlayer.getCardOwned().size() < 5) {
 				System.out.println(
-						"The players number of cards: " + currentPlayer.getCardOwned().size() + "\n" + "Names");
+						"The number of cards the player has: " + currentPlayer.getCardOwned().size() + "\n" + "Names: "+currentPlayer.getCardOwned());
 
-				System.out.println("Do you want exchange armies for the Cards Y/N");
-				decision = scanner.nextLine();
+				System.out.println("Do you want exchange armies for the cards: Y/N");
+				
+				do {
+					decision=scanner.next().charAt(0);
+					if(!(decision=='Y' || decision=='y' || decision=='n' || decision=='N')) {
+						System.out.println("Try Again!!");
+					}
+				}while(!(decision=='Y' || decision=='y' || decision=='n' || decision=='N'));
 
+				
 				switch (decision) {
-				case "Y":
+				case 'y':
+				case 'Y':
 					cardExchangeViewArmy = CardExchangeView(currentPlayer);
-					decision = "N";
+					decision = 'N';
 					break;
-				case "N":
+				case 'n':
+				case 'N':
 					break;
 				default:
 					System.out.println("please enter again ");
@@ -96,9 +105,6 @@ public class RiskReinforcementPhase {
 
 			noOfRemainingArmies = calculateArmy(currentPlayer, currentPlayerTerritories, riskContinentList);
 			noOfRemainingArmies = noOfRemainingArmies + cardExchangeViewArmy;
-
-			
-		//} while (currentPlayer.getCardOwned().size() >= 3 && decision.contentEquals("Y"));
 
 		System.out.println("The number of armies calculated for reinforcement : " + noOfRemainingArmies);
 		System.out.println("\nReinforcement started.....");
@@ -250,17 +256,16 @@ public class RiskReinforcementPhase {
 		selectedCards.add(RiskCard.ARTILLERY);
 		selectedCards.add(RiskCard.CAVALRY);
 
-//        for (int i = 0; i < player.getCardOwned().size(); i++) {
-//            selectedCards[i] = player.getCardOwned().get(i);
-//        }
-		// Map<String, Integer> cardType = new HashMap<>();
-		System.out.println("The Card Owned by the Player" + player.getCardOwned());
+		System.out.println("The Cards owned by the Player: " + player.getCardOwned());
 
-		System.out.println("Do you want to replace the armies for  1) Similar cards \n2)Distinct Cards");
-		decision = scanner.nextInt();
-
-		if (player.getCardOwned().size() >= 3) // remove
-		{
+		System.out.println("Do you want to replace the armies for  1)Similar cards \n2)Distinct Cards");
+		do {
+			decision=scanner.nextInt();
+			if(!(decision==1 || decision==2)) {
+				System.out.println("Try Again!!");
+			}
+		}while(!(decision==1 || decision==2));
+	
 			if (decision == 1) {
 				ArrayList<RiskCard> infantry = new ArrayList<RiskCard>();
 				ArrayList<RiskCard> Artillery = new ArrayList<RiskCard>();
@@ -274,8 +279,13 @@ public class RiskReinforcementPhase {
 						|| player.getCardOwned().containsAll(Cavalry)) {
 
 					System.out.println(
-							"From the below choices which cards to avail\n 1)Infantry \n 2)Artillery \n 3) Cavalry");
-					decForSameCards = scanner.nextInt();
+							"From the below choices which cards to avail\n1)Infantry \n2)Artillery \n3)Cavalry");
+					do {
+						decForSameCards=scanner.nextInt();
+						if(!(decForSameCards==1 || decForSameCards==2 || decForSameCards==3 )) {
+							System.out.println("Try Again!!");
+						}
+					}while(!(decForSameCards==1 || decForSameCards==2));
 					if (decForSameCards == 1) {
 						player.removeSimilarThreeCards(RiskCard.INFANT);
 					} else if (decForSameCards == 2) {
@@ -286,17 +296,14 @@ public class RiskReinforcementPhase {
 						System.out.println("Invalid input");
 					}
 				} else
-					System.out.println("Player doesn't have similar cards...");
+					System.out.println("Player doesn't have similar cards.");
 			} else if (decision == 2) {
-				System.out.println("The player owns different cards");
+				System.out.println("The player owns different cards.");
 				player.removeDistinctCards();
 			}
-		}
 		exchangeArmies = player.getCardViewCount() * 5;
 		player.setCardViewCount(player.getCardViewCount() + 1);
 		currentPlayer = player;
-//        System.out.println(player.getPlayerName() + ": Cards have been exchanged. " + (player.getArmiesOwned()*firstIterationCount*i) + " armies");
-
 		return exchangeArmies;
 	}
 
