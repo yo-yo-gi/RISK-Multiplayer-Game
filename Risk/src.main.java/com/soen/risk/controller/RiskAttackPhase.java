@@ -454,11 +454,11 @@ public class RiskAttackPhase {
 		System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
 		
 		
-//		attackSourceTerritory.setArmiesPresent(attackSourceArmy);
-//		attackDestinationTerritory.setArmiesPresent(attackDestinationArmy);
+		attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy);
+		attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 		
 
-//		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory);
+		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
 		
 
 		return riskMainMap;
