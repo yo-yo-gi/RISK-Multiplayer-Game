@@ -325,16 +325,20 @@ public class RiskAttackPhase {
 	 * @return
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+		char selectedchoice;
 		int sourceTCoutner=1,destinationTCoutner=1;
 		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
-		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,a1=null,attackerTerritory=null,defenderTerritory=null;
+		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory;
 		String defendingTerritory=null;
 		RiskPlayer currentPlayer = null;
 		List<String> adjTerritoryList;
 		List<String> AdjAttackList;
 		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
-		ArrayList<String> territoriesList = new ArrayList<String>();
+//		ArrayList<String> territoriesList = new ArrayList<String>();
+		RiskGameHelper riskGameHelper=new RiskGameHelper();
+		Map<String, Object> attackOutputMap = new HashMap<>();
+		
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
@@ -343,11 +347,11 @@ public class RiskAttackPhase {
 		}
 
 
-		System.out.println("Current Player:"+currentPlayer.getPlayerName());
+//		System.out.println("Current Player:"+currentPlayer.getPlayerName());
 		System.out.println("Select the territory you want to attack from:");
 		for (RiskTerritory currTerritory : playerTerritories) {
-			String a=currTerritory.getTerritoryName();
-			territoriesList.add(a);
+//			String a=currTerritory.getTerritoryName();
+//			territoriesList.add(a);
 			System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 			sourceTCoutner++;	
 
@@ -399,8 +403,8 @@ public class RiskAttackPhase {
 //		AdjAttackList=AdjAttackList.stream().distinct().collect(Collectors.toList());
 
 
-		System.out.println("Adjacent Territories to attack:\n"+AdjAttackList);
-		RiskGameHelper riskGameHelper=new RiskGameHelper();
+//		System.out.println("Adjacent Territories to attack:\n"+AdjAttackList);
+		
 		System.out.println("Enter the territory you want to attack:");
 		for (String territory : AdjAttackList) {
 			System.out.println(destinationTCoutner+"." + RiskGameHelper.getRiskTerritoryByName(riskMainMap, territory).getTerritoryName()
@@ -436,8 +440,7 @@ public class RiskAttackPhase {
 		System.out.println("Defender Territory Name:"+attackDestinationTerritoryName);
 		System.out.println("Defender Army count:"+attackDestinationArmy);
 		
-		Map<String, Object> attackOutputMap = new HashMap<>();
-		
+		/*Below code will call the function to give user option to attack in Normal or All-Out method*/		
 		attackOutputMap=attackPhaseInput(attackSourceTerritoryName,attackSourceArmy, attackDestinationTerritoryName, attackDestinationArmy);
 		
 		for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
@@ -459,6 +462,17 @@ public class RiskAttackPhase {
 		
 
 		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
+		
+		System.out.println("Do you want to attack again?(Y/N)");
+		do {
+			selectedchoice=scanner.next().charAt(0);
+			if(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N')) {
+				System.out.println("Try Again!!");
+			}
+		}while(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N'));
+		if(selectedchoice=='Y'||selectedchoice=='y') {
+			getAttackphaseMap(riskMainMap);
+		}else System.out.println("Fortification phase skipped...");
 		
 
 		return riskMainMap;
