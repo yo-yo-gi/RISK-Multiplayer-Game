@@ -156,10 +156,16 @@ public class RiskAttackPhase {
 			output.put(attackSourceTerritoryName, attackingArmyCount);
 			output.put(attackDestinationTerritoryName, defendingArmyCount);
 
-			if (noAttackerWin == noDefenderWin) {
-				output.put("did_defender_win", noDefenderWin > noAttackerWin);
-			} else {
-				output.put("did_attacker_win", (noAttackerWin > noDefenderWin));
+			if (noAttackerWin > noDefenderWin) {
+				output.put("did_attacker_win", true);
+			} else { 
+				if(noAttackerWin < noDefenderWin) {
+					output.put("did_defender_win", true);
+				}
+				else {
+					output.put("did_attacker_win", true);
+					output.put("did_defender_win", true);
+				     }
 			}
 		}
 		System.out.println("output="+output.toString());
@@ -293,10 +299,17 @@ public class RiskAttackPhase {
 				System.out.println(attackSourceTerritoryName + attackingArmyCount);
 				System.out.println(attackDestinationTerritoryName + defendingArmyCount);
 
-				if (noAttackerWin == noDefenderWin) {
-					output.put("did_defender_win", noDefenderWin > noAttackerWin);
-				} else {
-					output.put("did_attacker_win", (noAttackerWin > noDefenderWin));
+				if (noAttackerWin > noDefenderWin) {
+					output.put("did_attacker_win", true);
+				} else { 
+					if(noAttackerWin < noDefenderWin) 
+					{
+						output.put("did_defender_win", true);
+					}
+					else {
+						output.put("did_attacker_win", true);
+						output.put("did_defender_win", true);
+				     	     }
 				}
 			}
 		}
