@@ -228,7 +228,7 @@ public class RiskAttackPhase {
 				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
 				if (maxDiceCastByAttacker > maxDiceCastByDefender) {
-					output.put(attackSourceTerritoryName, attackingArmyCount);
+					output.put(attackSourceTerritoryName, (attackingArmyCount));
 					defendingArmyCount--;
 					if(defendingArmyCount==0) {
 						output.put(attackDestinationTerritoryName, (defendingArmyCount));
@@ -237,15 +237,15 @@ public class RiskAttackPhase {
 
 				} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
 					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, defendingArmyCount);
+					output.put(attackDestinationTerritoryName, (defendingArmyCount));
 					if(attackingArmyCount==0) {
-						output.put("attacker_surviving_armies", (attackingArmyCount));
+						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
 					}
 				}
 				else {
 					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, defendingArmyCount);
+					output.put(attackDestinationTerritoryName, (defendingArmyCount));
 					if(defendingArmyCount==0) {
 						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
@@ -290,8 +290,8 @@ public class RiskAttackPhase {
 
 				output.put(attackSourceTerritoryName, attackingArmyCount);
 				output.put(attackDestinationTerritoryName, defendingArmyCount);
-				System.out.println(attackSourceTerritoryName+ attackingArmyCount);
-				System.out.println(attackDestinationTerritoryName+ defendingArmyCount);
+				System.out.println(attackSourceTerritoryName + attackingArmyCount);
+				System.out.println(attackDestinationTerritoryName + defendingArmyCount);
 
 				if (noAttackerWin == noDefenderWin) {
 					output.put("did_defender_win", noDefenderWin > noAttackerWin);
