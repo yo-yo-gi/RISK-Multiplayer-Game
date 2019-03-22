@@ -60,7 +60,7 @@ public class RiskAttackPhase {
 				System.out.println("Invalid input. Try again!!");
 
 			}
-		}while(choice>=1 || choice <=2);
+		}while(!(choice>=1 || choice <=2));
 		return attackOutput;
 	}
 
