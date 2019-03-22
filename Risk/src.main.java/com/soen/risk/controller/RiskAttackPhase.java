@@ -90,10 +90,10 @@ public class RiskAttackPhase {
 				scanner.next();
 			}
 			desiredDiceCastByAttacker=scanner.nextInt();
-			if (desiredDiceCastByAttacker > 3) {
-				System.out.println("Attacker cannot cast more than 3 dice. Try Again!!");
+			if (desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker==0) {
+				System.out.println("Attacker cannot cast more than 3 or 0 dice. Try Again!!");
 			}
-		}while(desiredDiceCastByAttacker > 3);
+		}while(desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker==0);
 
 		System.out.println("Enter the number of dice you want to roll for defence: ");
 
@@ -103,10 +103,10 @@ public class RiskAttackPhase {
 				scanner.next();
 			}
 			desiredDiceCastByDefender=scanner.nextInt();		
-			if (desiredDiceCastByDefender > 2) {
-				System.out.println("Defender cannot cast more than 2 dice. Try Again!!");
+			if (desiredDiceCastByDefender > 2 || desiredDiceCastByDefender==0) {
+				System.out.println("Defender cannot cast more than 2 or 0 dice. Try Again!!");
 			}
-		}while(desiredDiceCastByDefender > 2);
+		}while(desiredDiceCastByDefender > 2 || desiredDiceCastByDefender==0);
 
 		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
 		Map<String, Object> output = new HashMap<>();
