@@ -12,11 +12,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
-import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
+// TODO: Auto-generated Javadoc
 /**
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
  * a) The normal attack mode is used to attack on any adjacent territory for each player
@@ -37,39 +37,37 @@ public class RiskAttackPhase {
 
 	/**
 	 * Attack phase input for both modes.
+	 *
+	 * @param attackSourceTerritoryName the attack source territory name
+	 * @param attackSourceArmy the attack source army
+	 * @param attackDestinationTerritoryName the attack destination territory name
+	 * @param attackDestinationArmy the attack destination army
+	 * @return the map
 	 */
 	public Map<String, Object> attackPhaseInput(String attackSourceTerritoryName,int attackSourceArmy, String attackDestinationTerritoryName, int attackDestinationArmy){
-		int flag=1;
 		Map<String, Object> attackOutput = new HashMap<>();
-		System.out.println("Do you want to attack in 1)Normal mode 2) All-Out mode");
+		System.out.println("Do you want to attack in 1)Normal Mode 2) All-Out Mode ");
 		int choice= scanner.nextInt();
-		while(flag==1) {
-			switch(choice) {
-			case 1:
-				attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
-				break;
-			case 2:
-				attackOutput=rollDiceForAllOutAttackMode(attackSourceArmy,attackDestinationArmy);
-				break;
-			case 3:
-				System.out.println("Exit!!");
-				flag=Constants.ZERO;
-				break;
-			default:
-				System.out.println("Invalid input. Try again!");
+		switch(choice) {
+		case 1:
+			attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+			break;
+		case 2:
+			attackOutput=rollDiceForAllOutAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+			break;
+		default:
+			System.out.println("Invalid input. Try again!");
 
-			}
 		}
 		return attackOutput;
-
 	}
-
-
 
 	/**
 	 * Roll dice for attack.
 	 *
+	 * @param attackSourceTerritoryName the attack source territory name
 	 * @param attackingArmyCount the attacking army count
+	 * @param attackDestinationTerritoryName the attack destination territory name
 	 * @param defendingArmyCount the defending army count
 	 * @return the map
 	 */
@@ -162,7 +160,7 @@ public class RiskAttackPhase {
 			}
 		}
 		System.out.println("output="+output.toString());
-		logger.doLogging("Attack phase successful and the map with remaining armies is: "+output.toString());
+		logger.doLogging("Attack phase successful and the map with remaining armies-> "+output.toString());
 		return output;
 	}
 
@@ -197,7 +195,7 @@ public class RiskAttackPhase {
 	 * @param defendingArmyCount the defending army count
 	 * @return the map
 	 */
-	public static Map<String, Object> rollDiceForAllOutAttackMode(int attackingArmyCount, int defendingArmyCount) {
+	public static Map<String, Object> rollDiceForAllOutAttackMode(String attackSourceTerritoryName,int attackingArmyCount, String attackDestinationTerritoryName, int defendingArmyCount) {
 		int diceCastOfAttacker,diceCastOfDefender;
 		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
 
@@ -227,16 +225,16 @@ public class RiskAttackPhase {
 				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
 				if (maxDiceCastByAttacker > maxDiceCastByDefender) {
-					output.put("attacker_surviving_armies", attackingArmyCount);
+					output.put(attackSourceTerritoryName, attackingArmyCount);
 					defendingArmyCount--;
 					if(defendingArmyCount==0) {
-						output.put("defender_surviving_armies", (defendingArmyCount));
+						output.put(attackDestinationTerritoryName, (defendingArmyCount));
 						break;
 					}
 
 				} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
 					attackingArmyCount--;
-					output.put("defender_surviving_armies", defendingArmyCount);
+					output.put(attackDestinationTerritoryName, defendingArmyCount);
 					if(attackingArmyCount==0) {
 						output.put("attacker_surviving_armies", (attackingArmyCount));
 						break;
@@ -244,9 +242,9 @@ public class RiskAttackPhase {
 				}
 				else {
 					attackingArmyCount--;
-					output.put("defender_surviving_armies", defendingArmyCount);
+					output.put(attackDestinationTerritoryName, defendingArmyCount);
 					if(defendingArmyCount==0) {
-						output.put("attacker_surviving_armies", (attackingArmyCount));
+						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
 					}
 				}
@@ -287,13 +285,13 @@ public class RiskAttackPhase {
 					}
 				}
 
-				output.put("attacker_surviving_armies", attackingArmyCount);
-				output.put("defender_surviving_armies", defendingArmyCount);
-				System.out.println("attacker_surviving_armies-> "+ attackingArmyCount);
-				System.out.println("defender_surviving_armies-> "+ defendingArmyCount);
+				output.put(attackSourceTerritoryName, attackingArmyCount);
+				output.put(attackDestinationTerritoryName, defendingArmyCount);
+				System.out.println(attackSourceTerritoryName+ attackingArmyCount);
+				System.out.println(attackDestinationTerritoryName+ defendingArmyCount);
 
 				if (noAttackerWin == noDefenderWin) {
-					output.put("did_defender_win", noDefenderWin>noAttackerWin);
+					output.put("did_defender_win", noDefenderWin > noAttackerWin);
 				} else {
 					output.put("did_attacker_win", (noAttackerWin > noDefenderWin));
 				}
@@ -303,9 +301,12 @@ public class RiskAttackPhase {
 		System.out.println("Output returned is: "+ output.toString());
 		return output;
 	}
+
 	/**
-	 * @param riskMainMap
-	 * @return
+	 * Gets the attackphase map.
+	 *
+	 * @param riskMainMap the risk main map
+	 * @return the attackphase map
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 		char selectedchoice;
