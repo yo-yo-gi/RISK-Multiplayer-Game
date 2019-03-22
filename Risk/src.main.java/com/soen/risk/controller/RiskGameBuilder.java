@@ -68,13 +68,13 @@ public class RiskGameBuilder {
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
-		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
+//		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
 		RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
 		RiskMapEditor riskMapEditor;
 
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
-		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
+		RiskPlayer riskPlayer=new RiskPlayer();
 		RiskGameHelper riskGameHelper=new RiskGameHelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
 		
@@ -295,16 +295,16 @@ public class RiskGameBuilder {
 //			riskDominationObservable.setContinentsContr(entry.getKey().getOccupiedContinents());
 //			riskDominationObservable.setArmiesOwned(entry.getKey().getArmiesOwned());
 
-			RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
+
 			
 			entry.getKey().setCurrentPlayerTurn(true);
 			entry.getKey().setCardOwned(RiskCard.INFANT);
 			entry.getKey().setCardOwned(RiskCard.INFANT);
 			entry.getKey().setCardOwned(RiskCard.INFANT);
-			riskMainMap=riskReinforcementPhase.getReinforcedMap(riskMainMap, riskContinentList);
+			riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 			
 			
-			riskMainMap=riskAttackPhase.getAttackphaseMap(riskMainMap);
+			riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
 			
 			
 			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
@@ -316,14 +316,14 @@ public class RiskGameBuilder {
 				}
 			}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
 			if(selection1=='Y'||selection1=='y') {
-				riskMainMap=riskFortifyPhase.getFortifiedMap(riskMainMap);
+				riskMainMap=riskPlayer.getFortifiedMap(riskMainMap);
 			}else System.out.println("Fortification phase skipped...");
 			
 			entry.getKey().setCurrentPlayerTurn(false);
 		}
 		tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
-		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
+		System.out.println("Reinforcement & Fortification phases complete for all players.\n Phase 1 completed. Thank You!! ");
 
 		scanner.close();
 	}
