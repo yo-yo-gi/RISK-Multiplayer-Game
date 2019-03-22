@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -136,7 +137,7 @@ public class RiskGameHelper {
 	}
 
 	/**
-	 * Method to update army after attack
+	 * Method to update army after attack and to delete defender's territory. Also checks if defenders territory is last available then assign all cards to current player
 	 * 
 	 * @param attackSourceTerritory source territory of attack
 	 * @param attackDestinationTerritory destination territory of attack
@@ -184,16 +185,27 @@ public class RiskGameHelper {
 		}
 		
 		updatedMap.put(currentPlayer, currPlayerList);
-		updatedMap.put(defenderPlayer, defenderPlayerTerritories);
-
+		if (!(defenderPlayerTerritories.size()==0)) {
+			updatedMap.put(defenderPlayer, defenderPlayerTerritories);
+		}else {
+			for (RiskCard currCard : defenderPlayer.getCardOwned()) {
+				currentPlayer.setCardOwned(currCard);
+			}
+			updatedMap.put(currentPlayer, currPlayerList);
+			updatedMap.remove(defenderPlayer);
+		}
 		return updatedMap;
 	}
 
 	/**
+	 * 
+	 * This function moves armies after win 
+	 *  
 	 * @param attackMoveArmy
 	 * @param attackSourceTerritory
 	 * @param attackDestinationTerritory
 	 * @param riskMainMap
+	 * 
 	 * @return
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackMoveArmy,
@@ -227,6 +239,42 @@ public class RiskGameHelper {
 		currPlayerList.set(currPlayerList.indexOf(attackDestinationTerritory), destinationTerritory);
 		
 		riskMainMap.put(currentPlayer, currPlayerList);
+		return riskMainMap;
+	}
+
+	/**
+	 * Function to assign random cards to the player after winning the territories
+	 * 
+	 * @param riskMainMap map with all players and respective territories
+	 * @return riskMainMap map with all players with cards updated
+	 */
+	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignRandomCard(
+			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+		
+		RiskPlayer currentPlayer = null;
+		
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+			if (entry.getKey().isCurrentPlayerTurn()) {
+				currentPlayer = entry.getKey();
+				break;
+			}
+		}
+		
+		 int randomCardNumber=(int) ((Math.random() * ((3 - 1) + 1)) + 1);
+		 
+		 switch(randomCardNumber) {
+			case 1:
+				currentPlayer.setCardOwned(RiskCard.INFANT);
+				break;
+				
+			case 2:
+				currentPlayer.setCardOwned(RiskCard.CAVALRY);
+				break;
+	
+			case 3:
+				currentPlayer.setCardOwned(RiskCard.ARTILLERY);
+				break;	
+			}
 		return riskMainMap;
 	}
 }
