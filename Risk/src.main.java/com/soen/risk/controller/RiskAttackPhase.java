@@ -11,13 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-// TODO: Auto-generated Javadoc
 /**
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
  * a) The normal attack mode is used to attack on any adjacent territory for each player
@@ -326,7 +324,7 @@ public class RiskAttackPhase {
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 		char selectedchoice;
-		int sourceTCoutner=1,destinationTCoutner=1;
+		int sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
 		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
 		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory;
@@ -335,8 +333,7 @@ public class RiskAttackPhase {
 		List<String> adjTerritoryList;
 		List<String> AdjAttackList;
 		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
-//		ArrayList<String> territoriesList = new ArrayList<String>();
-		RiskGameHelper riskGameHelper=new RiskGameHelper();
+
 		Map<String, Object> attackOutputMap = new HashMap<>();
 		
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
@@ -347,18 +344,17 @@ public class RiskAttackPhase {
 		}
 
 
+		
+		do {
+			
+			
 //		System.out.println("Current Player:"+currentPlayer.getPlayerName());
 		System.out.println("Select the territory you want to attack from:");
 		for (RiskTerritory currTerritory : playerTerritories) {
-//			String a=currTerritory.getTerritoryName();
-//			territoriesList.add(a);
 			System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 			sourceTCoutner++;	
 
 		}
-
-		//		System.out.println(territoriesList);
-
 		do {
 			while (!scanner.hasNextInt()) {
 				System.out.println("Try Again!!");
@@ -372,23 +368,17 @@ public class RiskAttackPhase {
 
 		attackSourceTerritory=playerTerritories.get(attackSourceTerritoryIndex-1);
 		attackSourceTerritoryName=attackSourceTerritory.getTerritoryName();
-		attackSourceArmy=attackSourceTerritory.getArmiesPresent();
+		attackSourceArmy=attackSourceTerritory.getArmiesPresent()-1;
+		
+		if (attackSourceArmy==1) {
+			System.out.println("Player needs at least 1 army to attack...\n Please select another territory");
+		}
+		
+		}while(attackSourceArmy==1);
+		
 
 
 		adjTerritoryList=new ArrayList<String>(attackSourceTerritory.getAdjacents());
-
-		/*
-		 * for (RiskTerritory currTerritory : playerTerritories) { if
-		 * (currTerritory.getTerritoryName().equalsIgnoreCase(attackSourceTerritoryName)
-		 * ) { adjTerritoryList=currTerritory.getAdjacents(); }
-		 * 
-		 * }
-		 */
-
-
-
-//		System.out.println(adjTerritoryList);
-
 
 		AdjAttackList=new ArrayList<String>(adjTerritoryList);
 		for (String currAdj : adjTerritoryList) {
@@ -398,12 +388,7 @@ public class RiskAttackPhase {
 				}
 			}
 		}
-	
 
-//		AdjAttackList=AdjAttackList.stream().distinct().collect(Collectors.toList());
-
-
-//		System.out.println("Adjacent Territories to attack:\n"+AdjAttackList);
 		
 		System.out.println("Enter the territory you want to attack:");
 		for (String territory : AdjAttackList) {
@@ -422,14 +407,12 @@ public class RiskAttackPhase {
 				System.out.println("Try Again!!");
 			}
 		}while(attackDestinationTerritoryIndex>=destinationTCoutner || attackDestinationTerritoryIndex<0);
-
-//		String defendingTerritory=AdjAttackList.get(attackDestinationTerritoryIndex-1);
+		
 		for(int i=0;i<AdjAttackList.size();i++) {
 			if(i==attackDestinationTerritoryIndex-1) {
 				defendingTerritory=AdjAttackList.get(i);
 			}
 		}
-//		System.out.println("Defending Territory name:"+defendingTerritory);
 		attackDestinationTerritory = RiskGameHelper.getRiskTerritoryByName(riskMainMap, defendingTerritory);
 		attackDestinationTerritoryName=attackDestinationTerritory.getTerritoryName();
 		attackDestinationArmy=attackDestinationTerritory.getArmiesPresent();
@@ -453,15 +436,36 @@ public class RiskAttackPhase {
 				defenderTerritoryArmy=(int) entry.getValue();
 			}
 		}
-		System.out.println("Attacker:"+attackerTerritory+" has "+attackerTerritoryArmy+" left");
-		System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
-		
-		
 		attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy);
 		attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 		
-
+//		updating the main map for the army after every attack and deleting the territory if army is zero
 		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
+		
+		if ((boolean) (attackOutputMap.get("did_attacker_win"))) {
+			System.out.println("Attacker wins...");
+		}else System.out.println("Defender wins...");
+		
+		System.out.println("Attacker:"+attackerTerritory+" has "+attackerTerritoryArmy+" left");
+		System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
+		
+		if (defenderTerritoryArmy==0) {
+			System.out.println("How many armies you want to move to the new conquered territory?");
+			do {
+				while (!scanner.hasNextInt()) {
+					System.out.println("Try Again!!");
+					scanner.next();
+				}
+				attackMoveArmy = scanner.nextInt();
+				if(attackMoveArmy>=attackerTerritoryArmy || attackMoveArmy<=0) {
+					System.out.println("Try Again!!");
+				}
+			}while(attackMoveArmy>=attackerTerritoryArmy || attackMoveArmy<=0);
+			
+//			Moving armies to new territory
+			riskMainMap=RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackSourceTerritory,attackDestinationTerritory, riskMainMap);
+		}
+		
 		
 		System.out.println("Do you want to attack again?(Y/N)");
 		do {
@@ -472,7 +476,7 @@ public class RiskAttackPhase {
 		}while(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N'));
 		if(selectedchoice=='Y'||selectedchoice=='y') {
 			getAttackphaseMap(riskMainMap);
-		}else System.out.println("Fortification phase skipped...");
+		}else System.out.println("attack completed...");
 		
 
 		return riskMainMap;

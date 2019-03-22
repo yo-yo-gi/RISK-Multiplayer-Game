@@ -146,10 +146,19 @@ public class RiskGameHelper {
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updateArmyAfterAttack(
 			RiskTerritory attackSourceTerritory, RiskTerritory attackDestinationTerritory,
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+			ArrayList<RiskTerritory> currPlayerList=new ArrayList<RiskTerritory>();
+			RiskPlayer currentPlayer = null, defenderPlayer=null;
+			ArrayList<RiskTerritory> defenderPlayerTerritories=new ArrayList<RiskTerritory>();
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+			if (entry.getKey().isCurrentPlayerTurn()) {
+				currentPlayer=entry.getKey();
+				currPlayerList.addAll(entry.getValue());
+				break;
+			}
+		}
 		
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updatedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
-
 			for (RiskTerritory currRiskTerritory : entry.getValue()) {
 				ArrayList<RiskTerritory> tempTerritoriesList=new ArrayList<RiskTerritory>(entry.getValue());
 				if (currRiskTerritory.getTerritoryName().equalsIgnoreCase(attackSourceTerritory.getTerritoryName())) {
@@ -161,9 +170,63 @@ public class RiskGameHelper {
 					updatedMap.put(entry.getKey(), tempTerritoriesList);
 				}
 			}
-
 		}
+		
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+			for (RiskTerritory currRiskTerritory : entry.getValue()) {
+				if (currRiskTerritory.getArmiesPresent()==0) {
+					currPlayerList.add(currRiskTerritory);	
+					defenderPlayerTerritories=entry.getValue();
+					defenderPlayer=entry.getKey();
+					defenderPlayerTerritories.remove(defenderPlayerTerritories.indexOf(attackDestinationTerritory));
+				}
+			}
+		}
+		
+		updatedMap.put(currentPlayer, currPlayerList);
+		updatedMap.put(defenderPlayer, defenderPlayerTerritories);
 
 		return updatedMap;
+	}
+
+	/**
+	 * @param attackMoveArmy
+	 * @param attackSourceTerritory
+	 * @param attackDestinationTerritory
+	 * @param riskMainMap
+	 * @return
+	 */
+	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackMoveArmy,
+			RiskTerritory attackSourceTerritory, RiskTerritory attackDestinationTerritory,
+			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+		
+		RiskTerritory sourceTerritory = null; 
+		RiskTerritory destinationTerritory = null;
+		RiskPlayer currentPlayer = null;
+		ArrayList<RiskTerritory> currPlayerList=new ArrayList<RiskTerritory>();
+		
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+			if (entry.getKey().isCurrentPlayerTurn()) {
+				currentPlayer=entry.getKey();
+				currPlayerList.addAll(entry.getValue());
+				break;
+			}
+			for (RiskTerritory currTerriory : entry.getValue()) {
+				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackSourceTerritory.getTerritoryName())) {
+					sourceTerritory=currTerriory;
+				}
+				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackDestinationTerritory.getTerritoryName())) {
+					destinationTerritory=currTerriory;
+				}
+			}
+		}
+		
+		sourceTerritory.setArmiesPresent(sourceTerritory.getArmiesPresent()-attackMoveArmy);
+		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent()+attackMoveArmy);
+		currPlayerList.set(currPlayerList.indexOf(attackSourceTerritory), sourceTerritory);
+		currPlayerList.set(currPlayerList.indexOf(attackDestinationTerritory), destinationTerritory);
+		
+		riskMainMap.put(currentPlayer, currPlayerList);
+		return riskMainMap;
 	}
 }
