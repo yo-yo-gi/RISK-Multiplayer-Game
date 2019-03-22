@@ -147,9 +147,11 @@ public class RiskGameHelper {
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updateArmyAfterAttack(
 			RiskTerritory attackSourceTerritory, RiskTerritory attackDestinationTerritory,
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+			boolean defenderArmyZeroCheckFlag=false;
 			ArrayList<RiskTerritory> currPlayerList=new ArrayList<RiskTerritory>();
 			RiskPlayer currentPlayer = null, defenderPlayer=null;
 			ArrayList<RiskTerritory> defenderPlayerTerritories=new ArrayList<RiskTerritory>();
+			
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
@@ -176,6 +178,7 @@ public class RiskGameHelper {
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			for (RiskTerritory currRiskTerritory : entry.getValue()) {
 				if (currRiskTerritory.getArmiesPresent()==0) {
+					defenderArmyZeroCheckFlag=true;
 					currPlayerList.add(currRiskTerritory);	
 					defenderPlayerTerritories=entry.getValue();
 					defenderPlayer=entry.getKey();
@@ -184,16 +187,22 @@ public class RiskGameHelper {
 			}
 		}
 		
-		updatedMap.put(currentPlayer, currPlayerList);
-		if (!(defenderPlayerTerritories.size()==0)) {
-			updatedMap.put(defenderPlayer, defenderPlayerTerritories);
-		}else {
-			for (RiskCard currCard : defenderPlayer.getCardOwned()) {
-				currentPlayer.setCardOwned(currCard);
-			}
+		
+		
+		if (defenderArmyZeroCheckFlag) {
 			updatedMap.put(currentPlayer, currPlayerList);
-			updatedMap.remove(defenderPlayer);
+			updatedMap.put(defenderPlayer, defenderPlayerTerritories);
+			
+			if (defenderPlayerTerritories.size()==0) {
+				for (RiskCard currCard : defenderPlayer.getCardOwned()) {
+					currentPlayer.setCardOwned(currCard);
+				}
+				updatedMap.remove(defenderPlayer);
+				updatedMap.put(currentPlayer, currPlayerList);
+			}
 		}
+		
+		
 		return updatedMap;
 	}
 

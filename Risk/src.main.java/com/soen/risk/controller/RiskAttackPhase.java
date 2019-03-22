@@ -16,7 +16,6 @@ import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
-// TODO: Auto-generated Javadoc
 /**
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
  * a) The normal attack mode is used to attack on any adjacent territory for each player
@@ -25,7 +24,8 @@ import com.soen.risk.model.RiskTerritory;
  * 
  * @author Chirag
  * @author Shashank Rao
- * @version 1.0
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public class RiskAttackPhase {
 
@@ -76,20 +76,32 @@ public class RiskAttackPhase {
 		Scanner scanner=new Scanner(System.in);
 		int desiredDiceCastByAttacker, desiredDiceCastByDefender;
 		System.out.println("Enter the number of dice you want to roll for attack: ");
+		
+		
+		
+		
 		desiredDiceCastByAttacker=scanner.nextInt();
-
 		if (desiredDiceCastByAttacker > 3) {
 			System.out.println("Attacker cannot cast more than 3 dice. Try Again!!");
 			desiredDiceCastByAttacker=scanner.nextInt();
 		}
+		
+		
+		
+		
 		System.out.println("Enter the number of dice you want to roll for defence: ");
-		desiredDiceCastByDefender=scanner.nextInt();
-
+		
+		
+		desiredDiceCastByDefender=scanner.nextInt();		
 		if (desiredDiceCastByDefender > 2) {
 			System.out.println("Defender cannot cast more than 2 dice. Try Again!!");
-			System.out.println("Try Again!!");
+//			System.out.println("Try Again!!");
 			desiredDiceCastByDefender=scanner.nextInt();
 		}
+		
+		
+		
+		
 		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
 		Map<String, Object> output = new HashMap<>();
 		/*
@@ -319,7 +331,7 @@ public class RiskAttackPhase {
 		List<String> adjTerritoryList;
 		List<String> AdjAttackList;
 		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
-
+		boolean cardEarnFlag=false;
 		Map<String, Object> attackOutputMap = new HashMap<>();
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
@@ -422,15 +434,26 @@ public class RiskAttackPhase {
 				defenderTerritoryArmy=(int) entry.getValue();
 			}
 		}
-		attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy);
+		attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
 		attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 
 		//		updating the main map for the army after every attack and deleting the territory if army is zero
 		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
 
+		if (riskMainMap.size()==1) {
+			System.out.println("*****************************************");
+			System.out.println(currentPlayer.getPlayerName() + "wins the match and conquered the world...\n Game Ends");
+			System.out.println("*****************************************");
+			System.exit(0);
+			}
+		
+		
 		if ((boolean) (attackOutputMap.get("did_attacker_win"))) {
+			cardEarnFlag=true;
 			System.out.println("Attacker wins...");
-		}else System.out.println("Defender wins...");
+		}else {
+			System.out.println("Defender wins...");
+		}
 
 		System.out.println("Attacker:"+attackerTerritory+" has "+attackerTerritoryArmy+" left");
 		System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
@@ -462,7 +485,12 @@ public class RiskAttackPhase {
 		}while(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N'));
 		if(selectedchoice=='Y'||selectedchoice=='y') {
 			getAttackphaseMap(riskMainMap);
-		}else System.out.println("attack completed...");
+		}else {
+		if(cardEarnFlag) {
+		riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
+		}
+		System.out.println("attack completed...");
+		}
 
 
 		return riskMainMap;
