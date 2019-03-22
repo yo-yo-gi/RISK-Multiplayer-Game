@@ -3,6 +3,7 @@
  */
 package com.soen.risk.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.soen.risk.model.RiskDominationObservable;
@@ -14,7 +15,7 @@ import com.soen.risk.model.RiskDominationObservable;
 public class RiskDominationView implements RiskDominationObserver {
 
 	private String percentMapContr;
-	private List<String> continentsContr;
+	private List<String> continentsContr=new ArrayList<String>();
 	private int armiesOwned;
 	RiskDominationObservable riskDominationObservable;
 

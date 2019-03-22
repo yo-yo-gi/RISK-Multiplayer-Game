@@ -3,12 +3,14 @@
  */
 package com.soen.risk.model;
 
-import java.util.ArrayList;
+import com.soen.risk.view.RiskCardviewObserver;
 
 /**
  * @author Yogesh Nimbhorkar
  *
  */
 public interface RiskCardviewObservable {
-	public void update();
+	public void addObserver(RiskCardviewObserver observer);
+	public void removeObserver(RiskCardviewObserver observer);
+	public void notifyAllObservers(); 
 }

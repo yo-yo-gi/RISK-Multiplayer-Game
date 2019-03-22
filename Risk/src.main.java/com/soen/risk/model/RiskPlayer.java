@@ -6,6 +6,8 @@ package com.soen.risk.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.soen.risk.view.RiskCardviewObserver;
+
 
 /**
  * <h2>Player Model</h2>
@@ -14,7 +16,7 @@ import java.util.List;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-public class RiskPlayer {
+public class RiskPlayer implements RiskCardviewObservable {
 
 	/** The player id. */
 	private String playerId;
@@ -39,11 +41,9 @@ public class RiskPlayer {
 	
 	/** The card owned. */
 	private ArrayList<RiskCard> cardOwned= new ArrayList<RiskCard>();
-	
-	/** Cards Return Logic*/
-	 
+ 
 	private int cardViewCount=1;
-
+	private List<RiskCardviewObserver> cardviewObsevers;
 	RiskCard cardData;
 
 	/**
@@ -61,6 +61,7 @@ public class RiskPlayer {
 	 */
 
 	public RiskPlayer() {
+		cardviewObsevers=new ArrayList<RiskCardviewObserver>();
 	}
 
 	/**
@@ -163,6 +164,7 @@ public class RiskPlayer {
 	{
 		this.cardArmies = cardArmyCount;
 	}
+	
 	public void setArmiesOwned(int armiesOwned) {
 		this.armiesOwned = armiesOwned;
 	}
@@ -199,6 +201,7 @@ public class RiskPlayer {
 
 	public void setCardOwned(RiskCard card) {
 		this.cardOwned.add(card);
+		notifyAllObservers();
 	}
 
 	/**
@@ -233,5 +236,34 @@ public class RiskPlayer {
 		 this.cardOwned.remove(RiskCard.INFANT);
 	     this.cardOwned.remove(RiskCard.ARTILLERY);
 	     this.cardOwned.remove(RiskCard.CAVALRY);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.soen.risk.model.RiskCardviewObservable#addObserver(com.soen.risk.view.RiskCardviewObserver)
+	 */
+	@Override
+	public void addObserver(RiskCardviewObserver observer) {
+		cardviewObsevers.add(observer);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.soen.risk.model.RiskCardviewObservable#removeObserver(com.soen.risk.view.RiskCardviewObserver)
+	 */
+	@Override
+	public void removeObserver(RiskCardviewObserver observer) {
+		cardviewObsevers.remove(observer);
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.soen.risk.model.RiskCardviewObservable#notifyAllObservers()
+	 */
+	@Override
+	public void notifyAllObservers() {
+		for (RiskCardviewObserver currObserver : cardviewObsevers) {
+			currObserver.update(this.cardOwned);
+		}
+		
 	}
 }
