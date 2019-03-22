@@ -45,20 +45,27 @@ public class RiskAttackPhase {
 	 * @return the map
 	 */
 	public Map<String, Object> attackPhaseInput(String attackSourceTerritoryName,int attackSourceArmy, String attackDestinationTerritoryName, int attackDestinationArmy){
+		int choice;
 		Map<String, Object> attackOutput = new HashMap<>();
 		System.out.println("Do you want to attack in 1)Normal Mode 2) All-Out Mode ");
-		int choice= scanner.nextInt();
-		switch(choice) {
-		case 1:
-			attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
-			break;
-		case 2:
-			attackOutput=rollDiceForAllOutAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
-			break;
-		default:
-			System.out.println("Invalid input. Try again!");
+		do {
+			while (!scanner.hasNextInt()) {
+				System.out.println("Try Again!!");
+				scanner.next();
+			}
+			choice= scanner.nextInt();
+			switch(choice) {
+			case 1:
+				attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+				break;
+			case 2:
+				attackOutput=rollDiceForAllOutAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+				break;
+			default:
+				System.out.println("Invalid input. Try again!!");
 
-		}
+			}
+		}while(choice>=1 || choice <=2);
 		return attackOutput;
 	}
 
@@ -76,44 +83,33 @@ public class RiskAttackPhase {
 		Scanner scanner=new Scanner(System.in);
 		int desiredDiceCastByAttacker, desiredDiceCastByDefender;
 		System.out.println("Enter the number of dice you want to roll for attack: ");
-		
-		
-		
-		
-		desiredDiceCastByAttacker=scanner.nextInt();
-		if (desiredDiceCastByAttacker > 3) {
-			System.out.println("Attacker cannot cast more than 3 dice. Try Again!!");
+
+		do {
+			while (!scanner.hasNextInt()) {
+				System.out.println("Try Again!!");
+				scanner.next();
+			}
 			desiredDiceCastByAttacker=scanner.nextInt();
-		}
-		
-		
-		
-		
+			if (desiredDiceCastByAttacker > 3) {
+				System.out.println("Attacker cannot cast more than 3 dice. Try Again!!");
+			}
+		}while(desiredDiceCastByAttacker > 3);
+
 		System.out.println("Enter the number of dice you want to roll for defence: ");
-		
-		
-		desiredDiceCastByDefender=scanner.nextInt();		
-		if (desiredDiceCastByDefender > 2) {
-			System.out.println("Defender cannot cast more than 2 dice. Try Again!!");
-//			System.out.println("Try Again!!");
-			desiredDiceCastByDefender=scanner.nextInt();
-		}
-		
-		
-		
-		
+
+		do {
+			while (!scanner.hasNextInt()) {
+				System.out.println("Try Again!!");
+				scanner.next();
+			}
+			desiredDiceCastByDefender=scanner.nextInt();		
+			if (desiredDiceCastByDefender > 2) {
+				System.out.println("Defender cannot cast more than 2 dice. Try Again!!");
+			}
+		}while(desiredDiceCastByDefender > 2);
+
 		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
 		Map<String, Object> output = new HashMap<>();
-		/*
-		if (attackingArmyCount < 2) {
-			System.out.println("Attacker should have more than 2 armies to attack");
-		}
-		if (defendingArmyCount < 1) {
-			System.out.println("Defender should have at least 1 army to defend");
-		}
-		if (desiredDiceCastByAttacker >= attackingArmyCount) {
-			System.out.println("Attacker must have at least one more army in their territory than the dice casted");
-		}*/
 
 		List<Integer> attackerDiceList = rollDice(desiredDiceCastByAttacker);
 		System.out.println(attackerDiceList);
@@ -445,9 +441,9 @@ public class RiskAttackPhase {
 			System.out.println(currentPlayer.getPlayerName() + "wins the match and conquered the world...\n Game Ends");
 			System.out.println("*****************************************");
 			System.exit(0);
-			}
-		
-		
+		}
+
+
 		if ((boolean) (attackOutputMap.get("did_attacker_win"))) {
 			cardEarnFlag=true;
 			System.out.println("Attacker wins...");
@@ -486,10 +482,10 @@ public class RiskAttackPhase {
 		if(selectedchoice=='Y'||selectedchoice=='y') {
 			getAttackphaseMap(riskMainMap);
 		}else {
-		if(cardEarnFlag) {
-		riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
-		}
-		System.out.println("attack completed...");
+			if(cardEarnFlag) {
+				riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
+			}
+			System.out.println("attack completed...");
 		}
 
 
