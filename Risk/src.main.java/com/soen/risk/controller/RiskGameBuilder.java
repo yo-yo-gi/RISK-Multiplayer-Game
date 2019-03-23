@@ -304,8 +304,17 @@ public class RiskGameBuilder {
 			riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 			
 			
-			riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
-			
+			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
+			char selectionAttack;
+			do {
+				selectionAttack=scanner.next().charAt(0);
+				if(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N')) {
+					System.out.println("Try Again!!");
+				}
+			}while(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N'));
+			if(selectionAttack=='Y'||selectionAttack=='y') {
+				riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
+			}else System.out.println("Attack phase skipped...");
 			
 			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
 			char selection1;

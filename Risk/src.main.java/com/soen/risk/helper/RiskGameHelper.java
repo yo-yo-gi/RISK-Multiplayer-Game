@@ -176,7 +176,8 @@ public class RiskGameHelper {
 		}
 		
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
-			for (RiskTerritory currRiskTerritory : entry.getValue()) {
+			ArrayList<RiskTerritory> tempTerritoryList=new ArrayList<RiskTerritory>(entry.getValue());
+			for (RiskTerritory currRiskTerritory : tempTerritoryList) {
 				if (currRiskTerritory.getArmiesPresent()==0) {
 					defenderArmyZeroCheckFlag=true;
 					currPlayerList.add(currRiskTerritory);	
@@ -230,7 +231,7 @@ public class RiskGameHelper {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
 				currPlayerList.addAll(entry.getValue());
-				break;
+//				break;
 			}
 			for (RiskTerritory currTerriory : entry.getValue()) {
 				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackSourceTerritory.getTerritoryName())) {

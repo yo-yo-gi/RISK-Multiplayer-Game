@@ -474,6 +474,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 		RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
+		boolean currPlayerArmyCheck=true;
 		char selectedchoice;
 		int sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
 		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
@@ -501,6 +502,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 			//		System.out.println("Current Player:"+currentPlayer.getPlayerName());
 			System.out.println("Select the territory you want to attack from:");
+			
 			for (RiskTerritory currTerritory : playerTerritories) {
 				System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 				sourceTCoutner++;	
@@ -521,11 +523,12 @@ public class RiskPlayer implements RiskCardviewObservable {
 			attackSourceTerritoryName=attackSourceTerritory.getTerritoryName();
 			attackSourceArmy=attackSourceTerritory.getArmiesPresent()-1;
 
-			if (attackSourceArmy==1) {
+			if (attackSourceArmy<1) {
 				System.out.println("Player needs at least 1 army to attack...\n Please select another territory");
+				sourceTCoutner=1;
 			}
 
-		}while(attackSourceArmy==1);
+		}while((attackSourceArmy<1));
 
 
 
@@ -600,18 +603,24 @@ public class RiskPlayer implements RiskCardviewObservable {
 			System.exit(0);
 		}
 
-
-		if ((boolean) (attackOutputMap.get("did_attacker_win"))) {
-			cardEarnFlag=true;
-			System.out.println("Attacker wins...");
-		}else {
-			System.out.println("Defender wins...");
-		}
+//		boolean flag=false;
+//		for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
+//			if(entry.getKey()=="did_attacker_win") {
+//				flag=true;
+//			}
+//		}
+//		if (flag) {
+//			
+//			System.out.println("Attacker wins...");
+//		}else {
+//			System.out.println("Defender wins...");
+//		}
 
 		System.out.println("Attacker:"+attackerTerritory+" has "+attackerTerritoryArmy+" left");
 		System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
 
 		if (defenderTerritoryArmy==0) {
+			cardEarnFlag=true;
 			System.out.println("How many armies you want to move to the new conquered territory?");
 			do {
 				while (!scanner.hasNextInt()) {
@@ -637,13 +646,32 @@ public class RiskPlayer implements RiskCardviewObservable {
 			}
 		}while(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N'));
 		if(selectedchoice=='Y'||selectedchoice=='y') {
-			getAttackphaseMap(riskMainMap);
-		}else {
-			if(cardEarnFlag) {
-				riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
+			ArrayList<RiskTerritory> listArmyCheck=new ArrayList<RiskTerritory>();
+//			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+//				if (entry.getKey().isCurrentPlayerTurn()) {
+//					currentPlayer=entry.getKey();
+//					listArmyCheck=entry.getValue();
+//				}
+//			}
+			listArmyCheck=riskMainMap.get(currentPlayer);
+			for (RiskTerritory currPlayerTerritory : listArmyCheck) {
+				if(currPlayerTerritory.getArmiesPresent()>1) {
+					currPlayerArmyCheck=false;
+					break;
+				}
+			}if(!currPlayerArmyCheck) {
+				getAttackphaseMap(riskMainMap);
 			}
-			System.out.println("attack completed...");
+			else {
+				System.out.println("You currently have only 1 army in you territories...\n.Cannot attack further...Proceed to fortification phase");
+				
+			}
+			
 		}
+		if(cardEarnFlag) {
+			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
+		}
+		System.out.println("attack completed...");
 
 
 		return riskMainMap;
@@ -668,13 +696,14 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackMap)
 	{
+		boolean exitFlag=false;
 		RiskPlayer currentPlayer = null;
 		/** The source territory. */
 		int sourceTerritory;
 		/** The adjacent territory list. */
 		ArrayList<String> adjTerritoryList;
 		/** The owned territory list. */
-		ArrayList<String> OwnedAdjList;
+		ArrayList<String> OwnedAdjList = new ArrayList<String>();
 
 		/**  The number of armies to be moved. */
 		int finalMoveOfArmies;
@@ -694,8 +723,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 		System.out.println();
 		System.out.println("Fortification started...");
 		System.out.println();
-		int destinationTerritory, sourceArmy, destinationArmy = Constants.ZERO;
-		String sourceTerritoryName, destinationTName = null ;
+		int destinationTerritory, sourceArmy = 0, destinationArmy = Constants.ZERO;
+		String sourceTerritoryName = null, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
 
 		logger.doLogging("currentPlayer name is: "+currentPlayer);
@@ -712,6 +741,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 					System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
 					sourceTCoutner++;			
 				}
+				System.out.println(sourceTCoutner+".Exit");
 
 				do {
 					while (!scanner.hasNextInt()) {
@@ -719,17 +749,24 @@ public class RiskPlayer implements RiskCardviewObservable {
 						scanner.next();
 					}
 					sourceTerritory=scanner.nextInt();
-					if(sourceTerritory>=sourceTCoutner || sourceTerritory<0) {
+					if(sourceTerritory>sourceTCoutner || sourceTerritory<0) {
 						System.out.println("Try Again!!");
 					}
-				}while(sourceTerritory>=sourceTCoutner || sourceTerritory<0);
-
+				}while(sourceTerritory>sourceTCoutner || sourceTerritory<0);
+				
+				if(sourceTerritory==sourceTCoutner) {
+					System.out.println("Exit Selected");
+					exitFlag=true;
+					break;
+				}
 				sourceTerritoryName=playerTerritories.get(sourceTerritory-1).getTerritoryName();
 				sourceArmy=playerTerritories.get(sourceTerritory-1).getArmiesPresent();
 				if ((playerTerritories.get(sourceTerritory-1).getArmiesPresent()==1)) {
 					System.out.println("Source territory must have at least one army \n please select different source territory");
 				}
 			}while(!(playerTerritories.get(sourceTerritory-1).getArmiesPresent()>1));
+			if(exitFlag)
+				break;
 
 			logger.doLogging("Selected source territory  "+sourceTerritoryName);
 			adjTerritoryList=new ArrayList<String>();
@@ -739,7 +776,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 				}
 			}
 
-			OwnedAdjList=new ArrayList<String>();
+			OwnedAdjList.clear();
 			for (String currAdj : adjTerritoryList) {
 				for (RiskTerritory currTerritory : playerTerritories) {
 					if (currAdj.equalsIgnoreCase(currTerritory.getTerritoryName())) {
@@ -828,10 +865,12 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 		System.out.println();
 		System.out.println("Fortification completed for the Player "+currentPlayer.getPlayerName());
-		System.out.println();
-		System.out.println("Source Territory: "+sourceTerritoryName+" has armies: "+sourceArmy);
-		System.out.println("Destination Territory: "+destinationTName+" has armies: "+destinationArmy);
-		System.out.println();
+		if(!exitFlag) {
+			System.out.println();
+			System.out.println("Source Territory: "+sourceTerritoryName+" has armies: "+sourceArmy);
+			System.out.println("Destination Territory: "+destinationTName+" has armies: "+destinationArmy);
+			System.out.println();
+		}
 
 		fortifiedMap.put(currentPlayer, finalFortifyList);
 		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
