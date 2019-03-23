@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
-import com.soen.risk.controller.RiskFortificationPhase;
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -41,7 +39,7 @@ public class RiskFortificationPhaseTest {
 		ArrayList<RiskTerritory> territories = new ArrayList<RiskTerritory>();
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-		RiskFortificationPhase riskFortificationTest = new RiskFortificationPhase();
+		RiskPlayer riskPlayer = new RiskPlayer();
 
 		RiskPlayer player1 = new RiskPlayer("Player1");
 
@@ -60,7 +58,7 @@ public class RiskFortificationPhaseTest {
 
 		
 
-		playerTerritoryMap = riskFortificationTest.getFortifiedMap(playerTerritoryMap);
+		playerTerritoryMap = riskPlayer.getFortifiedMap(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
 		Integer []  expected= {3,7};

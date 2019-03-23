@@ -21,7 +21,6 @@ import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
-import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -75,7 +74,6 @@ public class RiskGameBuilder {
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
 		RiskPlayer riskPlayer=new RiskPlayer();
-		RiskGameHelper riskGameHelper=new RiskGameHelper();
 		logger.doLogging("In RiskGameBuilder class------> ");
 		
 		System.out.println("Welcome to RISK GAME!!!");
@@ -272,7 +270,7 @@ public class RiskGameBuilder {
 		//		passing list of players and List of countries to assign random territories
 		riskMainMap=riskTerritoryAssignmentToPlayer.assignTerritory(riskPlayerList,riskTerritoryList);
 		//		assigning control value as per territories owned by player
-		riskMainMap=riskGameHelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
+		riskMainMap=RiskGameHelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
 		//		assigning round robin army to above map
 		riskMainMap=riskArmyAllocationToPlayers.assignArmiesToPlayers(riskMainMap);
 
@@ -285,22 +283,17 @@ public class RiskGameBuilder {
 
 		//		starting turn by turn reinforcement, attack and fortify
 
-//		RiskDomination riskDominationObservable=new RiskDomination();
-//		RiskDominationView riskDominationObserver=new RiskDominationView(riskDominationObservable);
+
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		while(tempMap.size()>1) {
 			
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
-//			riskDominationObservable.setPercentMapContr((RiskUtility.calculateDominationMapControlled(11, entry.getValue().size())));
-//			riskDominationObservable.setContinentsContr(entry.getKey().getOccupiedContinents());
-//			riskDominationObservable.setArmiesOwned(entry.getKey().getArmiesOwned());
-
-
-			
 			entry.getKey().setCurrentPlayerTurn(true);
-			entry.getKey().setCardOwned(RiskCard.INFANT);
-			entry.getKey().setCardOwned(RiskCard.INFANT);
-			entry.getKey().setCardOwned(RiskCard.INFANT);
+//			entry.getKey().setCardOwned(RiskCard.INFANT);
+//			entry.getKey().setCardOwned(RiskCard.INFANT);
+//			entry.getKey().setCardOwned(RiskCard.INFANT);
+			RiskGameHelper.assignRandomCard(riskMainMap);
+			
 			riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 			
 			

@@ -43,9 +43,13 @@ public class RiskDominationView implements RiskDominationObserver {
 	 * printing phase view
 	 */
 	private void showPhaseView() {
-		System.out.println("the percentage of the map controlled by player is: " + this.percentMapContr);
-		System.out.println("the continents controlled by player is: " + this.continentsContr);
-		System.out.println("the total number of armies owned by player is: " + this.armiesOwned);
+		System.out.println("*************************************************************");
+		System.out.println("*                  Risk Domination View                     *");
+		System.out.println("*************************************************************");
+		System.out.println("The percentage of map controlled by player: " + this.percentMapContr);
+		System.out.println("The continents controlled by player: " + this.continentsContr);
+		System.out.println("The total number of armies owned by player: " + this.armiesOwned);
+		System.out.println("*************************************************************");
 	}
 
 }

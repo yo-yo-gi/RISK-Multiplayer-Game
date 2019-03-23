@@ -36,10 +36,12 @@ public class RiskCardviewView implements RiskCardviewObserver{
 	 * 
 	 */
 	private void showCardview() {
-		System.out.println("New card has been added to players card list. Updated cards are /n");
-		for (RiskCard riskCard : cardOwned) {
-			System.out.println(riskCard.name());
-		}
+		System.out.println("*************************************************************");
+		System.out.println("*                    Risk Card View                         *");
+		System.out.println("*************************************************************");
+		System.out.println("New card has been assigned to player.\nUpdated card deck as: \n");
+		System.out.println(this.cardOwned);
+		System.out.println("\n*************************************************************");
 	}
 
 }

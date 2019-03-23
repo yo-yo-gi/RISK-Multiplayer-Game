@@ -38,7 +38,13 @@ public class RiskPhaseView implements RiskPhaseObserver {
 	 * printing phase view
 	 */
 	private void showPhaseView() {
-		System.out.println("Current Phase: "+this.currentGamePhase+" Current Player: "+this.currentPlayerName+" Current Action: "+this.currentAction);		
+		System.out.println("*************************************************************");
+		System.out.println("*                    Risk Phase View                        *");
+		System.out.println("*************************************************************");
+		System.out.println("Current Phase: "+this.currentGamePhase);
+		System.out.println("Current Player: "+this.currentPlayerName);
+		System.out.println("Current Action: "+this.currentAction);
+		System.out.println("*************************************************************");
 	}
 
 }

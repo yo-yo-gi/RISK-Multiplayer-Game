@@ -17,6 +17,7 @@ import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.view.RiskCardviewObserver;
+import com.soen.risk.view.RiskPhaseView;
 
 
 /**
@@ -30,37 +31,32 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	/** The logger. */
 	RiskLogger logger= new RiskLogger();
-
 	/** The scanner. */
-	Scanner scanner=new Scanner(System.in);
-	
+	Scanner scanner=new Scanner(System.in);	
 	/** The player id. */
 	private String playerId;
-
 	/** The player name. */
 	private String playerName;
-
 	/** The occupied territories. */
 	private ArrayList<String> occupiedTerritories;
-
 	/** The occupied continents. */
 	private ArrayList<String> occupiedContinents=new ArrayList<String>();
-
 	/** The armies owned. */
-	private int armiesOwned;
-	
+	private int armiesOwned;	
 	/** Current player turn*/
-	private boolean currentPlayerTurn=false;
-	
+	private boolean currentPlayerTurn=false;	
 	/** Cards replaced with Armies Count */
-	private int cardArmies;
-	
-	/** The card owned. */
+	private int cardArmies;	
+	/** The list of card owned. */
 	private ArrayList<RiskCard> cardOwned= new ArrayList<RiskCard>();
- 
+	/** Card exchange count for  player */
 	private int cardViewCount=1;
+	/** Risk card view obsever interface object */
 	private List<RiskCardviewObserver> cardviewObsevers;
-	RiskCard cardData;
+	/** Risk Phase view as Obsevable. */
+	RiskPhase riskPhase=new RiskPhase();
+	/** Risk Phase view as Obsever */
+	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
 
 	/**
 	 * Instantiates a new risk player.
@@ -302,30 +298,47 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap,
-			ArrayList<RiskContinent> riskContinentList) {
-		/** The selected terr index. */
+			ArrayList<RiskContinent> riskContinentList) {		
+		
+		/** The selected territory index. */
 		int selectedTerrIndex = 0;
+		/** Player with turn. */
 		RiskPlayer currentPlayer = null;
+		/** Output map with reinforcement data */
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(
 				riskMainMap);
+		/** Reinforcement phase controller */
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
+		/** Scanner object. */
 		Scanner scanner = new Scanner(System.in);
+		/** Name of current player */
 		String currentPlayerName = null;
+		/** Decision if user want to exchange cards or not. */
 		char decision ;
+		/** List of territories owned by current player. */
 		ArrayList<RiskTerritory> currentPlayerTerritories = new ArrayList<RiskTerritory>();
-		int noOfRemainingArmies = 0, cardExchangeViewArmy = 0;
-		ArrayList<RiskTerritory> playerTerritories = null;
-
+		/** Armies remaining after each iteration of reinfocement. */
+		int noOfRemainingArmies = 0;
+		/** Army calculated for card exchange view. */
+		int	cardExchangeViewArmy = 0;
+//		finding current player to use in this phase
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : reinforcedMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer = entry.getKey();
-				playerTerritories = entry.getValue();
+				currentPlayerTerritories = entry.getValue();
 			}
 		}
 
-		currentPlayerTerritories = playerTerritories;
 		currentPlayerName = currentPlayer.getPlayerName();
+		/** Territories owned by current player */
 		int noOfCountriesOwned = currentPlayerTerritories.size();
+		
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+		riskPhase.setCurrentPlayerName(currentPlayerName);
+		riskPhase.setCurrentAction("Starting Reinforcement");
+		
+		
 		/**
 		 * Condition to check the army calculated from the card exchange view or number
 		 * of number of armies / control value calculation
@@ -495,7 +508,10 @@ public class RiskPlayer implements RiskCardviewObservable {
 			}
 		}
 
-
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.ATTACK);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Attack Phase");
 
 		do {
 
@@ -729,6 +745,11 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 		logger.doLogging("currentPlayer name is: "+currentPlayer);
 
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Fortification Phase");
+		
 		do
 		{
 			do {
@@ -858,9 +879,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 				destinationTerritoryObject.setArmiesPresent(destinationArmy);
 				finalFortifyList.set(playerTerritories.indexOf(sourceTerritoryObject), sourceTerritoryObject);
 				finalFortifyList.set(playerTerritories.indexOf(destinationTerritoryObject), destinationTerritoryObject);
-
-			}
-			
+			}			
 		}
 
 		System.out.println();
@@ -873,6 +892,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 		}
 
 		fortifiedMap.put(currentPlayer, finalFortifyList);
+//		Triggering Phase View observer
+		riskPhase.setCurrentAction("Fortification Phase Completed");
 		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
 		return fortifiedMap;
 	}
