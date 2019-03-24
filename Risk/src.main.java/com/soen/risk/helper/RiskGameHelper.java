@@ -102,9 +102,8 @@ public class RiskGameHelper {
 	 */
 	public static String calculateDominationMapControlled(long totalTerritories, long ownedTerritories) {
 		String mapControll = null;
-
-		long calculation = Math.round((totalTerritories / ownedTerritories) * 100.0);
-		mapControll = Long.toString(calculation);
+		float percentage = ((float) ownedTerritories) / totalTerritories;
+		mapControll = String.format("%2.02f",(float)(percentage*100));
 		return mapControll;
 	}
 
@@ -182,7 +181,7 @@ public class RiskGameHelper {
 				}				
 			}
 		}
-//		Removing territory from defenders list if defender loses
+//		Removing territory from defenders list and adding to attacker's if defender loses all army
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			ArrayList<RiskTerritory> tempTerritoryList = new ArrayList<RiskTerritory>(entry.getValue());
 			for (RiskTerritory currRiskTerritory : tempTerritoryList) {
@@ -209,8 +208,6 @@ public class RiskGameHelper {
 				updatedMap.remove(defenderPlayer);
 				updatedMap.put(currentPlayer, currPlayerList);
 			}
-			
-
 		}
 
 		return updatedMap;
