@@ -50,7 +50,6 @@ public class RiskAttackPhase {
 			}
 			choice= scanner.nextInt();
 			if(choice>=3) {
-//				System.out.println("Try Again!!");
 				choice=3;
 			}
 			switch(choice) {
@@ -62,7 +61,6 @@ public class RiskAttackPhase {
 				break;
 			default:
 				System.out.println("Invalid input. Try again!!");
-
 			}
 		}while(choice>=3);
 		return attackOutput;
@@ -169,7 +167,7 @@ public class RiskAttackPhase {
 				else {
 					output.put("did_attacker_win", true);
 					output.put("did_defender_win", true);
-				     }
+				}
 			}
 		}
 		System.out.println("output="+output.toString());
@@ -286,13 +284,13 @@ public class RiskAttackPhase {
 					if ((i == 0 && maxDiceCastByAttacker > maxDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > minDiceCastByDefender)) {
 						defendingArmyCount--;
 						noAttackerWin++;
-						if(defendingArmyCount==1) {
+						if(defendingArmyCount<1) {
 							break;
 						}
 					} else {
 						attackingArmyCount--;
 						noDefenderWin++;
-						if(attackingArmyCount<=2) {
+						if(attackingArmyCount<1) {
 							break;
 						}
 					}
@@ -313,7 +311,7 @@ public class RiskAttackPhase {
 					else {
 						output.put("did_attacker_win", true);
 						output.put("did_defender_win", true);
-				     	     }
+					}
 				}
 			}
 		}
