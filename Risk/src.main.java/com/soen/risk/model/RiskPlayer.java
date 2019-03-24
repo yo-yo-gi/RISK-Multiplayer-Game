@@ -281,7 +281,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	
 
 
-	//==================================================================================
+//==================================================================================
 //	Reinforcement method
 //	============================================================================
 	
@@ -540,24 +540,30 @@ public class RiskPlayer implements RiskCardviewObservable {
 			attackSourceArmy=attackSourceTerritory.getArmiesPresent()-1;
 
 			if (attackSourceArmy<1) {
-				System.out.println("Player needs at least 1 army to attack...\n Please select another territory");
+				System.out.println("Player needs at least 1 army to attack...\nPlease select another territory");
+				sourceTCoutner=1;
+			}
+			
+			adjTerritoryList=new ArrayList<String>(attackSourceTerritory.getAdjacents());
+
+			AdjAttackList=new ArrayList<String>(adjTerritoryList);
+			for (String currAdj : adjTerritoryList) {
+				for (RiskTerritory currTerritory : playerTerritories) {
+					if ((currAdj.equalsIgnoreCase(currTerritory.getTerritoryName()))) {
+						AdjAttackList.remove(currAdj);
+					}
+				}
+			}
+			if (AdjAttackList.size()==0) {
+				System.out.println("Current territory don't have any adjucents to attack...\nPlease select another territory");
 				sourceTCoutner=1;
 			}
 
-		}while((attackSourceArmy<1));
+		}while((attackSourceArmy<1) || AdjAttackList.size()==0);
 
 
 
-		adjTerritoryList=new ArrayList<String>(attackSourceTerritory.getAdjacents());
-
-		AdjAttackList=new ArrayList<String>(adjTerritoryList);
-		for (String currAdj : adjTerritoryList) {
-			for (RiskTerritory currTerritory : playerTerritories) {
-				if ((currAdj.equalsIgnoreCase(currTerritory.getTerritoryName()))) {
-					AdjAttackList.remove(currAdj);
-				}
-			}
-		}
+		
 
 
 		System.out.println("Enter the territory you want to attack:");
@@ -600,18 +606,19 @@ public class RiskPlayer implements RiskCardviewObservable {
 			if(entry.getKey()==attackSourceTerritoryName) {
 				attackerTerritory=attackSourceTerritoryName;
 				attackerTerritoryArmy=(int) entry.getValue();
+				attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
 			}
 			else if(entry.getKey()==attackDestinationTerritoryName) {
 				defenderTerritory=attackDestinationTerritoryName;
 				defenderTerritoryArmy=(int) entry.getValue();
+				attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 			}
 		}
-		attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
-		attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
+		
+		
 
 		//		updating the main map for the army after every attack and deleting the territory if army is zero
 		riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
-
 		if (riskMainMap.size()==1) {
 			System.out.println("*****************************************");
 			System.out.println(currentPlayer.getPlayerName() + "wins the match and conquered the world...\n Game Ends");
@@ -644,10 +651,10 @@ public class RiskPlayer implements RiskCardviewObservable {
 					scanner.next();
 				}
 				attackMoveArmy = scanner.nextInt();
-				if(attackMoveArmy>=attackerTerritoryArmy || attackMoveArmy<=0) {
+				if(attackMoveArmy>attackerTerritoryArmy || attackMoveArmy<=0) {
 					System.out.println("Try Again!!");
 				}
-			}while(attackMoveArmy>=attackerTerritoryArmy || attackMoveArmy<=0);
+			}while(attackMoveArmy>attackerTerritoryArmy || attackMoveArmy<=0);
 
 			//			Moving armies to new territory
 			riskMainMap=RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackSourceTerritory,attackDestinationTerritory, riskMainMap);
@@ -695,7 +702,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	
 	
 	
-	//==================================================================================
+//==================================================================================
 //	Fortification method
 //	============================================================================
 	

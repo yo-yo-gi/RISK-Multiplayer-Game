@@ -292,7 +292,7 @@ public class RiskGameBuilder {
 //			entry.getKey().setCardOwned(RiskCard.INFANT);
 //			entry.getKey().setCardOwned(RiskCard.INFANT);
 //			entry.getKey().setCardOwned(RiskCard.INFANT);
-			RiskGameHelper.assignRandomCard(riskMainMap);
+//			RiskGameHelper.assignRandomCard(riskMainMap);
 			
 			riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 			

@@ -49,6 +49,10 @@ public class RiskAttackPhase {
 				scanner.next();
 			}
 			choice= scanner.nextInt();
+			if(choice>=3) {
+//				System.out.println("Try Again!!");
+				choice=3;
+			}
 			switch(choice) {
 			case 1:
 				attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
@@ -60,7 +64,7 @@ public class RiskAttackPhase {
 				System.out.println("Invalid input. Try again!!");
 
 			}
-		}while(!(choice>=1 || choice <=2));
+		}while(choice>=3);
 		return attackOutput;
 	}
 
@@ -252,7 +256,7 @@ public class RiskAttackPhase {
 				else {
 					attackingArmyCount--;
 					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(defendingArmyCount==0) {
+					if(attackingArmyCount==0) {
 						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
 					}
