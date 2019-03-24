@@ -63,7 +63,7 @@ public class RiskReinforcementPhaseTest {
 	public void setUp() {
 		riskMapBuilder=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile(Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/EarthMap.txt").toAbsolutePath().toString());		
+		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile(Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/Earth Map.txt").toAbsolutePath().toString());		
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
 		territoryList=riskMapBuilder.getTerritoryList();		
