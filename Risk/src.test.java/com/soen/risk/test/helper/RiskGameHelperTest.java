@@ -35,11 +35,11 @@ public class RiskGameHelperTest {
 	/** The risk player 2. */
 	RiskPlayer riskPlayer2 = new RiskPlayer();
 
-	/** The attacker source terr. */
-	RiskTerritory attackerSourceTerr= new RiskTerritory();
+	/** The attacker source territory. */
+	RiskTerritory attackerSourceTerritory= new RiskTerritory();
 
-	/** The attacker destination terr. */
-	RiskTerritory attackerDestinationTerr= new RiskTerritory();
+	/** The attacker destination territory. */
+	RiskTerritory attackerDestinationTerritory= new RiskTerritory();
 
 	/** The attacker list. */
 	ArrayList<RiskTerritory> attackerList = new ArrayList<>();
@@ -58,12 +58,12 @@ public class RiskGameHelperTest {
 		riskPlayer1.setPlayerName("Attacker1");
 		riskPlayer2.setPlayerName("Defender1");
 		riskPlayer1.setCurrentPlayerTurn(true);
-		attackerSourceTerr.setTerritoryName("Alaska");
-		attackerSourceTerr.setArmiesPresent(5);
-		attackerDestinationTerr.setTerritoryName("Peru");	
-		attackerDestinationTerr.setArmiesPresent(3);
-		attackerList.add(attackerSourceTerr);
-		defenderList.add(attackerDestinationTerr);
+		attackerSourceTerritory.setTerritoryName("Alaska");
+		attackerSourceTerritory.setArmiesPresent(5);
+		attackerDestinationTerritory.setTerritoryName("Peru");	
+		attackerDestinationTerritory.setArmiesPresent(3);
+		attackerList.add(attackerSourceTerritory);
+		defenderList.add(attackerDestinationTerritory);
 		riskMainMap.put(riskPlayer1, attackerList);
 		riskMainMap.put(riskPlayer2, defenderList);
 		attackMoveArmy=1;
@@ -74,9 +74,9 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testUpdateArmyAfterAttackForAttackerPositiveCase() {
-		attackerSourceTerr.setArmiesPresent(7);
-		attackerDestinationTerr.setArmiesPresent(5);
-		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		attackerSourceTerritory.setArmiesPresent(7);
+		attackerDestinationTerritory.setArmiesPresent(5);
+		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertEquals(7,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
 	}
 
@@ -85,9 +85,9 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testUpdateArmyAfterAttackForAttackerNegativeCase() {
-		attackerSourceTerr.setArmiesPresent(7);
-		attackerDestinationTerr.setArmiesPresent(3);
-		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		attackerSourceTerritory.setArmiesPresent(7);
+		attackerDestinationTerritory.setArmiesPresent(3);
+		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertNotEquals(8,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
 	}
 
@@ -96,9 +96,9 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testUpdateArmyAfterAttackForDefenderPositiveCase() {
-		attackerSourceTerr.setArmiesPresent(6);
-		attackerDestinationTerr.setArmiesPresent(4);
-		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		attackerSourceTerritory.setArmiesPresent(6);
+		attackerDestinationTerritory.setArmiesPresent(4);
+		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertEquals(4,riskMainMap.get(riskPlayer2).get(0).getArmiesPresent());
 	}
 
@@ -107,9 +107,9 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testUpdateArmyAfterAttackForDefenderNegativeCase() {
-		attackerSourceTerr.setArmiesPresent(7);
-		attackerDestinationTerr.setArmiesPresent(3);
-		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		attackerSourceTerritory.setArmiesPresent(7);
+		attackerDestinationTerritory.setArmiesPresent(3);
+		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertNotEquals(2,riskMainMap.get(riskPlayer2).get(0).getArmiesPresent());
 	}
 	
@@ -118,12 +118,12 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testMoveArmyAfterAttackPositiveCase() {
-		attackerSourceTerr.setArmiesPresent(8);
-		attackerDestinationTerr.setArmiesPresent(0);
-		attackerList.set(0,attackerSourceTerr);
-		attackerList.add(attackerDestinationTerr);
+		attackerSourceTerritory.setArmiesPresent(8);
+		attackerDestinationTerritory.setArmiesPresent(0);
+		attackerList.set(0,attackerSourceTerritory);
+		attackerList.add(attackerDestinationTerritory);
 		riskMainMap.put(riskPlayer1, attackerList);
-		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertEquals(7,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
 		assertEquals(1,riskMainMap.get(riskPlayer1).get(1).getArmiesPresent());
 		
@@ -134,12 +134,12 @@ public class RiskGameHelperTest {
 	 */
 	@Test
 	public void testMoveArmyAfterAttackNegativeCase() {
-		attackerSourceTerr.setArmiesPresent(6);
-		attackerDestinationTerr.setArmiesPresent(1);
-		attackerList.set(0,attackerSourceTerr);
-		attackerList.add(attackerDestinationTerr);
+		attackerSourceTerritory.setArmiesPresent(6);
+		attackerDestinationTerritory.setArmiesPresent(1);
+		attackerList.set(0,attackerSourceTerritory);
+		attackerList.add(attackerDestinationTerritory);
 		riskMainMap.put(riskPlayer1, attackerList);
-		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerritory, attackerDestinationTerritory, riskMainMap);
 		assertNotEquals(1,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
 		assertNotEquals(3,riskMainMap.get(riskPlayer1).get(1).getArmiesPresent());
 		
