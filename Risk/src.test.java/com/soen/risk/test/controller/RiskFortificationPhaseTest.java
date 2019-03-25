@@ -6,13 +6,11 @@ package com.soen.risk.test.controller;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.junit.Test;
 
-import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -36,7 +34,7 @@ public class RiskFortificationPhaseTest {
 
 		ArrayList<RiskTerritory> territories = new ArrayList<RiskTerritory>();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-		
+
 
 		RiskPlayer player1 = new RiskPlayer("Player1");
 		player1.setCurrentPlayerTurn(true);
@@ -49,12 +47,12 @@ public class RiskFortificationPhaseTest {
 		String[] parsedTerritory2 = {"Peru","South America","Brazil"};
 		RiskTerritory tr3 = new RiskTerritory(parsedTerritory2);
 		tr3.setArmiesPresent(5);
-		
+
 		territories.add(tr1);
 		territories.add(tr2);
 		territories.add(tr3);
 		playerTerritoryMap.put(player1, territories);
-		
+
 
 		playerTerritoryMap = player1.getFortifiedMap(playerTerritoryMap);
 

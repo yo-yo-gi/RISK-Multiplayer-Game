@@ -58,7 +58,7 @@ public class RiskReinforcementPhaseTest {
 
 
 	/**
-	 * Sets the up.
+	 * Sets the data for testing the functionalities of the methods.
 	 */
 	@Before
 	public void setUp() {
