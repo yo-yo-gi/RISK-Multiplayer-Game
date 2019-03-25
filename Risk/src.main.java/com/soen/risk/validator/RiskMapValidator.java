@@ -17,7 +17,6 @@ import com.soen.risk.helper.Constants;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
-
 /**
  * <h2>Map File Validator</h2>
  * This class is used to check for wrong syntax of map file,
@@ -30,18 +29,19 @@ import com.soen.risk.model.RiskTerritory;
  * check for connectivity of territory graph.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0
+ * @author Chirag
+ * @version 2.0
  */
 public class RiskMapValidator {
 
 	/** The continent list. */
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();
 
-	/** The terretory list. */
-	private ArrayList<RiskTerritory> terretoryList=new ArrayList<RiskTerritory>();
+	/** The territory list. */
+	private ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
 
-	/** The adjucency map. */
-	private Map<String, List<String>> adjucencyMap=new HashMap<String, List<String>>();
+	/** The adjacency map. */
+	private Map<String, List<String>> adjacencyMap=new HashMap<String, List<String>>();
 
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
@@ -50,24 +50,24 @@ public class RiskMapValidator {
 	boolean validation=false;
 
 	/** The index of DS colon. */
-	int indexOfMap=0, indexOfContinents=0, indexOfDash=0, indexOfTerritories=0, indexOfDSColon=0;
+	int indexOfMap=Constants.ZERO, indexOfContinents=Constants.ZERO, indexOfDash=Constants.ZERO, indexOfTerritories=Constants.ZERO, indexOfDSColon=Constants.ZERO;
 
-	/** The init continent list. */
+	/** The initialize continent list. */
 	private ArrayList<String> initContinentList;
 
-	/** The init territory list. */
+	/** The initialize territory list. */
 	private ArrayList<String> initTerritoryList;
 
-	/** The init adjucency list. */
-	private ArrayList<String> initAdjucencyList=new ArrayList<String>();
+	/** The initialize adjacency list. */
+	private ArrayList<String> initAdjacencyList=new ArrayList<String>();
 
-	/** The adj vertices. */
+	/** The adjacency vertices. */
 	private int adjVertices; // No. of vertices 
 
-	/** The adj list. */
+	/** The adjacency list. */
 	private LinkedList<Integer> adjList[]; //Adjacency List 
 
-	/** The adj list transpose. */
+	/** The adjacency list transpose. */
 	private LinkedList<Integer> adjListTranspose[]; //Adjacency List for transpose DFS
 
 	/**
@@ -83,10 +83,10 @@ public class RiskMapValidator {
 				riskMapBuilder = new RiskMapBuilder(); 
 				riskMapBuilder.loadMapData(parsedMapFile);
 				continentList=riskMapBuilder.getContinentList();
-				terretoryList=riskMapBuilder.getTerritoryList();
-				adjucencyMap=riskMapBuilder.getAdjacencyMap();
+				territoryList=riskMapBuilder.getTerritoryList();
+				adjacencyMap=riskMapBuilder.getAdjacencyMap();
 				if(validateContinents(continentList)) {
-					if(validateTerritories(terretoryList, adjucencyMap)) {			
+					if(validateTerritories(territoryList, adjacencyMap)) {			
 						validation=true;
 					}else {validation=false;}
 				}else {validation=false;}
@@ -233,7 +233,7 @@ public class RiskMapValidator {
 				}
 			}
 			//		checking if connected or not
-			territoryValidation=checkTerritoryAdjucency();
+			territoryValidation=checkTerritoryAdjacency();
 		}
 		return territoryValidation;
 	}
@@ -251,8 +251,8 @@ public class RiskMapValidator {
 		boolean duplicacyValidation=false;
 		int continentCounter=Constants.ZERO;
 		int territoryCounter=Constants.ZERO;
-		int adjucentCounter=Constants.ZERO;
-		int adjucentCounterSelf = Constants.ZERO;
+		int adjacentCounter=Constants.ZERO;
+		int adjacentCounterSelf = Constants.ZERO;
 		int continentCorrectCount=Constants.ZERO;
 		//		name of territory and name of continent should not be same
 		for (String currTerritory : territories) {
@@ -263,11 +263,11 @@ public class RiskMapValidator {
 				}else {duplicacyValidation=true;}
 			}
 			if(duplicacyValidation==false) break;
-			initAdjucencyList=new ArrayList<String>();
-			initAdjucencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
-			for (String currAdjucent : initAdjucencyList) {
+			initAdjacencyList=new ArrayList<String>();
+			initAdjacencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
+			for (String currAdjacent : initAdjacencyList) {
 				for (String currContinent : continents) {
-					if(currAdjucent.equalsIgnoreCase(currContinent)){
+					if(currAdjacent.equalsIgnoreCase(currContinent)){
 						duplicacyValidation=false;
 						break;
 					}else {duplicacyValidation=true;}
@@ -298,26 +298,26 @@ public class RiskMapValidator {
 			}
 			//			there can not be more than 1 adjacent territory with same name
 			for (String currTerritory : territories) {
-				initAdjucencyList=new ArrayList<String>();
-				initAdjucencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
-				for (String currAdjucent : initAdjucencyList) {
-					adjucentCounter=Constants.ZERO;
-					for (String anotherAdjucent : initAdjucencyList) {
-						if(currAdjucent.equalsIgnoreCase(anotherAdjucent))
-							adjucentCounter++;
-					}if(adjucentCounter>2) {duplicacyValidation=false; break;}					
-				}if(adjucentCounter>2) {duplicacyValidation=false; break;}
+				initAdjacencyList=new ArrayList<String>();
+				initAdjacencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
+				for (String currAdjacent : initAdjacencyList) {
+					adjacentCounter=Constants.ZERO;
+					for (String anotherAdjacent : initAdjacencyList) {
+						if(currAdjacent.equalsIgnoreCase(anotherAdjacent))
+							adjacentCounter++;
+					}if(adjacentCounter>2) {duplicacyValidation=false; break;}					
+				}if(adjacentCounter>2) {duplicacyValidation=false; break;}
 			}
 
 			//			there can not be  adjacent territory with same name as territory name
 			for (String currTerritory : territories) {
-				initAdjucencyList=new ArrayList<String>();
-				initAdjucencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
-				for (String currAdjucent : initAdjucencyList) {
-					adjucentCounterSelf = Constants.ZERO;
-					if(currAdjucent.equalsIgnoreCase(currTerritory))
-						adjucentCounterSelf++;				
-				}if(adjucentCounterSelf>0) {duplicacyValidation=false; break;}
+				initAdjacencyList=new ArrayList<String>();
+				initAdjacencyList.addAll(Arrays.asList((currTerritory.split(",",3)[2]).split(",")));
+				for (String currAdjacent : initAdjacencyList) {
+					adjacentCounterSelf = Constants.ZERO;
+					if(currAdjacent.equalsIgnoreCase(currTerritory))
+						adjacentCounterSelf++;				
+				}if(adjacentCounterSelf>0) {duplicacyValidation=false; break;}
 			}
 
 			//			continent name in territory should be present in continent list
@@ -330,7 +330,7 @@ public class RiskMapValidator {
 				}if(continentCorrectCount!=1) {duplicacyValidation=false; break;}
 			}
 
-			if(continentCounter<2 && territoryCounter<2 && adjucentCounter<2 && continentCorrectCount==1&&adjucentCounterSelf==0) {
+			if(continentCounter<2 && territoryCounter<2 && adjacentCounter<2 && continentCorrectCount==1&&adjacentCounterSelf==0) {
 				duplicacyValidation=true;
 			}else {duplicacyValidation=false;}
 		}
@@ -487,7 +487,7 @@ public class RiskMapValidator {
 	 * @return returns true if graph is strongly connected
 	 */
 
-	Boolean checkTerritoryAdjucency() 
+	Boolean checkTerritoryAdjacency() 
 	{ 
 		//		Step 1: Mark all the vertices as not visited 
 		//		(For first DFS) 
