@@ -4,6 +4,7 @@
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,49 +87,77 @@ public class RiskReinforcementPhase {
 
 		System.out.println("The Cards owned by the Player: " + player.getCardOwned());
 
-		System.out.println("Do you want to replace the armies for  1)Similar cards \n2)Distinct Cards");
+		System.out.println("Do you want to replace the armies for  1)Similar cards 2)Distinct Cards");
 		do {
 			decision=scanner.nextInt();
 			if(!(decision==1 || decision==2)) {
 				System.out.println("Try Again!!");
 			}
 		}while(!(decision==1 || decision==2));
-	
-			if (decision == 1) {
-				ArrayList<RiskCard> infantry = new ArrayList<RiskCard>();
-				ArrayList<RiskCard> Artillery = new ArrayList<RiskCard>();
-				ArrayList<RiskCard> Cavalry = new ArrayList<RiskCard>();
-				for (int i = 0; i < 3; i++) {
-					infantry.add(RiskCard.INFANT);
-					Artillery.add(RiskCard.ARTILLERY);
-					Cavalry.add(RiskCard.CAVALRY);
-				}
-				if (player.getCardOwned().containsAll(infantry) || player.getCardOwned().containsAll(Artillery)
-						|| player.getCardOwned().containsAll(Cavalry)) {
+		int infantCounter=0;
+		int cavCounter=0;
+		int artilleryCounter=0;
 
-					System.out.println(
-							"From the below choices which cards to avail\n1)Infantry \n2)Artillery \n3)Cavalry");
-					do {
-						decForSameCards=scanner.nextInt();
-						if(!(decForSameCards==1 || decForSameCards==2 || decForSameCards==3 )) {
-							System.out.println("Try Again!!");
-						}
-					}while(!(decForSameCards==1 || decForSameCards==2));
-					if (decForSameCards == 1) {
-						player.removeSimilarThreeCards(RiskCard.INFANT);
-					} else if (decForSameCards == 2) {
-						player.removeSimilarThreeCards(RiskCard.ARTILLERY);
-					} else if (decForSameCards == 3) {
-						player.removeSimilarThreeCards(RiskCard.CAVALRY);
-					} else {
-						System.out.println("Invalid input");
-					}
-				} else
-					System.out.println("Player doesn't have similar cards.");
-			} else if (decision == 2) {
-				System.out.println("The player owns different cards.");
+		ArrayList<RiskCard> distinctCards = new ArrayList<RiskCard>();
+		distinctCards.add(RiskCard.INFANT);
+		distinctCards.add(RiskCard.ARTILLERY);
+		distinctCards.add(RiskCard.CAVALRY);
+		
+		for(RiskCard currCard:player.getCardOwned()) {
+			if (currCard.equals(RiskCard.INFANT)) {
+				infantCounter = infantCounter + 1;
+			}
+			if(currCard.equals(RiskCard.ARTILLERY))
+			{
+				artilleryCounter = artilleryCounter + 1;
+			}
+			if(currCard.equals(RiskCard.CAVALRY))
+			{
+				cavCounter = cavCounter + 1;
+			}
+		}
+		if (decision == 1) {
+			
+			if(infantCounter>=3 || artilleryCounter >= 3 || cavCounter >= 3)
+			 {
+				if (infantCounter == 3) {
+					System.out.println("Infantry Cards removed");
+					player.removeSimilarThreeCards(RiskCard.INFANT);
+				} else if (artilleryCounter == 3) {
+					System.out.println("Artillery Cards remvoed");
+					player.removeSimilarThreeCards(RiskCard.ARTILLERY);
+				} else if (cavCounter==3) {
+					System.out.println("Cavalry Cards removed");
+					player.removeSimilarThreeCards(RiskCard.CAVALRY);
+				}
+			} 
+			else
+			{
+				System.out.println("Player doesn't have similar cards. Exchaging distinct cards.");
 				player.removeDistinctCards();
 			}
+		} else if (decision == 2) {
+			
+			if (player.getCardOwned().containsAll(distinctCards))
+			{
+				System.out.println("Exchanging distinct cards.");
+				player.removeDistinctCards();
+			}
+			else
+			{
+				System.out.println("The player does not contain distinct cards,hence exchanging for similar cards");
+				if (infantCounter == 3) {
+					System.out.println("Infantry Cards removed");
+					player.removeSimilarThreeCards(RiskCard.INFANT);
+				} else if (artilleryCounter == 3) {
+					System.out.println("Artillery Cards remvoed");
+					player.removeSimilarThreeCards(RiskCard.ARTILLERY);
+				} else if (cavCounter==3) {
+					System.out.println("Cavalry Cards removed");
+					player.removeSimilarThreeCards(RiskCard.CAVALRY);
+				}
+			}
+		}
 		exchangeArmies = player.getCardViewCount() * 5;
 		player.setCardViewCount(player.getCardViewCount() + 1);
 		return exchangeArmies;
