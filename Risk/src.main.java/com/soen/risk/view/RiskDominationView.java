@@ -9,16 +9,29 @@ import java.util.List;
 import com.soen.risk.model.RiskDominationObservable;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskDominationView.
  *
+ * @author Yogesh Nimbhorkar
  */
 public class RiskDominationView implements RiskDominationObserver {
 
+	/** The percent map contr. */
 	private String percentMapContr;
+	
+	/** The continents contr. */
 	private List<String> continentsContr=new ArrayList<String>();
+	
+	/** The armies owned. */
 	private int armiesOwned;
+	
+	/** The risk domination observable. */
 	RiskDominationObservable riskDominationObservable;
 
+	/**
+	 * Instantiates a new risk domination view.
+	 *
+	 * @param riskDominationObservable the risk domination observable
+	 */
 	public RiskDominationView(RiskDominationObservable riskDominationObservable) {
 		this.riskDominationObservable = riskDominationObservable;
 		this.riskDominationObservable.addObserver(this);
@@ -40,7 +53,7 @@ public class RiskDominationView implements RiskDominationObserver {
 	}
 
 	/**
-	 * printing phase view
+	 * printing phase view.
 	 */
 	private void showPhaseView() {
 		System.out.println("*************************************************************");

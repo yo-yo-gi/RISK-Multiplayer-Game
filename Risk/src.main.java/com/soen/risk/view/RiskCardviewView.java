@@ -10,14 +10,24 @@ import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskCardviewObservable;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskCardviewView.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public class RiskCardviewView implements RiskCardviewObserver{
 
+	/** The card owned. */
 	private List<RiskCard> cardOwned;
+	
+	/** The cardview obsevable. */
 	private RiskCardviewObservable cardviewObsevable;
 	
+	/**
+	 * Instantiates a new risk cardview view.
+	 *
+	 * @param cardviewObsevable the cardview obsevable
+	 */
 	public RiskCardviewView(RiskCardviewObservable cardviewObsevable) {
 		this.cardviewObsevable=cardviewObsevable;
 		this.cardviewObsevable.addObserver(this);
@@ -33,7 +43,7 @@ public class RiskCardviewView implements RiskCardviewObserver{
 	}
 
 	/**
-	 * 
+	 * Show cardview.
 	 */
 	private void showCardview() {
 		System.out.println("*************************************************************");

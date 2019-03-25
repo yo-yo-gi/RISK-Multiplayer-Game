@@ -6,17 +6,32 @@ package com.soen.risk.view;
 import com.soen.risk.model.RiskPhaseObservable;
 import com.soen.risk.model.RiskPhaseType;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskPhaseView.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public class RiskPhaseView implements RiskPhaseObserver {
 
+	/** The current game phase. */
 	private RiskPhaseType currentGamePhase;
+	
+	/** The current player name. */
 	private String currentPlayerName;
+	
+	/** The current action. */
 	private String currentAction;
+	
+	/** The phase observable. */
 	private RiskPhaseObservable phaseObservable;
 	
+	/**
+	 * Instantiates a new risk phase view.
+	 *
+	 * @param phaseObservable the phase observable
+	 */
 	public RiskPhaseView(RiskPhaseObservable phaseObservable) {
 		this.phaseObservable=phaseObservable;
 		this.phaseObservable.addObserver(this);
@@ -35,7 +50,7 @@ public class RiskPhaseView implements RiskPhaseObserver {
 	}
 
 	/**
-	 * printing phase view
+	 * Printing Risk Phase View.
 	 */
 	private void showPhaseView() {
 		System.out.println("*************************************************************");
