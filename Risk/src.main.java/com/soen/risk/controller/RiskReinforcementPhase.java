@@ -64,11 +64,7 @@ public class RiskReinforcementPhase {
 	 * Iteration 2 Implementation of a card exchange view using the Observer
 	 * pattern.
 	 *
-	 * @param playerID                  the player ID
-	 * @param noOfCountriesOwned        the number of countries assigned to the
-	 *                                  Player
-	 * @param noOfPlayers               the total number of players set for the game
-	 * @param totalCountriesInContinent the total number of Countries in a continent
+	 * @param player	Player information
 	 */
 
 	public int CardExchangeView(RiskPlayer player) {
