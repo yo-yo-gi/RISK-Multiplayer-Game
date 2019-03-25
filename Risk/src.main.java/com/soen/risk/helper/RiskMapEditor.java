@@ -25,7 +25,7 @@ public class RiskMapEditor {
 	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);
 
-	/** The fullmap. */
+	/** The fullMap. */
 	ArrayList<String> fullmap=new ArrayList<String>();
 
 	/** The Map 1. */
@@ -126,12 +126,12 @@ public class RiskMapEditor {
 
 	public void editMap() {
 
-		
+
 		boolean flag1 = true;
 		boolean flag2 = true;
 		boolean flag3 = true;
-		int choiceofEdit =0;
-		int choiceofAdd=0;
+		int choiceofEdit =Constants.ZERO;
+		int choiceofAdd=Constants.ZERO;
 		while (flag1) {
 			System.out.println("Please select an option from below:");
 			System.out.println("1. ADD");
@@ -173,7 +173,7 @@ public class RiskMapEditor {
 						System.out.println("Add continent name in the format:<Continent Name>=<Control Value>");
 						String continent=scanner.next();
 						addContinent(continent);
-						
+
 						break;
 					case 2:
 						System.out.println("Add terrritory selected");
@@ -183,9 +183,9 @@ public class RiskMapEditor {
 						addTerritory(territory);
 						break;
 					case 3:
-						
+
 						flag2=false;
-						
+
 						break;
 					default:
 						System.out.println("Invalid input");
@@ -215,7 +215,7 @@ public class RiskMapEditor {
 						System.out.println("Delete continent selected");
 						System.out.println("Enter the continent you want to remove:");
 						String removeContinent=scanner.next();
-						
+
 						deleteContinent(removeContinent);
 						break;
 					case 2:
@@ -226,7 +226,7 @@ public class RiskMapEditor {
 						break;
 					case 3:
 						flag3=false;
-						
+
 						break;
 					default:
 						System.out.println("Invalid input");
@@ -368,7 +368,7 @@ public class RiskMapEditor {
 	 */
 
 	/*Logic to delete a continent from the continent ArrayList and territory ArrayList-START*/
-	
+
 
 	public void deleteContinent(String continentToRemove) {
 		ArrayList<String> deletedContinentList=new  ArrayList<String>(continentList);
@@ -391,7 +391,7 @@ public class RiskMapEditor {
 					tempContinentList.remove(indexOfContinent);
 				}
 			}
-			
+
 		}
 
 		deletedContinentList=tempContinentList;
@@ -405,7 +405,7 @@ public class RiskMapEditor {
 					if(indexOfTerritory>=0)
 						tempTerritoryList.remove(indexOfTerritory);
 				}
-				
+
 			}
 			deletedTerritoryList=tempTerritoryList;
 		}

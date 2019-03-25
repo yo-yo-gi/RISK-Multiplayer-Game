@@ -5,10 +5,8 @@ package com.soen.risk.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskMapBuilder;
@@ -81,9 +79,9 @@ public class RiskTerritoryAssignmentToPlayer {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
-			
+
 		}
-		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
+		logger.doLogging("Returning playerTerritory map------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

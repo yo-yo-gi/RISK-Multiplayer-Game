@@ -22,7 +22,8 @@ import com.soen.risk.view.RiskDominationView;
  * This class is used for writing utility functions related to game play.
  *
  * @author Yogesh Nimbhorkar
- * @version 1.0
+ * @author Chirag
+ * @version 2.0
  */
 public class RiskGameHelper {
 
@@ -101,10 +102,10 @@ public class RiskGameHelper {
 	 * @return mapControll percentage of map controlled by player
 	 */
 	public static String calculateDominationMapControlled(long totalTerritories, long ownedTerritories) {
-		String mapControll = null;
+		String mapControl = null;
 		float percentage = ((float) ownedTerritories) / totalTerritories;
-		mapControll = String.format("%2.02f",(float)(percentage*100));
-		return mapControll;
+		mapControl = String.format("%2.02f",(float)(percentage*100));
+		return mapControl;
 	}
 
 	/**
@@ -142,21 +143,21 @@ public class RiskGameHelper {
 	 * checks if defenders territory is last available then assign all cards to
 	 * current player
 	 * 
-	 * @param attackSourceTerritory      source territory of attack
-	 * @param attackDestinationTerritory destination territory of attack
+	 * @param attackerSourceTerritory      source territory of attack
+	 * @param attackerDestinationTerritory destination territory of attack
 	 * @param riskMainMap                Map of players with respective territory
 	 * @return updatedMap Updated map after army updation
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updateArmyAfterAttack(
-			RiskTerritory attackSourceTerritory, RiskTerritory attackDestinationTerritory,
+			RiskTerritory attackerSourceTerritory, RiskTerritory attackerDestinationTerritory,
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
-		
+
 		boolean defenderArmyZeroCheckFlag = false;
 		ArrayList<RiskTerritory> currPlayerList = new ArrayList<RiskTerritory>();
 		RiskPlayer currentPlayer = null, defenderPlayer = null;
 		ArrayList<RiskTerritory> defenderPlayerTerritories = new ArrayList<RiskTerritory>();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updatedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
-//		Finding current player and calculating total territories in map
+		//		Finding current player and calculating total territories in map
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer = entry.getKey();
@@ -165,23 +166,23 @@ public class RiskGameHelper {
 			}			
 		}
 
-		
-//		Updating source and destination armies after attack
+
+		//		Updating source and destination armies after attack
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			for (RiskTerritory currRiskTerritory : entry.getValue()) {
 				ArrayList<RiskTerritory> tempTerritoriesList = new ArrayList<RiskTerritory>(entry.getValue());
-				
-				if (currRiskTerritory.getTerritoryName().equalsIgnoreCase(attackSourceTerritory.getTerritoryName())) {
-					tempTerritoriesList.set(entry.getValue().indexOf(currRiskTerritory), attackSourceTerritory);
+
+				if (currRiskTerritory.getTerritoryName().equalsIgnoreCase(attackerSourceTerritory.getTerritoryName())) {
+					tempTerritoriesList.set(entry.getValue().indexOf(currRiskTerritory), attackerSourceTerritory);
 					updatedMap.put(entry.getKey(), tempTerritoriesList);
 				}
-				if (currRiskTerritory.getTerritoryName().equalsIgnoreCase(attackDestinationTerritory.getTerritoryName())) {
-					tempTerritoriesList.set(entry.getValue().indexOf(currRiskTerritory), attackDestinationTerritory);
+				if (currRiskTerritory.getTerritoryName().equalsIgnoreCase(attackerDestinationTerritory.getTerritoryName())) {
+					tempTerritoriesList.set(entry.getValue().indexOf(currRiskTerritory), attackerDestinationTerritory);
 					updatedMap.put(entry.getKey(), tempTerritoriesList);
 				}				
 			}
 		}
-//		Removing territory from defenders list and adding to attacker's if defender loses all army
+		//		Removing territory from defenders list and adding to attacker's if defender loses all army
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			ArrayList<RiskTerritory> tempTerritoryList = new ArrayList<RiskTerritory>(entry.getValue());
 			for (RiskTerritory currRiskTerritory : tempTerritoryList) {
@@ -190,13 +191,13 @@ public class RiskGameHelper {
 					currPlayerList.add(currRiskTerritory);
 					defenderPlayerTerritories = entry.getValue();
 					defenderPlayer = entry.getKey();
-					defenderPlayerTerritories.remove(defenderPlayerTerritories.indexOf(attackDestinationTerritory));
+					defenderPlayerTerritories.remove(defenderPlayerTerritories.indexOf(attackerDestinationTerritory));
 				}
 			}
 		}
 
-		
-//		Removing territory from defenders territory list and updating map
+
+		//		Removing territory from defenders territory list and updating map
 		if (defenderArmyZeroCheckFlag) {
 			updatedMap.put(currentPlayer, currPlayerList);
 			updatedMap.put(defenderPlayer, defenderPlayerTerritories);
@@ -232,10 +233,10 @@ public class RiskGameHelper {
 		RiskTerritory destinationTerritory = null;
 		RiskPlayer currentPlayer = null;
 		ArrayList<RiskTerritory> currPlayerList = new ArrayList<RiskTerritory>();
-//		Domination view observer object initialization
+		//		Domination view observer object initialization
 		RiskDomination riskDominationObservable=new RiskDomination();
 		RiskDominationView riskDominationObserver=new RiskDominationView(riskDominationObservable);
-		int totalMapTerritories=0;
+		int totalMapTerritories=Constants.ZERO;
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
@@ -257,20 +258,20 @@ public class RiskGameHelper {
 		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent() + attackMoveArmy);
 		currPlayerList.set(currPlayerList.indexOf(attackSourceTerritory), sourceTerritory);
 		currPlayerList.set(currPlayerList.indexOf(attackDestinationTerritory), destinationTerritory);
-		
-//		Calculating current player total armies in all territories and updating current player
-		int currentPlayerArmies=0;
+
+		//		Calculating current player total armies in all territories and updating current player
+		int currentPlayerArmies=Constants.ZERO;
 		for (RiskTerritory currTerritory : currPlayerList) {
 			currentPlayerArmies=currentPlayerArmies+currTerritory.getArmiesPresent();
 		}
 		currentPlayer.setArmiesOwned(currentPlayerArmies);
 		riskMainMap.put(currentPlayer, currPlayerList);
-		
-//		Triggering domination view when there is addition of new territory			
+
+		//		Triggering domination view when there is addition of new territory			
 		riskDominationObservable.setPercentMapContr((RiskGameHelper.calculateDominationMapControlled(totalMapTerritories, currPlayerList.size())));
 		riskDominationObservable.setContinentsContr(currentPlayer.getOccupiedContinents());
 		riskDominationObservable.setArmiesOwned(currentPlayer.getArmiesOwned());
-		
+
 		return riskMainMap;
 	}
 
@@ -284,7 +285,7 @@ public class RiskGameHelper {
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 
 		RiskPlayer currentPlayer = null;
-//		Finding current player turn
+		//		Finding current player turn
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer = entry.getKey();
