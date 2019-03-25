@@ -19,7 +19,6 @@ import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.view.RiskCardviewObserver;
 import com.soen.risk.view.RiskPhaseView;
 
-
 /**
  * <h2>Player Model</h2>
  * This class is used to set and get the values of the parameters for players.
@@ -43,19 +42,24 @@ public class RiskPlayer implements RiskCardviewObservable {
 	private ArrayList<String> occupiedContinents=new ArrayList<String>();
 	/** The armies owned. */
 	private int armiesOwned;	
-	/** Current player turn*/
+	
+	/**  Current player turn. */
 	private boolean currentPlayerTurn=false;	
-	/** Cards replaced with Armies Count */
+	
+	/**  Cards replaced with Armies Count. */
 	private int cardArmies;	
 	/** The list of card owned. */
 	private ArrayList<RiskCard> cardOwned= new ArrayList<RiskCard>();
-	/** Card exchange count for  player */
+	
+	/**  Card exchange count for  player. */
 	private int cardViewCount=1;
-	/** Risk card view obsever interface object */
+	
+	/**  Risk card view obsever interface object. */
 	private List<RiskCardviewObserver> cardviewObsevers;
 	/** Risk Phase view as Obsevable. */
 	RiskPhase riskPhase=new RiskPhase();
-	/** Risk Phase view as Obsever */
+	
+	/**  Risk Phase view as Obsever. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
 
 	/**
@@ -169,7 +173,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	/**
 	 * Sets the armies owned.
 	 *
-	 * @param armiesOwned the armiesOwned to set
+	 * @param cardArmyCount the new card army count
 	 */
 
 	public void setCardArmyCount(int cardArmyCount)
@@ -177,11 +181,18 @@ public class RiskPlayer implements RiskCardviewObservable {
 		this.cardArmies = cardArmyCount;
 	}
 	
+	/**
+	 * Sets the armies owned.
+	 *
+	 * @param armiesOwned the new armies owned
+	 */
 	public void setArmiesOwned(int armiesOwned) {
 		this.armiesOwned = armiesOwned;
 	}
 
 	/**
+	 * Checks if is current player turn.
+	 *
 	 * @return the currentPlayerTurn
 	 */
 	public boolean isCurrentPlayerTurn() {
@@ -189,6 +200,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 	}
 
 	/**
+	 * Sets the current player turn.
+	 *
 	 * @param currentPlayerTurn the currentPlayerTurn to set
 	 */
 	public void setCurrentPlayerTurn(boolean currentPlayerTurn) {
@@ -208,7 +221,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	/**
 	 * Sets the card owned.
 	 *
-	 * @param cardOwned the cardOwned to set
+	 * @param card the new card owned
 	 */
 
 	public void setCardOwned(RiskCard card) {
@@ -217,6 +230,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 	}
 
 	/**
+	 * Gets the card view count.
+	 *
 	 * @return the cardViewCount
 	 */
 	public int getCardViewCount() {
@@ -224,26 +239,37 @@ public class RiskPlayer implements RiskCardviewObservable {
 	}
 
 	/**
+	 * Sets the card view count.
+	 *
 	 * @param cardViewCount the cardViewCount to set
 	 */
 	public void setCardViewCount(int cardViewCount) {
 		this.cardViewCount = cardViewCount;
 	}
 
+	/**
+	 * Gets the cards used count.
+	 *
+	 * @return the cards used count
+	 */
 	public int getCardsUsedCount() {
 		return this.cardArmies;
 	}
+	
 	/**
-     * Removes either of three Infantry or Artillery or Cavalry cards
-     *
-     * @param type Sting type of card
-     */
+	 * Removes either of three Infantry or Artillery or Cavalry cards.
+	 *
+	 * @param type Sting type of card
+	 */
     public void removeSimilarThreeCards (RiskCard type) {
         this.cardOwned.remove(type);
         this.cardOwned.remove(type);
         this.cardOwned.remove(type);
     }
 
+	/**
+	 * Removes the distinct cards.
+	 */
 	public void removeDistinctCards() {
 		 this.cardOwned.remove(RiskCard.INFANT);
 	     this.cardOwned.remove(RiskCard.ARTILLERY);
@@ -288,13 +314,12 @@ public class RiskPlayer implements RiskCardviewObservable {
 	
 	
 	/**
-	 * Assigning the Armies to the Countries for the Player.
-	 *
-	 * @param currentPlayer     : Current player is passed
-	 * @param playerTerritories : The territories assigned to the player
-	 * @param riskContinentList : The total continent list
-	 * @return the reinforced map
-	 */
+ * Assigning the Armies to the Countries for the Player.
+ *
+ * @param riskMainMap the risk main map
+ * @param riskContinentList : The total continent list
+ * @return the reinforced map
+ */
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getReinforcedMap(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap,
@@ -703,7 +728,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 		if(cardEarnFlag) {
 			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
 		}
-		System.out.println("attack completed...");
+		System.out.println("Attack completed...");
 
 
 //		return riskMainMap;
@@ -718,15 +743,14 @@ public class RiskPlayer implements RiskCardviewObservable {
 //	============================================================================
 	
 	/**
-	 * Gets the fortified map.
-	 * The Class RiskFortificationPhase to move as many armies 
-	 * as you would like from one (and only one) of your territories 
-	 * into one (and only one) of your adjacent territories.
-	 *
-	 * @param currentPlayer the current player
-	 * @param playerTerritories the player territories
-	 * @return the fortified map
-	 */
+ * Gets the fortified map.
+ * The Class RiskFortificationPhase to move as many armies 
+ * as you would like from one (and only one) of your territories 
+ * into one (and only one) of your adjacent territories.
+ *
+ * @param attackMap the attack map
+ * @return the fortified map
+ */
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getFortifiedMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackMap)
 	{

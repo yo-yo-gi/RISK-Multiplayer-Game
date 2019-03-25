@@ -9,21 +9,35 @@ import java.util.List;
 import com.soen.risk.view.RiskDominationObserver;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskDomination.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public class RiskDomination implements RiskDominationObservable {
 
+	/** The percent map contr. */
 	private String percentMapContr;
+
+	/** The continents contr. */
 	private List<String> continentsContr;
+
+	/** The armies owned. */
 	private int armiesOwned;
+
+	/** The domination observers. */
 	List<RiskDominationObserver> dominationObservers;
 
+	/**
+	 * Instantiates a new risk domination.
+	 */
 	public RiskDomination() {
 		dominationObservers = new ArrayList<RiskDominationObserver>();
 	}
 
 	/**
+	 * Sets the percent map contr.
+	 *
 	 * @param percentMapContr the percentMapContr to set
 	 */
 	public void setPercentMapContr(String percentMapContr) {
@@ -31,6 +45,8 @@ public class RiskDomination implements RiskDominationObservable {
 	}
 
 	/**
+	 * Sets the continents contr.
+	 *
 	 * @param continentsContr the continentsContr to set
 	 */
 	public void setContinentsContr(List<String> continentsContr) {
@@ -38,6 +54,8 @@ public class RiskDomination implements RiskDominationObservable {
 	}
 
 	/**
+	 * Sets the armies owned.
+	 *
 	 * @param armiesOwned the armiesOwned to set
 	 */
 	public void setArmiesOwned(int armiesOwned) {
@@ -51,7 +69,7 @@ public class RiskDomination implements RiskDominationObservable {
 	@Override
 	public void addObserver(RiskDominationObserver observer) {
 		dominationObservers.add(observer);
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -60,7 +78,7 @@ public class RiskDomination implements RiskDominationObservable {
 	@Override
 	public void removeObserver(RiskDominationObserver observer) {
 		dominationObservers.remove(observer);
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -71,7 +89,7 @@ public class RiskDomination implements RiskDominationObservable {
 		for (RiskDominationObserver riskDominationObserver : dominationObservers) {
 			riskDominationObserver.update(this.percentMapContr, this.continentsContr, this.armiesOwned);
 		}
-		
+
 	}
-	
+
 }

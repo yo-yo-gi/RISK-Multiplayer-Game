@@ -4,16 +4,26 @@
 package com.soen.risk.model;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Enum RiskPhaseType.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public enum RiskPhaseType {
 	
+	/** The startup. */
 	STARTUP("Startup"),
+	
+	/** The reinforcement. */
 	REINFORCEMENT("Renforcement"),
+	
+	/** The attack. */
 	ATTACK("Attack"),
+	
+	/** The fortify. */
 	FORTIFY("Fortify");
 	
+	/** The phase name. */
 	private final String phaseName;
 	
 	/**

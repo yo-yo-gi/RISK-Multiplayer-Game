@@ -9,22 +9,36 @@ import java.util.List;
 import com.soen.risk.view.RiskPhaseObserver;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskPhase.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 2.0
  */
 public class RiskPhase implements RiskPhaseObservable {
 
+	/** The current game phase. */
 	private RiskPhaseType currentGamePhase;
+	
+	/** The current player name. */
 	private String currentPlayerName;
+	
+	/** The current action. */
 	private String currentAction;
+	
+	/** The risk phase observers. */
 	private List<RiskPhaseObserver> riskPhaseObservers;
 	
 	
+	/**
+	 * Instantiates a new risk phase.
+	 */
 	public RiskPhase() {
 		riskPhaseObservers=new ArrayList<RiskPhaseObserver>();
 	}	
 	
 	/**
+	 * Sets the current game phase.
+	 *
 	 * @param currentGamePhase the currentGamePhase to set
 	 */
 	public void setCurrentGamePhase(RiskPhaseType currentGamePhase) {
@@ -33,6 +47,8 @@ public class RiskPhase implements RiskPhaseObservable {
 
 
 	/**
+	 * Sets the current player name.
+	 *
 	 * @param currentPlayerName the currentPlayerName to set
 	 */
 	public void setCurrentPlayerName(String currentPlayerName) {
@@ -41,8 +57,8 @@ public class RiskPhase implements RiskPhaseObservable {
 
 
 	/**
-	 * setting current action and calling notifyAllObservers method of Observable 
-	 * 
+	 * setting current action and calling notifyAllObservers method of Observable .
+	 *
 	 * @param currentAction the currentAction to set
 	 */
 	public void setCurrentAction(String currentAction) {
