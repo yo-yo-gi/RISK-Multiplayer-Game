@@ -33,16 +33,13 @@ public class RiskFortificationPhaseTest {
 	 */
 	@Test
 	public void testGetFortifiedMap() {
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
 
-		RiskPlayer playerName = new RiskPlayer();
 		ArrayList<RiskTerritory> territories = new ArrayList<RiskTerritory>();
-		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-		RiskPlayer riskPlayer = new RiskPlayer();
+		
 
 		RiskPlayer player1 = new RiskPlayer("Player1");
-
+		player1.setCurrentPlayerTurn(true);
 		String[] parsedTerritory = {"Venezuela","South America","Brazil"};
 		RiskTerritory tr1 = new RiskTerritory(parsedTerritory);
 		tr1.setArmiesPresent(5);
@@ -52,13 +49,14 @@ public class RiskFortificationPhaseTest {
 		String[] parsedTerritory2 = {"Peru","South America","Brazil"};
 		RiskTerritory tr3 = new RiskTerritory(parsedTerritory2);
 		tr3.setArmiesPresent(5);
+		
 		territories.add(tr1);
 		territories.add(tr2);
 		territories.add(tr3);
-
+		playerTerritoryMap.put(player1, territories);
 		
 
-		playerTerritoryMap = riskPlayer.getFortifiedMap(playerTerritoryMap);
+		playerTerritoryMap = player1.getFortifiedMap(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
 		Integer []  expected= {3,7};
