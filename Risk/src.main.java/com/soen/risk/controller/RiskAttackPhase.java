@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskLogger;
 /**
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
@@ -33,13 +34,13 @@ public class RiskAttackPhase {
 	/**
 	 * Attack phase input for both modes.
 	 *
-	 * @param attackSourceTerritoryName the attack source territory name
-	 * @param attackSourceArmy the attack source army
-	 * @param attackDestinationTerritoryName the attack destination territory name
-	 * @param attackDestinationArmy the attack destination army
+	 * @param attackerSourceTerritoryName the attack source territory name
+	 * @param attackerSourceArmy the attack source army
+	 * @param attackerDestinationTerritoryName the attack destination territory name
+	 * @param attackerDestinationArmy the attack destination army
 	 * @return the map
 	 */
-	public Map<String, Object> attackPhaseInput(String attackSourceTerritoryName,int attackSourceArmy, String attackDestinationTerritoryName, int attackDestinationArmy){
+	public Map<String, Object> attackPhaseInput(String attackerSourceTerritoryName,int attackerSourceArmy, String attackerDestinationTerritoryName, int attackerDestinationArmy){
 		int choice;
 		Map<String, Object> attackOutput = new HashMap<>();
 		System.out.println("Do you want to attack in 1)Normal Mode 2) All-Out Mode ");
@@ -54,10 +55,10 @@ public class RiskAttackPhase {
 			}
 			switch(choice) {
 			case 1:
-				attackOutput=rollDiceForNormalAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+				attackOutput=rollDiceForNormalAttackMode(attackerSourceTerritoryName, attackerSourceArmy, attackerDestinationTerritoryName,attackerDestinationArmy);
 				break;
 			case 2:
-				attackOutput=rollDiceForAllOutAttackMode(attackSourceTerritoryName, attackSourceArmy, attackDestinationTerritoryName,attackDestinationArmy);
+				attackOutput=rollDiceForAllOutAttackMode(attackerSourceTerritoryName, attackerSourceArmy, attackerDestinationTerritoryName,attackerDestinationArmy);
 				break;
 			default:
 				System.out.println("Invalid input. Try again!!");
@@ -69,13 +70,13 @@ public class RiskAttackPhase {
 	/**
 	 * Roll dice for attack.
 	 *
-	 * @param attackSourceTerritoryName the attack source territory name
+	 * @param attackerSourceTerritoryName the attack source territory name
 	 * @param attackingArmyCount the attacking army count
-	 * @param attackDestinationTerritoryName the attack destination territory name
+	 * @param attackerDestinationTerritoryName the attack destination territory name
 	 * @param defendingArmyCount the defending army count
 	 * @return the map
 	 */
-	public Map<String, Object> rollDiceForNormalAttackMode(String attackSourceTerritoryName,int attackingArmyCount, String attackDestinationTerritoryName, int defendingArmyCount) {
+	public Map<String, Object> rollDiceForNormalAttackMode(String attackerSourceTerritoryName,int attackingArmyCount, String attackerDestinationTerritoryName, int defendingArmyCount) {
 
 		Scanner scanner=new Scanner(System.in);
 		int desiredDiceCastByAttacker, desiredDiceCastByDefender;
@@ -122,17 +123,17 @@ public class RiskAttackPhase {
 
 			if (maxDiceCastByAttacker > maxDiceCastByDefender) {
 				output.put("did_attacker_win", true);
-				output.put(attackSourceTerritoryName, attackingArmyCount);
-				output.put(attackDestinationTerritoryName, (defendingArmyCount - 1));
+				output.put(attackerSourceTerritoryName, attackingArmyCount);
+				output.put(attackerDestinationTerritoryName, (defendingArmyCount - 1));
 			} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
 				output.put("did_defender_win", true);
-				output.put(attackSourceTerritoryName, (attackingArmyCount - 1));
-				output.put(attackDestinationTerritoryName, defendingArmyCount);
+				output.put(attackerSourceTerritoryName, (attackingArmyCount - 1));
+				output.put(attackerDestinationTerritoryName, defendingArmyCount);
 			}
 			else {
 				output.put("did_defender_win", true);
-				output.put(attackSourceTerritoryName, (attackingArmyCount - 1));
-				output.put(attackDestinationTerritoryName, defendingArmyCount);
+				output.put(attackerSourceTerritoryName, (attackingArmyCount - 1));
+				output.put(attackerDestinationTerritoryName, defendingArmyCount);
 			}
 		} else {
 			if (attackerDiceList.size() == 3) {
@@ -155,8 +156,8 @@ public class RiskAttackPhase {
 					noDefenderWin++;
 				}
 			}
-			output.put(attackSourceTerritoryName, attackingArmyCount);
-			output.put(attackDestinationTerritoryName, defendingArmyCount);
+			output.put(attackerSourceTerritoryName, attackingArmyCount);
+			output.put(attackerDestinationTerritoryName, defendingArmyCount);
 
 			if (noAttackerWin > noDefenderWin) {
 				output.put("did_attacker_win", true);
@@ -176,7 +177,7 @@ public class RiskAttackPhase {
 	}
 
 	/**
-	 * Roll dice.
+	 * Roll dice function to return the dice roll count list. 
 	 *
 	 * @param count the count
 	 * @return the list
@@ -191,7 +192,7 @@ public class RiskAttackPhase {
 	}
 
 	/**
-	 * Roll dice.
+	 * Roll dice function to return the dice roll count.
 	 *
 	 * @return the int
 	 */
@@ -200,7 +201,7 @@ public class RiskAttackPhase {
 	}
 
 	/**
-	 * Roll dice for all out attack mode.
+	 * Roll dice for all out attack mode where the method will execute until the atacker's or defender's army count is 0.
 	 *
 	 * @param attackingArmyCount the attacking army count
 	 * @param defendingArmyCount the defending army count
@@ -211,7 +212,7 @@ public class RiskAttackPhase {
 		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
 
 		Map<String, Object> output = new HashMap<>();
-		while (attackingArmyCount>0 && defendingArmyCount>0) {
+		while (attackingArmyCount>Constants.ZERO && defendingArmyCount>Constants.ZERO) {
 			if(attackingArmyCount>3) {
 				diceCastOfAttacker=3;
 			}else {
@@ -238,7 +239,7 @@ public class RiskAttackPhase {
 				if (maxDiceCastByAttacker > maxDiceCastByDefender) {
 					output.put(attackSourceTerritoryName, (attackingArmyCount));
 					defendingArmyCount--;
-					if(defendingArmyCount==0) {
+					if(defendingArmyCount==Constants.ZERO) {
 						output.put(attackDestinationTerritoryName, (defendingArmyCount));
 						break;
 					}
@@ -246,7 +247,7 @@ public class RiskAttackPhase {
 				} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
 					attackingArmyCount--;
 					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==0) {
+					if(attackingArmyCount==Constants.ZERO) {
 						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
 					}
@@ -254,7 +255,7 @@ public class RiskAttackPhase {
 				else {
 					attackingArmyCount--;
 					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==0) {
+					if(attackingArmyCount==Constants.ZERO) {
 						output.put(attackSourceTerritoryName, (attackingArmyCount));
 						break;
 					}
@@ -278,8 +279,8 @@ public class RiskAttackPhase {
 				Integer minDiceCastByDefender = Collections.min(defenderDiceList);
 
 				//Attacker 2, Defender 2 or Attacker 3 Defender 1 etc.
-				int noAttackerWin = 0;
-				int noDefenderWin = 0;
+				int noAttackerWin = Constants.ZERO;
+				int noDefenderWin = Constants.ZERO;
 				for (int i = 0; i < diceCastOfDefender; i++) {
 					if ((i == 0 && maxDiceCastByAttacker > maxDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > minDiceCastByDefender)) {
 						defendingArmyCount--;

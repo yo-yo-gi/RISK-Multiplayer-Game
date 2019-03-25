@@ -35,7 +35,7 @@ public class RiskPlayerBuilder {
 	}
 
 	/**
-	 * Sets the up players.
+	 * Sets the players.
 	 */
 	public void setUpPlayers() {
 		Scanner s = new Scanner(System.in);

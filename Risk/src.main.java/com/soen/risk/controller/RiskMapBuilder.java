@@ -17,6 +17,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * <h2>Map Builder</h2>
  * This class parse and validate map file,
@@ -34,7 +35,7 @@ public class RiskMapBuilder {
 	/** The territory list. */
 	private ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
 
-	/** The adjucency map. */
+	/** The adjacency map. */
 	private Map<String, List<String>> adjacencyMap=new HashMap<String, List<String>>();
 
 	/** The map upload status. */

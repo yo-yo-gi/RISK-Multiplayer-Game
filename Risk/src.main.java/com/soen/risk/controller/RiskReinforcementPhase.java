@@ -4,7 +4,6 @@
 package com.soen.risk.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,16 +22,16 @@ import com.soen.risk.model.RiskTerritory;
  * of armies corresponding to the continent's control value.
  * 
  * @author Neha Dighe
- * @version 1.0
+ * @version 2.0
  */
 public class RiskReinforcementPhase {
 	/**
-	 * Cacluation of Armies for the Player.
+	 * Calculation of Armies for the Player.
 	 *
 	 * @param currentPlayerForCalArmy the current player
-	 * @param currTerritoryList       the curr territory list
+	 * @param currTerritoryList       the current territory list
 	 * @param riskContinentList       the risk continent list
-	 * @return the int
+	 * @return the integer
 	 */
 
 	public int calculateArmy(RiskPlayer currentPlayerForCalArmy, ArrayList<RiskTerritory> currTerritoryList,
@@ -69,10 +68,10 @@ public class RiskReinforcementPhase {
 
 	public int CardExchangeView(RiskPlayer player) {
 
-		int exchangeArmies = 0;
+		int exchangeArmies = Constants.ZERO;
 		Scanner scanner = new Scanner(System.in);
 		int decision;
-		int decForSameCards = 0;
+		int decForSameCards = Constants.ZERO;
 		if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
 		}
@@ -90,15 +89,15 @@ public class RiskReinforcementPhase {
 				System.out.println("Try Again!!");
 			}
 		}while(!(decision==1 || decision==2));
-		int infantCounter=0;
-		int cavCounter=0;
-		int artilleryCounter=0;
+		int infantCounter=Constants.ZERO;
+		int cavCounter=Constants.ZERO;
+		int artilleryCounter=Constants.ZERO;
 
 		ArrayList<RiskCard> distinctCards = new ArrayList<RiskCard>();
 		distinctCards.add(RiskCard.INFANT);
 		distinctCards.add(RiskCard.ARTILLERY);
 		distinctCards.add(RiskCard.CAVALRY);
-		
+
 		for(RiskCard currCard:player.getCardOwned()) {
 			if (currCard.equals(RiskCard.INFANT)) {
 				infantCounter = infantCounter + 1;
@@ -113,9 +112,9 @@ public class RiskReinforcementPhase {
 			}
 		}
 		if (decision == 1) {
-			
+
 			if(infantCounter>=3 || artilleryCounter >= 3 || cavCounter >= 3)
-			 {
+			{
 				if (infantCounter == 3) {
 					System.out.println("Infantry Cards removed");
 					player.removeSimilarThreeCards(RiskCard.INFANT);
@@ -133,7 +132,7 @@ public class RiskReinforcementPhase {
 				player.removeDistinctCards();
 			}
 		} else if (decision == 2) {
-			
+
 			if (player.getCardOwned().containsAll(distinctCards))
 			{
 				System.out.println("Exchanging distinct cards.");
