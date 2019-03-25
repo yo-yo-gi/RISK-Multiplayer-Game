@@ -16,7 +16,6 @@ import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RiskGameHelperTest is test class to check the functionalities of the helper class 
  * based on the army count of attacker and defender.
@@ -51,7 +50,7 @@ public class RiskGameHelperTest {
 	int attackMoveArmy;
 	
 	/**
-	 * Sets the up.
+	 * Sets the data for testing the functionalities of the methods.
 	 */
 	@Before
 	public void setUp() {
