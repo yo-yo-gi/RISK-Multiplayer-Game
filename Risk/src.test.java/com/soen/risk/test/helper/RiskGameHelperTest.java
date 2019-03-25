@@ -16,6 +16,7 @@ import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class RiskGameHelperTest is test class to check the functionalities of the helper class 
  * based on the army count of attacker and defender.
@@ -46,7 +47,9 @@ public class RiskGameHelperTest {
 	/** The defender list. */
 	ArrayList<RiskTerritory> defenderList = new ArrayList<>();
 
-
+	/** The attack move army. */
+	int attackMoveArmy;
+	
 	/**
 	 * Sets the up.
 	 */
@@ -63,6 +66,7 @@ public class RiskGameHelperTest {
 		defenderList.add(attackerDestinationTerr);
 		riskMainMap.put(riskPlayer1, attackerList);
 		riskMainMap.put(riskPlayer2, defenderList);
+		attackMoveArmy=1;
 	}
 
 	/**
@@ -107,5 +111,37 @@ public class RiskGameHelperTest {
 		attackerDestinationTerr.setArmiesPresent(3);
 		riskMainMap= RiskGameHelper.updateArmyAfterAttack(attackerSourceTerr, attackerDestinationTerr, riskMainMap);
 		assertNotEquals(2,riskMainMap.get(riskPlayer2).get(0).getArmiesPresent());
+	}
+	
+	/**
+	 * Test move army after attack positive case.
+	 */
+	@Test
+	public void testMoveArmyAfterAttackPositiveCase() {
+		attackerSourceTerr.setArmiesPresent(8);
+		attackerDestinationTerr.setArmiesPresent(0);
+		attackerList.set(0,attackerSourceTerr);
+		attackerList.add(attackerDestinationTerr);
+		riskMainMap.put(riskPlayer1, attackerList);
+		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		assertEquals(7,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
+		assertEquals(1,riskMainMap.get(riskPlayer1).get(1).getArmiesPresent());
+		
+	}
+	
+	/**
+	 * Test move army after attack negative case.
+	 */
+	@Test
+	public void testMoveArmyAfterAttackNegativeCase() {
+		attackerSourceTerr.setArmiesPresent(6);
+		attackerDestinationTerr.setArmiesPresent(1);
+		attackerList.set(0,attackerSourceTerr);
+		attackerList.add(attackerDestinationTerr);
+		riskMainMap.put(riskPlayer1, attackerList);
+		riskMainMap= RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackerSourceTerr, attackerDestinationTerr, riskMainMap);
+		assertNotEquals(1,riskMainMap.get(riskPlayer1).get(0).getArmiesPresent());
+		assertNotEquals(3,riskMainMap.get(riskPlayer1).get(1).getArmiesPresent());
+		
 	}
 }
