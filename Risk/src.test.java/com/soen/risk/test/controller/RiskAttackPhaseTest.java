@@ -20,16 +20,16 @@ import com.soen.risk.controller.RiskAttackPhase;
  * @version 2.0
  */
 public class RiskAttackPhaseTest {
-	
+
 	/** The output. */
 	Map<String,Object> output=new HashMap<String,Object>();
-	
+
 	/** The attack destination territory name. */
 	String attackSourceTerritoryName, attackDestinationTerritoryName;
-	
+
 	/** The defending army count. */
 	int attackingArmyCount, defendingArmyCount;
-	
+
 	/** The risk attack phase. */
 	RiskAttackPhase riskAttackPhase = new RiskAttackPhase();
 
@@ -61,6 +61,4 @@ public class RiskAttackPhaseTest {
 		output=RiskAttackPhase.rollDiceForAllOutAttackMode(attackSourceTerritoryName, attackingArmyCount, attackDestinationTerritoryName, defendingArmyCount);
 		assertNotNull(output);
 	}
-
-
 }
