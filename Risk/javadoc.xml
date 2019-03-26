@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="javadoc">
-    <target name="javadoc">
-        <javadoc access="public" author="true" classpath="lib/junit-4.12.jar;C:\Users\yoges\.p2\pool\plugins\org.hamcrest.core_1.3.0.v20180420-1519.jar;lib/apache-logging-log4j.jar;C:\Users\yoges\.p2\pool\plugins\org.junit_4.12.0.v201504281640\junit.jar" destdir="javaDoc" doctitle="RISK_JavaDoc" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="com.soen.risk.test.helper,com.soen.risk.view,com.soen.risk.test.model,com.soen.risk.test.validator,com.soen.risk.controller,com.soen.risk.test.view,com.soen.risk.test.controller,com.soen.risk.helper,com.soen.risk.model,com.soen.risk.validator" source="1.8" sourcepath="src.test.java;src.main.resources;src.main.java" splitindex="true" use="true" version="true"/>
-    </target>
-</project>
