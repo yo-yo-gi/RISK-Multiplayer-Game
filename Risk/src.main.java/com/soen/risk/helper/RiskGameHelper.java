@@ -146,10 +146,10 @@ public class RiskGameHelper {
 	 * checks if defenders territory is last available then assign all cards to
 	 * current player
 	 * 
-	 * @param attackerSourceTerritory      source territory of attack
-	 * @param attackerDestinationTerritory destination territory of attack
+	 * @param attackerSourceTerritory      source territory of attacker
+	 * @param attackerDestinationTerritory destination territory of attacker
 	 * @param riskMainMap                Map of players with respective territory
-	 * @return updatedMap Updated map after army updation
+	 * @return updatedMap Updated map after army updated
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> updateArmyAfterAttack(
 			RiskTerritory attackerSourceTerritory, RiskTerritory attackerDestinationTerritory,
@@ -219,15 +219,16 @@ public class RiskGameHelper {
 	 * 
 	 * This function moves armies after win
 	 * 
-	 * @param attackMoveArmy
-	 * @param attackSourceTerritory
-	 * @param attackDestinationTerritory
-	 * @param riskMainMap
+	 * @param attackerMoveArmy
+	 * @param attackerSourceTerritory      source territory of attacker
+	 * @param attackerDestinationTerritory destination territory of attacker
+	 * @param riskMainMap                Map of players with respective territory
 	 * 
-	 * @return
+	 * @return riskMainMap Updated map after army moved
+	 * 
 	 */
-	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackMoveArmy,
-			RiskTerritory attackSourceTerritory, RiskTerritory attackDestinationTerritory,
+	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackerArmyToMove,
+			RiskTerritory attackerSourceTerritory, RiskTerritory attackerDestinationTerritory,
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 
 		RiskTerritory sourceTerritory = null;
@@ -246,19 +247,19 @@ public class RiskGameHelper {
 			}
 			totalMapTerritories=totalMapTerritories+entry.getValue().size();
 			for (RiskTerritory currTerriory : entry.getValue()) {
-				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackSourceTerritory.getTerritoryName())) {
+				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackerSourceTerritory.getTerritoryName())) {
 					sourceTerritory = currTerriory;
 				}
-				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackDestinationTerritory.getTerritoryName())) {
+				if (currTerriory.getTerritoryName().equalsIgnoreCase(attackerDestinationTerritory.getTerritoryName())) {
 					destinationTerritory = currTerriory;
 				}
 			}
 		}
 
-		sourceTerritory.setArmiesPresent(sourceTerritory.getArmiesPresent() - attackMoveArmy);
-		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent() + attackMoveArmy);
-		currPlayerList.set(currPlayerList.indexOf(attackSourceTerritory), sourceTerritory);
-		currPlayerList.set(currPlayerList.indexOf(attackDestinationTerritory), destinationTerritory);
+		sourceTerritory.setArmiesPresent(sourceTerritory.getArmiesPresent() - attackerArmyToMove);
+		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent() + attackerArmyToMove);
+		currPlayerList.set(currPlayerList.indexOf(attackerSourceTerritory), sourceTerritory);
+		currPlayerList.set(currPlayerList.indexOf(attackerDestinationTerritory), destinationTerritory);
 
 		//		Calculating current player total armies in all territories and updating current player
 		int currentPlayerArmies=Constants.ZERO;
