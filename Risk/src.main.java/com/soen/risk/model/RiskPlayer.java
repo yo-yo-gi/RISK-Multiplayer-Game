@@ -59,6 +59,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 	/** Risk Phase view as Obsevable. */
 	RiskPhase riskPhase=new RiskPhase();
 	
+	boolean cardEarnFlag=false;
+	
 	/**  Risk Phase view as Obsever. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
 
@@ -524,7 +526,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 		List<String> adjTerritoryList;
 		List<String> AdjAttackList = null;
 		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
-		boolean cardEarnFlag=false;
+		
 		Map<String, Object> attackOutputMap = new HashMap<>();
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
@@ -717,25 +719,21 @@ public class RiskPlayer implements RiskCardviewObservable {
 				getAttackphaseMap(riskMainMap);
 			}
 			else {
-				System.out.println("You currently have only 1 army in your territories...\n.Cannot attack further...Proceed to fortification phase");
+				System.out.println("You currently have only 1 army in your territories...\nCannot attack further...Proceed to fortification phase");
 				
 			}
 			
 		}
 		
 		}
-		
-		
+
+	}
 		if(cardEarnFlag) {
 			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
 		}
 		System.out.println("Attack completed...");
-
-
-//		return riskMainMap;
-		}
 		return riskMainMap;
-	}
+}
 	
 	
 	
