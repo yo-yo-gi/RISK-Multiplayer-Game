@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskLogger;
+
 /**
  * <h2> Risk Attack Controller</h2>
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
@@ -202,7 +203,9 @@ public class RiskAttackPhase {
 	/**
 	 * Roll dice for all out attack mode where the method will execute until the atacker's or defender's army count is 0.
 	 *
+	 * @param attackSourceTerritoryName the attack source territory name
 	 * @param attackingArmyCount the attacking army count
+	 * @param attackDestinationTerritoryName the attack destination territory name
 	 * @param defendingArmyCount the defending army count
 	 * @return the map
 	 */

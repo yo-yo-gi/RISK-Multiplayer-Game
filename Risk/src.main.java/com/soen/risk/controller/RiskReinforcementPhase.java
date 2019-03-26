@@ -69,7 +69,8 @@ public class RiskReinforcementPhase {
 	 * Iteration 2 Implementation of a card exchange view using the Observer
 	 * pattern.
 	 *
-	 * @param player	Player information
+	 * @param player Player information
+	 * @return the int
 	 */
 
 	public int CardExchangeView(RiskPlayer player) {
