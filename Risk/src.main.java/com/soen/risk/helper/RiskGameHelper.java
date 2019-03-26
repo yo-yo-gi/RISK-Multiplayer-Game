@@ -97,8 +97,8 @@ public class RiskGameHelper {
 	}
 
 	/**
-	 * This method calculates map control for the domination view
-	 * 
+	 * This method calculates map control for the domination view.
+	 *
 	 * @param totalTerritories total territories in map
 	 * @param ownedTerritories player owned territories
 	 * @return mapControll percentage of map controlled by player
@@ -112,8 +112,8 @@ public class RiskGameHelper {
 	}
 
 	/**
-	 * Finds the territory by name to use in attack phase
-	 * 
+	 * Finds the territory by name to use in attack phase.
+	 *
 	 * @param riskMap       map of player
 	 * @param territoryName name of territory to search
 	 * @return riskTerritory territory to be returned
@@ -216,16 +216,13 @@ public class RiskGameHelper {
 	}
 
 	/**
-	 * 
-	 * This function moves armies after win
-	 * 
-	 * @param attackerMoveArmy
+	 * This function moves armies after win.
+	 *
+	 * @param attackerArmyToMove the attacker army to move
 	 * @param attackerSourceTerritory      source territory of attacker
 	 * @param attackerDestinationTerritory destination territory of attacker
 	 * @param riskMainMap                Map of players with respective territory
-	 * 
 	 * @return riskMainMap Updated map after army moved
-	 * 
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackerArmyToMove,
 			RiskTerritory attackerSourceTerritory, RiskTerritory attackerDestinationTerritory,
@@ -278,8 +275,8 @@ public class RiskGameHelper {
 	}
 
 	/**
-	 * Function to assign random cards to the player after winning the territories
-	 * 
+	 * Function to assign random cards to the player after winning the territories.
+	 *
 	 * @param riskMainMap map with all players and respective territories
 	 * @return riskMainMap map with all players with cards updated
 	 */
