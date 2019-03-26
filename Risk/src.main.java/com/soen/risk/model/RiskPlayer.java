@@ -70,6 +70,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	public RiskPlayer(String name) {
 		setPlayerName(name);
+		cardviewObsevers=new ArrayList<RiskCardviewObserver>();
 	}
 
 	/**
@@ -545,7 +546,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 			System.out.println("Select the territory you want to attack from:");
 			
 			for (RiskTerritory currTerritory : playerTerritories) {
-				System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") ");
+				System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") -->"+currTerritory.getAdjacents());
 				sourceTCoutner++;	
 
 			}

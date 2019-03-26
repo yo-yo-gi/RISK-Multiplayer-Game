@@ -21,6 +21,7 @@ import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
+import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -289,10 +290,10 @@ public class RiskGameBuilder {
 
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
 				entry.getKey().setCurrentPlayerTurn(true);
-				//			entry.getKey().setCardOwned(RiskCard.INFANT);
-				//			entry.getKey().setCardOwned(RiskCard.INFANT);
-				//			entry.getKey().setCardOwned(RiskCard.INFANT);
-				//			RiskGameHelper.assignRandomCard(riskMainMap);
+//							entry.getKey().setCardOwned(RiskCard.ARTILLERY);
+//							entry.getKey().setCardOwned(RiskCard.CAVALRY);
+//							entry.getKey().setCardOwned(RiskCard.INFANT);
+//							RiskGameHelper.assignRandomCard(riskMainMap);
 
 				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 
