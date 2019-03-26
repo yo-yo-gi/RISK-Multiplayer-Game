@@ -118,7 +118,6 @@ public class RiskAttackPhase {
 
 		if (desiredDiceCastByAttacker == 1 || desiredDiceCastByDefender == 1) {
 			//Attacker 1, Defender 2
-			System.out.println("Checking max attacker's and defender's when desiredDiceCastByAttacker or desiredDiceCastByDefender = 1 ");
 			Integer maxDiceCastByAttacker = Collections.max(attackerDiceList);
 			Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
@@ -232,7 +231,6 @@ public class RiskAttackPhase {
 
 				System.out.println(defenderDiceList);
 				//Attacker 1, Defender 2
-				System.out.println("Checking max attacker's and defender's when desiredDiceCastByAttacker or desiredDiceCastByDefender = 1 ");
 				Integer maxDiceCastByAttacker = Collections.max(attackerDiceList);
 				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
@@ -299,8 +297,6 @@ public class RiskAttackPhase {
 
 				output.put(attackSourceTerritoryName, attackingArmyCount);
 				output.put(attackDestinationTerritoryName, defendingArmyCount);
-				System.out.println(attackSourceTerritoryName + attackingArmyCount);
-				System.out.println(attackDestinationTerritoryName + defendingArmyCount);
 
 				if (noAttackerWin > noDefenderWin) {
 					output.put("did_attacker_win", true);
