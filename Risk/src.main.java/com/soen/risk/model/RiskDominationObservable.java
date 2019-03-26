@@ -6,6 +6,7 @@ package com.soen.risk.model;
 import com.soen.risk.view.RiskDominationObserver;
 
 /**
+ * <h2> Risk Domination Observable</h2>
  * The Interface RiskDominationObservable.An asynchronous update interface for receiving notifications
  * about RiskDomination information as the RiskDomination is constructed.
  *

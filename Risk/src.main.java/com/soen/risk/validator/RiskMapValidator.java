@@ -29,7 +29,7 @@ import com.soen.risk.model.RiskTerritory;
  * check for connectivity of territory graph.
  *
  * @author Yogesh Nimbhorkar
- * @author Chirag
+ * @author Chirag Vora
  * @version 2.0
  */
 public class RiskMapValidator {

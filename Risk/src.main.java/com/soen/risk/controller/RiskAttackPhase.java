@@ -13,12 +13,13 @@ import java.util.Scanner;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskLogger;
 /**
+ * <h2> Risk Attack Controller</h2>
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
  * a) The normal attack mode is used to attack on any adjacent territory for each player
  * b) The all-out mode is used to attack on adjacent territories with max dice count unless any one 
  * 	  of the attacker or defender wins.
  * 
- * @author Chirag
+ * @author Chirag Vora
  * @author Shashank Rao
  * @author Yogesh Nimbhorkar
  * @version 2.0

@@ -9,6 +9,7 @@ import java.util.List;
 import com.soen.risk.view.RiskDominationObserver;
 
 /**
+ * <h2> Risk Domination </h2>
  * The Class RiskDomination. The players world domination view displays: 
  * (1) the percentage of the map controlled by every player 
  * (2) the continents controlled by every player 

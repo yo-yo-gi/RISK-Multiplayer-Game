@@ -6,6 +6,7 @@ package com.soen.risk.view;
 import com.soen.risk.model.RiskPhaseType;
 
 /**
+ * <h2> Risk Phase Observer </h2>
  * The interface RiskPhaseObserver. An asynchronous update interface for receiving notifications
  * about RiskPhase information as the RiskPhase is constructed.
  *

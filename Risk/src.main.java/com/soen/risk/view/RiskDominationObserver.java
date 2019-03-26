@@ -6,6 +6,7 @@ package com.soen.risk.view;
 import java.util.List;
 
 /**
+ * <h2> Risk Domination Observer </h2>
  * The interface RiskDominationObserver. An asynchronous update interface for receiving notifications
  * about RiskDomination information as the RiskDomination is constructed.
  *

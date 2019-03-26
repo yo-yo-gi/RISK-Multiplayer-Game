@@ -10,10 +10,10 @@ import com.soen.risk.helper.Constants;
 
 /**
  * <h2>Risk map view</h2>
- * Shows view for user created map.
+ * This class is used to show view for user created map.
  *
  * @author Shashank Rao
- * @author Chirag
+ * @author Chirag Vora
  * @version 1.0
  */
 public class RiskMapUserCreatorView {

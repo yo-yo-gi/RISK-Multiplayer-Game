@@ -15,15 +15,15 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * <h2>Reinforcement Phase Controller</h2> The class defines number of the
- * armies given to the player calculation. In the reinforcements phase, the
- * player is given a number of armies that depends on the number of countries he
- * owns (# of countries owned divided by 3, rounded down). If the player owns
- * all the countries of an entire continent else the player is given an amount
+ * <h2>Reinforcement Phase Controller</h2>
+ * The class defines number of the armies given to the player calculation. 
+ * In the reinforcements phase, the player is given a number of armies that 
+ * depends on the number of countries he owns (# of countries owned divided by 3, rounded down).
+ * If the player owns all the countries of an entire continent else the player is given an amount
  * of armies corresponding to the continent's control value.
  * 
  * @author Neha Dighe
- * @author Chirag
+ * @author Chirag Vora
  * @version 2.0
  */
 public class RiskReinforcementPhase {

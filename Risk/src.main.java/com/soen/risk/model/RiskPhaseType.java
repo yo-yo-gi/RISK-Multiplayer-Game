@@ -4,7 +4,8 @@
 package com.soen.risk.model;
 
 /**
- * The Enum RiskPhaseType.
+ * <h2> Risk Phase Type Class </h2>
+ * This class is used to display the name of the game phase currently being played.
  *
  * @author Yogesh Nimbhorkar
  * @version 2.0

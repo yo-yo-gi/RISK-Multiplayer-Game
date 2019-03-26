@@ -22,7 +22,7 @@ import com.soen.risk.view.RiskDominationView;
  * This class is used for writing utility functions related to game play.
  *
  * @author Yogesh Nimbhorkar
- * @author Chirag
+ * @author Chirag Vora
  * @version 2.0
  */
 public class RiskGameHelper {

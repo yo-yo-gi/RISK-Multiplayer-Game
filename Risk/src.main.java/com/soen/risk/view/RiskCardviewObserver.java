@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.soen.risk.model.RiskCard;
 
 /**
+ * <h2> Risk Card View Observer </h2>
  * The interface RiskCardviewObserver. An asynchronous update interface for receiving notifications
  * about RiskCardview information as the RiskCardview is constructed.
  *

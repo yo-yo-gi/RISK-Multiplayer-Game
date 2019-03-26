@@ -9,6 +9,7 @@ import java.util.List;
 import com.soen.risk.view.RiskPhaseObserver;
 
 /**
+ * <h2> Risk Phase </h2>
  * The Class RiskPhase.The phase view displays: 
  * (1) the name of the game	phase currently being played 
  * (2) the current player’s name 

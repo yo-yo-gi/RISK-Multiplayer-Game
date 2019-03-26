@@ -6,6 +6,7 @@ package com.soen.risk.model;
 import com.soen.risk.view.RiskCardviewObserver;
 
 /**
+ * <h2> Risk Card View Observable</h2> 
  * The Interface RiskCardviewObservable. An asynchronous update interface for receiving notifications
  * about RiskCardview information as the RiskCardview is constructed.
  *

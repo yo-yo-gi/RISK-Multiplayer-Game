@@ -10,6 +10,7 @@ import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskCardviewObservable;
 
 /**
+ * <h2> Risk Card View class </h2>
  * The Class RiskCardviewView. Shows the Cardview and updates the cardOwned.
  *
  * @author Yogesh Nimbhorkar

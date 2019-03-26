@@ -18,7 +18,6 @@ import java.util.Scanner;
  *
  * @author Shashank Rao
  * @version 1.0
- * 
  */
 public class RiskMapEditor {
 

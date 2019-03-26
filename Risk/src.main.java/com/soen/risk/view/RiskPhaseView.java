@@ -6,8 +6,8 @@ package com.soen.risk.view;
 import com.soen.risk.model.RiskPhaseObservable;
 import com.soen.risk.model.RiskPhaseType;
 
-// TODO: Auto-generated Javadoc
 /**
+ * <h2> Risk Phase View </h2>
  * The Class RiskPhaseView. The phase view displays: 
  * (1) the name of the game phase currently being played 
  * (2) the current player’s name 
