@@ -20,7 +20,7 @@ import com.soen.risk.model.RiskTerritory;
 /**
  * <h2> Risk Territory Assignment To Player Test</h2>
  * This class is used to test the number of the armies 
- * given to the player based on the number of players.
+ * given to the player based on the number of players
  * 
  * @author Neha Dighe
  * @author Chirag

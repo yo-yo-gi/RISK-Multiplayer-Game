@@ -29,7 +29,7 @@ import com.soen.risk.model.RiskTerritory;
 public class RiskArmyAllocationToPlayersTest {
 
 	/**
-	 * Test assign armies to players.
+	 * Test assign armies to playes.
 	 */
 	@Test
 	public void testAssignArmiesToPlayers() {
