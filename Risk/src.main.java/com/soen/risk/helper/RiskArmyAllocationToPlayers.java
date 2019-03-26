@@ -92,7 +92,6 @@ public class RiskArmyAllocationToPlayers {
 
 		}while(totalArmyPresent>0);
 
-
 		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
@@ -116,7 +115,8 @@ public class RiskArmyAllocationToPlayers {
 					armyOwned--;
 				}else currTerritory.setArmiesPresent(0);
 			}
-		}		
+		}
+		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

@@ -26,6 +26,9 @@ import com.soen.risk.view.RiskDominationView;
  * @version 2.0
  */
 public class RiskGameHelper {
+	
+	/** The logger. */
+	static RiskLogger logger= new RiskLogger();
 
 	/**
 	 * updates existing map player with continents own by players.
@@ -66,9 +69,8 @@ public class RiskGameHelper {
 
 			// Re populating map with updated player object
 			controlValueAssignedMap.put(currentPlayer, currentPlayerTerritories);
-
 		}
-
+		logger.doLogging("controlValueAssignedMap returned------"+controlValueAssignedMap);
 		return controlValueAssignedMap;
 	}
 
@@ -90,7 +92,7 @@ public class RiskGameHelper {
 			armies = 25;
 		else if (numOfPlayers == 6)
 			armies = 20;
-
+		logger.doLogging("armies returned------"+armies);
 		return armies;
 	}
 
@@ -105,6 +107,7 @@ public class RiskGameHelper {
 		String mapControl = null;
 		float percentage = ((float) ownedTerritories) / totalTerritories;
 		mapControl = String.format("%2.02f",(float)(percentage*100));
+		logger.doLogging("mapControl returned------"+mapControl);
 		return mapControl;
 	}
 
@@ -134,7 +137,7 @@ public class RiskGameHelper {
 		if (!foundFlag) {
 			riskTerritory.setArmiesPresent(-1);
 		}
-
+		logger.doLogging("riskTerritory returned------"+riskTerritory);
 		return riskTerritory;
 	}
 
@@ -166,7 +169,6 @@ public class RiskGameHelper {
 			}			
 		}
 
-
 		//		Updating source and destination armies after attack
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			for (RiskTerritory currRiskTerritory : entry.getValue()) {
@@ -196,7 +198,6 @@ public class RiskGameHelper {
 			}
 		}
 
-
 		//		Removing territory from defenders territory list and updating map
 		if (defenderArmyZeroCheckFlag) {
 			updatedMap.put(currentPlayer, currPlayerList);
@@ -210,7 +211,7 @@ public class RiskGameHelper {
 				updatedMap.put(currentPlayer, currPlayerList);
 			}
 		}
-
+		logger.doLogging("updatedMap returned------"+updatedMap);
 		return updatedMap;
 	}
 
@@ -271,7 +272,7 @@ public class RiskGameHelper {
 		riskDominationObservable.setPercentMapContr((RiskGameHelper.calculateDominationMapControlled(totalMapTerritories, currPlayerList.size())));
 		riskDominationObservable.setContinentsContr(currentPlayer.getOccupiedContinents());
 		riskDominationObservable.setArmiesOwned(currentPlayer.getArmiesOwned());
-
+		logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 
@@ -308,6 +309,7 @@ public class RiskGameHelper {
 			currentPlayer.setCardOwned(RiskCard.ARTILLERY);
 			break;
 		}
+		logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 }
