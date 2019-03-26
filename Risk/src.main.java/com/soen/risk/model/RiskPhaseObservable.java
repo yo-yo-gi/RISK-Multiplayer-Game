@@ -5,9 +5,9 @@ package com.soen.risk.model;
 
 import com.soen.risk.view.RiskPhaseObserver;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface RiskPhaseObservable.
+ * The Interface RiskPhaseObservable. An asynchronous update interface for receiving notifications
+ * about RiskPhase information as the RiskPhase is constructed.
  *
  * @author Yogesh Nimbhorkar
  * @version 2.0
