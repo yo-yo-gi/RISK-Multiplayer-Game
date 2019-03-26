@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
+import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
@@ -22,9 +23,14 @@ import com.soen.risk.model.RiskTerritory;
  * of armies corresponding to the continent's control value.
  * 
  * @author Neha Dighe
+ * @author Chirag
  * @version 2.0
  */
 public class RiskReinforcementPhase {
+
+	/** The logger. */
+	RiskLogger logger= new RiskLogger();
+
 	/**
 	 * Calculation of Armies for the Player.
 	 *
@@ -71,7 +77,6 @@ public class RiskReinforcementPhase {
 		int exchangeArmies = Constants.ZERO;
 		Scanner scanner = new Scanner(System.in);
 		int decision;
-		int decForSameCards = Constants.ZERO;
 		if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
 		}
@@ -155,7 +160,7 @@ public class RiskReinforcementPhase {
 		}
 		exchangeArmies = player.getCardViewCount() * 5;
 		player.setCardViewCount(player.getCardViewCount() + 1);
+		logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		return exchangeArmies;
 	}
-
 }

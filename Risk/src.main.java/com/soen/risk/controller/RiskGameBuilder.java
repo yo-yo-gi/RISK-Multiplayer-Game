@@ -21,7 +21,6 @@ import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
-import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -68,7 +67,6 @@ public class RiskGameBuilder {
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
-		//		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
 		RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
 		RiskMapEditor riskMapEditor;
 
@@ -198,8 +196,6 @@ public class RiskGameBuilder {
 			}
 		}
 
-
-
 		currentMap=new ArrayList<String>();
 		for (String currLine : mapFile) {
 			currentMap.add(currLine.replace("\\s", "").toLowerCase());
@@ -234,15 +230,10 @@ public class RiskGameBuilder {
 			System.exit(0);
 		}
 
-
 		/* 
 		 * 
 		 * Game map loading and validation completed..... 
 		 * 
-		 */
-
-		/*		  
-		 * Adding players, assigning initial armies to players and loading appropriate graphs...		 * 
 		 */
 
 		riskPlayerBuilder=new RiskPlayerBuilder();
@@ -290,13 +281,8 @@ public class RiskGameBuilder {
 
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
 				entry.getKey().setCurrentPlayerTurn(true);
-//							entry.getKey().setCardOwned(RiskCard.ARTILLERY);
-//							entry.getKey().setCardOwned(RiskCard.CAVALRY);
-//							entry.getKey().setCardOwned(RiskCard.INFANT);
-//							RiskGameHelper.assignRandomCard(riskMainMap);
 
 				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
-
 
 				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
 				char selectionAttack;
@@ -330,7 +316,6 @@ public class RiskGameBuilder {
 
 		scanner.close();
 	}
-
 }
 
 

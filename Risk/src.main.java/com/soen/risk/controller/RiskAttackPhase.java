@@ -16,7 +16,7 @@ import com.soen.risk.helper.RiskLogger;
  * The Class RiskAttackPhase used to attack on different territories based on 2 different modes:
  * a) The normal attack mode is used to attack on any adjacent territory for each player
  * b) The all-out mode is used to attack on adjacent territories with max dice count unless any one 
- * of the attacker or defender wins.
+ * 	  of the attacker or defender wins.
  * 
  * @author Chirag
  * @author Shashank Rao
@@ -171,7 +171,6 @@ public class RiskAttackPhase {
 				}
 			}
 		}
-		System.out.println("output="+output.toString());
 		logger.doLogging("Attack phase successful and the map with remaining armies-> "+output.toString());
 		return output;
 	}
@@ -316,10 +315,6 @@ public class RiskAttackPhase {
 				}
 			}
 		}
-		//logger.doLogging("Attack phase successful and the map with remaining armies-> "+output.toString());
-		System.out.println("Output returned is: "+ output.toString());
 		return output;
 	}
-
-
 }
