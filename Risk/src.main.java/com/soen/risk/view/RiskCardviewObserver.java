@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import com.soen.risk.model.RiskCard;
 
 /**
- * An asynchronous update interface for receiving notifications
+ * The interface RiskCardviewObserver. An asynchronous update interface for receiving notifications
  * about RiskCardview information as the RiskCardview is constructed.
  *
  * @author Yogesh Nimbhorkar

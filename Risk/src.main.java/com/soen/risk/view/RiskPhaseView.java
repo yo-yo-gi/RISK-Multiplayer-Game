@@ -8,7 +8,10 @@ import com.soen.risk.model.RiskPhaseType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class RiskPhaseView.
+ * The Class RiskPhaseView. The phase view displays: 
+ * (1) the name of the game phase currently being played 
+ * (2) the current player’s name 
+ * (3) information about actions that are taking place during this phase.
  *
  * @author Yogesh Nimbhorkar
  * @version 2.0
