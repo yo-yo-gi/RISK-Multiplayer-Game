@@ -59,7 +59,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	/** Risk Phase view as Obsevable. */
 	RiskPhase riskPhase=new RiskPhase();
 
-	boolean cardEarnFlag=false;
+	boolean cardEarnFlag=false,attackCounter=false;
 
 	/**  Risk Phase view as Obsever. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
@@ -678,6 +678,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 			if (defenderTerritoryArmy==0) {
 				cardEarnFlag=true;
+                attackCounter=true;
 				System.out.println("How many armies you want to move to the new conquered territory?");
 				do {
 					while (!scanner.hasNextInt()) {
@@ -720,16 +721,21 @@ public class RiskPlayer implements RiskCardviewObservable {
 					}
 					else {
 						System.out.println("You currently have only 1 army in your territories...\nCannot attack further...Proceed to fortification phase");
-
+                    }
+				}
+                else {
+					if(cardEarnFlag && attackCounter) {
+						riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
+						attackCounter=false;
 					}
-
 				}
 
 			}
 
 		}
-		if(cardEarnFlag) {
-			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);		
+		if(cardEarnFlag && attackCounter) {
+			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
+			attackCounter=false;
 		}
 		System.out.println("Attack completed...");
 		return riskMainMap;

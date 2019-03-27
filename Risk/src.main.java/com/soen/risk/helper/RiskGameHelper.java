@@ -283,17 +283,24 @@ public class RiskGameHelper {
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignRandomCard(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
-
+        int randomCardNumber;
 		RiskPlayer currentPlayer = null;
+		ArrayList<RiskTerritory> currPlayerTerritories=new ArrayList<RiskTerritory>();
 		//		Finding current player turn
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer = entry.getKey();
+				currPlayerTerritories = entry.getValue();
 				break;
 			}
 		}
 		RiskCardviewView riskCardviewView = new RiskCardviewView(currentPlayer);
-		int randomCardNumber = (int) ((Math.random() * 100) % 3);
+		do {
+			randomCardNumber = (int) ((Math.random() * 100) % 3);
+			if(randomCardNumber!=0)
+				break;
+		}while(randomCardNumber==Constants.ZERO);
+		
 
 		switch (randomCardNumber) {
 		case 1:
@@ -308,7 +315,8 @@ public class RiskGameHelper {
 			currentPlayer.setCardOwned(RiskCard.ARTILLERY);
 			break;
 		}
-		logger.doLogging("riskMainMap returned------"+riskMainMap);
+		riskMainMap.put(currentPlayer, currPlayerTerritories);
+        logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 }
