@@ -499,13 +499,9 @@ public class RiskPlayer implements RiskCardviewObservable {
 	}
 
 
-
 	//==================================================================================
 	//	Attack method
 	//	============================================================================
-
-
-
 
 	/**
 	 * Gets the attackphase map.
@@ -542,15 +538,12 @@ public class RiskPlayer implements RiskCardviewObservable {
 		riskPhase.setCurrentAction("Starting Attack Phase");
 
 		do {
-
-
 			//		System.out.println("Current Player:"+currentPlayer.getPlayerName());
 			System.out.println("Select the territory you want to attack from:");
 
 			for (RiskTerritory currTerritory : playerTerritories) {
 				System.out.println(sourceTCoutner+"." + currTerritory.getTerritoryName()+" ("+currTerritory.getArmiesPresent()+") -->"+currTerritory.getAdjacents());
-				sourceTCoutner++;	
-
+				sourceTCoutner++;
 			}
 			System.out.println(sourceTCoutner+".Exit");
 			do {
@@ -678,7 +671,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 			if (defenderTerritoryArmy==0) {
 				cardEarnFlag=true;
-                attackCounter=true;
+				attackCounter=true;
 				System.out.println("How many armies you want to move to the new conquered territory?");
 				do {
 					while (!scanner.hasNextInt()) {
@@ -695,12 +688,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 				riskMainMap=RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackSourceTerritory,attackDestinationTerritory, riskMainMap);
 			}
 
-
-
 			if (!exitFlag) {
-
-
-
 				System.out.println("Do you want to attack again?(Y/N)");
 				do {
 					selectedchoice=scanner.next().charAt(0);
@@ -721,17 +709,15 @@ public class RiskPlayer implements RiskCardviewObservable {
 					}
 					else {
 						System.out.println("You currently have only 1 army in your territories...\nCannot attack further...Proceed to fortification phase");
-                    }
+					}
 				}
-                else {
+				else {
 					if(cardEarnFlag && attackCounter) {
 						riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
 						attackCounter=false;
 					}
 				}
-
 			}
-
 		}
 		if(cardEarnFlag && attackCounter) {
 			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
@@ -740,7 +726,6 @@ public class RiskPlayer implements RiskCardviewObservable {
 		System.out.println("Attack completed...");
 		return riskMainMap;
 	}
-
 
 
 	//==================================================================================
@@ -944,6 +929,4 @@ public class RiskPlayer implements RiskCardviewObservable {
 		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
 		return fortifiedMap;
 	}
-
-
 }

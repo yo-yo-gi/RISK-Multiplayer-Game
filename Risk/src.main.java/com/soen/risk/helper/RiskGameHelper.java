@@ -27,7 +27,7 @@ import com.soen.risk.view.RiskDominationView;
  * @version 2.0
  */
 public class RiskGameHelper {
-	
+
 	/** The logger. */
 	static RiskLogger logger= new RiskLogger();
 
@@ -283,7 +283,7 @@ public class RiskGameHelper {
 	 */
 	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignRandomCard(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
-        int randomCardNumber;
+		int randomCardNumber;
 		RiskPlayer currentPlayer = null;
 		ArrayList<RiskTerritory> currPlayerTerritories=new ArrayList<RiskTerritory>();
 		//		Finding current player turn
@@ -300,7 +300,7 @@ public class RiskGameHelper {
 			if(randomCardNumber!=0)
 				break;
 		}while(randomCardNumber==Constants.ZERO);
-		
+
 
 		switch (randomCardNumber) {
 		case 1:
@@ -316,7 +316,7 @@ public class RiskGameHelper {
 			break;
 		}
 		riskMainMap.put(currentPlayer, currPlayerTerritories);
-        logger.doLogging("riskMainMap returned------"+riskMainMap);
+		logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 }
