@@ -78,6 +78,7 @@ public class RiskReinforcementPhase {
 		int exchangeArmies = Constants.ZERO;
 		Scanner scanner = new Scanner(System.in);
 		int decision;
+		boolean exchangeArmy = false;
 		if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
 		}
@@ -124,18 +125,25 @@ public class RiskReinforcementPhase {
 				if (infantCounter == 3) {
 					System.out.println("Infantry Cards removed");
 					player.removeSimilarThreeCards(RiskCard.INFANT);
+					exchangeArmy = true;
 				} else if (artilleryCounter == 3) {
 					System.out.println("Artillery Cards remvoed");
 					player.removeSimilarThreeCards(RiskCard.ARTILLERY);
+					exchangeArmy = true;
 				} else if (cavCounter==3) {
 					System.out.println("Cavalry Cards removed");
 					player.removeSimilarThreeCards(RiskCard.CAVALRY);
+					exchangeArmy = true;
 				}
 			} 
 			else
 			{
-				System.out.println("Player doesn't have similar cards. Exchaging distinct cards.");
-				player.removeDistinctCards();
+				if (player.getCardOwned().containsAll(distinctCards))
+				{
+					System.out.println("Player doesn't have similar cards. Exchaging distinct cards.");
+					player.removeDistinctCards();
+					exchangeArmy = true;
+				}
 			}
 		} else if (decision == 2) {
 
@@ -143,25 +151,36 @@ public class RiskReinforcementPhase {
 			{
 				System.out.println("Exchanging distinct cards.");
 				player.removeDistinctCards();
+				exchangeArmy = true;
 			}
 			else
 			{
-				System.out.println("The player does not contain distinct cards,hence exchanging for similar cards");
+				System.out.println("The player does not contain distinct cards");
 				if (infantCounter == 3) {
 					System.out.println("Infantry Cards removed");
 					player.removeSimilarThreeCards(RiskCard.INFANT);
+					exchangeArmy = true;
 				} else if (artilleryCounter == 3) {
 					System.out.println("Artillery Cards remvoed");
 					player.removeSimilarThreeCards(RiskCard.ARTILLERY);
+					exchangeArmy =true;
 				} else if (cavCounter==3) {
 					System.out.println("Cavalry Cards removed");
 					player.removeSimilarThreeCards(RiskCard.CAVALRY);
+					exchangeArmy = true;
 				}
 			}
 		}
+		if(exchangeArmy == true)
+		{
 		exchangeArmies = player.getCardViewCount() * 5;
 		player.setCardViewCount(player.getCardViewCount() + 1);
 		logger.doLogging("exchangeArmies returned------"+exchangeArmies);
+		}
+		else
+		{
+			System.out.println("Cards cannot be replaced with armies");
+		}
 		return exchangeArmies;
 	}
 }
