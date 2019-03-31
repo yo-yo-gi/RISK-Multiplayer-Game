@@ -351,7 +351,6 @@ public class RiskMapEditor {
 
 		}						
 		if (flag) {
-			//		continentList=deletedContinentList;
 			territoryList=deletedTerritoryList;
 			System.out.println("Deleted successfully");
 		}else System.err.println("Territory not found. Please check again.");

@@ -11,7 +11,7 @@ Africa=3
 Europe=5
 Asia=7
 Australia=2
-North_America=7
+North_America=5
 -
 [Territories]
 Alaska,North_America,Northwest_Territory,Alberta,Kamchatka
