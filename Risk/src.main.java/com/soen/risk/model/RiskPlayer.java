@@ -53,6 +53,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	/**  Card exchange count for  player. */
 	private int cardViewCount=1;
+	
+	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackedMap;
 
 	/**  Risk card view obsever interface object. */
 	private List<RiskCardviewObserver> cardviewObsevers;
@@ -510,6 +512,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 	 * @return the attackphase map
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> getAttackphaseMap(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
+		attackedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
 		boolean currPlayerArmyCheck=true, exitFlag=false;
 		char selectedchoice;
@@ -525,7 +528,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 		Map<String, Object> attackOutputMap = new HashMap<>();
 
-		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()) {
+		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : attackedMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
 				playerTerritories=entry.getValue();
@@ -616,7 +619,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 					defendingTerritory=AdjAttackList.get(i);
 				}
 			}
-			attackDestinationTerritory = RiskGameHelper.getRiskTerritoryByName(riskMainMap, defendingTerritory);
+			attackDestinationTerritory = RiskGameHelper.getRiskTerritoryByName(attackedMap, defendingTerritory);
 			attackDestinationTerritoryName=attackDestinationTerritory.getTerritoryName();
 			attackDestinationArmy=attackDestinationTerritory.getArmiesPresent();
 
@@ -645,8 +648,8 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 
 			//		updating the main map for the army after every attack and deleting the territory if army is zero
-			riskMainMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, riskMainMap);
-			if (riskMainMap.size()==1) {
+			attackedMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, attackedMap);
+			if (attackedMap.size()==1) {
 				System.out.println("*****************************************");
 				System.out.println(currentPlayer.getPlayerName() + "wins the match and conquered the world...\n Game Ends");
 				System.out.println("*****************************************");
@@ -685,7 +688,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 				}while(attackMoveArmy>attackerTerritoryArmy || attackMoveArmy<=0);
 
 				//			Moving armies to new territory
-				riskMainMap=RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackSourceTerritory,attackDestinationTerritory, riskMainMap);
+				attackedMap=RiskGameHelper.moveArmyAfterAttack(attackMoveArmy,attackSourceTerritory,attackDestinationTerritory, attackedMap);
 			}
 
 			if (!exitFlag) {
@@ -698,14 +701,14 @@ public class RiskPlayer implements RiskCardviewObservable {
 				}while(!(selectedchoice=='Y' || selectedchoice=='y' || selectedchoice=='n' || selectedchoice=='N'));
 				if(selectedchoice=='Y'||selectedchoice=='y') {
 					ArrayList<RiskTerritory> listArmyCheck=new ArrayList<RiskTerritory>();
-					listArmyCheck=riskMainMap.get(currentPlayer);
+					listArmyCheck=attackedMap.get(currentPlayer);
 					for (RiskTerritory currPlayerTerritory : listArmyCheck) {
 						if(currPlayerTerritory.getArmiesPresent()>1) {
 							currPlayerArmyCheck=false;
 							break;
 						}
 					}if(!currPlayerArmyCheck) {
-						getAttackphaseMap(riskMainMap);
+						getAttackphaseMap(attackedMap);
 					}
 					else {
 						System.out.println("You currently have only 1 army in your territories...\nCannot attack further...Proceed to fortification phase");
@@ -713,18 +716,18 @@ public class RiskPlayer implements RiskCardviewObservable {
 				}
 				else {
 					if(cardEarnFlag && attackCounter) {
-						riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
+						attackedMap=RiskGameHelper.assignRandomCard(attackedMap);	
 						attackCounter=false;
 					}
 				}
 			}
 		}
 		if(cardEarnFlag && attackCounter) {
-			riskMainMap=RiskGameHelper.assignRandomCard(riskMainMap);	
+			attackedMap=RiskGameHelper.assignRandomCard(attackedMap);	
 			attackCounter=false;
 		}
 		System.out.println("Attack completed...");
-		return riskMainMap;
+		return attackedMap;
 	}
 
 
