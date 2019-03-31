@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -37,7 +36,7 @@ import com.soen.risk.view.RiskMapUserCreatorView;
  * 
  * @author Yogesh Nimbhorkar
  * @author Shashank Rao
- * @version 1.0
+ * @version 2.0
  */
 public class RiskGameBuilder {
 
@@ -52,7 +51,7 @@ public class RiskGameBuilder {
 		RiskPlayerBuilder riskPlayerBuilder;
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
-	 
+
 		Scanner scanner = new Scanner(System.in);
 
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false,checkflag=false ;
@@ -62,31 +61,27 @@ public class RiskGameBuilder {
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
 
-		int mapType=0, count=1;
-		Map<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		int mapType= Constants.ZERO, count=1;
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
 		RiskMapUserCreator riskMapUserCreator= new RiskMapUserCreator();
 		RiskMapFileWriter riskMapFileWriter=new RiskMapFileWriter();
-		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
 		RiskMapUserCreatorView riskMapUserCreatorView=new RiskMapUserCreatorView();
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforcedMap;
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 		RiskMapEditor riskMapEditor;
 
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
-		RiskFortificationPhase riskFortifyPhase=new RiskFortificationPhase();
-		RiskGameHelper riskGameHelper=new RiskGameHelper();
+		RiskPlayer riskPlayer=new RiskPlayer();
 		logger.doLogging("In RiskGameBuilder class------> ");
-		
+
 		System.out.println("Welcome to RISK GAME!!!");
 		System.out.println();
 		System.out.println();
 		System.out.println("Game Starting");
 
 		do {
-			
+
 			System.out.println("\nPlease enter your choice:");
 			System.out.println("1. Upload from existing maps");
 			System.out.println("2. Create map from scratch");
@@ -201,8 +196,6 @@ public class RiskGameBuilder {
 			}
 		}
 
-
-		
 		currentMap=new ArrayList<String>();
 		for (String currLine : mapFile) {
 			currentMap.add(currLine.replace("\\s", "").toLowerCase());
@@ -237,15 +230,10 @@ public class RiskGameBuilder {
 			System.exit(0);
 		}
 
-
 		/* 
 		 * 
 		 * Game map loading and validation completed..... 
 		 * 
-		 */
-
-		/*		  
-		 * Adding players, assigning initial armies to players and loading appropriate graphs...		 * 
 		 */
 
 		riskPlayerBuilder=new RiskPlayerBuilder();
@@ -258,7 +246,7 @@ public class RiskGameBuilder {
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
 		System.out.println();
 		System.out.println("Players numbers initialized. Game started.");
-		
+
 		for(RiskPlayer curPlayer:riskPlayerList) {
 			System.out.println("Player #"+count+" -> "+curPlayer.getPlayerName());
 			count++;
@@ -274,7 +262,7 @@ public class RiskGameBuilder {
 		//		passing list of players and List of countries to assign random territories
 		riskMainMap=riskTerritoryAssignmentToPlayer.assignTerritory(riskPlayerList,riskTerritoryList);
 		//		assigning control value as per territories owned by player
-		riskMainMap=riskGameHelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
+		riskMainMap=RiskGameHelper.assignControlValuesToPlayer(riskMainMap,riskContinentList);
 		//		assigning round robin army to above map
 		riskMainMap=riskArmyAllocationToPlayers.assignArmiesToPlayers(riskMainMap);
 
@@ -287,32 +275,47 @@ public class RiskGameBuilder {
 
 		//		starting turn by turn reinforcement, attack and fortify
 
-		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet())
-		{
-			reinforcedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-			fortifiedMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 
-			reinforcedMap=riskReinforcementPhase.getReinforcedMap(entry.getKey(),entry.getValue(), riskContinentList);
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
+		while(tempMap.size()>1) {
 
-			System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
-			char selection1;
-			do {
-				selection1=scanner.next().charAt(0);
-				if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
-					System.out.println("Try Again!!");
-				}
-			}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
-			if(selection1=='Y'||selection1=='y') {
-				fortifiedMap=riskFortifyPhase.getFortifiedMap(reinforcedMap.keySet().stream().findFirst().get(), reinforcedMap.get(reinforcedMap.keySet().stream().findFirst().get()));
-			}else System.out.println("Fortification phase skipped...");
-			
+			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
+				entry.getKey().setCurrentPlayerTurn(true);
 
+				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
+
+				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
+				char selectionAttack;
+				do {
+					selectionAttack=scanner.next().charAt(0);
+					if(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N')) {
+						System.out.println("Try Again!!");
+					}
+				}while(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N'));
+				if(selectionAttack=='Y'||selectionAttack=='y') {
+					riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
+				}else System.out.println("Attack phase skipped...");
+
+				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
+				char selection1;
+				do {
+					selection1=scanner.next().charAt(0);
+					if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+						System.out.println("Try Again!!");
+					}
+				}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
+				if(selection1=='Y'||selection1=='y') {
+					riskMainMap=riskPlayer.getFortifiedMap(riskMainMap);
+				}else System.out.println("Fortification phase skipped...");
+
+				entry.getKey().setCurrentPlayerTurn(false);
+			}
+			tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
-		System.out.println("Reinforcement & Fortification phases complete for all players. \r\n Phase 1 completed. Thank You!! ");
+		System.out.println("Reinforcement & Fortification phases complete for all players.\n Phase 1 completed. Thank You!! ");
 
 		scanner.close();
 	}
-
 }
 
 

@@ -5,9 +5,8 @@ package com.soen.risk.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskMapBuilder;
@@ -39,7 +38,7 @@ public class RiskTerritoryAssignmentToPlayer {
 	 * @return the map
 	 */
 
-	public Map<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
+	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
 		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println();
 		System.out.println("Start up phase...");
@@ -54,7 +53,7 @@ public class RiskTerritoryAssignmentToPlayer {
 		shuffledTerritories=territories;
 		Collections.shuffle(shuffledTerritories);
 
-		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		for (RiskPlayer currentPlayer : riskPlayerList) {
 			playerTerritoryMap.put(currentPlayer, new ArrayList<RiskTerritory>());
 		}
@@ -80,9 +79,9 @@ public class RiskTerritoryAssignmentToPlayer {
 			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
-			
+
 		}
-		logger.doLogging("returning playerTerritory map ----"+playerTerritoryMap);
+		logger.doLogging("Returning playerTerritory map------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

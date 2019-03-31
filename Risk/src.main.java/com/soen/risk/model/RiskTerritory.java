@@ -5,7 +5,6 @@ package com.soen.risk.model;
 
 import java.util.ArrayList;
 
-
 /**
  * <h2>Territory Model</h2>
  * This class is used to set and get the values of the parameters for territories.
@@ -56,6 +55,13 @@ public class RiskTerritory {
 			adjTerritories.add(parsedTerritory[i]);
 		}
 		setAdjacents(adjTerritories);
+	}
+
+	/**
+	 * Default Constructor.
+	 */
+	public RiskTerritory() {
+		
 	}
 
 	/**

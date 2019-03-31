@@ -13,7 +13,6 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -21,9 +20,10 @@ import com.soen.risk.model.RiskTerritory;
 /**
  * <h2> Risk Territory Assignment To Player Test</h2>
  * This class is used to test the number of the armies 
- * given to the player based on the number of players.
+ * given to the player based on the number of players
  * 
  * @author Neha Dighe
+ * @author Chirag
  * @version 1.0
  */
 public class RiskTerritoryAssignmentToPlayerTest {
@@ -33,11 +33,9 @@ public class RiskTerritoryAssignmentToPlayerTest {
 	 */
 	@Test
 	public void testAssignTerritory() {
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
 
 		List<RiskPlayer> playersNames = new ArrayList<RiskPlayer>();
 		List<RiskTerritory> territories = new ArrayList<RiskTerritory>();
-		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskAssignmentToPlayer = new RiskTerritoryAssignmentToPlayer();
 
@@ -65,7 +63,6 @@ public class RiskTerritoryAssignmentToPlayerTest {
 		playerTerritoryMap = riskAssignmentToPlayer.assignTerritory(playersNames,territories);
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> stringListEntry : playerTerritoryMap.entrySet()) {
-			String player = stringListEntry.getKey().getPlayerName();
 			List<RiskTerritory> value = stringListEntry.getValue();
 
 			assertEquals(1,value.size());

@@ -6,14 +6,11 @@ package com.soen.risk.test.controller;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
-import com.soen.risk.controller.RiskFortificationPhase;
-import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -34,16 +31,13 @@ public class RiskFortificationPhaseTest {
 	 */
 	@Test
 	public void testGetFortifiedMap() {
-		HashMap<RiskPlayer, ArrayList<RiskTerritory>> playerMap;
 
-		RiskPlayer playerName = new RiskPlayer();
 		ArrayList<RiskTerritory> territories = new ArrayList<RiskTerritory>();
-		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
-		Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new HashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-		RiskFortificationPhase riskFortificationTest = new RiskFortificationPhase();
+		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+
 
 		RiskPlayer player1 = new RiskPlayer("Player1");
-
+		player1.setCurrentPlayerTurn(true);
 		String[] parsedTerritory = {"Venezuela","South America","Brazil"};
 		RiskTerritory tr1 = new RiskTerritory(parsedTerritory);
 		tr1.setArmiesPresent(5);
@@ -53,13 +47,14 @@ public class RiskFortificationPhaseTest {
 		String[] parsedTerritory2 = {"Peru","South America","Brazil"};
 		RiskTerritory tr3 = new RiskTerritory(parsedTerritory2);
 		tr3.setArmiesPresent(5);
+
 		territories.add(tr1);
 		territories.add(tr2);
 		territories.add(tr3);
+		playerTerritoryMap.put(player1, territories);
 
-		
 
-		playerTerritoryMap = riskFortificationTest.getFortifiedMap(player1,territories);
+		playerTerritoryMap = player1.getFortifiedMap(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
 		Integer []  expected= {3,7};

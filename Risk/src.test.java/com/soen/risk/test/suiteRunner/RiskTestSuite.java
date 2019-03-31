@@ -7,9 +7,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.soen.risk.test.controller.RiskAttackPhaseTest;
 import com.soen.risk.test.controller.RiskFortificationPhaseTest;
 import com.soen.risk.test.controller.RiskReinforcementPhaseTest;
 import com.soen.risk.test.helper.RiskArmyAllocationToPlayersTest;
+import com.soen.risk.test.helper.RiskGameHelperTest;
 import com.soen.risk.test.helper.RiskMapEditorTest;
 import com.soen.risk.test.helper.RiskTerritoryAssignmentToPlayerTest;
 import com.soen.risk.test.validator.RiskMapValidatorTest;
@@ -21,7 +23,7 @@ import com.soen.risk.test.validator.RiskMapValidatorTest;
  * package src.test.java
  * 
  * @author Chirag Vora
- * @version 1.0
+ * @version 2.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ 
@@ -30,7 +32,9 @@ import com.soen.risk.test.validator.RiskMapValidatorTest;
 	RiskTerritoryAssignmentToPlayerTest.class,
 	RiskArmyAllocationToPlayersTest.class,
 	RiskReinforcementPhaseTest.class,
-	RiskFortificationPhaseTest.class,
+	RiskAttackPhaseTest.class,
+	RiskGameHelperTest.class,
+	RiskFortificationPhaseTest.class
 })
 public class RiskTestSuite {
 }

@@ -52,7 +52,7 @@ import com.soen.risk.helper.RiskMapUserCreator;
 
 
 	/**
-	 * Sets the up.
+	 * Sets the data for testing the functionalities of the methods.
 	 *
 	 * @throws Exception the exception
 	 */

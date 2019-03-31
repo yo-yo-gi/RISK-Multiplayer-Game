@@ -18,7 +18,7 @@ public final class Constants {
 	 */
 
 	private Constants(){
-		//		To restrict instantiation
+		//		To restrict instantiation of Constants class
 	}
 
 	/** The Constant ZERO. */

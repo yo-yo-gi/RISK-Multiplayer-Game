@@ -1,17 +1,34 @@
+/*
+ * 
+ */
 package com.soen.risk.view;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.soen.risk.helper.Constants;
+
 /**
  * <h2>Risk map view</h2>
- * Shows view for user created map.
+ * This class is used to show view for user created map.
  *
  * @author Shashank Rao
+ * @author Chirag Vora
  * @version 1.0
  */
 public class RiskMapUserCreatorView {
-	int continentStartIndex=0,continentEndIndex=0,territoryStartIndex=0,territoryEndIndex=0;
+	
+	/** The territory end index. */
+	int continentStartIndex=Constants.ZERO,continentEndIndex=Constants.ZERO,territoryStartIndex=Constants.ZERO,territoryEndIndex=Constants.ZERO;
+	
+	/** The display list. */
 	ArrayList<String> displayList=new ArrayList<String>();
+	
+	/**
+	 * Display map.
+	 *
+	 * @param mapFile the map file
+	 */
 	public void displayMap(List<String> mapFile) {
 		
 		for (String currentLine : mapFile) {

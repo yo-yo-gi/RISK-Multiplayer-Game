@@ -4,6 +4,7 @@
 package com.soen.risk.model;
 
 import java.util.ArrayList;
+
 /**
  * <h2>Continent Model</h2>
  * This class is used to set and get the values of the parameters for continents.
@@ -19,8 +20,8 @@ public class RiskContinent {
 	/** The continent name. */
 	private String continentName;
 
-	/** The controll value. */
-	private int controllValue;
+	/** The control value. */
+	private int controlValue;
 
 	/** The included territories. */
 	private ArrayList<String> includedTerritories;
@@ -29,11 +30,11 @@ public class RiskContinent {
 	 * Instantiates a new risk continent.
 	 *
 	 * @param continentName the continent name
-	 * @param controllValue the controll value
+	 * @param controlValue the control value
 	 */
-	public RiskContinent(String continentName, int controllValue) {
+	public RiskContinent(String continentName, int controlValue) {
 		setContinentName(continentName);
-		setControllValue(controllValue);
+		setControllValue(controlValue);
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class RiskContinent {
 	 */
 
 	public int getControllValue() {
-		return controllValue;
+		return controlValue;
 	}
 
 	/**
@@ -93,7 +94,7 @@ public class RiskContinent {
 	 */
 
 	public void setControllValue(int controllValue) {
-		this.controllValue = controllValue;
+		this.controlValue = controllValue;
 	}
 
 	/**

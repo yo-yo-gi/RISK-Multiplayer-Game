@@ -1,0 +1,5 @@
+INFO03-26-2019 17:34:53 || RiskLogger.doLogging() : Inside the fortification phase----------
+INFO03-26-2019 17:34:53 || RiskLogger.doLogging() : currentPlayer name is: com.soen.risk.model.RiskPlayer@5ccd43c2
+INFO03-26-2019 17:35:11 || RiskLogger.doLogging() : Selected source territory  Venezuela
+INFO03-26-2019 17:35:14 || RiskLogger.doLogging() : Selected destination territory-> Venezuela
+INFO03-26-2019 17:35:17 || RiskLogger.doLogging() : Fortification successful and the foritified map is: {com.soen.risk.model.RiskPlayer@5ccd43c2=[com.soen.risk.model.RiskTerritory@4aa8f0b4, com.soen.risk.model.RiskTerritory@7960847b, com.soen.risk.model.RiskTerritory@6a6824be]}

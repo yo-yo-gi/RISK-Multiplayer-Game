@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.controller.RiskReinforcementPhase;
+import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -57,13 +58,13 @@ public class RiskReinforcementPhaseTest {
 
 
 	/**
-	 * Sets the up.
+	 * Sets the data for testing the functionalities of the methods.
 	 */
 	@Before
 	public void setUp() {
 		riskMapBuilder=new RiskMapBuilder();
 		riskPlayer=new RiskPlayer("test");
-		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile(Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/EarthMap.txt").toAbsolutePath().toString());		
+		mapFile=(ArrayList<String>) riskMapBuilder.parseMapFile(Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps/Earth Map.txt").toAbsolutePath().toString());		
 		riskMapBuilder.loadMapData(mapFile);
 		continentList=riskMapBuilder.getContinentList();
 		territoryList=riskMapBuilder.getTerritoryList();		
@@ -93,7 +94,7 @@ public class RiskReinforcementPhaseTest {
 	public void testArmyCalculationPerPlayer_controlValue() {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
-		assertEquals(19,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
+		assertEquals(21,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
 	}
 
 	/**
@@ -104,5 +105,27 @@ public class RiskReinforcementPhaseTest {
 		ownedContinents.add("North_America");
 		riskPlayer.setOccupiedContinents(ownedContinents);		
 		assertNotEquals(33,riskReinforcementPhase.calculateArmy(riskPlayer,territoryList,continentList ));
+	}
+	
+	/**
+	 * Test army calculation per player control value fail.
+	 */
+	@Test
+	public void testArmyCalculationPerPlayer_cardview() {
+		riskPlayer.setCardOwned(RiskCard.ARTILLERY);	
+		riskPlayer.setCardOwned(RiskCard.CAVALRY);	
+		riskPlayer.setCardOwned(RiskCard.INFANT);	
+		assertEquals(5,riskReinforcementPhase.CardExchangeView(riskPlayer));
+	}
+	
+	/**
+	 * Test army calculation per player control value fail.
+	 */
+	@Test
+	public void testArmyCalculationPerPlayer_cardviewFail() {
+		riskPlayer.setCardOwned(RiskCard.ARTILLERY);	
+		riskPlayer.setCardOwned(RiskCard.CAVALRY);	
+		riskPlayer.setCardOwned(RiskCard.INFANT);	
+		assertNotEquals(3,riskReinforcementPhase.CardExchangeView(riskPlayer));
 	}
 }

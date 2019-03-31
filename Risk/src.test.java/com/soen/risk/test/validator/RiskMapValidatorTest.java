@@ -48,6 +48,7 @@ public class RiskMapValidatorTest extends RiskMapValidator {
 
 /**
  * Called before every test case.
+ * Sets the data for testing the functionalities of the methods.
  *
  * @throws Exception the exception
  */

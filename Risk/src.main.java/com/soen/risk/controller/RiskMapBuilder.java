@@ -16,7 +16,6 @@ import com.soen.risk.helper.Constants;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskTerritory;
 
-
 /**
  * <h2>Map Builder</h2>
  * This class parse and validate map file,
@@ -34,7 +33,7 @@ public class RiskMapBuilder {
 	/** The territory list. */
 	private ArrayList<RiskTerritory> territoryList=new ArrayList<RiskTerritory>();
 
-	/** The adjucency map. */
+	/** The adjacency map. */
 	private Map<String, List<String>> adjacencyMap=new HashMap<String, List<String>>();
 
 	/** The map upload status. */
@@ -104,7 +103,6 @@ public class RiskMapBuilder {
 			riskContinent=new RiskContinent(parsedContinenet[0],Integer.parseInt(parsedContinenet[1]));
 			addedContinentList.add(riskContinent);
 		}
-
 		return addedContinentList;
 	}
 
@@ -246,7 +244,6 @@ public class RiskMapBuilder {
 				idForTerritory=currTerritory.getTerritoryId();
 			}
 		}
-
 		return idForTerritory;		
 	}
 
