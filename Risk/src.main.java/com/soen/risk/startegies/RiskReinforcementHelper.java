@@ -113,12 +113,14 @@ public class RiskReinforcementHelper {
 			territoryCounter++;
 		}
 		
-		reinforcementTerritory.setArmiesPresent(reinforcementTerritory.getArmiesPresent()+noOfRemainingArmies);
 		
-		currentPlayerTerritories.set(currentPlayerTerritories.indexOf(reinforcementTerritory), reinforcementTerritory);
-		
+		reinforcementTerritory.setArmiesPresent(reinforcementTerritory.getArmiesPresent()+noOfRemainingArmies);		
+		currentPlayerTerritories.set(currentPlayerTerritories.indexOf(reinforcementTerritory), reinforcementTerritory);		
 		reinforcedMap.put(currentPlayer, currentPlayerTerritories);
 		System.out.println("Reinforcement Phase Completed for the Player " + currentPlayerName);
+		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
+			System.out.println(riskTerritory.getTerritoryName()+"("+riskTerritory.getArmiesPresent()+")");
+		}
 		System.out.println("\n");
 		return reinforcedMap;
 	}

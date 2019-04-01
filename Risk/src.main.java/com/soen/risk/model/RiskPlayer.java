@@ -708,7 +708,7 @@ public class RiskPlayer implements RiskCardviewObservable {
 							break;
 						}
 					}if(!currPlayerArmyCheck) {
-						getAttackphaseMap(attackedMap);
+						attackedMap=getAttackphaseMap(attackedMap);
 					}
 					else {
 						System.out.println("You currently have only 1 army in your territories...\nCannot attack further...Proceed to fortification phase");

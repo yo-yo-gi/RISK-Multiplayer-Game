@@ -24,6 +24,7 @@ import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
+import com.soen.risk.startegies.RiskAggressiveStartegy;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -275,6 +276,7 @@ public class RiskGameBuilder {
 
 		//		starting turn by turn reinforcement, attack and fortify
 
+		RiskAggressiveStartegy riskAggressiveStartegy=new RiskAggressiveStartegy();
 
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		while(tempMap.size()>1) {
@@ -282,31 +284,36 @@ public class RiskGameBuilder {
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
 				entry.getKey().setCurrentPlayerTurn(true);
 
-				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
-
-				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
-				char selectionAttack;
-				do {
-					selectionAttack=scanner.next().charAt(0);
-					if(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N')) {
-						System.out.println("Try Again!!");
-					}
-				}while(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N'));
-				if(selectionAttack=='Y'||selectionAttack=='y') {
-					riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
-				}else System.out.println("Attack phase skipped...");
-
-				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
-				char selection1;
-				do {
-					selection1=scanner.next().charAt(0);
-					if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
-						System.out.println("Try Again!!");
-					}
-				}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
-				if(selection1=='Y'||selection1=='y') {
-					riskMainMap=riskPlayer.getFortifiedMap(riskMainMap);
-				}else System.out.println("Fortification phase skipped...");
+				
+				riskMainMap=riskAggressiveStartegy.reinforce(riskMainMap, riskContinentList);
+				riskMainMap=riskAggressiveStartegy.attack(riskMainMap);
+				riskMainMap=riskAggressiveStartegy.fortify(riskMainMap);
+				
+//				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
+//
+//				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
+//				char selectionAttack;
+//				do {
+//					selectionAttack=scanner.next().charAt(0);
+//					if(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N')) {
+//						System.out.println("Try Again!!");
+//					}
+//				}while(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N'));
+//				if(selectionAttack=='Y'||selectionAttack=='y') {
+//					riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
+//				}else System.out.println("Attack phase skipped...");
+//
+//				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
+//				char selection1;
+//				do {
+//					selection1=scanner.next().charAt(0);
+//					if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
+//						System.out.println("Try Again!!");
+//					}
+//				}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
+//				if(selection1=='Y'||selection1=='y') {
+//					riskMainMap=riskPlayer.getFortifiedMap(riskMainMap);
+//				}else System.out.println("Fortification phase skipped...");
 
 				entry.getKey().setCurrentPlayerTurn(false);
 			}
