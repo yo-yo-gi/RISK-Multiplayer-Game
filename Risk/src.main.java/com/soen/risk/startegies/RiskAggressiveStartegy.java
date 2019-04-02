@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskAttackPhase;
+import com.soen.risk.helper.RiskAttackHelper;
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
@@ -19,7 +20,10 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * The Class RiskAggressiveStartegy.
+ * The Class RiskAggressiveStartegy that focuses on attack (reinforces its 
+ * strongest country, then always attack with it until it cannot attack anymore, 
+ * then fortifies in order to maximize aggregation of forces in one country).
+ * 
  * @author Yogesh Nimbhorkar
  * @author Chirag Vora
  * @version 3.0
