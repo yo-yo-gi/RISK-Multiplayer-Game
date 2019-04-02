@@ -60,7 +60,7 @@ public class RiskReinforcementHelper {
 		char decision ;
 		/** List of territories owned by current player. */
 		ArrayList<RiskTerritory> currentPlayerTerritories = new ArrayList<RiskTerritory>();
-		/** Armies remaining after each iteration of reinfocement. */
+		/** Armies remaining after each iteration of reinforcement. */
 		int noOfRemainingArmies = 0;
 		/** Army calculated for card exchange view. */
 		int	cardExchangeViewArmy = 0;

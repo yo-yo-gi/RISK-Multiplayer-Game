@@ -20,7 +20,8 @@ import com.soen.risk.model.RiskTerritory;
 
 /**
  * The Class RiskAggressiveStartegy.
- * @author Chirag
+ * @author Yogesh Nimbhorkar
+ * @author Chirag Vora
  * @version 3.0
  */
 public class RiskAggressiveStartegy implements RiskPlayerStrategy{

@@ -25,6 +25,7 @@ import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.startegies.RiskAggressiveStartegy;
+import com.soen.risk.startegies.RiskBenevolentStartegy;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -276,8 +277,10 @@ public class RiskGameBuilder {
 
 		//		starting turn by turn reinforcement, attack and fortify
 
+		// RiskAggressiveStartegy implementation
 		RiskAggressiveStartegy riskAggressiveStartegy=new RiskAggressiveStartegy();
-
+		RiskBenevolentStartegy riskBenevolentStartegy= new RiskBenevolentStartegy();
+		
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		while(tempMap.size()>1) {
 
@@ -285,9 +288,12 @@ public class RiskGameBuilder {
 				entry.getKey().setCurrentPlayerTurn(true);
 
 				
-				riskMainMap=riskAggressiveStartegy.reinforce(riskMainMap, riskContinentList);
+				/*riskMainMap=riskAggressiveStartegy.reinforce(riskMainMap, riskContinentList);
 				riskMainMap=riskAggressiveStartegy.attack(riskMainMap);
-				riskMainMap=riskAggressiveStartegy.fortify(riskMainMap);
+				riskMainMap=riskAggressiveStartegy.fortify(riskMainMap);*/
+				
+				riskMainMap=riskBenevolentStartegy.reinforce(riskMainMap, riskContinentList);
+				riskMainMap=riskBenevolentStartegy.fortify(riskMainMap);
 				
 //				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
 //
@@ -319,7 +325,7 @@ public class RiskGameBuilder {
 			}
 			tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
-		System.out.println("Reinforcement & Fortification phases complete for all players.\n Phase 1 completed. Thank You!! ");
+		System.out.println("Reinforcement & Fortification phases complete for all players.\n Phase 3 completed. Thank You!! ");
 
 		scanner.close();
 	}
