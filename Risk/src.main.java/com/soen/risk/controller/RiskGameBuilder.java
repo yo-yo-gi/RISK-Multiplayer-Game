@@ -26,6 +26,8 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.startegies.RiskAggressiveStartegy;
 import com.soen.risk.startegies.RiskBenevolentStartegy;
+import com.soen.risk.startegies.RiskCheaterStrategy;
+import com.soen.risk.startegies.RiskHumanStrategy;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -191,7 +193,7 @@ public class RiskGameBuilder {
 						}
 						break;
 					}else {
-						System.out.println("User selecte No[N].");
+						System.out.println("User selected No[N].");
 						editCompletionStatus=false;
 					}
 				}
@@ -246,6 +248,41 @@ public class RiskGameBuilder {
 		riskPlayerList=new ArrayList<RiskPlayer>();				
 		riskPlayerBuilder.addPlayers(riskPlayersNames);
 		riskPlayerList=riskPlayerBuilder.getRiskPlayerList();
+		
+		for (RiskPlayer player : riskPlayerList) {
+			System.out.println("\nEnter Strategy of the Player "+player.getPlayerName());
+			System.out.println("1. Human");
+			System.out.println("2. Aggressive");
+			System.out.println("3. Benevolent");
+			System.out.println("4. Random");
+			System.out.println("5. Cheater");
+			
+			
+			int playerstrategy;
+			do {
+				while (!(scanner.hasNextInt())) {
+					System.out.println("Invalid option. Please select from given options.");
+					scanner.next();
+				}
+				playerstrategy = scanner.nextInt();
+				if((playerstrategy>5 || playerstrategy<0)) {
+					System.out.println("Invalid option. Please select from given options.");
+				}
+			}while((playerstrategy>5 || playerstrategy<0));
+			
+			if (playerstrategy == 1)
+				player.setPlayerStrategy(new RiskHumanStrategy());
+			else if (playerstrategy == 2)
+				player.setPlayerStrategy(new RiskAggressiveStartegy());
+			else if (playerstrategy == 3)
+				player.setPlayerStrategy(new RiskBenevolentStartegy());
+			else if (playerstrategy == 4)
+				player.setPlayerStrategy(new RiskAggressiveStartegy());
+//				player.setPlayerStrategy(new RiskRandomStrategy());
+			else if (playerstrategy == 5)
+				player.setPlayerStrategy(new RiskCheaterStrategy());
+		}
+		
 		System.out.println();
 		System.out.println("Players numbers initialized. Game started.");
 
@@ -277,57 +314,21 @@ public class RiskGameBuilder {
 
 		//		starting turn by turn reinforcement, attack and fortify
 
-		// RiskAggressiveStartegy implementation
-		RiskAggressiveStartegy riskAggressiveStartegy=new RiskAggressiveStartegy();
-		RiskBenevolentStartegy riskBenevolentStartegy= new RiskBenevolentStartegy();
-		
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		while(tempMap.size()>1) {
 
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
 				entry.getKey().setCurrentPlayerTurn(true);
-
 				
-				/*riskMainMap=riskAggressiveStartegy.reinforce(riskMainMap, riskContinentList);
-				riskMainMap=riskAggressiveStartegy.attack(riskMainMap);
-				riskMainMap=riskAggressiveStartegy.fortify(riskMainMap);*/
+				riskMainMap=entry.getKey().getPlayerStrategy().reinforce(riskMainMap, riskContinentList);
+				riskMainMap=entry.getKey().getPlayerStrategy().attack(riskMainMap);
+				riskMainMap=entry.getKey().getPlayerStrategy().fortify(riskMainMap);
 				
-				riskMainMap=riskBenevolentStartegy.reinforce(riskMainMap, riskContinentList);
-				riskMainMap=riskBenevolentStartegy.fortify(riskMainMap);
-				
-//				riskMainMap=riskPlayer.getReinforcedMap(riskMainMap, riskContinentList);
-//
-//				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to attack?(Y/N)");
-//				char selectionAttack;
-//				do {
-//					selectionAttack=scanner.next().charAt(0);
-//					if(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N')) {
-//						System.out.println("Try Again!!");
-//					}
-//				}while(!(selectionAttack=='Y' || selectionAttack=='y' || selectionAttack=='n' || selectionAttack=='N'));
-//				if(selectionAttack=='Y'||selectionAttack=='y') {
-//					riskMainMap=riskPlayer.getAttackphaseMap(riskMainMap);
-//				}else System.out.println("Attack phase skipped...");
-//
-//				System.out.print("Player -->"+entry.getKey().getPlayerName() +" Do you want to fortify?(Y/N)");
-//				char selection1;
-//				do {
-//					selection1=scanner.next().charAt(0);
-//					if(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N')) {
-//						System.out.println("Try Again!!");
-//					}
-//				}while(!(selection1=='Y' || selection1=='y' || selection1=='n' || selection1=='N'));
-//				if(selection1=='Y'||selection1=='y') {
-//					riskMainMap=riskPlayer.getFortifiedMap(riskMainMap);
-//				}else System.out.println("Fortification phase skipped...");
-
 				entry.getKey().setCurrentPlayerTurn(false);
 			}
 			tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
-		System.out.println("Reinforcement & Fortification phases complete for all players.\n Phase 3 completed. Thank You!! ");
-
-		scanner.close();
+				scanner.close();
 	}
 }
 

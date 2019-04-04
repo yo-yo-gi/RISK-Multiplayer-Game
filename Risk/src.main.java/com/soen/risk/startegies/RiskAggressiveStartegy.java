@@ -19,6 +19,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * The Class RiskAggressiveStartegy.
  * @author Yogesh Nimbhorkar
  * @version 3.0
  */
