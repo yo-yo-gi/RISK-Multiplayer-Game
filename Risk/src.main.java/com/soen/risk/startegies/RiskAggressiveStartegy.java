@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskAttackPhase;
-import com.soen.risk.helper.RiskAttackHelper;
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
@@ -20,12 +19,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * The Class RiskAggressiveStartegy that focuses on attack (reinforces its 
- * strongest country, then always attack with it until it cannot attack anymore, 
- * then fortifies in order to maximize aggregation of forces in one country).
- * 
  * @author Yogesh Nimbhorkar
- * @author Chirag Vora
  * @version 3.0
  */
 public class RiskAggressiveStartegy implements RiskPlayerStrategy{
@@ -110,7 +104,16 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {
 		
 		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
-				
+		
+		/*
+		 * for(Entry<RiskPlayer, ArrayList<RiskTerritory>>
+		 * entry:fortifiedMap.entrySet()) {
+		 * System.out.println(entry.getKey().getPlayerName()); for (RiskTerritory
+		 * currTerritory : entry.getValue()) {
+		 * System.out.println(currTerritory.getTerritoryName()+"("+currTerritory.
+		 * getArmiesPresent()+")"+" - "+currTerritory.getAdjacents()); } }
+		 */
+		
 		ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
 		ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();
 		RiskTerritory fortifySourceTerritoy;
@@ -201,7 +204,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 		ArrayList<RiskTerritory> adjListWithOppositeTerritories=new ArrayList<RiskTerritory>();
 		int maxArmy=0;
 		
-//		finding list of current player territories in string format
+//		finding list of current player territories in string foramat
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			stringTerritoryList.add(currTerritory.getTerritoryName());
 		}

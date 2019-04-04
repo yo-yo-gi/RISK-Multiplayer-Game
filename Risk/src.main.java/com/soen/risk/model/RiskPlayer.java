@@ -16,6 +16,7 @@ import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.helper.RiskLogger;
+import com.soen.risk.startegies.RiskPlayerStrategy;
 import com.soen.risk.view.RiskCardviewObserver;
 import com.soen.risk.view.RiskPhaseView;
 
@@ -65,6 +66,22 @@ public class RiskPlayer implements RiskCardviewObservable {
 
 	/**  Risk Phase view as Obsever. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
+	
+	RiskPlayerStrategy playerStrategy;
+
+	/**
+	 * @return the playerStrategy
+	 */
+	public RiskPlayerStrategy getPlayerStrategy() {
+		return playerStrategy;
+	}
+
+	/**
+	 * @param playerStrategy the playerStrategy to set
+	 */
+	public void setPlayerStrategy(RiskPlayerStrategy playerStrategy) {
+		this.playerStrategy = playerStrategy;
+	}
 
 	/**
 	 * Instantiates a new risk player.

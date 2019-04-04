@@ -14,16 +14,21 @@ package com.soen.risk.startegies;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
+import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.helper.Constants;
+import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
+import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 public class RiskReinforcementHelper {
+	/** The logger. */
+	RiskLogger logger= new RiskLogger();
 
 	/**
 	 * Assigning the Armies to the Countries for the Player.
@@ -38,6 +43,8 @@ public class RiskReinforcementHelper {
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap,
 			ArrayList<RiskContinent> riskContinentList, RiskTerritory reinforcementTerritory) {		
 
+		/** The selected territory index. */
+		int selectedTerrIndex = 0;
 		/** Player with turn. */
 		RiskPlayer currentPlayer = null;
 		/** Output map with reinforcement data */
@@ -45,13 +52,15 @@ public class RiskReinforcementHelper {
 				riskMainMap);
 		/** Reinforcement phase controller */
 		RiskReinforcementHelper riskReinforcementPhase=new RiskReinforcementHelper();
-
+		/** Scanner object. */
+		Scanner scanner = new Scanner(System.in);
 		/** Name of current player */
 		String currentPlayerName = null;
-
+		/** Decision if user want to exchange cards or not. */
+		char decision ;
 		/** List of territories owned by current player. */
 		ArrayList<RiskTerritory> currentPlayerTerritories = new ArrayList<RiskTerritory>();
-		/** Armies remaining after each iteration of reinforcement. */
+		/** Armies remaining after each iteration of reinfocement. */
 		int noOfRemainingArmies = 0;
 		/** Army calculated for card exchange view. */
 		int	cardExchangeViewArmy = 0;
@@ -67,7 +76,7 @@ public class RiskReinforcementHelper {
 		int noOfCountriesOwned = currentPlayerTerritories.size();
 
 		//		Triggering phase view observer		
-		/*	riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+	/*	riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
 		riskPhase.setCurrentPlayerName(currentPlayerName);
 		riskPhase.setCurrentAction("Starting Reinforcement");*/
 
@@ -103,8 +112,8 @@ public class RiskReinforcementHelper {
 					+ riskTerritory.getArmiesPresent() + ") ");
 			territoryCounter++;
 		}
-
-
+		
+		
 		reinforcementTerritory.setArmiesPresent(reinforcementTerritory.getArmiesPresent()+noOfRemainingArmies);		
 		currentPlayerTerritories.set(currentPlayerTerritories.indexOf(reinforcementTerritory), reinforcementTerritory);		
 		reinforcedMap.put(currentPlayer, currentPlayerTerritories);
@@ -160,6 +169,8 @@ public class RiskReinforcementHelper {
 	public int CardExchangeView(RiskPlayer player) {
 
 		int exchangeArmies = Constants.ZERO;
+		Scanner scanner = new Scanner(System.in);
+		int decision;
 		boolean exchangeArmy = false;
 		if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
@@ -222,6 +233,7 @@ public class RiskReinforcementHelper {
 		{
 			exchangeArmies = player.getCardViewCount() * 5;
 			player.setCardViewCount(player.getCardViewCount() + 1);
+			logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		}
 		else
 		{
