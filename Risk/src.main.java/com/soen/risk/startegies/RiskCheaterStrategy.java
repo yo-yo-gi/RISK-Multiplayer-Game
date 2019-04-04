@@ -39,8 +39,9 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	/** The fortified map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 
+	/** The army. */
 	int army;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -118,7 +119,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		// getting opponent territories in string format
 		for (RiskTerritory currTerritory : currPlayerList) {
 			for (String curAdj : currTerritory.getAdjacents()) {
-				if (!(currPlayerStringList.contains(curAdj))) {
+				if (currPlayerStringList.contains(curAdj)) {
 					terrListWithOpponentAdj.add(currTerritory.getTerritoryName());
 				}
 			}
@@ -126,6 +127,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		// adding list of opponent adjacent to current player list
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : gameMap.entrySet()) {
 			for (RiskTerritory currTerritory : entry.getValue()) {
+				//if (!(terrListWithOpponentAdj.contains(currTerritory.getTerritoryName()))) {
 				if (terrListWithOpponentAdj.contains(currTerritory.getTerritoryName())) {
 					currPlayerList.add(currTerritory);
 				}
@@ -181,13 +183,13 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	@Override
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortify(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {
-		
+
 		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
-		
+
 		ArrayList<RiskTerritory> currPlayerList = new ArrayList<RiskTerritory>();
 		ArrayList<String> terrListWithOpponentAdj = new ArrayList<String>();
 		ArrayList<String> currPlayerStringList = new ArrayList<String>();
-		
+
 
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
@@ -206,7 +208,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 				}
 			}
 		}
-		
+
 		for (RiskTerritory currTerritory : currPlayerList) {
 			int index=territoryList.indexOf(currTerritory);
 			army = (currTerritory.getArmiesPresent() * 2);
@@ -215,15 +217,17 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		}
 
 		fortifiedMap.put(currentPlayer, territoryList);
-		
+
 		return fortifiedMap;
 	}
 
 	// #######################################################################################
 
 	/**
-	 * @param gameMap
-	 * @return
+	 * Gets the current player.
+	 *
+	 * @param gameMap the game map
+	 * @return the current player
 	 */
 	private RiskPlayer getCurrentPlayer(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : gameMap.entrySet()) {
@@ -236,8 +240,10 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	}
 
 	/**
-	 * @param currPlayerTerritories
-	 * @return
+	 * Double army.
+	 *
+	 * @param currPlayerTerritories the curr player territories
+	 * @return the array list
 	 */
 	private ArrayList<RiskTerritory> doubleArmy(ArrayList<RiskTerritory> currPlayerTerritories) {
 		ArrayList<RiskTerritory> territoryList = new ArrayList<RiskTerritory>(currPlayerTerritories);
