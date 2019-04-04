@@ -1,4 +1,4 @@
-package com.soen.risk.startegies;
+package com.soen.risk.helper;
 /**
  * <h2>Reinforcement Phase Controller Tournament Mode</h2>
  * The class defines number of the armies given to the player calculation. 
@@ -18,8 +18,6 @@ import java.util.Scanner;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskReinforcementPhase;
-import com.soen.risk.helper.Constants;
-import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhaseType;

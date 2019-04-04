@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.soen.risk.controller.RiskAttackPhase;
+import com.soen.risk.helper.RiskAttackHelper;
 import com.soen.risk.helper.RiskGameHelper;
+import com.soen.risk.helper.RiskReinforcementHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
@@ -311,13 +313,6 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 					defendingTerritory=AdjAttackList.get(i);
 				}
 			}
-			
-			System.out.println("########################################");
-			for (String string : AdjAttackList) {
-				System.out.println(string);
-			}
-			System.out.println("########################################");
-			
 			attackDestinationTerritory = RiskGameHelper.getRiskTerritoryByName(attackedMap, defendingTerritory);
 			attackDestinationTerritoryName=attackDestinationTerritory.getTerritoryName();
 			attackDestinationArmy=attackDestinationTerritory.getArmiesPresent();

@@ -65,7 +65,7 @@ public class RiskGameBuilder {
 		List<RiskTerritory> riskTerritoryList;
 		ArrayList<RiskContinent> riskContinentList;
 
-		int mapType= Constants.ZERO, count=1;
+		int mapType= Constants.ZERO, count=1, gameType=1;
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
 		RiskTerritoryAssignmentToPlayer riskTerritoryAssignmentToPlayer=new RiskTerritoryAssignmentToPlayer();
 		RiskArmyAllocationToPlayers  riskArmyAllocationToPlayers= new RiskArmyAllocationToPlayers();
@@ -76,14 +76,29 @@ public class RiskGameBuilder {
 
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
-		RiskPlayer riskPlayer=new RiskPlayer();
 		logger.doLogging("In RiskGameBuilder class------> ");
 
-		System.out.println("Welcome to RISK GAME!!!");
-		System.out.println();
-		System.out.println();
+		System.out.println("Welcome to RISK GAME!!! \n");
 		System.out.println("Game Starting");
-
+		
+		System.out.println("\nPlease enter your choice:");
+		System.out.println("1. Single mode");
+		System.out.println("2. Tournament mode");
+		
+		do {
+			while (!(scanner.hasNextInt())) {
+				System.out.println("Invalid option. Please select from given options.");
+				scanner.next();
+			}
+			gameType=scanner.nextInt();
+			if(!(gameType==1 || gameType==2)) {
+				System.out.println("Invalid option. Please select from given options.");
+			}
+		}while(!(gameType==1 || gameType==2));
+		
+		if(gameType==2) {
+//			Call tournament controller
+		}else {
 		do {
 
 			System.out.println("\nPlease enter your choice:");
@@ -328,7 +343,10 @@ public class RiskGameBuilder {
 			}
 			tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		}
+	}
 				scanner.close();
+				
+				System.out.println("Risk Game completed...Thank You...");
 	}
 }
 

@@ -219,9 +219,6 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 
 		return fortifiedMap;
 	}
-
-	// #######################################################################################
-
 	/**
 	 * Gets the current player.
 	 *

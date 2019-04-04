@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
+import com.soen.risk.helper.RiskReinforcementHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -148,8 +149,6 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 		}
 		return fortifiedMap;
 	}
-
-	//		############################################################################################
 
 	/**
 	 * Gets the current player.
