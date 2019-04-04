@@ -90,7 +90,6 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 				System.out.println(currTerritory.getTerritoryName() + "(" + currTerritory.getArmiesPresent() + ")");
 			}
 		}
-
 		return reinforcedMap;
 	}
 
