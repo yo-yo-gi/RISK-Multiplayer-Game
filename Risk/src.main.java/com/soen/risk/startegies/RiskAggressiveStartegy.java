@@ -110,16 +110,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {
 		
 		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
-		
-		/*
-		 * for(Entry<RiskPlayer, ArrayList<RiskTerritory>>
-		 * entry:fortifiedMap.entrySet()) {
-		 * System.out.println(entry.getKey().getPlayerName()); for (RiskTerritory
-		 * currTerritory : entry.getValue()) {
-		 * System.out.println(currTerritory.getTerritoryName()+"("+currTerritory.
-		 * getArmiesPresent()+")"+" - "+currTerritory.getAdjacents()); } }
-		 */
-		
+				
 		ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
 		ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();
 		RiskTerritory fortifySourceTerritoy;
@@ -210,7 +201,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 		ArrayList<RiskTerritory> adjListWithOppositeTerritories=new ArrayList<RiskTerritory>();
 		int maxArmy=0;
 		
-//		finding list of current player territories in string foramat
+//		finding list of current player territories in string format
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			stringTerritoryList.add(currTerritory.getTerritoryName());
 		}
