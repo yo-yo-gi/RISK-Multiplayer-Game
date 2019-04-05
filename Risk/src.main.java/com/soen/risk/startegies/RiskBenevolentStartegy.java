@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 
 import com.soen.risk.helper.RiskReinforcementHelper;
 import com.soen.risk.model.RiskContinent;
+import com.soen.risk.model.RiskPhase;
+import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -35,8 +37,8 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 	/** The fortified map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 
-	/** The max and min army. */
-	int minArmy=0, maxArmy=0;
+	
+	RiskPhase riskPhase=new RiskPhase();
 
 	/* (non-Javadoc)
 	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getStrategyName()
@@ -66,6 +68,12 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 
 		//		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
+		
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Reinforcement Phase");
+		
 		//		getting current player territories
 		currPlayerTerritories=gameMap.get(currentPlayer);
 		//		find strongest territory to reinforce
@@ -103,6 +111,11 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 
 		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
 
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Fortification Phase");
+		
 		//		finding list of highest army territory
 		territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
 
@@ -174,6 +187,7 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 	private RiskTerritory findWeakestTerritory(ArrayList<RiskTerritory> currPlayerTerritories) {
 		ArrayList<RiskTerritory> territoriesWithMinArmies=new ArrayList<RiskTerritory>();
 
+		int maxArmy = 0;
 		//		getting max army present in above list	
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			if (currTerritory.getArmiesPresent()>maxArmy) {
@@ -181,9 +195,10 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy{
 			}
 		}
 
+		int minArmy = maxArmy;
 		//		getting minimum army present in above list
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
-			if (currTerritory.getArmiesPresent()<=maxArmy) {
+			if (currTerritory.getArmiesPresent()<=minArmy) {
 				minArmy=currTerritory.getArmiesPresent();
 			}
 		}

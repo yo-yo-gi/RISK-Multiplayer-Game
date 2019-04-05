@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import com.soen.risk.model.RiskContinent;
+import com.soen.risk.model.RiskPhase;
+import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
@@ -28,7 +30,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	RiskPlayer currentPlayer;
 
 	/** The reinforcement territory. */
-	ArrayList<RiskTerritory> reinforcementTerritoryList = new ArrayList<RiskTerritory>();
+	ArrayList<RiskTerritory> reinforcementTerritoryList;
 
 	/** The attacked map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackedMap;
@@ -39,8 +41,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	/** The fortified map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 
-	/** The army. */
-	int army;
+	RiskPhase riskPhase=new RiskPhase();
 
 	/*
 	 * (non-Javadoc)
@@ -72,11 +73,18 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforce(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap, ArrayList<RiskContinent> riskContinentList) {
 
+		// find current player
+		currentPlayer = getCurrentPlayer(gameMap);
+				
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Reinforcement Phase");
+
 		ArrayList<RiskTerritory> currPlayerTerritories = new ArrayList<RiskTerritory>();
 		reinforcedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 
-		// find current player
-		currentPlayer = getCurrentPlayer(gameMap);
+		
 		// getting current player territories
 		currPlayerTerritories = gameMap.get(currentPlayer);
 		// Double the armies on all its territories in reinforcement
@@ -107,6 +115,11 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		ArrayList<String> terrListWithOpponentAdj = new ArrayList<String>();
 		ArrayList<String> currPlayerStringList = new ArrayList<String>();
 
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.ATTACK);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Attack Phase");
+		
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
 
@@ -118,19 +131,20 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		// getting opponent territories in string format
 		for (RiskTerritory currTerritory : currPlayerList) {
 			for (String curAdj : currTerritory.getAdjacents()) {
-				if (currPlayerStringList.contains(curAdj)) {
-					terrListWithOpponentAdj.add(currTerritory.getTerritoryName());
+				if (!(currPlayerStringList.contains(curAdj)) && !(terrListWithOpponentAdj.contains(curAdj))) {
+					terrListWithOpponentAdj.add(curAdj);
 				}
 			}
 		}
 		// adding list of opponent adjacent to current player list
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : gameMap.entrySet()) {
+			ArrayList<RiskTerritory> tempList=new ArrayList<RiskTerritory>();
 			for (RiskTerritory currTerritory : entry.getValue()) {
-				//if (!(terrListWithOpponentAdj.contains(currTerritory.getTerritoryName()))) {
 				if (terrListWithOpponentAdj.contains(currTerritory.getTerritoryName())) {
-					currPlayerList.add(currTerritory);
+					tempList.add(currTerritory);
 				}
 			}
+			currPlayerList.addAll(tempList);
 		}
 		//		Updating map with added territory list of current player with opponent
 		attackedMap.put(currentPlayer, currPlayerList);
@@ -157,7 +171,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 
 		if (attackedMap.size()==1) {
 			System.out.println("*****************************************");
-			System.out.println(currentPlayer.getPlayerName() + "wins the match and conquered the world...\n Game Ends");
+			System.out.println(currentPlayer.getPlayerName() + " wins the match and conquered the world...\n Game Ends");
 			System.out.println("*****************************************");
 			System.exit(0);
 		}
@@ -190,6 +204,11 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		ArrayList<String> currPlayerStringList = new ArrayList<String>();
 
 
+//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Fortification Phase");
+		
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
 
@@ -209,11 +228,14 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 		}
 
 		for (RiskTerritory currTerritory : currPlayerList) {
-			int index=territoryList.indexOf(currTerritory);
-			army = (currTerritory.getArmiesPresent() * 2);
-			currTerritory.setArmiesPresent(army);
-			territoryList.set(index, currTerritory);
+			if (terrListWithOpponentAdj.contains(currTerritory.getTerritoryName())) {
+				RiskTerritory tempTerritory=currTerritory;
+				int army = (tempTerritory.getArmiesPresent() * 2);
+				tempTerritory.setArmiesPresent(army);
+				territoryList.set(currPlayerList.indexOf(currTerritory), tempTerritory);
+			}
 		}
+		
 
 		fortifiedMap.put(currentPlayer, territoryList);
 
@@ -244,10 +266,9 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy {
 	private ArrayList<RiskTerritory> doubleArmy(ArrayList<RiskTerritory> currPlayerTerritories) {
 		ArrayList<RiskTerritory> territoryList = new ArrayList<RiskTerritory>(currPlayerTerritories);
 
-		// finding list of current player territories in string format
-
+		
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
-			army = ((currTerritory.getArmiesPresent()) * 2);
+			int army = ((currTerritory.getArmiesPresent()) * 2);
 			currTerritory.setArmiesPresent(army);
 			territoryList.set(currPlayerTerritories.indexOf(currTerritory), currTerritory);
 		}

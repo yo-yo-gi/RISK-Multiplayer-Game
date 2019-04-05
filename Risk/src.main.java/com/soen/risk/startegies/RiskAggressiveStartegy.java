@@ -379,11 +379,6 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy{
 //					calling recursively  to same method
 					getAttackphaseMap(attackedMap, attackSourceTerritory);
 					
-				}else {
-					if(cardEarnFlag && attackCounter) {
-						attackedMap=RiskGameHelper.assignRandomCard(attackedMap);	
-						attackCounter=false;
-					}
 				}
 		if(cardEarnFlag && attackCounter) {
 			attackedMap=RiskGameHelper.assignRandomCard(attackedMap);	
