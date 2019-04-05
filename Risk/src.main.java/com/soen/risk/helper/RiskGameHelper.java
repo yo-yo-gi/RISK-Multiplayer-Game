@@ -32,8 +32,6 @@ public class RiskGameHelper implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 857415706360332225L;
-	/** The logger. */
-	static RiskLogger logger= new RiskLogger();
 
 	/**
 	 * updates existing map player with continents own by players.
@@ -75,7 +73,6 @@ public class RiskGameHelper implements Serializable{
 			// Re populating map with updated player object
 			controlValueAssignedMap.put(currentPlayer, currentPlayerTerritories);
 		}
-		logger.doLogging("controlValueAssignedMap returned------"+controlValueAssignedMap);
 		return controlValueAssignedMap;
 	}
 
@@ -97,7 +94,6 @@ public class RiskGameHelper implements Serializable{
 			armies = 25;
 		else if (numOfPlayers == 6)
 			armies = 20;
-		logger.doLogging("armies returned------"+armies);
 		return armies;
 	}
 
@@ -112,7 +108,6 @@ public class RiskGameHelper implements Serializable{
 		String mapControl = null;
 		float percentage = ((float) ownedTerritories) / totalTerritories;
 		mapControl = String.format("%2.02f",(float)(percentage*100));
-		logger.doLogging("mapControl returned------"+mapControl);
 		return mapControl;
 	}
 
@@ -142,7 +137,6 @@ public class RiskGameHelper implements Serializable{
 		if (!foundFlag) {
 			riskTerritory.setArmiesPresent(-1);
 		}
-		logger.doLogging("riskTerritory returned------"+riskTerritory);
 		return riskTerritory;
 	}
 
@@ -216,7 +210,6 @@ public class RiskGameHelper implements Serializable{
 				updatedMap.put(currentPlayer, currPlayerList);
 			}
 		}
-		logger.doLogging("updatedMap returned------"+updatedMap);
 		return updatedMap;
 	}
 
@@ -275,7 +268,6 @@ public class RiskGameHelper implements Serializable{
 		riskDominationObservable.setPercentMapContr((RiskGameHelper.calculateDominationMapControlled(totalMapTerritories, currPlayerList.size())));
 		riskDominationObservable.setContinentsContr(currentPlayer.getOccupiedContinents());
 		riskDominationObservable.setArmiesOwned(currentPlayer.getArmiesOwned());
-		logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 
@@ -320,7 +312,6 @@ public class RiskGameHelper implements Serializable{
 			break;
 		}
 		riskMainMap.put(currentPlayer, currPlayerTerritories);
-		logger.doLogging("riskMainMap returned------"+riskMainMap);
 		return riskMainMap;
 	}
 }

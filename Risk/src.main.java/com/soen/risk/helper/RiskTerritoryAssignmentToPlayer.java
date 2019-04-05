@@ -30,9 +30,6 @@ public class RiskTerritoryAssignmentToPlayer implements Serializable{
 	 */
 	private static final long serialVersionUID = 6801860287742689318L;
 
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
-
 	/** The risk map builder. */
 	RiskMapBuilder riskMapBuilder;
 
@@ -45,7 +42,6 @@ public class RiskTerritoryAssignmentToPlayer implements Serializable{
 	 */
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignTerritory(List<RiskPlayer> riskPlayerList, List<RiskTerritory> riskTerritoryList) {
-		logger.doLogging("In RiskTerritoryAssignmentToPlayer class------");
 		System.out.println();
 		System.out.println("Start up phase...");
 		System.out.println("Assignment of territories to Player...");
@@ -87,7 +83,6 @@ public class RiskTerritoryAssignmentToPlayer implements Serializable{
 			System.out.println("Player: "+"-> " + player + " <- has " + value.size() + " Territories");
 
 		}
-		logger.doLogging("Returning playerTerritory map------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

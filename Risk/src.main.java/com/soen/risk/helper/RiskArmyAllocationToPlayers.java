@@ -29,8 +29,6 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6316522767300342984L;
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
 
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
@@ -45,7 +43,6 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){	
 			countMap.put(entry.getKey(), entry.getKey().getArmiesOwned());
 		}
-		logger.doLogging("Allocating armies to players in round robin fashion------");
 		System.out.println();
 		System.out.println("Allocating armies to players in round robin fashion...");
 		System.out.println();	
@@ -97,7 +94,6 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 
 		}while(totalArmyPresent>0);
 
-		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 
@@ -121,7 +117,6 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 				}else currTerritory.setArmiesPresent(0);
 			}
 		}
-		logger.doLogging("playerTerritoryMap returned------"+playerTerritoryMap);
 		return playerTerritoryMap;
 	}
 }

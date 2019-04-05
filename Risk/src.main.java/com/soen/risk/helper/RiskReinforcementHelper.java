@@ -28,8 +28,7 @@ public class RiskReinforcementHelper implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 992509886649834869L;
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
+
 
 	/**
 	 * Assigning the Armies to the Countries for the Player.
@@ -234,7 +233,6 @@ public class RiskReinforcementHelper implements Serializable {
 		{
 			exchangeArmies = player.getCardViewCount() * 5;
 			player.setCardViewCount(player.getCardViewCount() + 1);
-			logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		}
 		else
 		{

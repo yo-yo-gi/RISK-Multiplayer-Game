@@ -16,7 +16,6 @@ import com.soen.risk.controller.RiskAttackPhase;
 import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskGameHelper;
-import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
@@ -38,8 +37,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 	 */
 	private static final long serialVersionUID = -8182262865311172353L;
 
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
 	
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);	
@@ -505,7 +502,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 				playerTerritories=entry.getValue();
 			}
 		}
-		logger.doLogging("Inside the fortification phase----------");
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println();
@@ -514,8 +510,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		int destinationTerritory, sourceArmy = Constants.ZERO, destinationArmy = Constants.ZERO;
 		String sourceTerritoryName = null, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
-
-		logger.doLogging("currentPlayer name is: "+currentPlayer);
 
 		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
@@ -561,7 +555,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 			if(exitFlag)
 				break;
 
-			logger.doLogging("Selected source territory  "+sourceTerritoryName);
 			adjTerritoryList=new ArrayList<String>();
 			for (RiskTerritory currTerritory : playerTerritories) {			
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(sourceTerritoryName)) {
@@ -604,8 +597,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 			}while(destinationTerritory>=destinationTCoutner || destinationTerritory<0);
 
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
-
-			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
 
 			for (RiskTerritory currTerritory : playerTerritories) {
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(destinationTName)) {
@@ -666,7 +657,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		fortifiedMap.put(currentPlayer, finalFortifyList);
 		//		Triggering Phase View observer
 		riskPhase.setCurrentAction("Fortification Phase Completed");
-		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
 		return fortifiedMap;
 	
 	}

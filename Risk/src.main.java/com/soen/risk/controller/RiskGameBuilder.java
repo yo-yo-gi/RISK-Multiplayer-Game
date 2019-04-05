@@ -16,7 +16,6 @@ import java.util.Scanner;
 import com.soen.risk.helper.Constants;
 import com.soen.risk.helper.RiskArmyAllocationToPlayers;
 import com.soen.risk.helper.RiskGameHelper;
-import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.helper.RiskMapEditor;
 import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
@@ -57,7 +56,6 @@ public class RiskGameBuilder implements Serializable {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static void main(String[] args) throws IOException {
-		RiskLogger logger= new RiskLogger();
 		RiskPlayerBuilder riskPlayerBuilder;
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
@@ -82,7 +80,6 @@ public class RiskGameBuilder implements Serializable {
 
 		char continueEditChoice = Constants.ZERO,editChoice=Constants.ZERO;
 		String filename;
-		logger.doLogging("In RiskGameBuilder class------> ");
 
 		System.out.println("Welcome to RISK GAME!!! \n");
 		System.out.println("Game Starting");
@@ -118,7 +115,7 @@ public class RiskGameBuilder implements Serializable {
 			System.out.println("\nPlease enter your choice:");
 			System.out.println("1. Upload from existing maps");
 			System.out.println("2. Create map from scratch");
-			logger.doLogging("Map Loading Phase------> ");
+
 
 			do {
 				while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
@@ -235,7 +232,6 @@ public class RiskGameBuilder implements Serializable {
 		}
 
 		mapValidationStatus=riskMapValidator.validateMap(currentMap);
-		logger.doLogging("Map validation status------> "+mapValidationStatus);
 		if (mapValidationStatus) {
 			if(mapType==1) {
 				System.out.println("Map loaded and validated successfully...");

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
-import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPlayer;
@@ -33,8 +32,6 @@ public class RiskReinforcementPhase implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3067269818071733591L;
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
 
 	/**
 	 * Calculation of Armies for the Player.
@@ -180,7 +177,6 @@ public class RiskReinforcementPhase implements Serializable {
 		{
 		exchangeArmies = player.getCardViewCount() * 5;
 		player.setCardViewCount(player.getCardViewCount() + 1);
-		logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		}
 		else
 		{

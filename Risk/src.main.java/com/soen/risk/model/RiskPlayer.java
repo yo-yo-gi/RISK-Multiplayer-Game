@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
-
-import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.startegies.RiskPlayerStrategy;
 import com.soen.risk.view.RiskCardviewObserver;
 import com.soen.risk.view.RiskPhaseView;
@@ -27,8 +25,6 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -568260170682309331L;
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);	
 	/** The player id. */
