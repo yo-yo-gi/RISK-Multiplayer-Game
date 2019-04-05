@@ -3,6 +3,7 @@
  */
 package com.soen.risk.startegies;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,6 +14,7 @@ import java.util.Map.Entry;
 import com.soen.risk.controller.RiskAttackPhase;
 import com.soen.risk.helper.RiskAttackHelper;
 import com.soen.risk.helper.RiskGameHelper;
+import com.soen.risk.helper.RiskReinforcementHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
@@ -23,9 +25,13 @@ import com.soen.risk.model.RiskTerritory;
  * @author SHASHANK RAO
  *
  */
-public class RiskRandomStrategy implements RiskPlayerStrategy {
+public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 701482605691028024L;
 	RiskPlayer currentPlayer;
 	RiskTerritory reinforcementTerritory;
 	RiskTerritory attackTerritory;
