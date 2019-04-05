@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
+import com.soen.risk.startegies.RiskHumanStrategy;
 
 /**
  * <h2>Risk Fortification Phase Test</h2>
@@ -53,8 +54,8 @@ public class RiskFortificationPhaseTest {
 		territories.add(tr3);
 		playerTerritoryMap.put(player1, territories);
 
-
-		playerTerritoryMap = player1.getFortifiedMap(playerTerritoryMap);
+		RiskHumanStrategy riskHumanStrategy=new RiskHumanStrategy();
+		playerTerritoryMap = riskHumanStrategy.fortify(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
 		Integer []  expected= {3,7};
