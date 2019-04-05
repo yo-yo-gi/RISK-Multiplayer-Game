@@ -22,7 +22,6 @@ import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskContinent;
-import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
@@ -101,6 +100,14 @@ public class RiskGameBuilder {
 		
 		if(gameType==2) {
 //			Call tournament controller
+//			GameController gameController  = new GameController();
+//			try {
+//				gameController.initializeGame(2);
+//			} catch (NumberFormatException e) {
+//				e.printStackTrace();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 		}else {
 		do {
 
@@ -326,41 +333,11 @@ public class RiskGameBuilder {
 
 
 		/*		 
-		 * Starting game reinforcement state and fortify state		 * 
+		 * Calling riskGameRunner	 * 
 		 */
+		RiskGameRunner riskGameRunner=new RiskGameRunner();
+		riskGameRunner.startTurnbyturnGame(riskMainMap, riskContinentList);
 
-		//		starting turn by turn reinforcement, attack and fortify
-
-		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
-		while(tempMap.size()>1) {
-
-			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
-				
-				entry.getKey().setCurrentPlayerTurn(true);	
-				
-				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
-					System.out.println("Do you want to save the game?");
-				}
-				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.REINFORCEMENT);				
-				riskMainMap=entry.getKey().getPlayerStrategy().reinforce(riskMainMap, riskContinentList);
-				
-				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
-					System.out.println("Do you want to save the game?");
-				}
-				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.ATTACK);		
-				riskMainMap=entry.getKey().getPlayerStrategy().attack(riskMainMap);
-				
-				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
-					System.out.println("Do you want to save the game?");
-				}
-				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.FORTIFY);		
-				riskMainMap=entry.getKey().getPlayerStrategy().fortify(riskMainMap);
-				
-				
-				entry.getKey().setCurrentPlayerTurn(false);
-			}
-			tempMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
-		}
 	}
 				scanner.close();
 				
