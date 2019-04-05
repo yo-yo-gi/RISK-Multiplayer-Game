@@ -22,12 +22,15 @@ import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskContinent;
+import com.soen.risk.model.RiskPhase;
+import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.startegies.RiskAggressiveStartegy;
 import com.soen.risk.startegies.RiskBenevolentStartegy;
 import com.soen.risk.startegies.RiskCheaterStrategy;
 import com.soen.risk.startegies.RiskHumanStrategy;
+import com.soen.risk.startegies.RiskRandomStrategy;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -292,8 +295,7 @@ public class RiskGameBuilder {
 			else if (playerstrategy == 3)
 				player.setPlayerStrategy(new RiskBenevolentStartegy());
 			else if (playerstrategy == 4)
-				player.setPlayerStrategy(new RiskAggressiveStartegy());
-//				player.setPlayerStrategy(new RiskRandomStrategy());
+				player.setPlayerStrategy(new RiskRandomStrategy());
 			else if (playerstrategy == 5)
 				player.setPlayerStrategy(new RiskCheaterStrategy());
 		}
@@ -333,11 +335,27 @@ public class RiskGameBuilder {
 		while(tempMap.size()>1) {
 
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : riskMainMap.entrySet()){
-				entry.getKey().setCurrentPlayerTurn(true);
 				
+				entry.getKey().setCurrentPlayerTurn(true);	
+				
+				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
+					System.out.println("Do you want to save the game?");
+				}
+				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.REINFORCEMENT);				
 				riskMainMap=entry.getKey().getPlayerStrategy().reinforce(riskMainMap, riskContinentList);
+				
+				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
+					System.out.println("Do you want to save the game?");
+				}
+				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.ATTACK);		
 				riskMainMap=entry.getKey().getPlayerStrategy().attack(riskMainMap);
+				
+				if (entry.getKey().getPlayerStrategy().equals(new RiskHumanStrategy())) {
+					System.out.println("Do you want to save the game?");
+				}
+				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.FORTIFY);		
 				riskMainMap=entry.getKey().getPlayerStrategy().fortify(riskMainMap);
+				
 				
 				entry.getKey().setCurrentPlayerTurn(false);
 			}

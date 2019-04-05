@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Phaser;
 
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.startegies.RiskPlayerStrategy;
@@ -40,6 +41,9 @@ public class RiskPlayer implements RiskCardviewObservable {
 	/**  Current player turn. */
 	private boolean currentPlayerTurn=false;	
 
+	/**  Current player phase. */
+	private RiskPhaseType currentPlayerPhase;	
+	
 	/**  Cards replaced with Armies Count. */
 	private int cardArmies;	
 	/** The list of card owned. */
@@ -61,6 +65,20 @@ public class RiskPlayer implements RiskCardviewObservable {
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
 	
 	RiskPlayerStrategy playerStrategy;
+
+	/**
+	 * @return the currentPlayerPhase
+	 */
+	public RiskPhaseType getCurrentPlayerPhase() {
+		return currentPlayerPhase;
+	}
+
+	/**
+	 * @param currentPlayerPhase the currentPlayerPhase to set
+	 */
+	public void setCurrentPlayerPhase(RiskPhaseType currentPlayerPhase) {
+		this.currentPlayerPhase = currentPlayerPhase;
+	}
 
 	/**
 	 * @return the playerStrategy
