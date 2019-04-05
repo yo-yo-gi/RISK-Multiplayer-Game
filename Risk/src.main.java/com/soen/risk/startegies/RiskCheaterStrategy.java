@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
+import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
@@ -189,7 +190,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 				System.out.println(currTerritory.getTerritoryName() + "(" + currTerritory.getArmiesPresent() + ")");
 			}
 		}
-
+		attackedMap=RiskGameHelper.assignRandomCard(attackedMap);
 		return attackedMap;
 	}
 
