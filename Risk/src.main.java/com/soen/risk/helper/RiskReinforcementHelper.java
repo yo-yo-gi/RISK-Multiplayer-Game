@@ -1,4 +1,5 @@
 package com.soen.risk.helper;
+import java.io.Serializable;
 /**
  * <h2>Reinforcement Phase Controller Tournament Mode</h2>
  * The class defines number of the armies given to the player calculation. 
@@ -14,19 +15,21 @@ package com.soen.risk.helper;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
-import com.soen.risk.controller.RiskReinforcementPhase;
 import com.soen.risk.model.RiskCard;
 import com.soen.risk.model.RiskContinent;
-import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-public class RiskReinforcementHelper {
+public class RiskReinforcementHelper implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 992509886649834869L;
 	/** The logger. */
-	//RiskLogger logger= new RiskLogger();
+	RiskLogger logger= new RiskLogger();
 
 	/**
 	 * Assigning the Armies to the Countries for the Player.
@@ -231,7 +234,7 @@ public class RiskReinforcementHelper {
 		{
 			exchangeArmies = player.getCardViewCount() * 5;
 			player.setCardViewCount(player.getCardViewCount() + 1);
-		//	logger.doLogging("exchangeArmies returned------"+exchangeArmies);
+			logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		}
 		else
 		{

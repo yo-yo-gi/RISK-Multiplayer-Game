@@ -3,6 +3,7 @@
  */
 package com.soen.risk.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,12 @@ import com.soen.risk.model.RiskCardviewObservable;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public class RiskCardviewView implements RiskCardviewObserver{
+public class RiskCardviewView implements RiskCardviewObserver, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2983592628997945724L;
 
 	/** The card owned. */
 	private List<RiskCard> cardOwned;

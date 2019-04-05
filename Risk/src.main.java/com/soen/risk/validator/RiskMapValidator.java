@@ -3,6 +3,7 @@
  */
 package com.soen.risk.validator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,7 +33,12 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 2.0
  */
-public class RiskMapValidator {
+public class RiskMapValidator implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5683549817353967130L;
 
 	/** The continent list. */
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();

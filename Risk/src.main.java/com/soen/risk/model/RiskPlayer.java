@@ -3,11 +3,11 @@
  */
 package com.soen.risk.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.Phaser;
 
 import com.soen.risk.helper.RiskLogger;
 import com.soen.risk.startegies.RiskPlayerStrategy;
@@ -21,8 +21,12 @@ import com.soen.risk.view.RiskPhaseView;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public class RiskPlayer implements RiskCardviewObservable {
+public class RiskPlayer implements RiskCardviewObservable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -568260170682309331L;
 	/** The logger. */
 	RiskLogger logger= new RiskLogger();
 	/** The scanner. */

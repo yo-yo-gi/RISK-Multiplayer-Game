@@ -3,6 +3,7 @@
  */
 package com.soen.risk.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,8 +27,12 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 2.0
  */
-public class RiskReinforcementPhase {
+public class RiskReinforcementPhase implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3067269818071733591L;
 	/** The logger. */
 	RiskLogger logger= new RiskLogger();
 

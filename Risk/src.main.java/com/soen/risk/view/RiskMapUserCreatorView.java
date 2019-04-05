@@ -3,6 +3,7 @@
  */
 package com.soen.risk.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,13 @@ import com.soen.risk.helper.Constants;
  * @author Chirag Vora
  * @version 1.0
  */
-public class RiskMapUserCreatorView {
+public class RiskMapUserCreatorView implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5596428415250055023L;
+
 	/** The territory end index. */
 	int continentStartIndex=Constants.ZERO,continentEndIndex=Constants.ZERO,territoryStartIndex=Constants.ZERO,territoryEndIndex=Constants.ZERO;
 	

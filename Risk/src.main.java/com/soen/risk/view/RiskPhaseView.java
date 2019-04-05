@@ -3,6 +3,8 @@
  */
 package com.soen.risk.view;
 
+import java.io.Serializable;
+
 import com.soen.risk.model.RiskPhaseObservable;
 import com.soen.risk.model.RiskPhaseType;
 
@@ -16,7 +18,12 @@ import com.soen.risk.model.RiskPhaseType;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public class RiskPhaseView implements RiskPhaseObserver {
+public class RiskPhaseView implements RiskPhaseObserver, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7492753711023819837L;
 
 	/** The current game phase. */
 	private RiskPhaseType currentGamePhase;

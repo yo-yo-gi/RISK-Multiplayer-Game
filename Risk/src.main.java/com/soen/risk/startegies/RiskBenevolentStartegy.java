@@ -3,6 +3,7 @@
  */
 package com.soen.risk.startegies;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -23,7 +24,12 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 3.0
  */
-public class RiskBenevolentStartegy implements RiskPlayerStrategy{
+public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3964270414016765507L;
 
 	/** The current player. */
 	RiskPlayer currentPlayer;

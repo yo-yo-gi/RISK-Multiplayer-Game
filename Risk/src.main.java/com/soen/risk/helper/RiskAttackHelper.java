@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +14,12 @@ import java.util.Map;
  * @author yogesh
  *
  */
-public class RiskAttackHelper {
+public class RiskAttackHelper implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4203513605553006857L;
+
 	/**
 	 * Roll dice function to return the dice roll count list. 
 	 *

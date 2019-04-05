@@ -6,6 +6,7 @@ package com.soen.risk.helper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -17,7 +18,12 @@ import java.util.List;
  * @author Shashank Rao
  * @version 1.0
  */
-public class RiskMapFileWriter {
+public class RiskMapFileWriter implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1469262494419766846L;
 
 	/**
 	 * Write map to text file.

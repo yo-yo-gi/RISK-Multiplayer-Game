@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -22,7 +23,12 @@ import com.soen.risk.model.RiskTerritory;
  * @author Chirag Vora
  * @version 1.0
  */
-public class RiskTerritoryAssignmentToPlayer {
+public class RiskTerritoryAssignmentToPlayer implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6801860287742689318L;
 
 	/** The logger. */
 	RiskLogger logger= new RiskLogger();

@@ -3,6 +3,7 @@
  */
 package com.soen.risk.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,12 @@ import java.util.ArrayList;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-public class RiskTerritory {
+public class RiskTerritory implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1634060258997289222L;
 
 	/** The territory id. */
 	protected int territoryId;

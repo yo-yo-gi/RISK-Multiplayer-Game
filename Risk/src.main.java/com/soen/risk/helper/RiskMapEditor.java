@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +20,12 @@ import java.util.Scanner;
  * @author Shashank Rao
  * @version 1.0
  */
-public class RiskMapEditor {
+public class RiskMapEditor implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6819484579138628790L;
 
 	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);

@@ -3,6 +3,7 @@
  */
 package com.soen.risk.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -17,7 +18,13 @@ import com.soen.risk.startegies.RiskHumanStrategy;
  * @author Yogesh Nimbhorkar
  *
  */
-public class RiskGameRunner {
+public class RiskGameRunner implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4138186835044512635L;
+	RiskSavedGameController riskSavedGameController=new RiskSavedGameController();
 
 	public void startTurnbyturnGame(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap,ArrayList<RiskContinent> riskContinentList) {
 		//		starting turn by turn reinforcement, attack and fortify
@@ -38,6 +45,7 @@ public class RiskGameRunner {
 				
 				if (entry.getKey().getPlayerStrategy() instanceof RiskHumanStrategy) {
 					System.out.println("Do you want to save the game?");
+					riskSavedGameController.saveGame(riskMainMap,riskContinentList);
 				}
 				entry.getKey().setCurrentPlayerPhase(RiskPhaseType.ATTACK);		
 				riskMainMap=entry.getKey().getPlayerStrategy().attack(riskMainMap);

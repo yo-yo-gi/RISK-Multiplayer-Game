@@ -3,6 +3,7 @@
  */
 package com.soen.risk.view;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,12 @@ import com.soen.risk.model.RiskDominationObservable;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public class RiskDominationView implements RiskDominationObserver {
+public class RiskDominationView implements RiskDominationObserver, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7516841628080122976L;
 
 	/** The percent map contr. */
 	private String percentMapContr;

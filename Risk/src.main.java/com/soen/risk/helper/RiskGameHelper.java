@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,8 +26,12 @@ import com.soen.risk.view.RiskDominationView;
  * @author Chirag Vora
  * @version 2.0
  */
-public class RiskGameHelper {
+public class RiskGameHelper implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 857415706360332225L;
 	/** The logger. */
 	static RiskLogger logger= new RiskLogger();
 

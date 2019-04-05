@@ -3,6 +3,7 @@
  */
 package com.soen.risk.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,12 @@ import com.soen.risk.model.RiskPlayer;
  * @author Pooja Dhir
  * @version 1.0
  */
-public class RiskPlayerBuilder {
+public class RiskPlayerBuilder implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1425243862605668711L;
 
 	/** The risk player list. */
 	private ArrayList<RiskPlayer> riskPlayerList;

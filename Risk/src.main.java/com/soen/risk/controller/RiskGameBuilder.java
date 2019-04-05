@@ -5,12 +5,12 @@ package com.soen.risk.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
@@ -22,7 +22,6 @@ import com.soen.risk.helper.RiskMapFileWriter;
 import com.soen.risk.helper.RiskMapUserCreator;
 import com.soen.risk.helper.RiskTerritoryAssignmentToPlayer;
 import com.soen.risk.model.RiskContinent;
-import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.startegies.RiskAggressiveStartegy;
@@ -44,7 +43,12 @@ import com.soen.risk.view.RiskMapUserCreatorView;
  * @author Shashank Rao
  * @version 2.0
  */
-public class RiskGameBuilder {
+public class RiskGameBuilder implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2690671575352872926L;
 
 	/**
 	 * The main method.

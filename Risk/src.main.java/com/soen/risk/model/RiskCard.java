@@ -3,6 +3,8 @@
  */
 package com.soen.risk.model;
 
+import java.io.Serializable;
+
 /**
  * <h2>Card Enum Model</h2>
  * This class is used to set and get the values of the parameters for cards.
@@ -10,7 +12,7 @@ package com.soen.risk.model;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public enum RiskCard {
+public enum RiskCard implements Serializable{
 
 	/** The infant. */
 	INFANT("Infant"),

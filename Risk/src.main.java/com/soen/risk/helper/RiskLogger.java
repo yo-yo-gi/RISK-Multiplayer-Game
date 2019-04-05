@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,7 +21,12 @@ import java.util.logging.Logger;
  * @author Chirag Vora
  * @version 1.0
  */
-public class RiskLogger {
+public class RiskLogger implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4009029439304080040L;
 
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(RiskLogger.class.getName());

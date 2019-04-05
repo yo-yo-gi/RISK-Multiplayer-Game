@@ -3,6 +3,7 @@
  */
 package com.soen.risk.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +12,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.soen.risk.helper.Constants;
-import com.soen.risk.helper.RiskLogger;
 
 /**
  * <h2> Risk Attack Controller</h2>
@@ -25,10 +25,12 @@ import com.soen.risk.helper.RiskLogger;
  * @author Yogesh Nimbhorkar
  * @version 2.0
  */
-public class RiskAttackPhase {
+public class RiskAttackPhase implements Serializable {
 
-	/** The logger. */
-	RiskLogger logger= new RiskLogger();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5702424585304391344L;
 
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);
@@ -172,7 +174,7 @@ public class RiskAttackPhase {
 				}
 			}
 		}
-		logger.doLogging("Attack phase successful and the map with remaining armies-> "+output.toString());
+		
 		return output;
 	}
 

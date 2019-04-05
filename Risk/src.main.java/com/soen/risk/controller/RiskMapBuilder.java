@@ -4,6 +4,7 @@
 package com.soen.risk.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,7 +26,12 @@ import com.soen.risk.model.RiskTerritory;
  * @author Yogesh Nimbhorkar
  * @version 1.0
  */
-public class RiskMapBuilder {
+public class RiskMapBuilder implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6575315867416329282L;
 
 	/** The continent list. */
 	private ArrayList<RiskContinent> continentList=new ArrayList<RiskContinent>();

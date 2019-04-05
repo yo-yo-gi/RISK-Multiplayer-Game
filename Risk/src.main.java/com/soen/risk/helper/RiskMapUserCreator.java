@@ -3,6 +3,7 @@
  */
 package com.soen.risk.helper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,9 +17,13 @@ import java.util.Scanner;
  * @author Shashank Rao
  * @version 1.0
  */
-public class RiskMapUserCreator {
+public class RiskMapUserCreator implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5124274417312752360L;
 	/** The create status. */
 	boolean createStatus=true;
 
