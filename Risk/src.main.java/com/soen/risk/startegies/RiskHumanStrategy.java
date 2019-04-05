@@ -33,7 +33,7 @@ import com.soen.risk.view.RiskPhaseView;
 public class RiskHumanStrategy implements RiskPlayerStrategy{
 	
 	/** The logger. */
-	RiskLogger logger= new RiskLogger();
+	//RiskLogger logger= new RiskLogger();
 	
 	/** The scanner. */
 	Scanner scanner=new Scanner(System.in);	
@@ -499,7 +499,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy{
 				playerTerritories=entry.getValue();
 			}
 		}
-		logger.doLogging("Inside the fortification phase----------");
+		//logger.doLogging("Inside the fortification phase----------");
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap= new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 		ArrayList<RiskTerritory> finalFortifyList=new ArrayList<RiskTerritory>(playerTerritories);
 		System.out.println();
@@ -509,7 +509,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy{
 		String sourceTerritoryName = null, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
 
-		logger.doLogging("currentPlayer name is: "+currentPlayer);
+	//	logger.doLogging("currentPlayer name is: "+currentPlayer);
 
 		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
@@ -555,7 +555,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy{
 			if(exitFlag)
 				break;
 
-			logger.doLogging("Selected source territory  "+sourceTerritoryName);
+	//		logger.doLogging("Selected source territory  "+sourceTerritoryName);
 			adjTerritoryList=new ArrayList<String>();
 			for (RiskTerritory currTerritory : playerTerritories) {			
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(sourceTerritoryName)) {
@@ -599,7 +599,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy{
 
 			destinationTName=OwnedAdjList.get(destinationTerritory-1);
 
-			logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
+		//	logger.doLogging("Selected destination territory-> "+sourceTerritoryName);
 
 			for (RiskTerritory currTerritory : playerTerritories) {
 				if (currTerritory.getTerritoryName().equalsIgnoreCase(destinationTName)) {
@@ -660,7 +660,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy{
 		fortifiedMap.put(currentPlayer, finalFortifyList);
 		//		Triggering Phase View observer
 		riskPhase.setCurrentAction("Fortification Phase Completed");
-		logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
+	//	logger.doLogging("Fortification successful and the foritified map is: "+fortifiedMap);
 		return fortifiedMap;
 	
 	}

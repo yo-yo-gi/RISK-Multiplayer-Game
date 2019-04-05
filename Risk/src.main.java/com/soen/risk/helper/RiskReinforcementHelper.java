@@ -26,7 +26,7 @@ import com.soen.risk.model.RiskTerritory;
 
 public class RiskReinforcementHelper {
 	/** The logger. */
-	RiskLogger logger= new RiskLogger();
+	//RiskLogger logger= new RiskLogger();
 
 	/**
 	 * Assigning the Armies to the Countries for the Player.
@@ -231,7 +231,7 @@ public class RiskReinforcementHelper {
 		{
 			exchangeArmies = player.getCardViewCount() * 5;
 			player.setCardViewCount(player.getCardViewCount() + 1);
-			logger.doLogging("exchangeArmies returned------"+exchangeArmies);
+		//	logger.doLogging("exchangeArmies returned------"+exchangeArmies);
 		}
 		else
 		{
