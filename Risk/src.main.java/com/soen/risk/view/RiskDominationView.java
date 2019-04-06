@@ -33,7 +33,7 @@ public class RiskDominationView implements RiskDominationObserver, Serializable 
 	private List<String> continentsContr=new ArrayList<String>();
 	
 	/** The armies owned. */
-	private int armiesOwned;
+	private long armiesOwned;
 	
 	/** The risk domination observable. */
 	RiskDominationObservable riskDominationObservable;
@@ -55,7 +55,7 @@ public class RiskDominationView implements RiskDominationObserver, Serializable 
 	 * java.util.List, int)
 	 */
 	@Override
-	public void update(String percentMapContr, List<String> continentsContr, int armiesOwned) {
+	public void update(String percentMapContr, List<String> continentsContr, long armiesOwned) {
 		this.percentMapContr = percentMapContr;
 		this.continentsContr = continentsContr;
 		this.armiesOwned = armiesOwned;

@@ -72,7 +72,13 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 //		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
 //		getting current player territories
-		currPlayerTerritories=gameMap.get(currentPlayer);
+		currPlayerTerritories=gameMap.get(currPlayerTerritories);
+		for (RiskTerritory riskTerritory : currPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return reinforcedMap;
+			}
+		}
+		
 //		fetching the territory size for current player
 		max=currPlayerTerritories.size();
 		min=1;
@@ -133,15 +139,6 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 		
 		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 		
-		/*
-		 * for(Entry<RiskPlayer, ArrayList<RiskTerritory>>
-		 * entry:fortifiedMap.entrySet()) {
-		 * System.out.println(entry.getKey().getPlayerName()); for (RiskTerritory
-		 * currTerritory : entry.getValue()) {
-		 * System.out.println(currTerritory.getTerritoryName()+"("+currTerritory.
-		 * getArmiesPresent()+")"+" - "+currTerritory.getAdjacents()); } }
-		 */
-		
 		ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
 		ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();
 		RiskTerritory fortifySourceTerritoy=new RiskTerritory();
@@ -154,6 +151,12 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 		currentPlayer=getCurrentPlayer(fortifiedMap);
 //		getting current player territories
 		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
+		
+		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return fortifiedMap;
+			}
+		}
 		
 //		finding adjacent owned territories to fortify
 		territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
@@ -299,8 +302,8 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 		attackedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		
 		
-		int sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
-		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
+		long sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
+		long attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
 		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory = null;
 		String defendingTerritory=null;
@@ -379,12 +382,12 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 			for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
 				if(entry.getKey()==attackSourceTerritoryName) {
 					attackerTerritory=attackSourceTerritoryName;
-					attackerTerritoryArmy=(int) entry.getValue();
+					attackerTerritoryArmy=(long) entry.getValue();
 					attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
 				}
 				else if(entry.getKey()==attackDestinationTerritoryName) {
 					defenderTerritory=attackDestinationTerritoryName;
-					defenderTerritoryArmy=(int) entry.getValue();
+					defenderTerritoryArmy=(long) entry.getValue();
 					attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 				}
 			}

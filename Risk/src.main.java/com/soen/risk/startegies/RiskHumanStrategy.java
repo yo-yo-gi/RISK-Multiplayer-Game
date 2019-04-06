@@ -39,7 +39,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 
 	
 	/** The scanner. */
-	Scanner scanner=new Scanner(System.in);	
+	transient Scanner scanner = new Scanner(System.in);
 	
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackedMap;
 	
@@ -86,18 +86,18 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 				gameMap);
 		/** Reinforcement phase controller */
 		RiskReinforcementPhase riskReinforcementPhase=new RiskReinforcementPhase();
-		/** Scanner object. */
-		Scanner scanner = new Scanner(System.in);
 		/** Name of current player */
 		String currentPlayerName = null;
 		/** Decision if user want to exchange cards or not. */
 		char decision ;
 		/** List of territories owned by current player. */
 		ArrayList<RiskTerritory> currentPlayerTerritories = new ArrayList<RiskTerritory>();
-		/** Armies remaining after each iteration of reinfocement. */
+		/** Armies remaining after each iteration of reinforcement. */
 		int noOfRemainingArmies = 0;
 		/** Army calculated for card exchange view. */
 		int	cardExchangeViewArmy = 0;
+		scanner = new Scanner(System.in);
+		
 		//		finding current player to use in this phase
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : reinforcedMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
@@ -259,8 +259,12 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		RiskAttackPhase riskAttackPhase=new RiskAttackPhase();
 		boolean currPlayerArmyCheck=true, exitFlag=false;
 		char selectedchoice;
-		int sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
-		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
+		long sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
+		int attackSourceTerritoryIndex=0,attackDestinationTerritoryIndex=0;
+		long defenderTerritoryArmy=0;
+		long attackerTerritoryArmy=0;
+		long attackDestinationArmy=0;
+		long attackSourceArmy=0;
 		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory = null;
 		String defendingTerritory=null;
@@ -268,9 +272,8 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		List<String> adjTerritoryList;
 		List<String> AdjAttackList = null;
 		ArrayList<RiskTerritory> playerTerritories = new ArrayList<RiskTerritory>();
-
 		Map<String, Object> attackOutputMap = new HashMap<>();
-
+		scanner = new Scanner(System.in);
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : attackedMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
 				currentPlayer=entry.getKey();
@@ -378,12 +381,12 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 			for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
 				if(entry.getKey()==attackSourceTerritoryName) {
 					attackerTerritory=attackSourceTerritoryName;
-					attackerTerritoryArmy=(int) entry.getValue();
+					attackerTerritoryArmy=(long) entry.getValue();
 					attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
 				}
 				else if(entry.getKey()==attackDestinationTerritoryName) {
 					defenderTerritory=attackDestinationTerritoryName;
-					defenderTerritoryArmy=(int) entry.getValue();
+					defenderTerritoryArmy=(long) entry.getValue();
 					attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 				}
 			}
@@ -489,7 +492,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		ArrayList<String> adjTerritoryList;
 		/** The owned territory list. */
 		ArrayList<String> OwnedAdjList = new ArrayList<String>();
-
+		scanner = new Scanner(System.in);
 		/**  The number of armies to be moved. */
 		int finalMoveOfArmies;
 		/** The destination territory object. */
@@ -507,7 +510,9 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		System.out.println();
 		System.out.println("Fortification started...");
 		System.out.println();
-		int destinationTerritory, sourceArmy = Constants.ZERO, destinationArmy = Constants.ZERO;
+		int destinationTerritory;
+		long destinationArmy = Constants.ZERO;
+		long sourceArmy = Constants.ZERO;
 		String sourceTerritoryName = null, destinationTName = null ;
 		System.out.println("Player Name: "+currentPlayer.getPlayerName());
 

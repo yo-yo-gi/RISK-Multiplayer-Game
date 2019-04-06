@@ -32,6 +32,7 @@ public class RiskReinforcementPhase implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3067269818071733591L;
+	transient Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * Calculation of Armies for the Player.
@@ -78,7 +79,7 @@ public class RiskReinforcementPhase implements Serializable {
 	public int CardExchangeView(RiskPlayer player) {
 
 		int exchangeArmies = Constants.ZERO;
-		Scanner scanner = new Scanner(System.in);
+		
 		int decision;
 		boolean exchangeArmy = false;
 		if (player.getCardOwned().size() != 3) {

@@ -82,6 +82,13 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 		
 		//		getting current player territories
 		currPlayerTerritories=gameMap.get(currentPlayer);
+		
+		for (RiskTerritory riskTerritory : currPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return reinforcedMap;
+			}
+		}
+		
 		//		find strongest territory to reinforce
 		reinforcementTerritory=findWeakestTerritory(currPlayerTerritories);
 		//		calculating and adding reinforced armies in weakest countries
@@ -116,6 +123,12 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 		ArrayList<RiskTerritory> adjacencyList=new ArrayList<RiskTerritory>();
 
 		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
+		
+		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return fortifiedMap;
+			}
+		}
 
 //		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
@@ -141,7 +154,7 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 		}
 
 		//		finding territory with max armies in adjacent
-		int adjMaxArmy=0;
+		long adjMaxArmy=0;
 		for (RiskTerritory currAdjTerritory : adjacencyList) {
 			if (currAdjTerritory.getArmiesPresent()>adjMaxArmy) {
 				adjMaxArmy=currAdjTerritory.getArmiesPresent();
@@ -193,7 +206,7 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 	private RiskTerritory findWeakestTerritory(ArrayList<RiskTerritory> currPlayerTerritories) {
 		ArrayList<RiskTerritory> territoriesWithMinArmies=new ArrayList<RiskTerritory>();
 
-		int maxArmy = 0;
+		long maxArmy = 0;
 		//		getting max army present in above list	
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			if (currTerritory.getArmiesPresent()>maxArmy) {
@@ -201,7 +214,7 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 			}
 		}
 
-		int minArmy = maxArmy;
+		long minArmy = maxArmy;
 		//		getting minimum army present in above list
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			if (currTerritory.getArmiesPresent()<=minArmy) {
@@ -229,7 +242,8 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 		ArrayList<String> currPlayerAdjacentsStringTerritories=new ArrayList<String>();
 		ArrayList<String> currPlayerStringTerritories=new ArrayList<String>();
 		LinkedHashMap<RiskTerritory, ArrayList<String>>	fortifyAdjacencyMap=new LinkedHashMap<RiskTerritory, ArrayList<String>>();
-		int currentPlayerMaxArmy=0,currentPlayerMinArmy=1;
+		long currentPlayerMaxArmy=0;
+		long currentPlayerMinArmy=1;
 		int skipFortifyCounter=0;
 		//		finding maximum number of armies present in territory list
 		for (RiskTerritory currTerritory : currentPlayerTerritories) {

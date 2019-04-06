@@ -33,7 +33,7 @@ public class RiskDomination implements RiskDominationObservable , Serializable{
 	private List<String> continentsContr;
 
 	/** The armies owned. */
-	private int armiesOwned;
+	private long armiesOwned;
 
 	/** The domination observers. */
 	List<RiskDominationObserver> dominationObservers;
@@ -66,10 +66,10 @@ public class RiskDomination implements RiskDominationObservable , Serializable{
 	/**
 	 * Sets the armies owned.
 	 *
-	 * @param armiesOwned the armiesOwned to set
+	 * @param l the armiesOwned to set
 	 */
-	public void setArmiesOwned(int armiesOwned) {
-		this.armiesOwned = armiesOwned;
+	public void setArmiesOwned(long l) {
+		this.armiesOwned = l;
 		notifyAllObservers();
 	}
 

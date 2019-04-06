@@ -26,7 +26,7 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	 */
 	private static final long serialVersionUID = -568260170682309331L;
 	/** The scanner. */
-	Scanner scanner=new Scanner(System.in);	
+	transient Scanner scanner = new Scanner(System.in);
 	/** The player id. */
 	private String playerId;
 	/** The player name. */
@@ -36,7 +36,7 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	/** The occupied continents. */
 	private ArrayList<String> occupiedContinents=new ArrayList<String>();
 	/** The armies owned. */
-	private int armiesOwned;	
+	private long armiesOwned;	
 
 	/**  Current player turn. */
 	private boolean currentPlayerTurn=false;	
@@ -199,7 +199,7 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	 * @return the armiesOwned
 	 */
 
-	public int getArmiesOwned() {
+	public long getArmiesOwned() {
 		return armiesOwned;
 	}
 
@@ -217,10 +217,10 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	/**
 	 * Sets the armies owned.
 	 *
-	 * @param armiesOwned the new armies owned
+	 * @param currentPlayerArmies the new armies owned
 	 */
-	public void setArmiesOwned(int armiesOwned) {
-		this.armiesOwned = armiesOwned;
+	public void setArmiesOwned(long currentPlayerArmies) {
+		this.armiesOwned = currentPlayerArmies;
 	}
 
 	/**

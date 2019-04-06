@@ -28,7 +28,7 @@ public class RiskMapEditor implements Serializable {
 	private static final long serialVersionUID = 6819484579138628790L;
 
 	/** The scanner. */
-	Scanner scanner = new Scanner(System.in);
+	transient Scanner scanner = new Scanner(System.in);
 
 	/** The fullMap. */
 	ArrayList<String> fullmap=new ArrayList<String>();

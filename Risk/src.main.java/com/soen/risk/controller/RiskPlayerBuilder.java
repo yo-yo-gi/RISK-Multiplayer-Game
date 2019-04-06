@@ -26,6 +26,7 @@ public class RiskPlayerBuilder implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1425243862605668711L;
+	transient Scanner s=new Scanner(System.in);
 
 	/** The risk player list. */
 	private ArrayList<RiskPlayer> riskPlayerList;
@@ -44,7 +45,7 @@ public class RiskPlayerBuilder implements Serializable {
 	 * Sets the players.
 	 */
 	public void setUpPlayers() {
-		Scanner s = new Scanner(System.in);
+		
 		int numberOfPlayers = -1;
 
 		//		 To take number of players

@@ -216,13 +216,13 @@ public class RiskGameHelper implements Serializable{
 	/**
 	 * This function moves armies after win.
 	 *
-	 * @param attackerArmyToMove the attacker army to move
+	 * @param attackMoveArmy the attacker army to move
 	 * @param attackerSourceTerritory      source territory of attacker
 	 * @param attackerDestinationTerritory destination territory of attacker
 	 * @param riskMainMap                Map of players with respective territory
 	 * @return riskMainMap Updated map after army moved
 	 */
-	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(int attackerArmyToMove,
+	public static LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> moveArmyAfterAttack(long attackMoveArmy,
 			RiskTerritory attackerSourceTerritory, RiskTerritory attackerDestinationTerritory,
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap) {
 
@@ -251,13 +251,13 @@ public class RiskGameHelper implements Serializable{
 			}
 		}
 
-		sourceTerritory.setArmiesPresent(sourceTerritory.getArmiesPresent() - attackerArmyToMove);
-		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent() + attackerArmyToMove);
+		sourceTerritory.setArmiesPresent(sourceTerritory.getArmiesPresent() - attackMoveArmy);
+		destinationTerritory.setArmiesPresent(destinationTerritory.getArmiesPresent() + attackMoveArmy);
 		currPlayerList.set(currPlayerList.indexOf(attackerSourceTerritory), sourceTerritory);
 		currPlayerList.set(currPlayerList.indexOf(attackerDestinationTerritory), destinationTerritory);
 
 		//		Calculating current player total armies in all territories and updating current player
-		int currentPlayerArmies=Constants.ZERO;
+		long currentPlayerArmies=Constants.ZERO;
 		for (RiskTerritory currTerritory : currPlayerList) {
 			currentPlayerArmies=currentPlayerArmies+currTerritory.getArmiesPresent();
 		}

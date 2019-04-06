@@ -24,6 +24,7 @@ public class RiskMapUserCreator implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5124274417312752360L;
+	transient Scanner scanner = new Scanner(System.in);
 	/** The create status. */
 	boolean createStatus=true;
 
@@ -33,9 +34,6 @@ public class RiskMapUserCreator implements Serializable{
 	 * @return finalMap Returns a full list of map file containing the continents and territories entered by the user.
 	 */
 	public List<String> mapCreator() {
-
-
-		Scanner scanner=new Scanner(System.in);
 		boolean flag1=true;
 		boolean flag2=true;
 		char selection1, selection2;

@@ -33,18 +33,18 @@ public class RiskAttackPhase implements Serializable {
 	private static final long serialVersionUID = -5702424585304391344L;
 
 	/** The scanner. */
-	Scanner scanner=new Scanner(System.in);
+	transient Scanner scanner=new Scanner(System.in);
 
 	/**
 	 * Attack phase input for both modes.
 	 *
 	 * @param attackerSourceTerritoryName the attack source territory name
-	 * @param attackerSourceArmy the attack source army
+	 * @param attackSourceArmy the attack source army
 	 * @param attackerDestinationTerritoryName the attack destination territory name
-	 * @param attackerDestinationArmy the attack destination army
+	 * @param attackDestinationArmy the attack destination army
 	 * @return the map
 	 */
-	public Map<String, Object> attackPhaseInput(String attackerSourceTerritoryName,int attackerSourceArmy, String attackerDestinationTerritoryName, int attackerDestinationArmy){
+	public Map<String, Object> attackPhaseInput(String attackerSourceTerritoryName,long attackSourceArmy, String attackerDestinationTerritoryName, long attackDestinationArmy){
 		int choice;
 		Map<String, Object> attackOutput = new HashMap<>();
 		System.out.println("Do you want to attack in 1)Normal Mode 2) All-Out Mode ");
@@ -59,10 +59,10 @@ public class RiskAttackPhase implements Serializable {
 			}
 			switch(choice) {
 			case 1:
-				attackOutput=rollDiceForNormalAttackMode(attackerSourceTerritoryName, attackerSourceArmy, attackerDestinationTerritoryName,attackerDestinationArmy);
+				attackOutput=rollDiceForNormalAttackMode(attackerSourceTerritoryName, attackSourceArmy, attackerDestinationTerritoryName,attackDestinationArmy);
 				break;
 			case 2:
-				attackOutput=rollDiceForAllOutAttackMode(attackerSourceTerritoryName, attackerSourceArmy, attackerDestinationTerritoryName,attackerDestinationArmy);
+				attackOutput=rollDiceForAllOutAttackMode(attackerSourceTerritoryName, attackSourceArmy, attackerDestinationTerritoryName,attackDestinationArmy);
 				break;
 			default:
 				System.out.println("Invalid input. Try again!!");
@@ -75,12 +75,12 @@ public class RiskAttackPhase implements Serializable {
 	 * Roll dice for attack.
 	 *
 	 * @param attackerSourceTerritoryName the attack source territory name
-	 * @param attackingArmyCount the attacking army count
+	 * @param attackSourceArmy the attacking army count
 	 * @param attackerDestinationTerritoryName the attack destination territory name
-	 * @param defendingArmyCount the defending army count
+	 * @param attackDestinationArmy the defending army count
 	 * @return the map
 	 */
-	public Map<String, Object> rollDiceForNormalAttackMode(String attackerSourceTerritoryName,int attackingArmyCount, String attackerDestinationTerritoryName, int defendingArmyCount) {
+	public Map<String, Object> rollDiceForNormalAttackMode(String attackerSourceTerritoryName,long attackSourceArmy, String attackerDestinationTerritoryName, long attackDestinationArmy) {
 
 		Scanner scanner=new Scanner(System.in);
 		int desiredDiceCastByAttacker, desiredDiceCastByDefender;
@@ -92,10 +92,10 @@ public class RiskAttackPhase implements Serializable {
 				scanner.next();
 			}
 			desiredDiceCastByAttacker=scanner.nextInt();
-			if (desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker<=0 || desiredDiceCastByAttacker > attackingArmyCount) {
+			if (desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker<=0 || desiredDiceCastByAttacker > attackSourceArmy) {
 				System.out.println("Attacker cannot cast 0 dice/ more than 3 dice/ more than attackingArmyCount. Try Again!!");
 			}
-		}while(desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker<=0 || desiredDiceCastByAttacker > attackingArmyCount);
+		}while(desiredDiceCastByAttacker > 3 || desiredDiceCastByAttacker<=0 || desiredDiceCastByAttacker > attackSourceArmy);
 
 		System.out.println("Enter the number of dice you want to roll for defence: ");
 
@@ -105,12 +105,12 @@ public class RiskAttackPhase implements Serializable {
 				scanner.next();
 			}
 			desiredDiceCastByDefender=scanner.nextInt();		
-			if (desiredDiceCastByDefender > 2 || desiredDiceCastByDefender<=0 || desiredDiceCastByDefender > defendingArmyCount) {
+			if (desiredDiceCastByDefender > 2 || desiredDiceCastByDefender<=0 || desiredDiceCastByDefender > attackDestinationArmy) {
 				System.out.println("Defender cannot cast 0 dice/ more than 3 dice/ more than defendingArmyCount . Try Again!!");
 			}
-		}while(desiredDiceCastByDefender > 2 || desiredDiceCastByDefender<=0 || desiredDiceCastByDefender > defendingArmyCount);
+		}while(desiredDiceCastByDefender > 2 || desiredDiceCastByDefender<=0 || desiredDiceCastByDefender > attackDestinationArmy);
 
-		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
+		System.out.println("attackingArmyCount: " + attackSourceArmy + ", defendingArmyCount: " + attackDestinationArmy);
 		Map<String, Object> output = new HashMap<>();
 
 		List<Integer> attackerDiceList = rollDice(desiredDiceCastByAttacker);
@@ -126,17 +126,17 @@ public class RiskAttackPhase implements Serializable {
 
 			if (maxDiceCastByAttacker > maxDiceCastByDefender) {
 				output.put("did_attacker_win", true);
-				output.put(attackerSourceTerritoryName, attackingArmyCount);
-				output.put(attackerDestinationTerritoryName, (defendingArmyCount - 1));
+				output.put(attackerSourceTerritoryName, attackSourceArmy);
+				output.put(attackerDestinationTerritoryName, (attackDestinationArmy - 1));
 			} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
 				output.put("did_defender_win", true);
-				output.put(attackerSourceTerritoryName, (attackingArmyCount - 1));
-				output.put(attackerDestinationTerritoryName, defendingArmyCount);
+				output.put(attackerSourceTerritoryName, (attackSourceArmy - 1));
+				output.put(attackerDestinationTerritoryName, attackDestinationArmy);
 			}
 			else {
 				output.put("did_defender_win", true);
-				output.put(attackerSourceTerritoryName, (attackingArmyCount - 1));
-				output.put(attackerDestinationTerritoryName, defendingArmyCount);
+				output.put(attackerSourceTerritoryName, (attackSourceArmy - 1));
+				output.put(attackerDestinationTerritoryName, attackDestinationArmy);
 			}
 		} else {
 			if (attackerDiceList.size() == 3) {
@@ -152,15 +152,15 @@ public class RiskAttackPhase implements Serializable {
 			int noDefenderWin = 0;
 			for (int i = 0; i < desiredDiceCastByDefender; i++) {
 				if ((i == 0 && maxDiceCastByAttacker > maxDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > minDiceCastByDefender)) {
-					defendingArmyCount--;
+					attackDestinationArmy--;
 					noAttackerWin++;
 				} else {
-					attackingArmyCount--;
+					attackSourceArmy--;
 					noDefenderWin++;
 				}
 			}
-			output.put(attackerSourceTerritoryName, attackingArmyCount);
-			output.put(attackerDestinationTerritoryName, defendingArmyCount);
+			output.put(attackerSourceTerritoryName, attackSourceArmy);
+			output.put(attackerDestinationTerritoryName, attackDestinationArmy);
 
 			if (noAttackerWin > noDefenderWin) {
 				output.put("did_attacker_win", true);
@@ -181,12 +181,12 @@ public class RiskAttackPhase implements Serializable {
 	/**
 	 * Roll dice function to return the dice roll count list. 
 	 *
-	 * @param count the count
+	 * @param diceCastOfAttacker the count
 	 * @return the list
 	 */
-	public static List<Integer> rollDice(int count) {
+	public static List<Integer> rollDice(long diceCastOfAttacker) {
 		List<Integer> diceList = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < diceCastOfAttacker; i++) {
 			diceList.add(rollDice());
 		}
 		diceList.sort(Collections.reverseOrder());
@@ -206,28 +206,29 @@ public class RiskAttackPhase implements Serializable {
 	 * Roll dice for all out attack mode where the method will execute until the atacker's or defender's army count is 0.
 	 *
 	 * @param attackSourceTerritoryName the attack source territory name
-	 * @param attackingArmyCount the attacking army count
+	 * @param attackSourceArmy the attacking army count
 	 * @param attackDestinationTerritoryName the attack destination territory name
-	 * @param defendingArmyCount the defending army count
+	 * @param attackDestinationArmy the defending army count
 	 * @return the map
 	 */
-	public static Map<String, Object> rollDiceForAllOutAttackMode(String attackSourceTerritoryName,int attackingArmyCount, String attackDestinationTerritoryName, int defendingArmyCount) {
-		int diceCastOfAttacker,diceCastOfDefender;
-		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
+	public static Map<String, Object> rollDiceForAllOutAttackMode(String attackSourceTerritoryName,long attackSourceArmy, String attackDestinationTerritoryName, long attackDestinationArmy) {
+		long diceCastOfAttacker;
+		long diceCastOfDefender;
+		System.out.println("attackingArmyCount: " + attackSourceArmy + ", defendingArmyCount: " + attackDestinationArmy);
 
 		Map<String, Object> output = new HashMap<>();
-		while (attackingArmyCount>Constants.ZERO && defendingArmyCount>Constants.ZERO) {
-			if(attackingArmyCount>3) {
+		while (attackSourceArmy>Constants.ZERO && attackDestinationArmy>Constants.ZERO) {
+			if(attackSourceArmy>3) {
 				diceCastOfAttacker=3;
 			}else {
-				diceCastOfAttacker=attackingArmyCount;
+				diceCastOfAttacker=attackSourceArmy;
 			}
-			if(defendingArmyCount>2) {
+			if(attackDestinationArmy>2) {
 				diceCastOfDefender=2;
 			}else {
-				diceCastOfDefender=defendingArmyCount;
+				diceCastOfDefender=attackDestinationArmy;
 			}
-			if(attackingArmyCount==1 || defendingArmyCount==1) {
+			if(attackSourceArmy==1 || attackDestinationArmy==1) {
 				List<Integer> attackerDiceList = rollDice(diceCastOfAttacker);
 
 				System.out.println(attackerDiceList);
@@ -240,26 +241,26 @@ public class RiskAttackPhase implements Serializable {
 				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
 				if (maxDiceCastByAttacker > maxDiceCastByDefender) {
-					output.put(attackSourceTerritoryName, (attackingArmyCount));
-					defendingArmyCount--;
-					if(defendingArmyCount==Constants.ZERO) {
-						output.put(attackDestinationTerritoryName, (defendingArmyCount));
+					output.put(attackSourceTerritoryName, (attackSourceArmy));
+					attackDestinationArmy--;
+					if(attackDestinationArmy==Constants.ZERO) {
+						output.put(attackDestinationTerritoryName, (attackDestinationArmy));
 						break;
 					}
 
 				} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
-					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==Constants.ZERO) {
-						output.put(attackSourceTerritoryName, (attackingArmyCount));
+					attackSourceArmy--;
+					output.put(attackDestinationTerritoryName, (attackDestinationArmy));
+					if(attackSourceArmy==Constants.ZERO) {
+						output.put(attackSourceTerritoryName, (attackSourceArmy));
 						break;
 					}
 				}
 				else {
-					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==Constants.ZERO) {
-						output.put(attackSourceTerritoryName, (attackingArmyCount));
+					attackSourceArmy--;
+					output.put(attackDestinationTerritoryName, (attackDestinationArmy));
+					if(attackSourceArmy==Constants.ZERO) {
+						output.put(attackSourceTerritoryName, (attackSourceArmy));
 						break;
 					}
 				}
@@ -286,22 +287,22 @@ public class RiskAttackPhase implements Serializable {
 				int noDefenderWin = Constants.ZERO;
 				for (int i = 0; i < diceCastOfDefender; i++) {
 					if ((i == 0 && maxDiceCastByAttacker > maxDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > minDiceCastByDefender)) {
-						defendingArmyCount--;
+						attackDestinationArmy--;
 						noAttackerWin++;
-						if(defendingArmyCount<1) {
+						if(attackDestinationArmy<1) {
 							break;
 						}
 					} else {
-						attackingArmyCount--;
+						attackSourceArmy--;
 						noDefenderWin++;
-						if(attackingArmyCount<1) {
+						if(attackSourceArmy<1) {
 							break;
 						}
 					}
 				}
 
-				output.put(attackSourceTerritoryName, attackingArmyCount);
-				output.put(attackDestinationTerritoryName, defendingArmyCount);
+				output.put(attackSourceTerritoryName, attackSourceArmy);
+				output.put(attackDestinationTerritoryName, attackDestinationArmy);
 
 				if (noAttackerWin > noDefenderWin) {
 					output.put("did_attacker_win", true);

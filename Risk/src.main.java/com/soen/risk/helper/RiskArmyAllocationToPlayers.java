@@ -29,6 +29,8 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6316522767300342984L;
+	
+	transient Scanner scanner = new Scanner(System.in);
 
 	/**
 	 * Assign armies to each players for the countries they own in round robin fashion.
@@ -39,25 +41,24 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> assignArmiesToPlayers(Map<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMapParam ) {
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> playerTerritoryMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(assignInitialArmy(playerTerritoryMapParam));
-		Map<RiskPlayer, Integer> countMap = new LinkedHashMap<RiskPlayer, Integer>();
+		Map<RiskPlayer, Long> countMap = new LinkedHashMap<RiskPlayer, Long>();
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){	
 			countMap.put(entry.getKey(), entry.getKey().getArmiesOwned());
 		}
 		System.out.println();
 		System.out.println("Allocating armies to players in round robin fashion...");
-		System.out.println();	
-		Scanner scanner = new Scanner(System.in);
-		int totalArmyPresent=Constants.ZERO;
+		System.out.println();
+		long totalArmyPresent=Constants.ZERO;
 		do {	
 			System.out.println();	
 			for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet()){
-				int currentArmy=countMap.get(entry.getKey());
+				Long currentArmy=countMap.get(entry.getKey());
 				if (currentArmy>0) {
 					String PlayerName=entry.getKey().getPlayerName();
 					System.out.println("Remaining armies for "+ PlayerName+"--> "+countMap.get(entry.getKey()));				
 					int territoryCounter=1;
 					int selectedTerrIndex=Constants.ZERO;
-					int newArmyToSet=Constants.ZERO;
+					long newArmyToSet=Constants.ZERO;
 					ArrayList<RiskTerritory> currentTerrList=new ArrayList<RiskTerritory>(entry.getValue());
 					RiskTerritory riskTerritory;
 					System.out.println(PlayerName+" --> Select territory");
@@ -88,7 +89,7 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 			}
 
 			totalArmyPresent=Constants.ZERO;
-			for (Entry<RiskPlayer, Integer> entry : countMap.entrySet()){	
+			for (Entry<RiskPlayer, Long> entry : countMap.entrySet()){	
 				totalArmyPresent=totalArmyPresent+entry.getValue();
 			}			
 
@@ -108,7 +109,7 @@ public class RiskArmyAllocationToPlayers implements Serializable{
 
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : playerTerritoryMap.entrySet())
 		{	
-			int armyOwned=entry.getKey().getArmiesOwned();
+			long armyOwned=entry.getKey().getArmiesOwned();
 			entry.getKey().setArmiesOwned(armyOwned-entry.getValue().size());
 			for (RiskTerritory currTerritory : entry.getValue()) {		
 				if(armyOwned>0) {

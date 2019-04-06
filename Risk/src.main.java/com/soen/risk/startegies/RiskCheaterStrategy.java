@@ -94,6 +94,13 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		
 		// getting current player territories
 		currPlayerTerritories = gameMap.get(currentPlayer);
+
+		for (RiskTerritory riskTerritory : currPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return reinforcedMap;
+			}
+		}
+	
 		// Double the armies on all its territories in reinforcement
 		reinforcementTerritoryList = doubleArmy(currPlayerTerritories);
 
@@ -190,7 +197,8 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 				System.out.println(currTerritory.getTerritoryName() + "(" + currTerritory.getArmiesPresent() + ")");
 			}
 		}
-		attackedMap=RiskGameHelper.assignRandomCard(attackedMap);
+
+//		RiskGameHelper.assignRandomCard(attackedMap);
 		return attackedMap;
 	}
 
@@ -218,6 +226,11 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
+		for (RiskTerritory riskTerritory : currPlayerList) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return fortifiedMap;
+			}
+		}
 
 		// getting own territories in string format
 		for (RiskTerritory currTerritory : currPlayerList) {
@@ -237,7 +250,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		for (RiskTerritory currTerritory : currPlayerList) {
 			if (terrListWithOpponentAdj.contains(currTerritory.getTerritoryName())) {
 				RiskTerritory tempTerritory=currTerritory;
-				int army = (tempTerritory.getArmiesPresent() * 2);
+				long army = (tempTerritory.getArmiesPresent() * 2);
 				tempTerritory.setArmiesPresent(army);
 				territoryList.set(currPlayerList.indexOf(currTerritory), tempTerritory);
 			}
@@ -275,7 +288,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 
 		
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
-			int army = ((currTerritory.getArmiesPresent()) * 2);
+			long army = ((currTerritory.getArmiesPresent()) * 2);
 			currTerritory.setArmiesPresent(army);
 			territoryList.set(currPlayerTerritories.indexOf(currTerritory), currTerritory);
 		}

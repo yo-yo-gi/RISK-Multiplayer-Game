@@ -73,6 +73,14 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		currPlayerTerritories=gameMap.get(currentPlayer);
 //		find strongest territory to reinforce
 		reinforcementTerritory=findStrongestTerritory(currPlayerTerritories);
+		
+		for (RiskTerritory riskTerritory : currPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return reinforcedMap;
+			}
+		}
+		
+		
 //		calculating and adding reinforced armies in strongest countries
 		reinforcedMap=riskReinforcementHelper.getReinforcedMap(gameMap, riskContinentList, reinforcementTerritory);
 	
@@ -123,6 +131,12 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		
 		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
 		
+		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
+			if (riskTerritory.getArmiesPresent()>1000000) {
+				return fortifiedMap;
+			}
+		}
+		
 //		finding list of highest army territory
 		territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
 		
@@ -142,7 +156,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		}
 		
 //		finding territory with max armies in adjacent
-		int adjMaxArmy=0;
+		long adjMaxArmy=0;
 		for (RiskTerritory currAdjTerritory : adjucencyList) {
 			if (currAdjTerritory.getArmiesPresent()>adjMaxArmy) {
 				adjMaxArmy=currAdjTerritory.getArmiesPresent();
@@ -202,7 +216,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		ArrayList<RiskTerritory> territoriesWithMaxArmies=new ArrayList<RiskTerritory>();
 		ArrayList<String> stringTerritoryList=new ArrayList<String>();
 		ArrayList<RiskTerritory> adjListWithOppositeTerritories=new ArrayList<RiskTerritory>();
-		int maxArmy=0;
+		long maxArmy=0;
 		
 //		finding list of current player territories in string foramat
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
@@ -253,8 +267,10 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		attackedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		
 		
-		int sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
-		int attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
+		long sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
+		long attackSourceTerritoryIndex=0,attackDestinationTerritoryIndex=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
+		long attackDestinationArmy=0;
+		long attackSourceArmy=0;
 		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory = null;
 		String defendingTerritory=null;
@@ -326,12 +342,12 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 			for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
 				if(entry.getKey()==attackSourceTerritoryName) {
 					attackerTerritory=attackSourceTerritoryName;
-					attackerTerritoryArmy=(int) entry.getValue();
+					attackerTerritoryArmy=(long) entry.getValue();
 					attackSourceTerritory.setArmiesPresent(attackerTerritoryArmy+1);
 				}
 				else if(entry.getKey()==attackDestinationTerritoryName) {
 					defenderTerritory=attackDestinationTerritoryName;
-					defenderTerritoryArmy=(int) entry.getValue();
+					defenderTerritoryArmy=(long) entry.getValue();
 					attackDestinationTerritory.setArmiesPresent(defenderTerritoryArmy);
 				}
 			}
@@ -394,7 +410,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 		ArrayList<String> currPlayerAdjacentsStringTerritories=new ArrayList<String>();
 		ArrayList<String> currPlayerStringTerritories=new ArrayList<String>();
 		LinkedHashMap<RiskTerritory, ArrayList<String>>	fortifyAdjacencyMap=new LinkedHashMap<RiskTerritory, ArrayList<String>>();
-		int currentPlayerMaxArmy=0;
+		long currentPlayerMaxArmy=0;
 		int skipFortifyCounter=0;
 //		finding maximum number of armies present in territory list
 		for (RiskTerritory currTerritory : currentPlayerTerritories) {

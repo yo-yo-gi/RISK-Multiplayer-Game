@@ -23,12 +23,12 @@ public class RiskAttackHelper implements Serializable{
 	/**
 	 * Roll dice function to return the dice roll count list. 
 	 *
-	 * @param count the count
+	 * @param diceCastOfAttacker the count
 	 * @return the list
 	 */
-	public static List<Integer> rollDice(int count) {
+	public static List<Integer> rollDice(long diceCastOfAttacker) {
 		List<Integer> diceList = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < diceCastOfAttacker; i++) {
 			diceList.add(rollDice());
 		}
 		diceList.sort(Collections.reverseOrder());
@@ -48,28 +48,29 @@ public class RiskAttackHelper implements Serializable{
 	 * Roll dice for all out attack mode where the method will execute until the atacker's or defender's army count is 0.
 	 *
 	 * @param attackSourceTerritoryName the attack source territory name
-	 * @param attackingArmyCount the attacking army count
+	 * @param attackSourceArmy the attacking army count
 	 * @param attackDestinationTerritoryName the attack destination territory name
-	 * @param defendingArmyCount the defending army count
+	 * @param attackDestinationArmy the defending army count
 	 * @return the map
 	 */
-	public static Map<String, Object> rollDiceForAllOutAttackMode(String attackSourceTerritoryName,int attackingArmyCount, String attackDestinationTerritoryName, int defendingArmyCount) {
-		int diceCastOfAttacker,diceCastOfDefender;
-		System.out.println("attackingArmyCount: " + attackingArmyCount + ", defendingArmyCount: " + defendingArmyCount);
+	public static Map<String, Object> rollDiceForAllOutAttackMode(String attackSourceTerritoryName,long attackSourceArmy, String attackDestinationTerritoryName, long attackDestinationArmy) {
+		long diceCastOfAttacker;
+		long diceCastOfDefender;
+		System.out.println("attackingArmyCount: " + attackSourceArmy + ", defendingArmyCount: " + attackDestinationArmy);
 
 		Map<String, Object> output = new HashMap<>();
-		while (attackingArmyCount>Constants.ZERO && defendingArmyCount>Constants.ZERO) {
-			if(attackingArmyCount>3) {
+		while (attackSourceArmy>Constants.ZERO && attackDestinationArmy>Constants.ZERO) {
+			if(attackSourceArmy>3) {
 				diceCastOfAttacker=3;
 			}else {
-				diceCastOfAttacker=attackingArmyCount;
+				diceCastOfAttacker=attackSourceArmy;
 			}
-			if(defendingArmyCount>2) {
+			if(attackDestinationArmy>2) {
 				diceCastOfDefender=2;
 			}else {
-				diceCastOfDefender=defendingArmyCount;
+				diceCastOfDefender=attackDestinationArmy;
 			}
-			if(attackingArmyCount==1 || defendingArmyCount==1) {
+			if(attackSourceArmy==1 || attackDestinationArmy==1) {
 				List<Integer> attackerDiceList = rollDice(diceCastOfAttacker);
 
 				System.out.println(attackerDiceList);
@@ -82,26 +83,26 @@ public class RiskAttackHelper implements Serializable{
 				Integer maxDiceCastByDefender = Collections.max(defenderDiceList);
 
 				if (maxDiceCastByAttacker > maxDiceCastByDefender) {
-					output.put(attackSourceTerritoryName, (attackingArmyCount));
-					defendingArmyCount--;
-					if(defendingArmyCount==Constants.ZERO) {
-						output.put(attackDestinationTerritoryName, (defendingArmyCount));
+					output.put(attackSourceTerritoryName, (attackSourceArmy));
+					attackDestinationArmy--;
+					if(attackDestinationArmy==Constants.ZERO) {
+						output.put(attackDestinationTerritoryName, (attackDestinationArmy));
 						break;
 					}
 
 				} else if( maxDiceCastByDefender > maxDiceCastByAttacker) {
-					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==Constants.ZERO) {
-						output.put(attackSourceTerritoryName, (attackingArmyCount));
+					attackSourceArmy--;
+					output.put(attackDestinationTerritoryName, (attackDestinationArmy));
+					if(attackSourceArmy==Constants.ZERO) {
+						output.put(attackSourceTerritoryName, (attackSourceArmy));
 						break;
 					}
 				}
 				else {
-					attackingArmyCount--;
-					output.put(attackDestinationTerritoryName, (defendingArmyCount));
-					if(attackingArmyCount==Constants.ZERO) {
-						output.put(attackSourceTerritoryName, (attackingArmyCount));
+					attackSourceArmy--;
+					output.put(attackDestinationTerritoryName, (attackDestinationArmy));
+					if(attackSourceArmy==Constants.ZERO) {
+						output.put(attackSourceTerritoryName, (attackSourceArmy));
 						break;
 					}
 				}
@@ -128,22 +129,22 @@ public class RiskAttackHelper implements Serializable{
 				int noDefenderWin = Constants.ZERO;
 				for (int i = 0; i < diceCastOfDefender; i++) {
 					if ((i == 0 && maxDiceCastByAttacker > maxDiceCastByDefender) || (i == 1 && minDiceCastByAttacker > minDiceCastByDefender)) {
-						defendingArmyCount--;
+						attackDestinationArmy--;
 						noAttackerWin++;
-						if(defendingArmyCount<1) {
+						if(attackDestinationArmy<1) {
 							break;
 						}
 					} else {
-						attackingArmyCount--;
+						attackSourceArmy--;
 						noDefenderWin++;
-						if(attackingArmyCount<1) {
+						if(attackSourceArmy<1) {
 							break;
 						}
 					}
 				}
 
-				output.put(attackSourceTerritoryName, attackingArmyCount);
-				output.put(attackDestinationTerritoryName, defendingArmyCount);
+				output.put(attackSourceTerritoryName, attackSourceArmy);
+				output.put(attackDestinationTerritoryName, attackDestinationArmy);
 
 				if (noAttackerWin > noDefenderWin) {
 					output.put("did_attacker_win", true);

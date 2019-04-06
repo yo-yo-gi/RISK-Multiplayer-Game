@@ -28,6 +28,7 @@ import com.soen.risk.startegies.RiskBenevolentStartegy;
 import com.soen.risk.startegies.RiskCheaterStrategy;
 import com.soen.risk.startegies.RiskHumanStrategy;
 import com.soen.risk.startegies.RiskRandomStrategy;
+import com.soen.risk.tournamentControl.TournamentModeController;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -48,7 +49,7 @@ public class RiskGameBuilder implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2690671575352872926L;
-
+	transient static Scanner scanner=new Scanner(System.in);
 	/**
 	 * The main method.
 	 *
@@ -60,7 +61,7 @@ public class RiskGameBuilder implements Serializable {
 		RiskMapBuilder riskMapBuilder = new RiskMapBuilder();
 		RiskMapValidator riskMapValidator = new RiskMapValidator();
 
-		Scanner scanner = new Scanner(System.in);
+		
 
 		boolean mapInitCompletionStatus=false, mapValidationStatus=false, editCompletionStatus=true, currentMapAvailableStaus=false,checkflag=false ;
 		List<String> mapFile = null, currentMap=null;
@@ -101,34 +102,33 @@ public class RiskGameBuilder implements Serializable {
 		
 		if(gameType==2) {
 //			Call tournament controller
-//			GameController gameController  = new GameController();
-//			try {
-//				gameController.initializeGame(2);
-//			} catch (NumberFormatException e) {
-//				e.printStackTrace();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+			TournamentModeController.startTournamentMode();
+			
 		}else {
 		do {
 
 			System.out.println("\nPlease enter your choice:");
 			System.out.println("1. Upload from existing maps");
 			System.out.println("2. Create map from scratch");
+			System.out.println("3. Load existing saved games");
 
 
 			do {
-				while (!(scanner.hasNextInt() || mapType==1 || mapType==2)) {
+				while (!(scanner.hasNextInt())) {
 					System.out.println("Invalid option. Please select from given options.");
 					scanner.next();
 				}
 				mapType=scanner.nextInt();
-				if(!(mapType==1 || mapType==2)) {
+				if(!(mapType==1 || mapType==2 || mapType==3)) {
 					System.out.println("Invalid option. Please select from given options.");
 				}
-			}while(!(mapType==1 || mapType==2));
+			}while(!(mapType==1 || mapType==2 || mapType==3));
 
-			if (mapType==1) {
+			if (mapType==3) {
+				RiskSavedGameController riskSavedGameController=new RiskSavedGameController();
+				riskSavedGameController.resumeGame();
+			}
+			else if (mapType==1) {
 				String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps").toAbsolutePath().toString();
 				Path path;
 				int fileName;
@@ -159,8 +159,7 @@ public class RiskGameBuilder implements Serializable {
 				if (riskMapBuilder.getMapUploadStatus()) {
 					mapInitCompletionStatus=true;
 				}
-			}
-			if (mapType==2) {
+			}else if (mapType==2) {
 				System.out.println("Create Map selected");
 				mapFile=riskMapUserCreator.mapCreator();
 				checkflag=riskMapUserCreator.getcreateStatus();

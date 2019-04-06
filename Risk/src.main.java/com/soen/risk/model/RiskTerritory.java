@@ -33,7 +33,7 @@ public class RiskTerritory implements Serializable{
 	private String territoryName;
 
 	/** The armies present. */
-	private int armiesPresent;
+	private long armiesPresent;
 
 	/** The continent. */
 	private String continent;
@@ -156,7 +156,7 @@ public class RiskTerritory implements Serializable{
 	 * @return the armiesPresent
 	 */
 
-	public int getArmiesPresent() {
+	public long getArmiesPresent() {
 		return armiesPresent;
 	}
 
@@ -166,7 +166,7 @@ public class RiskTerritory implements Serializable{
 	 * @param armiesPresent the armiesPresent to set
 	 */
 
-	public void setArmiesPresent(int armiesPresent) {
+	public void setArmiesPresent(long armiesPresent) {
 		this.armiesPresent = armiesPresent;
 	}
 

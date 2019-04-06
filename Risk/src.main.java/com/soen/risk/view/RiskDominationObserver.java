@@ -24,5 +24,5 @@ public interface RiskDominationObserver {
 	 * @param continentsContr the continents contr
 	 * @param armiesOwned the armies owned
 	 */
-	public void update(String percentMapContr, List<String> continentsContr, int armiesOwned);
+	public void update(String percentMapContr, List<String> continentsContr, long armiesOwned);
 }
