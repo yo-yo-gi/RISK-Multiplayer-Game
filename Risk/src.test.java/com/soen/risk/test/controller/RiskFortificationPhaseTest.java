@@ -58,8 +58,8 @@ public class RiskFortificationPhaseTest {
 		playerTerritoryMap = riskHumanStrategy.fortify(playerTerritoryMap);
 
 		List<RiskTerritory> terrirtoryList = playerTerritoryMap.get(player1);
-		Integer []  expected= {3,7};
-		Integer []  actual= {terrirtoryList.get(0).getArmiesPresent(),terrirtoryList.get(1).getArmiesPresent()};
+		Long []  expected= {(long) 3,(long) 7};
+		Long []  actual= {terrirtoryList.get(0).getArmiesPresent(),terrirtoryList.get(1).getArmiesPresent()};
 
 
 		assertArrayEquals(expected, actual);
