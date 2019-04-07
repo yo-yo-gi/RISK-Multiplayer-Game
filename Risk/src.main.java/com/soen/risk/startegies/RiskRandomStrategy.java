@@ -26,11 +26,7 @@ import com.soen.risk.model.RiskTerritory;
  *
  */
 public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
-
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 701482605691028024L;
 	RiskPlayer currentPlayer;
 	RiskTerritory reinforcementTerritory;
@@ -72,7 +68,7 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 //		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
 //		getting current player territories
-		currPlayerTerritories=gameMap.get(currPlayerTerritories);
+		currPlayerTerritories=gameMap.get(currentPlayer);
 		for (RiskTerritory riskTerritory : currPlayerTerritories) {
 			if (riskTerritory.getArmiesPresent()>1000000) {
 				return reinforcedMap;
@@ -135,87 +131,76 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 	 */
 	@Override
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortify(
-			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {
-		
-		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
-		
-		ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
-		ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();
-		RiskTerritory fortifySourceTerritoy=new RiskTerritory();
-		RiskTerritory fortifyAdjTerritory = new RiskTerritory();
-		int fortifySourceTerritoyIndex, fortifyAdjTerritoryIndex;
-		ArrayList<RiskTerritory> adjucencyList=new ArrayList<RiskTerritory>();
-		
-		
-//		find current player
-		currentPlayer=getCurrentPlayer(fortifiedMap);
-//		getting current player territories
-		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
-		
-		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
-			if (riskTerritory.getArmiesPresent()>1000000) {
-				return fortifiedMap;
+			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap) {fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
+	        
+	        
+	        ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
+	        ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();
+	        RiskTerritory fortifySourceTerritoy=new RiskTerritory();
+	        RiskTerritory fortifyAdjTerritory = new RiskTerritory();
+	        int fortifySourceTerritoyIndex, fortifyAdjTerritoryIndex;
+	        ArrayList<RiskTerritory> adjucencyList=new ArrayList<RiskTerritory>();
+	        
+	        
+//	        find current player
+	        currentPlayer=getCurrentPlayer(fortifiedMap);
+//	        getting current player territories
+	        currentPlayerTerritories=fortifiedMap.get(currentPlayer);
+	        
+	        for (RiskTerritory riskTerritory : currentPlayerTerritories) {
+				if (riskTerritory.getArmiesPresent()>1000000) {
+					return fortifiedMap;
+				}
 			}
-		}
-		
-//		finding adjacent owned territories to fortify
-		territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
-		
-		if (territoriesWithAdjacents.size()==0) {
-			System.out.println("Fortify skipped as no fortification condition matching");
-			return fortifiedMap;
-		}
-//		find out 1st adjacent and write logic to move army to that territory
-		fortifySourceTerritoy=territoriesWithAdjacents.get(0);	
-		fortifySourceTerritoyIndex=currentPlayerTerritories.indexOf(fortifySourceTerritoy);
-		
-//		finding adjacent list of RiskTerritory objects
-		for (RiskTerritory currTerritory : currentPlayerTerritories) {
-			if (fortifySourceTerritoy.getAdjacents().contains(currTerritory.getTerritoryName())) {
-				adjucencyList.add(currTerritory);
-			}				
-		}
-		
-//		finding random destination territory to fortify
-		ArrayList<RiskTerritory> finalAdjucencyList=new ArrayList<RiskTerritory>(adjucencyList);
-		for (RiskTerritory riskTerritory : adjucencyList) {
-			if (riskTerritory.getArmiesPresent()==1) {
-				finalAdjucencyList.remove(finalAdjucencyList.indexOf(riskTerritory));
-			}
-		}
-
-
-
-		if(finalAdjucencyList.size()>0) {
-			int maxAdjList=finalAdjucencyList.size();
-			int minAdjList=1;
-			int destinationIndex=randomNumberGenerator(maxAdjList, minAdjList);
-			fortifyAdjTerritory=currentPlayerTerritories.get(destinationIndex-1);
-			
-	
-	
-	
-//	 fortifyAdjTerritory
-		fortifyAdjTerritoryIndex=currentPlayerTerritories.indexOf(fortifyAdjTerritory);
-		
-//		fortifying or moving armies from source to destination
-		fortifySourceTerritoy.setArmiesPresent(fortifySourceTerritoy.getArmiesPresent()-1);
-		fortifyAdjTerritory.setArmiesPresent(fortifyAdjTerritory.getArmiesPresent()+1);
-		
-//		Updating map before return
-		currentPlayerTerritories.set(fortifySourceTerritoyIndex, fortifySourceTerritoy);
-		currentPlayerTerritories.set(fortifyAdjTerritoryIndex, fortifyAdjTerritory);
-		fortifiedMap.put(currentPlayer, currentPlayerTerritories);
-		
-		for (RiskTerritory currTerritory : currentPlayerTerritories) {
-			System.out.println(currTerritory.getTerritoryName()+"("+currTerritory.getArmiesPresent()+")");
-		}
-		
-		
-	}
-		fortifiedMap.put(currentPlayer, territoriesWithAdjacents);
-		System.out.println("Fortification completed for player:"+currentPlayer.getPlayerName());
-		return fortifiedMap;
+	        
+//	        finding adjacent owned territories to fortify
+	        territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
+	        
+	        if (territoriesWithAdjacents.size()==0) {
+	            System.out.println("Fortify skipped as no fortification condition matching");
+	            return fortifiedMap;
+	        }
+//	        find out 1st adjacent and write logic to move army to that territory
+	        fortifySourceTerritoy=territoriesWithAdjacents.get(0);    
+	        fortifySourceTerritoyIndex=currentPlayerTerritories.indexOf(fortifySourceTerritoy);
+	        
+//	        finding adjacent list of RiskTerritory objects
+	        for (RiskTerritory currTerritory : currentPlayerTerritories) {
+	            if (fortifySourceTerritoy.getAdjacents().contains(currTerritory.getTerritoryName())) {
+	                adjucencyList.add(currTerritory);
+	            }                
+	        }
+	        
+//	        finding territory with max armies in adjacent
+	        long adjMaxArmy=0;
+	        for (RiskTerritory currAdjTerritory : adjucencyList) {
+	            if (currAdjTerritory.getArmiesPresent()>adjMaxArmy) {
+	                adjMaxArmy=currAdjTerritory.getArmiesPresent();
+	            }
+	        }
+	        for (RiskTerritory currAdjTerritory : adjucencyList) {
+	            if (currAdjTerritory.getArmiesPresent()==adjMaxArmy) {
+	                fortifyAdjTerritory=currAdjTerritory;
+	            }
+	        }
+	        fortifyAdjTerritoryIndex=currentPlayerTerritories.indexOf(fortifyAdjTerritory);
+	        
+//	        fortifying or moving armies from source to destination
+	        fortifySourceTerritoy.setArmiesPresent(fortifySourceTerritoy.getArmiesPresent()-1);
+	        fortifyAdjTerritory.setArmiesPresent(fortifyAdjTerritory.getArmiesPresent()+1);
+	        
+//	        Updating map before return
+	        currentPlayerTerritories.set(fortifySourceTerritoyIndex, fortifySourceTerritoy);
+	        currentPlayerTerritories.set(fortifyAdjTerritoryIndex, fortifyAdjTerritory);
+	        fortifiedMap.put(currentPlayer, currentPlayerTerritories);
+	        
+	        System.out.println("Fortification completed");
+	        for (RiskTerritory currTerritory : currentPlayerTerritories) {
+	            System.out.println(currTerritory.getTerritoryName()+"("+currTerritory.getArmiesPresent()+")");
+	        }
+	        
+	        return fortifiedMap;
+	        
 	}
 	
 
@@ -266,13 +251,7 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 			}
 		}
 		
-		
-////		getting max army present in above list
-//		for (RiskTerritory currTerritory : adjListWithOppositeTerritories) {
-//			if (currTerritory.getArmiesPresent()>maxArmy) {
-//				maxArmy=currTerritory.getArmiesPresent();
-//			}
-//		}
+
 //		finding territory with max army satisfying above condition
 		for (RiskTerritory currTerritory : adjListWithOppositeTerritories) {
 			if (currTerritory.getArmiesPresent()>1) {
@@ -302,8 +281,7 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 		attackedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(riskMainMap);
 		
 		
-		long sourceTCoutner=1,destinationTCoutner=1, attackMoveArmy=0;
-		long attackSourceTerritoryIndex=0,attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
+		long attackSourceArmy=0,attackDestinationTerritoryIndex=0,attackDestinationArmy=0,attackerTerritoryArmy=0,defenderTerritoryArmy=0;
 		String attackSourceTerritoryName=null,attackDestinationTerritoryName=null,attackerTerritory=null,defenderTerritory=null;
 		RiskTerritory attackDestinationTerritory, attackSourceTerritory = null;
 		String defendingTerritory=null;
@@ -334,7 +312,6 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 			
 			if (attackSourceArmy<1) {
 				System.out.println("Player needs at least 1 army to attack...\nPlease select another territory or select Exit");
-				sourceTCoutner=1;
 			}
 
 
@@ -450,45 +427,57 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 	 * @param currentPlayerTerritories
 	 * @return
 	 */
-	private ArrayList<RiskTerritory> getTerritoriesWithAdjacents(ArrayList<RiskTerritory> currentPlayerTerritories) {
-		
-		LinkedHashMap<RiskTerritory, ArrayList<String>>	fortifyAdjacencyMap=new LinkedHashMap<RiskTerritory, ArrayList<String>>();
-		ArrayList<RiskTerritory> returnList=new ArrayList<RiskTerritory>();
-		ArrayList<String> currPLayerStringTerritories=new ArrayList<String>();
-		ArrayList<String> currentTerritoryAdjacents=new ArrayList<String>();
+	private ArrayList<RiskTerritory> getTerritoriesWithAdjacents(ArrayList<RiskTerritory> currentPlayerTerritories) {ArrayList<RiskTerritory> returnList=new ArrayList<RiskTerritory>();
+    ArrayList<String> currPlayerAdjacentsStringTerritories=new ArrayList<String>();
+    ArrayList<String> currPlayerStringTerritories=new ArrayList<String>();
+    LinkedHashMap<RiskTerritory, ArrayList<String>>    fortifyAdjacencyMap=new LinkedHashMap<RiskTerritory, ArrayList<String>>();
+    long currentPlayerMaxArmy=0;
+    int skipFortifyCounter=0;
+//    finding maximum number of armies present in territory list
+    for (RiskTerritory currTerritory : currentPlayerTerritories) {
+        currPlayerStringTerritories.add(currTerritory.getTerritoryName());
+        if (currTerritory.getArmiesPresent()>=currentPlayerMaxArmy) {
+            currentPlayerMaxArmy=currTerritory.getArmiesPresent();                
+        }
+        if (currTerritory.getArmiesPresent()==1) {
+            skipFortifyCounter++;
+        }
+        
+    }
+    
+//    returning null list if all armies presents are 1
+    if (currentPlayerMaxArmy==1 || (skipFortifyCounter==currentPlayerTerritories.size()-1)) {
+        return returnList;
+    }
+    
+//    finding the territory with adjacent of own and containing max armies
+    while (fortifyAdjacencyMap.size() < 1) {
+        for (RiskTerritory currTerritory : currentPlayerTerritories) {
 
-		
-		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
-			if(riskTerritory.getArmiesPresent()>1) {
-				currPLayerStringTerritories.add(riskTerritory.getTerritoryName());
-			}
-		}
-		if(currPLayerStringTerritories.size()==0)
-			return returnList;
-		
-		while(fortifyAdjacencyMap.size()<1) {
-			for (RiskTerritory currTerritory : currentPlayerTerritories) {
+            for (String currTerritoryName : currTerritory.getAdjacents()) {
+                if (currPlayerStringTerritories.contains(currTerritoryName)) {
+                    currPlayerAdjacentsStringTerritories.add(currTerritoryName);
+                }
+            }
 
-				for (String currTerritoryName : currTerritory.getAdjacents()) {
-					if (currPLayerStringTerritories.contains(currTerritoryName)) {
-						currentTerritoryAdjacents.add(currTerritoryName);
-					}
-				}
+            if (currTerritory.getArmiesPresent() == currentPlayerMaxArmy
+                    && currPlayerAdjacentsStringTerritories.size() > 0) {
+                fortifyAdjacencyMap.put(currTerritory, currPlayerAdjacentsStringTerritories);
+            }
 
-				if (currentTerritoryAdjacents.size() > 0) {
-					fortifyAdjacencyMap.put(currTerritory, currentTerritoryAdjacents);
-				}
-				else
-					break;
-
-			}
-		}
-		
-		for ( RiskTerritory key : fortifyAdjacencyMap.keySet() ) {
-			returnList.add(key);
-		}
-		
-		return returnList;
+        }
+        if(currentPlayerMaxArmy>0) currentPlayerMaxArmy--;
+        else break;            
+    }
+    
+//    putting all territories with max armies in list
+    for ( RiskTerritory key : fortifyAdjacencyMap.keySet() ) {
+        returnList.add(key);
+    }
+    
+    
+    return returnList;
+	
 	}
 
 	public int randomNumberGenerator(int max,int min) {
