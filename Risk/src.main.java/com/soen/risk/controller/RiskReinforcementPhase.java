@@ -82,9 +82,9 @@ public class RiskReinforcementPhase implements Serializable {
 		
 		int decision;
 		boolean exchangeArmy = false;
-		if (player.getCardOwned().size() != 3) {
+		/*if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
-		}
+		}*/
 		ArrayList<RiskCard> selectedCards = new ArrayList<RiskCard>();
 		selectedCards.add(RiskCard.INFANT);
 		selectedCards.add(RiskCard.ARTILLERY);

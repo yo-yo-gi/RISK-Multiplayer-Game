@@ -85,13 +85,9 @@ public class RiskReinforcementHelper implements Serializable {
 		 * of number of armies / control value calculation
 		 */
 		System.out.println("\nCalculation of armies for the  player: "+currentPlayer.getPlayerName());
-		if (currentPlayer.getCardOwned().size() >= 3 && currentPlayer.getCardOwned().size() < 5) {
-			System.out.println(
-					"The number of cards the player has: " + currentPlayer.getCardOwned().size() + "\n" + "Names: "+currentPlayer.getCardOwned());
-			cardExchangeViewArmy = riskReinforcementPhase.CardExchangeView(currentPlayer);
-		}
-		if (currentPlayer.getCardOwned().size() >= 5) {
-			System.out.println("The players has 5 cards and must exchange cards with armies");
+	
+		if (currentPlayer.getCardOwned().size() >= 3) {
+			System.out.println("The players has 3 or more cards and must exchange cards with armies");
 			cardExchangeViewArmy = riskReinforcementPhase.CardExchangeView(currentPlayer);
 		}
 		noOfRemainingArmies = riskReinforcementPhase.calculateArmy(currentPlayer, currentPlayerTerritories, riskContinentList);
@@ -168,9 +164,9 @@ public class RiskReinforcementHelper implements Serializable {
 
 		int exchangeArmies = Constants.ZERO;
 		boolean exchangeArmy = false;
-		if (player.getCardOwned().size() != 3) {
+	/*	if (player.getCardOwned().size() != 3) {
 			System.out.println("Cards cannot be greater");
-		}
+		}*/
 		ArrayList<RiskCard> selectedCards = new ArrayList<RiskCard>();
 		selectedCards.add(RiskCard.INFANT);
 		selectedCards.add(RiskCard.ARTILLERY);
