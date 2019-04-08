@@ -22,6 +22,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2> Risk Aggressive Strategy</h2>
  * The Class RiskAggressiveStartegy strategy that focuses on attack (reinforces 
  * its strongest country, then always attack with it until it cannot attack anymore,
  * then fortifies in order to maximize aggregation of forces in one country).

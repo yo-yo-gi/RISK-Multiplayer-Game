@@ -24,6 +24,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2>Risk Saved Game Controller</h2>
  * The Class RiskSavedGameController is for saving and resuming the  Risk Game .
  *
  * @author Yogesh Nimbhorkar

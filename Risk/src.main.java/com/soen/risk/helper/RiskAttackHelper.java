@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <h2>Risk Attack Helper</h2>
  * The Class RiskAttackHelper is to help the attack in single mode and tournament mode.
  *
  * @author Yogesh Nimbhorkar

@@ -18,6 +18,7 @@ import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.startegies.RiskHumanStrategy;
 
 /**
+ * <h2>Risk Game Runner</h2>
  * The Class RiskGameRunner if for running the game in single mode and tournament mode and to save the game.
  *
  * @author Yogesh Nimbhorkar

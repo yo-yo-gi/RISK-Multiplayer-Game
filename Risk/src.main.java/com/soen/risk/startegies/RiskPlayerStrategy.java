@@ -11,6 +11,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2> Risk Player Strategy</h2>
  * RiskPlayerStrategy interface
  * It contains declaration of the reinforce, attack and fortify methods.
  * 

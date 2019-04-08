@@ -23,7 +23,9 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.view.RiskPhaseView;
 
-/** The Class RiskHumanStrategy focuses on user interaction for all phases of the game.
+/** 
+ * <h2> Risk Human Strategy</h2>
+ * The Class RiskHumanStrategy focuses on user interaction for all phases of the game.
  * User is given option to select the countries as per his choice and game proceeds
  * based on user given input.
  * 

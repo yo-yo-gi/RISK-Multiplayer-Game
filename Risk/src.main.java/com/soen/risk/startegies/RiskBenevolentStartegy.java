@@ -16,6 +16,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2> Risk Benevolent Strategy</h2>
  * The Class RiskBenevolentStartegy that focuses on protecting its weak countries 
  * (reinforces its weakest countries, never attacks, then fortifies in order to move 
  * armies to weaker countries).

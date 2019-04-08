@@ -15,6 +15,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2> Risk Cheater Strategy</h2>
  * The Class RiskCheaterStrategy strategy whose reinforce() method doubles the
  * number of armies on all its countries, whose attack() method automatically
  * conquers all the neighbors of all its countries, and whose fortify() method
