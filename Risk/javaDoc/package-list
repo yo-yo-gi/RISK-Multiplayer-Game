@@ -1,8 +1,10 @@
 com.soen.risk.controller
 com.soen.risk.helper
 com.soen.risk.model
+com.soen.risk.startegies
 com.soen.risk.test.controller
 com.soen.risk.test.helper
+com.soen.risk.test.strategies
 com.soen.risk.test.suiteRunner
 com.soen.risk.test.validator
 com.soen.risk.validator

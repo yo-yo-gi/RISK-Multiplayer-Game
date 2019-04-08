@@ -28,7 +28,6 @@ import com.soen.risk.startegies.RiskBenevolentStartegy;
 import com.soen.risk.startegies.RiskCheaterStrategy;
 import com.soen.risk.startegies.RiskHumanStrategy;
 import com.soen.risk.startegies.RiskRandomStrategy;
-import com.soen.risk.tournamentControl.TournamentModeController;
 import com.soen.risk.validator.RiskMapValidator;
 import com.soen.risk.view.RiskMapUserCreatorView;
 
@@ -102,7 +101,7 @@ public class RiskGameBuilder implements Serializable {
 		
 		if(gameType==2) {
 //			Call tournament controller
-			TournamentModeController.startTournamentMode();
+		//	TournamentModeController.startTournamentMode();
 			
 		}else {
 		do {
