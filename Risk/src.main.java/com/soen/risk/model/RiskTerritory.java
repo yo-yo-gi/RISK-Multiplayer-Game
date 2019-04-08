@@ -15,9 +15,7 @@ import java.util.ArrayList;
  */
 public class RiskTerritory implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1634060258997289222L;
 
 	/** The territory id. */

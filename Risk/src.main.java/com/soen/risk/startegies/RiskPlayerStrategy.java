@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.soen.risk.startegies;
 
 import java.util.ArrayList;
@@ -8,47 +11,35 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * It contains declaration of the reinforce, attack and fortify methods
- 
- *
+ * RiskPlayerStrategy interface
+ * It contains declaration of the reinforce, attack and fortify methods.
+ * 
+ * @author Chirag Vora
+ * @version 3.0
  */
 public interface RiskPlayerStrategy {
 
 	/**
-	 * This method will return strategy Name
-	 * 
-	 * @return strategy name
-	 */
-	public String getStrategyName();
-
-	/**
-	 * This method will return true if strategy is a bot
-	 * 
-	 * @return true or false
-	 */
-	public boolean getIsBot();
-
-	/**
-	 * This method will execute reinforce method for the Strategy
-	 * 
-	 * @param player
-	 *            Input Player
+	 * This method will execute reinforce method for the Strategy.
+	 *
+	 * @param gameMap the game map
+	 * @param riskContinentList the risk continent list
 	 * @return true or false
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforce(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap, ArrayList<RiskContinent> riskContinentList);
+
 	/**
-	 * This method will execute attack method for the Strategy
-	 * 
-	 * @param attackerPlayer
-	 *            Player Object
+	 * This method will execute attack method for the Strategy.
+	 *
+	 * @param gameMap the game map
+	 * @return the linked hash map
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attack(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap);
 
 	/**
-	 * This method will execute fortify method for the Strategy
-	 * 
-	 * @param player
-	 *            Player Object
+	 * This method will execute fortify method for the Strategy.
+	 *
+	 * @param gameMap the game map
 	 * @return true or false
 	 */
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortify(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap);

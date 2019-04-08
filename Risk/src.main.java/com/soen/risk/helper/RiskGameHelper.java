@@ -28,9 +28,7 @@ import com.soen.risk.view.RiskDominationView;
  */
 public class RiskGameHelper implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 857415706360332225L;
 
 	/**

@@ -24,20 +24,26 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * @author Yogesh Nimbhorkar
+ * The Class RiskSavedGameController is for saving and resuming the  Risk Game .
  *
+ * @author Yogesh Nimbhorkar
+ * @version 3.0
  */
-public class RiskSavedGameController implements Serializable{
-	
-	
+public class RiskSavedGameController implements Serializable{	
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3090511003077001459L;
+	
+	/** The scanner. */
 	transient static Scanner scanner=new Scanner(System.in);
 
-
+	/**
+	 * Save game.
+	 *
+	 * @param riskMainMap the risk main map
+	 * @param cotinentList the continent list
+	 * @return true, if successful
+	 */
 	public boolean saveGame(LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap, ArrayList<RiskContinent> cotinentList) {
 		
 		List<Object> gameToBeSaved=new ArrayList<Object>();
@@ -65,21 +71,18 @@ public class RiskSavedGameController implements Serializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 		return savaStatus;
 	}
 	
-
+	/**
+	 * Resume game method to resume the game from the point where it was saved.
+	 */
 	@SuppressWarnings("unchecked")
 	public void resumeGame() {		
 		
 		LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> riskMainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-		
-		ArrayList<RiskContinent> riskContinentList=new ArrayList<RiskContinent>();
-	
+		ArrayList<RiskContinent> riskContinentList=new ArrayList<RiskContinent>();	
 		RiskGameRunner riskGameRunner=new RiskGameRunner();
-		
 				
 		String loadGamesPath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/savedGames").toAbsolutePath().toString();
 		Path path;
@@ -87,7 +90,6 @@ public class RiskSavedGameController implements Serializable{
 		File folder = new File(loadGamesPath);
 		File[] listOfFiles = folder.listFiles();
 		int fileCounter=1;
-
 		
 //		logic to get all saved games
 		System.out.println("Please select game you want to load:");
@@ -125,8 +127,7 @@ public class RiskSavedGameController implements Serializable{
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		riskGameRunner.startTurnbyturnGame(riskMainMap, riskContinentList);
 	}
 }

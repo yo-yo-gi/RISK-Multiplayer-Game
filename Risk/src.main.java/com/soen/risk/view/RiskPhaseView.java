@@ -20,9 +20,7 @@ import com.soen.risk.model.RiskPhaseType;
  */
 public class RiskPhaseView implements RiskPhaseObserver, Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7492753711023819837L;
 
 	/** The current game phase. */

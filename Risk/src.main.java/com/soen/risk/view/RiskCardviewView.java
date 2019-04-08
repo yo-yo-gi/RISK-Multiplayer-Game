@@ -19,9 +19,7 @@ import com.soen.risk.model.RiskCardviewObservable;
  */
 public class RiskCardviewView implements RiskCardviewObserver, Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2983592628997945724L;
 
 	/** The card owned. */

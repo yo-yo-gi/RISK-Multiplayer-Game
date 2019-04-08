@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author yogesh
+ * The Class RiskAttackHelper is to help the attack in single mode and tournament mode.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 3.0
  */
 public class RiskAttackHelper implements Serializable{
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4203513605553006857L;
 
 	/**

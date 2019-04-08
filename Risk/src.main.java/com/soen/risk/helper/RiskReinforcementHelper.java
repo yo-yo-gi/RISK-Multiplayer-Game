@@ -1,8 +1,22 @@
+/*
+ * 
+ */
 package com.soen.risk.helper;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Map.Entry;
+import com.soen.risk.model.RiskCard;
+import com.soen.risk.model.RiskContinent;
+import com.soen.risk.model.RiskPlayer;
+import com.soen.risk.model.RiskTerritory;
+
 /**
  * <h2>Reinforcement Phase Controller Tournament Mode</h2>
- * The class defines number of the armies given to the player calculation. 
+ * The Class RiskReinforcementHelper defines number of the armies given to the player calculation. 
  * In the reinforcements phase, the player is given a number of armies that 
  * depends on the number of countries he owns (# of countries owned divided by 3, rounded down).
  * If the player owns all the countries of an entire continent else the player is given an amount
@@ -12,31 +26,21 @@ import java.io.Serializable;
  * @author Neha Dighe
  * @version 1.0
  */
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Map.Entry;
-
-import com.soen.risk.model.RiskCard;
-import com.soen.risk.model.RiskContinent;
-import com.soen.risk.model.RiskPlayer;
-import com.soen.risk.model.RiskTerritory;
 
 public class RiskReinforcementHelper implements Serializable {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 992509886649834869L;
+	
+	/** The scanner. */
 	transient Scanner scanner = new Scanner(System.in);
-
 
 	/**
 	 * Assigning the Armies to the Countries for the Player.
 	 *
 	 * @param riskMainMap the risk main map
 	 * @param riskContinentList : The total continent list
-	 * @param reinforcementTerritory 
+	 * @param reinforcementTerritory the reinforcement territory
 	 * @return the reinforced map
 	 */
 
@@ -107,7 +111,6 @@ public class RiskReinforcementHelper implements Serializable {
 					+ riskTerritory.getArmiesPresent() + ") ");
 			territoryCounter++;
 		}
-		
 		
 		reinforcementTerritory.setArmiesPresent(reinforcementTerritory.getArmiesPresent()+noOfRemainingArmies);		
 		currentPlayerTerritories.set(currentPlayerTerritories.indexOf(reinforcementTerritory), reinforcementTerritory);		

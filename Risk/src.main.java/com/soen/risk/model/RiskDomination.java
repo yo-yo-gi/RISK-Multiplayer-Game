@@ -21,9 +21,7 @@ import com.soen.risk.view.RiskDominationObserver;
  */
 public class RiskDomination implements RiskDominationObservable , Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3486421125592637926L;
 
 	/** The percent map contr. */
