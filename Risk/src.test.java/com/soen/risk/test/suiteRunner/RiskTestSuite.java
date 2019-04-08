@@ -14,6 +14,7 @@ import com.soen.risk.test.helper.RiskArmyAllocationToPlayersTest;
 import com.soen.risk.test.helper.RiskGameHelperTest;
 import com.soen.risk.test.helper.RiskMapEditorTest;
 import com.soen.risk.test.helper.RiskTerritoryAssignmentToPlayerTest;
+import com.soen.risk.test.strategies.RiskStartegyTest;
 import com.soen.risk.test.validator.RiskMapValidatorTest;
 
 /**
@@ -34,6 +35,7 @@ import com.soen.risk.test.validator.RiskMapValidatorTest;
 	RiskReinforcementPhaseTest.class,
 	RiskAttackPhaseTest.class,
 	RiskGameHelperTest.class,
+	RiskStartegyTest.class,
 	RiskFortificationPhaseTest.class
 })
 public class RiskTestSuite {
