@@ -127,6 +127,8 @@ public class RiskGameBuilder implements Serializable {
 			if (mapType==3) {
 				RiskSavedGameController riskSavedGameController=new RiskSavedGameController();
 				riskSavedGameController.resumeGame();
+				System.out.println("Risk Game completed...Thank You...");				
+				System.exit(0);
 			}
 			else if (mapType==1) {
 				String mapFilePath=Paths.get(System.getProperty("user.dir") + "/src.main.resources/maps").toAbsolutePath().toString();
@@ -316,7 +318,7 @@ public class RiskGameBuilder implements Serializable {
 		System.out.println();
 
 		/*
-		 * assigning random territories to players and assigning random armies		 * 
+		 * assigning random territories to players and assigning random armies 
 		 */
 
 		riskTerritoryList=riskMapBuilder.getTerritoryList();
