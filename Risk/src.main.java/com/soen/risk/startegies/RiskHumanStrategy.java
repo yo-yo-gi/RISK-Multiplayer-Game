@@ -321,10 +321,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 
 		}while((attackSourceArmy<1) || AdjAttackList.size()==0);
 
-
-
-
-
 		if(exitFlag==false) {
 			System.out.println("Enter the territory you want to attack:");
 			for (String territory : AdjAttackList) {
@@ -375,8 +371,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 				}
 			}
 
-
-
 			//		updating the main map for the army after every attack and deleting the territory if army is zero
 			attackedMap=RiskGameHelper.updateArmyAfterAttack(attackSourceTerritory,attackDestinationTerritory, attackedMap);
 			if (attackedMap.size()==1) {
@@ -385,19 +379,6 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 				System.out.println("*****************************************");
 				System.exit(0);
 			}
-
-			//		boolean flag=false;
-			//		for (Entry<String, Object> entry : attackOutputMap.entrySet()) {
-			//			if(entry.getKey()=="did_attacker_win") {
-			//				flag=true;
-			//			}
-			//		}
-			//		if (flag) {
-			//			
-			//			System.out.println("Attacker wins...");
-			//		}else {
-			//			System.out.println("Defender wins...");
-			//		}
 
 			System.out.println("Attacker:"+attackerTerritory+" has "+attackerTerritoryArmy+" left");
 			System.out.println("Defender:"+defenderTerritory+" has "+defenderTerritoryArmy+" left");
@@ -647,9 +628,5 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		//		Triggering Phase View observer
 		riskPhase.setCurrentAction("Fortification Phase Completed");
 		return fortifiedMap;
-
 	}
-
-
-
 }

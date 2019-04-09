@@ -90,6 +90,12 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 
 		//		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
+
+		//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Reinforcement Phase");
+
 		//		getting current player territories
 		currPlayerTerritories=gameMap.get(currentPlayer);
 		for (RiskTerritory riskTerritory : currPlayerTerritories) {
@@ -162,6 +168,12 @@ public class RiskRandomStrategy implements RiskPlayerStrategy , Serializable{
 
 			//	        find current player
 			currentPlayer=getCurrentPlayer(fortifiedMap);
+
+			//			Triggering phase view observer		
+			riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
+			riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+			riskPhase.setCurrentAction("Starting Fortify Phase");
+
 			//	        getting current player territories
 			currentPlayerTerritories=fortifiedMap.get(currentPlayer);
 

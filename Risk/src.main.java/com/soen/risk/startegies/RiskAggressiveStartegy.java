@@ -84,6 +84,12 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 
 		//		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
+
+		//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Reinforcement Phase");
+
 		//		getting current player territories
 		currPlayerTerritories=gameMap.get(currentPlayer);
 		//		find strongest territory to reinforce
@@ -95,7 +101,7 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 			}
 		}
 
-//		calculating and adding reinforced armies in strongest countries
+		//		calculating and adding reinforced armies in strongest countries
 		reinforcedMap=riskReinforcementHelper.getReinforcedMap(gameMap, riskContinentList, reinforcementTerritory);
 
 		return reinforcedMap;
@@ -135,6 +141,10 @@ public class RiskAggressiveStartegy implements RiskPlayerStrategy, Serializable{
 
 		fortifiedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 
+		//		Triggering phase view observer		
+		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
+		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
+		riskPhase.setCurrentAction("Starting Fortify Phase");
 
 		ArrayList<RiskTerritory> territoriesWithAdjacents=new ArrayList<RiskTerritory>();
 		ArrayList<RiskTerritory> currentPlayerTerritories=new ArrayList<RiskTerritory>();

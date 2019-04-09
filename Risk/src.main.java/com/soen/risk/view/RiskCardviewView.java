@@ -44,11 +44,11 @@ public class RiskCardviewView implements RiskCardviewObserver, Serializable{
 	@Override
 	public void update(ArrayList<RiskCard> cardOwned) {
 		this.cardOwned=cardOwned;
-//		showCardview();
+		showCardview();
 	}
 
 	/**
-	 * Show cardview.
+	 * Show Cardview.
 	 */
 	private void showCardview() {
 		System.out.println("*************************************************************");
