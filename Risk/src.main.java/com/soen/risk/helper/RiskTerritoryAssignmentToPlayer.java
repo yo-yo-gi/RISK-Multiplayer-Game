@@ -14,7 +14,6 @@ import com.soen.risk.controller.RiskMapBuilder;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-
 /**
  * <h2> Territory assignment class</h2>
  * The Class CountryAssignmentToPlayer defines number of the armies 
@@ -25,9 +24,7 @@ import com.soen.risk.model.RiskTerritory;
  */
 public class RiskTerritoryAssignmentToPlayer implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6801860287742689318L;
 
 	/** The risk map builder. */

@@ -15,9 +15,7 @@ import java.util.ArrayList;
  */
 public class RiskContinent implements Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -7883598656154692545L;
 
 	/** The continent id. */

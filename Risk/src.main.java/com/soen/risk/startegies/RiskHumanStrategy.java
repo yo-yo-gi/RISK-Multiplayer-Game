@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import com.soen.risk.controller.RiskAttackPhase;
 import com.soen.risk.controller.RiskReinforcementPhase;
@@ -23,51 +23,35 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 import com.soen.risk.view.RiskPhaseView;
 
-/** The Class RiskHumanStrategy focuses on user interaction for all phases of the game.
+/** 
+ * <h2> Risk Human Strategy</h2>
+ * The Class RiskHumanStrategy focuses on user interaction for all phases of the game.
  * User is given option to select the countries as per his choice and game proceeds
  * based on user given input.
  * 
  * @author SHASHANK RAO
- *
+ * @version 3.0
  */
 public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
-	
-	/**
-	 * 
-	 */
+
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8182262865311172353L;
 
-	
+
 	/** The scanner. */
 	transient Scanner scanner = new Scanner(System.in);
-	
+
+	/** The attacked map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackedMap;
-	
+
 	/** Risk Phase view as Observable. */
 	RiskPhase riskPhase=new RiskPhase();
-	
+
 	/**  Risk Phase view as Observer. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
-	
+
+	/** The attack counter. */
 	boolean cardEarnFlag=false,attackCounter=false;
-
-	/* (non-Javadoc)
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getStrategyName()
-	 */
-	@Override
-	public String getStrategyName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getIsBot()
-	 */
-	@Override
-	public boolean getIsBot() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/* (non-Javadoc)
 	 * @see com.soen.risk.startegies.RiskPlayerStrategy#reinforce(java.util.LinkedHashMap, java.util.ArrayList)
@@ -75,7 +59,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 	@Override
 	public LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> reinforce(
 			LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> gameMap, ArrayList<RiskContinent> riskContinentList) {
-		
+
 
 		/** The selected territory index. */
 		int selectedTerrIndex = 0;
@@ -97,7 +81,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		/** Army calculated for card exchange view. */
 		int	cardExchangeViewArmy = 0;
 		scanner = new Scanner(System.in);
-		
+
 		//		finding current player to use in this phase
 		for (Entry<RiskPlayer, ArrayList<RiskTerritory>> entry : reinforcedMap.entrySet()) {
 			if (entry.getKey().isCurrentPlayerTurn()) {
@@ -245,7 +229,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		System.out.println("Reinforcement Phase Completed for the Player " + currentPlayerName);
 		System.out.println("\n");
 		return reinforcedMap;
-	
+
 	}
 
 	/* (non-Javadoc)
@@ -474,7 +458,7 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		}
 		System.out.println("Attack completed...");
 		return attackedMap;
-	
+
 	}
 
 	/* (non-Javadoc)
@@ -663,9 +647,9 @@ public class RiskHumanStrategy implements RiskPlayerStrategy, Serializable{
 		//		Triggering Phase View observer
 		riskPhase.setCurrentAction("Fortification Phase Completed");
 		return fortifiedMap;
-	
+
 	}
-	
-	
+
+
 
 }

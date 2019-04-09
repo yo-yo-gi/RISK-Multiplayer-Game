@@ -15,8 +15,8 @@ import com.soen.risk.model.RiskPhaseType;
 import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
-// TODO: Auto-generated Javadoc
 /**
+ * <h2> Risk Benevolent Strategy</h2>
  * The Class RiskBenevolentStartegy that focuses on protecting its weak countries 
  * (reinforces its weakest countries, never attacks, then fortifies in order to move 
  * armies to weaker countries).
@@ -26,9 +26,7 @@ import com.soen.risk.model.RiskTerritory;
  */
 public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3964270414016765507L;
 
 	/** The current player. */
@@ -43,24 +41,8 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 	/** The fortified map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 
-	
+	/** The risk phase. */
 	RiskPhase riskPhase=new RiskPhase();
-
-	/* (non-Javadoc)
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getStrategyName()
-	 */
-	@Override
-	public String getStrategyName() {
-		return null;
-	}
-	/* (non-Javadoc)
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getIsBot()
-	 */
-	@Override
-	public boolean getIsBot() {
-		return false;
-	}
-
 
 	/* (non-Javadoc)
 	 * @see com.soen.risk.startegies.RiskPlayerStrategy#reinforce(java.util.LinkedHashMap, java.util.ArrayList)
@@ -74,21 +56,21 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 
 		//		find current player
 		currentPlayer=getCurrentPlayer(gameMap);
-		
-//		Triggering phase view observer		
+
+		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
 		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
 		riskPhase.setCurrentAction("Starting Reinforcement Phase");
-		
+
 		//		getting current player territories
 		currPlayerTerritories=gameMap.get(currentPlayer);
-		
+
 		for (RiskTerritory riskTerritory : currPlayerTerritories) {
 			if (riskTerritory.getArmiesPresent()>1000000) {
 				return reinforcedMap;
 			}
 		}
-		
+
 		//		find strongest territory to reinforce
 		reinforcementTerritory=findWeakestTerritory(currPlayerTerritories);
 		//		calculating and adding reinforced armies in weakest countries
@@ -123,18 +105,18 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 		ArrayList<RiskTerritory> adjacencyList=new ArrayList<RiskTerritory>();
 
 		currentPlayerTerritories=fortifiedMap.get(currentPlayer);
-		
+
 		for (RiskTerritory riskTerritory : currentPlayerTerritories) {
 			if (riskTerritory.getArmiesPresent()>1000000) {
 				return fortifiedMap;
 			}
 		}
 
-//		Triggering phase view observer		
+		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
 		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
 		riskPhase.setCurrentAction("Starting Fortification Phase");
-		
+
 		//		finding list of highest army territory
 		territoriesWithAdjacents=getTerritoriesWithAdjacents(currentPlayerTerritories);
 
@@ -281,7 +263,6 @@ public class RiskBenevolentStartegy implements RiskPlayerStrategy, Serializable{
 			if(currentPlayerMaxArmy>0) currentPlayerMinArmy++;
 			else break;			
 		}
-
 		//		putting all territories with max armies in list
 		for ( RiskTerritory key : fortifyAdjacencyMap.keySet() ) {
 			returnList.add(key);

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import com.soen.risk.helper.RiskGameHelper;
 import com.soen.risk.model.RiskContinent;
 import com.soen.risk.model.RiskPhase;
 import com.soen.risk.model.RiskPhaseType;
@@ -16,6 +15,7 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
+ * <h2> Risk Cheater Strategy</h2>
  * The Class RiskCheaterStrategy strategy whose reinforce() method doubles the
  * number of armies on all its countries, whose attack() method automatically
  * conquers all the neighbors of all its countries, and whose fortify() method
@@ -28,9 +28,7 @@ import com.soen.risk.model.RiskTerritory;
  */
 public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5949805971444027113L;
 
 	/** The current player. */
@@ -48,27 +46,8 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 	/** The fortified map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> fortifiedMap;
 
+	/** The risk phase. */
 	RiskPhase riskPhase=new RiskPhase();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getStrategyName()
-	 */
-	@Override
-	public String getStrategyName() {
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.soen.risk.startegies.RiskPlayerStrategy#getIsBot()
-	 */
-	@Override
-	public boolean getIsBot() {
-		return false;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -82,8 +61,8 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 
 		// find current player
 		currentPlayer = getCurrentPlayer(gameMap);
-				
-//		Triggering phase view observer		
+
+		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.REINFORCEMENT);
 		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
 		riskPhase.setCurrentAction("Starting Reinforcement Phase");
@@ -91,7 +70,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		ArrayList<RiskTerritory> currPlayerTerritories = new ArrayList<RiskTerritory>();
 		reinforcedMap = new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>(gameMap);
 
-		
+
 		// getting current player territories
 		currPlayerTerritories = gameMap.get(currentPlayer);
 
@@ -100,7 +79,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 				return reinforcedMap;
 			}
 		}
-	
+
 		// Double the armies on all its territories in reinforcement
 		reinforcementTerritoryList = doubleArmy(currPlayerTerritories);
 
@@ -129,11 +108,11 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		ArrayList<String> terrListWithOpponentAdj = new ArrayList<String>();
 		ArrayList<String> currPlayerStringList = new ArrayList<String>();
 
-//		Triggering phase view observer		
+		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.ATTACK);
 		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
 		riskPhase.setCurrentAction("Starting Attack Phase");
-		
+
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
 
@@ -198,7 +177,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 			}
 		}
 
-//		RiskGameHelper.assignRandomCard(attackedMap);
+		//		RiskGameHelper.assignRandomCard(attackedMap);
 		return attackedMap;
 	}
 
@@ -219,11 +198,11 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 		ArrayList<String> currPlayerStringList = new ArrayList<String>();
 
 
-//		Triggering phase view observer		
+		//		Triggering phase view observer		
 		riskPhase.setCurrentGamePhase(RiskPhaseType.FORTIFY);
 		riskPhase.setCurrentPlayerName(currentPlayer.getPlayerName());
 		riskPhase.setCurrentAction("Starting Fortification Phase");
-		
+
 		// getting current player list
 		currPlayerList.addAll(gameMap.get(currentPlayer));
 		for (RiskTerritory riskTerritory : currPlayerList) {
@@ -255,7 +234,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 				territoryList.set(currPlayerList.indexOf(currTerritory), tempTerritory);
 			}
 		}
-		
+
 
 		fortifiedMap.put(currentPlayer, territoryList);
 
@@ -286,7 +265,7 @@ public class RiskCheaterStrategy implements RiskPlayerStrategy, Serializable{
 	private ArrayList<RiskTerritory> doubleArmy(ArrayList<RiskTerritory> currPlayerTerritories) {
 		ArrayList<RiskTerritory> territoryList = new ArrayList<RiskTerritory>(currPlayerTerritories);
 
-		
+
 		for (RiskTerritory currTerritory : currPlayerTerritories) {
 			long army = ((currTerritory.getArmiesPresent()) * 2);
 			currTerritory.setArmiesPresent(army);

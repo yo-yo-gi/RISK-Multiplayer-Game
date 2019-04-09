@@ -102,7 +102,7 @@ public class RiskGameBuilder implements Serializable {
 		
 		if(gameType==2) {
 //			Call tournament controller
-			TournamentModeController.startTournamentMode();
+		TournamentModeController.startTournamentMode();
 			
 		}else {
 		do {

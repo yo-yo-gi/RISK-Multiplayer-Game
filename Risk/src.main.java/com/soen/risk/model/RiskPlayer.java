@@ -21,9 +21,7 @@ import com.soen.risk.view.RiskPhaseView;
  */
 public class RiskPlayer implements RiskCardviewObservable, Serializable {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -568260170682309331L;
 	/** The scanner. */
 	transient Scanner scanner = new Scanner(System.in);
@@ -52,6 +50,7 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	/**  Card exchange count for  player. */
 	private int cardViewCount=1;
 	
+	/** The attacked map. */
 	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> attackedMap;
 
 	/**  Risk card view obsever interface object. */
@@ -59,14 +58,18 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	/** Risk Phase view as Obsevable. */
 	RiskPhase riskPhase=new RiskPhase();
 
+	/** The attack counter. */
 	boolean cardEarnFlag=false,attackCounter=false;
 
 	/**  Risk Phase view as Obsever. */
 	RiskPhaseView riskPhaseView=new RiskPhaseView(riskPhase);
 	
+	/** The player strategy. */
 	RiskPlayerStrategy playerStrategy;
 
 	/**
+	 * Gets the current player phase.
+	 *
 	 * @return the currentPlayerPhase
 	 */
 	public RiskPhaseType getCurrentPlayerPhase() {
@@ -74,6 +77,8 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	}
 
 	/**
+	 * Sets the current player phase.
+	 *
 	 * @param currentPlayerPhase the currentPlayerPhase to set
 	 */
 	public void setCurrentPlayerPhase(RiskPhaseType currentPlayerPhase) {
@@ -81,6 +86,8 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	}
 
 	/**
+	 * Gets the player strategy.
+	 *
 	 * @return the playerStrategy
 	 */
 	public RiskPlayerStrategy getPlayerStrategy() {
@@ -88,6 +95,8 @@ public class RiskPlayer implements RiskCardviewObservable, Serializable {
 	}
 
 	/**
+	 * Sets the player strategy.
+	 *
 	 * @param playerStrategy the playerStrategy to set
 	 */
 	public void setPlayerStrategy(RiskPlayerStrategy playerStrategy) {

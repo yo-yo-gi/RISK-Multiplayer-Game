@@ -19,9 +19,7 @@ import com.soen.risk.helper.Constants;
  */
 public class RiskMapUserCreatorView implements Serializable {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5596428415250055023L;
 
 	/** The territory end index. */

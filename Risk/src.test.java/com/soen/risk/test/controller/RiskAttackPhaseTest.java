@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.soen.risk.controller.RiskAttackPhase;
 
 /**
+ * <h2>Risk Attack Phase Test</h2>
  * The Class RiskAttackPhaseTest is Junit class to test the dice roll functionalities of the attack phase.
  * 
  * @author Chirag
