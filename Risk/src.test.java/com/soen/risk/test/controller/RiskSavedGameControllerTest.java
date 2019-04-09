@@ -3,7 +3,6 @@
  */
 package com.soen.risk.test.controller;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -18,13 +17,20 @@ import com.soen.risk.model.RiskPlayer;
 import com.soen.risk.model.RiskTerritory;
 
 /**
- * @author Yogesh Nimbhorkar
+ * <h2> RiskSavedGameControllerTest </h2>
+ * The Class RiskSavedGameControllerTest.
  *
+ * @author Yogesh Nimbhorkar
+ * @version 3.0
  */
 public class RiskSavedGameControllerTest {
-	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> mainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
-	ArrayList<RiskContinent> cotinentList=new ArrayList<RiskContinent>();
 	
+	/** The main map. */
+	LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>> mainMap=new LinkedHashMap<RiskPlayer, ArrayList<RiskTerritory>>();
+	
+	/** The continent list. */
+	ArrayList<RiskContinent> cotinentList=new ArrayList<RiskContinent>();
+
 	/**
 	 * Sets the data for the test methods.
 	 */
@@ -40,15 +46,15 @@ public class RiskSavedGameControllerTest {
 		mainMap.put(player1, territoryList);
 		cotinentList.add(continent);
 	}
-	
-	
+
+
 	/**
-	 * Test Saved game case
+	 * Test Saved game case.
 	 */
 	@Test
 	public void testSavedGameFunctinality() {
 		RiskSavedGameController riskSavedGameController= new RiskSavedGameController();
 		assertTrue(riskSavedGameController.saveGame(mainMap, cotinentList));
 	}
-	
+
 }
